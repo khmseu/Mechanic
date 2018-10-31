@@ -4,5 +4,8 @@
   "description": "Mechanic is a build tool",
   "main": "index.js",
   "author": "Kai",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "sqlite3": "^4.0.3"
+  }
 }
