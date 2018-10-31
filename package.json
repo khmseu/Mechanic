@@ -1,0 +1,8 @@
+{
+  "name": "Mechanic",
+  "version": "1.0.0",
+  "description": "Mechanic is a build tool",
+  "main": "index.js",
+  "author": "Kai",
+  "license": "MIT"
+}
