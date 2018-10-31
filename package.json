@@ -2,8 +2,9 @@
   "name": "Mechanic",
   "version": "1.0.0",
   "description": "Mechanic is a build tool",
-  "main": "index.js",
-  "author": "Kai",
+  "main": "src/index.js",
+  "repository": "git@github.com:khmseu/Mechanic.git",
+  "author": "Kai Henningsen <kai.extern+git@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "sqlite3": "^4.0.3"
