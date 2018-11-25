@@ -62,3 +62,9 @@ typings/
 
 # next.js build output
 .next
+
+# my own junk
+*-
+.mechanic.db
+murks
+x.js

@@ -1,12 +1,21 @@
 {
   "name": "Mechanic",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Mechanic is a build tool",
   "main": "src/index.js",
-  "repository": "git@github.com:khmseu/Mechanic.git",
-  "author": "Kai Henningsen <kai.extern+git@gmail.com>",
+  "repository": "github:khmseu/Mechanic",
+  "author": {
+    "name": "Kai Henningsen",
+    "email": "kai.extern+git@gmail.com"
+  },
   "license": "MIT",
+  "homepage": "https://github.com/khmseu/Mechanic",
+  "bugs": "https://github.com/khmseu/Mechanic/issues",
+  "scripts": {
+    "test": "node src/index.js"
+  },
   "dependencies": {
+    "options-parser": "^0.4.0",
     "sqlite3": "^4.0.3"
   }
 }
