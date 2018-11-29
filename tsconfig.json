@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+      "baseUrl": ".",
+      "paths": { "*": ["types/*"] },
+        "outDir": "./built",
+        "target": "es2018",
+        "noImplicitReturns":true,
+        "noFallthroughCasesInSwitch":true,
+        "module": "commonjs",
+        "alwaysStrict": true,
+        "declaration": true,
+        "declarationDir": "dout",
+        "declarationMap": true,
+        "listEmittedFiles": true,
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "resolveJsonModule": true,
+        "sourceMap": true,
+        "strict": true,
+        "strictFunctionTypes": true,
+        "strictNullChecks": true,
+        "strictPropertyInitialization": true
+    },
+    "include": [
+        "./src/**/*"
+    ]
+}

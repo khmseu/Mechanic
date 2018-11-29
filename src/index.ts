@@ -20,20 +20,31 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-const options = require('options-parser')
+import * as options from "options-parser";
 
-let opts = options.parse({
-  version: { short: 'v', flag: true },
+const footer =
+`Home page:      https://github.com/khmseu/Mechanic
+Documentation:  https://github.com/khmseu/Mechanic/wiki
+Report bugs to: https://github.com/khmseu/Mechanic/issues`;
+
+const verstr =
+`Mechanic 0.1.0
+Copyright © 2018 Kai Henningsen
+License: MIT`;
+
+const opts = options.parse({
   help: {
-    short: 'h',
     flag: true,
+    short: "h",
     showHelp: {
-      banner: 'Mechanic [options] [settings] [targets]',
+      banner: "Mechanic [options] [settings] [targets]",
       callback: () => {
-        console.log('Home page:      https://github.com/khmseu/Mechanic\nDocumentation:  https://github.com/khmseu/Mechanic/wiki\nReport bugs to: https://github.com/khmseu/Mechanic/issues')
-      }
-    }
-  }
+        // tslint:disable-next-line:no-console
+        console.log(footer);
+      },
+    },
+    version: { short: "v", flag: true },
+  },
   //   user: { required: true },
   //   all: { short: 'a', flag: true },
   //   host: { short: 'h', default: 'localhost' },
@@ -41,15 +52,16 @@ let opts = options.parse({
   //   r: { flag: true },
   //   db: { default: 'test' },
   //   out: { short: 'o', type: options.type.file.open.write() }
-})
+});
 
-console.log(opts)
+console.log(opts);
 
 if (opts.opt.version) {
-  console.log('Mechanic 0.1.0\nCopyright © 2018 Kai Henningsen\nLicense: MIT')
-  process.exit()
+  // tslint:disable-next-line:no-console
+  console.log(verstr);
+  process.exit();
 }
 
-const mdb = require('./mechdb')
-console.error({mdb: mdb})
-mdb.close().catch(err => console.error(err))
+import * as mdb from "./mechdb";
+console.error({mdb});
+mdb.close().catch((err) => console.error(err));
