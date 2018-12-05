@@ -64,4 +64,5 @@ if (opts.opt.version) {
 
 import * as mdb from "./mechdb";
 console.error({mdb});
+import * as rules from "./rules";
 mdb.close().catch((err) => console.error(err));
