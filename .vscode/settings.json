@@ -1,3 +1,5 @@
 {
-    "eslint.packageManager": "yarn"
+    "eslint.packageManager": "yarn",
+    "tslint.configFile": "tslint.json",
+    "tslint.packageManager": "yarn"
 }
