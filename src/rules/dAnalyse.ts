@@ -1,8 +1,6 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const dAnalyse_1 = require("./dAnalyse");
-const RuleObject_1 = require("./RuleObject");
-const tmAnalyse_1 = require("./tmAnalyse");
+import { isFunction } from "util";
+import { DependsGen, DependsSpec } from "./common";
+
 // MIT License
 //
 // Copyright (c) 2018 Kai Henningsen
@@ -25,9 +23,38 @@ const tmAnalyse_1 = require("./tmAnalyse");
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-exports.Rule = (spec) => {
-    const t = tmAnalyse_1.tmAnalyse(spec.Targets);
-    const d = dAnalyse_1.dAnalyse(spec.Dependencies);
-    RuleObject_1.rules.push(new RuleObject_1.RuleObject(t, d, spec.Recipe));
-};
-//# sourceMappingURL=index.js.map
+
+interface IDObject {
+  ns?: string;
+  name: string|DependsGen;
+}
+export type DAnalysed = IDObject[];
+
+export function dAnalyse(depends: DependsSpec[]): DAnalysed {
+  const ret: DAnalysed = [];
+  depends.forEach((depend) => {
+    if (Array.isArray(depend)) {
+      ret.push({
+        ns: depend[0],
+        name: depend[1],
+      });
+    } else if (isFunction(depend)) {
+      ret.push({
+        name: depend,
+      });
+    } else if (typeof(depend) === "string") {
+      const m = /^(\w+):(.*)$/.exec(depend);
+      if (m) {
+        ret.push({
+          ns: m[1],
+          name: m[2],
+        });
+      } else {
+        ret.push({
+          name: depend,
+        });
+      }
+    }
+  });
+  return ret;
+  }

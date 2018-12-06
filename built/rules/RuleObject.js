@@ -1,8 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const dAnalyse_1 = require("./dAnalyse");
-const RuleObject_1 = require("./RuleObject");
-const tmAnalyse_1 = require("./tmAnalyse");
 // MIT License
 //
 // Copyright (c) 2018 Kai Henningsen
@@ -25,9 +22,26 @@ const tmAnalyse_1 = require("./tmAnalyse");
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-exports.Rule = (spec) => {
-    const t = tmAnalyse_1.tmAnalyse(spec.Targets);
-    const d = dAnalyse_1.dAnalyse(spec.Dependencies);
-    RuleObject_1.rules.push(new RuleObject_1.RuleObject(t, d, spec.Recipe));
-};
-//# sourceMappingURL=index.js.map
+class RuleObject {
+    constructor(targets, dependencies, recipe) {
+        this.targets = targets;
+        this.dependencies = dependencies;
+        this.recipe = recipe;
+    }
+    matches(target) {
+        const grouplist = [];
+        this.targets.forEach((element) => {
+            const groups = element.match(target);
+            if (groups) {
+                grouplist.push(groups);
+            }
+        });
+        if (grouplist.length > 1) {
+            throw new Error("Matches for several targets on one rule " + this);
+        }
+        return grouplist.length ? grouplist[0] : null;
+    }
+}
+exports.RuleObject = RuleObject;
+exports.rules = [];
+//# sourceMappingURL=RuleObject.js.map
