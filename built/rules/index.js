@@ -29,10 +29,17 @@ class RuleObject {
         this.recipe = recipe;
     }
     matches(target) {
+        const grouplist = [];
         this.targets.forEach((element) => {
             const groups = element.match(target);
+            if (groups) {
+                grouplist.push(groups);
+            }
         });
-        return true;
+        if (grouplist.length > 1) {
+            throw new Error("Matches for several targets on one rule " + this);
+        }
+        return grouplist.length ? grouplist[0] : null;
     }
 }
 const rules = [];
@@ -96,4 +103,4 @@ exports.Rule = (spec) => {
     const d = dAnalyse(spec.Dependencies);
     rules.push(new RuleObject(t, d, spec.Recipe));
 };
-//# sourceMappingURL=rules.js.map
+//# sourceMappingURL=index.js.map

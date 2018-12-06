@@ -23,8 +23,6 @@ import {isFunction, isRegExp} from "util";
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// import { promisify } from "util";
-
 type VarTree = Map<string, Map<string, string>>;
 type TargetMatcher = (candidate: string) => (string[]|null);
 type TargetSpec = string|RegExp|TargetMatcher|[string, string | RegExp];
@@ -32,15 +30,15 @@ class TMObject {
   constructor(
       public ns: string|null, public name: string|RegExp|TargetMatcher) {}
   public match(target: string): string[]|null {
-      if (isFunction(this.name)) {
-          return (this.name as TargetMatcher)(target);
-      } else if (isRegExp(this.name)) {
-          return this.name.exec(target);
-      } else if (typeof(name) === "string") {
-          return name === target ? [target] : null;
-      } else {
-          return null;
-      }
+    if (isFunction(this.name)) {
+      return (this.name as TargetMatcher)(target);
+    } else if (isRegExp(this.name)) {
+      return this.name.exec(target);
+    } else if (typeof(name) === "string") {
+      return name === target ? [target] : null;
+    } else {
+      return null;
+    }
   }
 }
 type TMAnalysed = TMObject[];
@@ -60,11 +58,18 @@ class RuleObject {
   constructor(
       public targets: TMAnalysed, public dependencies: DAnalysed,
       public recipe: CallbackR) {}
-  public matches(target: string): boolean {
+  public matches(target: string): string[]|null {
+    const grouplist: string[][] = [];
     this.targets.forEach((element) => {
       const groups = element.match(target);
+      if (groups) {
+        grouplist.push(groups);
+      }
     });
-    return true;
+    if (grouplist.length > 1) {
+      throw new Error("Matches for several targets on one rule " + this);
+      }
+    return grouplist.length ? grouplist[0] : null;
   }
   }
 

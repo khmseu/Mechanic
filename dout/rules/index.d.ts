@@ -10,4 +10,4 @@ export declare const Rule: (spec: {
     Recipe: CallbackR;
 }) => void;
 export {};
-//# sourceMappingURL=rules.d.ts.map
+//# sourceMappingURL=index.d.ts.map
