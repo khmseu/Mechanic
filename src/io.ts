@@ -1,3 +1,5 @@
+import {existsSync} from 'fs';
+import {isAbsolute, normalize, parse, resolve} from 'path';
 
 // MIT License
 //
@@ -21,14 +23,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-export type VarTree = Map<string, Map<string, string>>;
-
-export type TargetMatcher = (candidate: string) => (string[]|null);
-export type TargetSpec = string|RegExp|TargetMatcher|[string, string|RegExp|TargetMatcher];
-export interface ITargetMatcher {
-    match(full: string, parent: string, child: string): RegExpMatchArray | null;
+// modified from path-search module
+type string3 = [string, string, string];
+export function pathSearch(path: string[], name: string): string3 {
+  const triple = (dir: string): string3 => {
+    if (isAbsolute(name)) {
+      return [resolve(name), parse(name).root, normalize(name)];
+      }
+    return [resolve(dir, name), resolve(dir), normalize(name)];
+  };
+  if (isAbsolute(name)) {
+    return triple('');
+    }
+  for (const dir of path) {
+    const candidate = resolve(dir, name);
+    if (existsSync(candidate)) {
+      return triple(dir);
+    }
+    }
+  return triple(path[0]);
 }
-export type DependsGen = (vars: VarTree) => (TargetSpec);
-export type DependsSpec = string|DependsGen|[string, string|DependsGen];
-
-export type CallbackR = (vars: VarTree) => void;
