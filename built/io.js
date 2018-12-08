@@ -10,7 +10,7 @@ function pathSearch(path, name) {
         return [path_1.resolve(dir, name), path_1.resolve(dir), path_1.normalize(name)];
     };
     if (path_1.isAbsolute(name)) {
-        return triple('');
+        return triple("");
     }
     for (const dir of path) {
         const candidate = path_1.resolve(dir, name);

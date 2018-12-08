@@ -23,12 +23,17 @@
 
 export type VarTree = Map<string, Map<string, string>>;
 
-export type TargetMatcher = (candidate: string) => (string[]|null);
-export type TargetSpec = string|RegExp|TargetMatcher|[string, string|RegExp|TargetMatcher];
-export interface ITargetMatcher {
-    match(full: string, parent: string, child: string): RegExpMatchArray | null;
+export interface ITargetDetails extends RegExpMatchArray {
+    targets: string[];
 }
-export type DependsGen = (vars: VarTree) => (TargetSpec);
-export type DependsSpec = string|DependsGen|[string, string|DependsGen];
+export interface ITargetMatcher {
+    match(full: string, parent: string, child: string): ITargetDetails | null;
+}
+export type TargetSpec = string|ITargetMatcher|[string, string|ITargetMatcher];
+
+export interface IDependencyGenerator {
+    generate(details: ITargetDetails, vars: VarTree): string[];
+}
+export type DependencySpec = string|IDependencyGenerator;
 
 export type CallbackR = (vars: VarTree) => void;

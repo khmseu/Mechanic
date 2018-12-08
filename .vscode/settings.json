@@ -1,5 +1,9 @@
 {
     "eslint.packageManager": "yarn",
     "tslint.configFile": "tslint.json",
-    "tslint.packageManager": "yarn"
+    "tslint.packageManager": "yarn",
+    "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+    "typescript.format.insertSpaceAfterTypeAssertion": true,
+    "editor.wordWrapColumn": 800
 }

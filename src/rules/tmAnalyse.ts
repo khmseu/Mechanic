@@ -1,6 +1,3 @@
-import { isFunction, isRegExp } from "util";
-import { TargetMatcher, TargetSpec } from "./common";
-
 // MIT License
 //
 // Copyright (c) 2018 Kai Henningsen
@@ -24,39 +21,36 @@ import { TargetMatcher, TargetSpec } from "./common";
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-class TMObject {
-  constructor(
-      public ns: string|null, public name: string|RegExp|TargetMatcher) {}
-  public match(target: string): string[]|null {
-    if (isFunction(this.name)) {
-      return (this.name as TargetMatcher)(target);
-    } else if (isRegExp(this.name)) {
-      return this.name.exec(target);
-    } else if (typeof(name) === "string") {
-      return name === target ? [target] : null;
-    } else {
-      return null;
-    }
+import nanomatch = require("nanomatch");
+import { ITargetDetails, ITargetMatcher, TargetSpec } from "./common";
+
+class StringMatcher implements ITargetMatcher {
+  private readonly rx: RegExp;
+  constructor(m: string) {
+    this.rx = nanomatch.makeRe(m, { capture: true });
+  }
+  public match(_: string, __: string, child: string): ITargetDetails | null {
+    return Object.assign({ targets: [] }, this.rx.exec(child));
   }
 }
-export type TMAnalysed = TMObject[];
+
+export type TMAnalysed = Array<{ ns: string; matcher: ITargetMatcher }>;
 
 export function tmAnalyse(targets: TargetSpec[]): TMAnalysed {
   const ret: TMAnalysed = [];
   targets.forEach((target) => {
     if (Array.isArray(target)) {
-      ret.push(new TMObject(target[0], target[1]));
-    } else if (isFunction(target)) {
-      ret.push(new TMObject(null, target));
-    } else if (isRegExp(target)) {
-      ret.push(new TMObject(null, target));
-    } else if (typeof(target) === "string") {
+      const [n, m] = target;
+      ret.push({ ns: n, matcher: typeof m === "string" ? new StringMatcher(m) : m });
+    } else if (typeof target === "string") {
       const m = /^(\w+):(.*)$/.exec(target);
       if (m) {
-        ret.push(new TMObject(m[1], m[2]));
+        ret.push({ ns: m[1], matcher: new StringMatcher(m[2]) });
       } else {
-        ret.push(new TMObject(null, target));
+        ret.push({ ns: "", matcher: new StringMatcher(target) });
       }
+    } else {
+      ret.push({ ns: "", matcher: target });
     }
   });
   return ret;

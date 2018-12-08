@@ -1,5 +1,5 @@
-import {existsSync} from 'fs';
-import {isAbsolute, normalize, parse, resolve} from 'path';
+import {existsSync} from "fs";
+import {isAbsolute, normalize, parse, resolve} from "path";
 
 // MIT License
 //
@@ -33,7 +33,7 @@ export function pathSearch(path: string[], name: string): string3 {
     return [resolve(dir, name), resolve(dir), normalize(name)];
   };
   if (isAbsolute(name)) {
-    return triple('');
+    return triple("");
     }
   for (const dir of path) {
     const candidate = resolve(dir, name);

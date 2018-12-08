@@ -14,5 +14,18 @@
                 "${workspaceFolder}/built/**/*.js"
             ]
         }
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Programm übersetzen",
+            "runtimeExecutable": "yarn",
+            "runtimeArgs": [
+                "run",
+                "build"
+            ],
+            "outFiles": [
+                "${workspaceFolder}/built/**/*.js"
+            ]
+        }
     ]
 }
