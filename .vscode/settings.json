@@ -5,5 +5,8 @@
     "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
     "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
     "typescript.format.insertSpaceAfterTypeAssertion": true,
-    "editor.wordWrapColumn": 800
+    "licenser.license": "MIT",
+    "licenser.author": "Kai Henningsen <kai.extern+mechanic@gmail.com>",
+    "licenser.projectName": "Mechanic",
+    "licenser.useSingleLineStyle": false,
 }

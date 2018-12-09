@@ -16,7 +16,6 @@
     "build": "tsc"
   },
   "dependencies": {
-    "nanomatch": "^1.2.13",
     "options-parser": "^0.4.0",
     "sqlite3": "^4.0.3"
   },
