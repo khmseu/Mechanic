@@ -46,9 +46,10 @@ if (opts.opt.version) {
   process.exit();
 }
 
-import * as mdb from "./mechdb/index";
+import * as mdb from "./mechdb/globals";
+import * as close from "./mechdb/close";
 // tslint:disable-next-line:no-console
 console.error({ mdb });
 import * as rules from "./rules/Rule";
 // tslint:disable-next-line:no-console
-mdb.close().catch((err) => console.error(err));
+close.close().catch((err) => console.error(err));
