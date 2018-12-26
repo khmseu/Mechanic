@@ -7,13 +7,11 @@
 
 import * as options from "options-parser";
 
-const footer =
-`Home page:      https://github.com/khmseu/Mechanic
+const footer = `Home page:      https://github.com/khmseu/Mechanic
 Documentation:  https://github.com/khmseu/Mechanic/wiki
 Report bugs to: https://github.com/khmseu/Mechanic/issues`;
 
-const verstr =
-`Mechanic 0.1.0
+const verstr = `Mechanic 0.1.0
 Copyright © 2018 Kai Henningsen
 License: MIT`;
 
@@ -47,7 +45,7 @@ if (opts.opt.version) {
   process.exit();
 }
 
-import * as mdb from "./mechdb";
-console.error({mdb});
-import * as rules from "./rules";
+import * as mdb from "./mechdb/index";
+console.error({ mdb });
+import * as rules from "./rules/Rule";
 mdb.close().catch((err) => console.error(err));

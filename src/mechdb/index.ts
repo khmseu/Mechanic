@@ -1,3 +1,4 @@
+
 /**
  * Copyright (c) 2018 Kai Henningsen <kai.extern+mechanic@gmail.com>
  *
@@ -78,7 +79,7 @@ function rebuild() {
 
 type CallbackGT = (errt?: Error, data?: number[]) => void;
 type CallbackST = (errt?: Error, data?: null) => void;
-type CallbackGD = (errt?: Error, data?: { generation: number, status: any }) => void;
+type CallbackGD = (errt?: Error, data?: { generation: number; status: any }) => void;
 type CallbackSD = (errt?: Error, data?: null) => void;
 type CallbackC = (errt?: Error, data?: null) => void;
 
@@ -95,19 +96,20 @@ export const getTarget = promisify((name: string, callback: CallbackGT) => {
 
 export const setTarget = promisify((name: string, dependlistJ: string[], callback: CallbackST) => {
   const dependlist = JSON.stringify(dependlistJ);
-  exports.getTarget(name).then((old?: { generation: number, status: string }) => {
-    if (old) {
-      if (old.status === dependlist) {
-        callback(undefined, null);
+  exports
+    .getTarget(name)
+    .then((old?: { generation: number; status: string }) => {
+      if (old) {
+        if (old.status === dependlist) {
+          callback(undefined, null);
+        } else {
+          db.run("update targets set dependlist = ? where name = ?", [dependlist, name], (err?: Error) => callback(err, null));
+        }
       } else {
-        db.run("update targets set dependlist = ? where name = ?", [dependlist, name],
-          (err?: Error) => callback(err, null));
+        db.run("insert into targets(name, dependlist) values(?, ?)", [name, dependlist], (err?: Error) => callback(err, null));
       }
-    } else {
-      db.run("insert into targets(name, dependlist) values(?, ?)", [name, dependlist],
-        (err?: Error) => callback(err, null));
-    }
-  }).catch((err?: Error) => callback(err, null));
+    })
+    .catch((err?: Error) => callback(err, null));
 });
 
 export const getDependency = promisify((name: string, callback: CallbackGD) => {
@@ -122,21 +124,22 @@ export const getDependency = promisify((name: string, callback: CallbackGD) => {
 
 export const setDependency = promisify((name: string, status: any, callback: CallbackSD) => {
   status = JSON.stringify(status);
-  exports.getDependency(name).then((old?: { generation: number; status: any }) => {
-    if (old) {
-      if (old.status === status) {
-        callback(undefined, null);
+  exports
+    .getDependency(name)
+    .then((old?: { generation: number; status: any }) => {
+      if (old) {
+        if (old.status === status) {
+          callback(undefined, null);
+        } else {
+          db.run("update dependencies set generation = generation + 1, status = ? where name = ?", [status, name], (err?: Error) => callback(err, null));
+        }
       } else {
-        db.run("update dependencies set generation = generation + 1, status = ? where name = ?",
-          [status, name], (err?: Error) => callback(err, null));
+        db.run("insert into dependencies(name, generation, status) values(?, 1, ?)", [name, status], (err?: Error) => callback(err, null));
       }
-    } else {
-      db.run("insert into dependencies(name, generation, status) values(?, 1, ?)",
-        [name, status], (err?: Error) => callback(err, null));
-    }
-  }). catch ((err?: Error) => callback(err, null));
+    })
+    .catch((err?: Error) => callback(err, null));
 });
 
 export const close = promisify((callback: CallbackC) => {
-  db.close((errp?: Error|null) => callback(errp || undefined, null));
+  db.close((errp?: Error | null) => callback(errp || undefined, null));
 });

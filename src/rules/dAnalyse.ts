@@ -5,40 +5,18 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { isFunction } from "util";
-import { DependsGen, DependsSpec } from "./common";
+import { DAnalysed } from "./DAnalysed";
+import { DependencySpec } from "./DependencySpec";
+import { DependencyStringMatcher } from "./DependencyStringMatcher";
 
-interface IDObject {
-  ns?: string;
-  name: string|DependsGen;
-}
-export type DAnalysed = IDObject[];
-
-export function dAnalyse(depends: DependsSpec[]): DAnalysed {
+export function dAnalyse(depends: DependencySpec[]): DAnalysed[] {
   const ret: DAnalysed = [];
   depends.forEach((depend) => {
-    if (Array.isArray(depend)) {
-      ret.push({
-        ns: depend[0],
-        name: depend[1],
-      });
-    } else if (isFunction(depend)) {
-      ret.push({
-        name: depend,
-      });
-    } else if (typeof(depend) === "string") {
-      const m = /^(\w+):(.*)$/.exec(depend);
-      if (m) {
-        ret.push({
-          ns: m[1],
-          name: m[2],
-        });
-      } else {
-        ret.push({
-          name: depend,
-        });
-      }
+    if (typeof depend === "string") {
+      ret.push({ generator: new DependencyStringMatcher(depend) });
+    } else {
+      ret.push({ generator: depend });
     }
   });
   return ret;
-  }
+}

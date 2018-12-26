@@ -2,7 +2,7 @@
 %token TODO /* mark places that need work */
 %start tklist
 %%
-special : NUL /* can't handle via literal */
+special:  NUL /* can't handle via literal */
 	| '\t'
 	| '\n'
 	| ' '
@@ -19,7 +19,7 @@ special : NUL /* can't handle via literal */
 	| '`'
 	| '|'
 	;
-condspecial : '#'
+condspecial:  '#'
 	    | '%'
 	    | '*'
 	    | '='
@@ -27,7 +27,7 @@ condspecial : '#'
 	    | '['
 	    | '~'
 	    ;
-normal : "[\x01-\x08\x0b-\x1f]"
+normal:  "[\x01-\x08\x0b-\x1f]"
        | '!'
        | '+'
        | ','
@@ -47,7 +47,7 @@ normal : "[\x01-\x08\x0b-\x1f]"
        | '~'
        | "[\x7f-􏿿]"
        ;
-anynonl : normal /* also no NUL */
+anynonl:  normal /* also no NUL */
 	| '\t'
 	| ' '
 	| '"'
@@ -70,7 +70,7 @@ anynonl : normal /* also no NUL */
 	| '|'
 	| '~'
 	;
-sqele : normal
+sqele:  normal
       | '\t'
       | '\n'
       | ' '
@@ -93,20 +93,20 @@ sqele : normal
       | '|'
       | '~'
       ;
-sqeleseq : %empty
+sqeleseq:  %empty
 	 | sqeleseq sqele
 	 ;
-dollarstuff : parameter | dcommand | arithmetic
+dollarstuff:  parameter | dcommand | arithmetic
 	    ;
-bqstring : bqcommand
+bqstring:  bqcommand
 	 ;
-bsindq : '\\' '$'
+bsindq:  '\\' '$'
        | '\\' '`'
        | '\\' '"'
        | '\\' '\\'
        | '\\' /* not special */
        ;
-dqele : normal
+dqele:  normal
       | '\t'
       | '\n'
       | ' '
@@ -130,7 +130,7 @@ dqele : normal
       | bqstring
       | bsindq
       ;
-dqeleseq : %empty
+dqeleseq:  %empty
 	 | dqeleseq dqele
 	 ;
 arithmetic: TODO ;
@@ -140,15 +140,15 @@ parameter: TODO ;
 tklist: TODO ;
 
 /* constructing tokens */
-nonewline : '\\' '\n'
+nonewline:  '\\' '\n'
 	  ; /* delete completely */
-escaped : '\\' anynonl
+escaped:  '\\' anynonl
 	;
-single : '\'' sqeleseq '\''
+single:  '\'' sqeleseq '\''
        ;
-double : '"' dqeleseq '"'
+double:  '"' dqeleseq '"'
        ;
 
-tklist : double | single | escaped | nonewline | special | condspecial
+tklist:  double | single | escaped | nonewline | special | condspecial
        ;
 

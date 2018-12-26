@@ -5,27 +5,35 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { CallbackR } from "./common";
-import { DAnalysed } from "./dAnalyse";
-import { TMAnalysed } from "./tmAnalyse";
+import { ok } from "assert";
+import { pathSearch } from "../io/pathSearch";
+import { CallbackR } from "./CallbackR";
+import { VarTree } from "./VarTree";
+import { DAnalysed } from "./DAnalysed";
+import { TMAnalysed } from "./TMAnalysed";
 
 export class RuleObject {
-  constructor(
-      public targets: TMAnalysed, public dependencies: DAnalysed,
-      public recipe: CallbackR) {}
-  public matches(target: string): string[]|null {
+  constructor(public targets: TMAnalysed, public dependencies: DAnalysed, public recipe: CallbackR) {}
+  public matches(target: string, vars: VarTree): string[] | null {
     const grouplist: string[][] = [];
     this.targets.forEach((element) => {
-      const groups = element.match(target);
-      if (groups) {
-        grouplist.push(groups);
+      const pathvar = element.pathvar;
+      const path = vars.PATH![pathvar] as string[];
+      ok(Array.isArray(path), "A Path must be a string list");
+      const candidate = pathSearch(path, target);
+      if (candidate) {
+        const matcher = element.matcher;
+        const groups = matcher.match(...candidate);
+        if (groups) {
+          grouplist.push(groups);
+        }
       }
     });
     if (grouplist.length > 1) {
       throw new Error("Matches for several targets on one rule " + this);
-      }
+    }
     return grouplist.length ? grouplist[0] : null;
   }
-  }
+}
 
 export const rules: RuleObject[] = [];

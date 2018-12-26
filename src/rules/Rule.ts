@@ -5,9 +5,10 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { CallbackR, DependsSpec, TargetSpec } from "./common";
+import { CallbackR } from "./CallbackR";
 import { dAnalyse } from "./dAnalyse";
 import { RuleObject, rules } from "./RuleObject";
+import { TargetSpec } from "./TargetSpec";
 import { tmAnalyse } from "./tmAnalyse";
 
 export const Rule = (spec: {
