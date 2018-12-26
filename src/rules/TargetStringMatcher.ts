@@ -1,15 +1,15 @@
 /**
  * Copyright (c) 2018 Kai Henningsen <kai.extern+mechanic@gmail.com>
- * 
+ *
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-import { ITargetMatcher } from "./ITargetMatcher";
 import { ITargetDetails } from "./ITargetDetails";
-import { VarValue } from "./VarValue";
-import { VarTree } from "./VarTree";
+import { ITargetMatcher } from "./ITargetMatcher";
 import { parseTargetName } from "./parseTargetName";
+import { VarTree } from "./VarTree";
+import { VarValue } from "./VarValue";
 export class TargetStringMatcher implements ITargetMatcher {
   private readonly fp: string[];
   private readonly rx: RegExp;

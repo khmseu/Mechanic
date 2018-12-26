@@ -1,4 +1,3 @@
-
 /**
  * Copyright (c) 2018 Kai Henningsen <kai.extern+mechanic@gmail.com>
  *
@@ -103,10 +102,18 @@ export const setTarget = promisify((name: string, dependlistJ: string[], callbac
         if (old.status === dependlist) {
           callback(undefined, null);
         } else {
-          db.run("update targets set dependlist = ? where name = ?", [dependlist, name], (err?: Error) => callback(err, null));
+          db.run(
+            "update targets set dependlist = ? where name = ?", //
+            [dependlist, name],
+            (err?: Error) => callback(err, null),
+          );
         }
       } else {
-        db.run("insert into targets(name, dependlist) values(?, ?)", [name, dependlist], (err?: Error) => callback(err, null));
+        db.run(
+          "insert into targets(name, dependlist) values(?, ?)", //
+          [name, dependlist],
+          (err?: Error) => callback(err, null),
+        );
       }
     })
     .catch((err?: Error) => callback(err, null));
@@ -131,10 +138,18 @@ export const setDependency = promisify((name: string, status: any, callback: Cal
         if (old.status === status) {
           callback(undefined, null);
         } else {
-          db.run("update dependencies set generation = generation + 1, status = ? where name = ?", [status, name], (err?: Error) => callback(err, null));
+          db.run(
+            "update dependencies set generation = generation + 1, status = ? where name = ?", //
+            [status, name],
+            (err?: Error) => callback(err, null),
+          );
         }
       } else {
-        db.run("insert into dependencies(name, generation, status) values(?, 1, ?)", [name, status], (err?: Error) => callback(err, null));
+        db.run(
+          "insert into dependencies(name, generation, status) values(?, 1, ?)", //
+          [name, status],
+          (err?: Error) => callback(err, null),
+        );
       }
     })
     .catch((err?: Error) => callback(err, null));

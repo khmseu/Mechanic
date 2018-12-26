@@ -37,6 +37,7 @@ const opts = options.parse({
   //   out: { short: 'o', type: options.type.file.open.write() }
 });
 
+// tslint:disable-next-line:no-console
 console.log(opts);
 
 if (opts.opt.version) {
@@ -46,6 +47,8 @@ if (opts.opt.version) {
 }
 
 import * as mdb from "./mechdb/index";
+// tslint:disable-next-line:no-console
 console.error({ mdb });
 import * as rules from "./rules/Rule";
+// tslint:disable-next-line:no-console
 mdb.close().catch((err) => console.error(err));

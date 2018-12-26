@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2018 Kai Henningsen <kai.extern+mechanic@gmail.com>
- * 
+ *
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
@@ -16,14 +16,12 @@ function parseDependencyName(m: string) {
   fp.map((v) => {
     if (v === "%") {
       rs.push("(.*)");
-    }
-    else if (/^\$/.test(v)) {
+    } else if (/^\$/.test(v)) {
       rx.push(rs.join(""));
       rs = [];
       const [ ns, name ] = /^\$(?:(\w+):)(\w+)$/.exec(v)!;
       vr.push({ ns, name });
-    }
-    else {
+    } else {
       rs.push([ ...v ]
         .map((c: string) => {
           c.replace(/\W/, "\\$&");

@@ -8,9 +8,9 @@
 import { ok } from "assert";
 import { pathSearch } from "../io/pathSearch";
 import { CallbackR } from "./CallbackR";
-import { VarTree } from "./VarTree";
 import { DAnalysed } from "./DAnalysed";
 import { TMAnalysed } from "./TMAnalysed";
+import { VarTree } from "./VarTree";
 
 export class RuleObject {
   constructor(public targets: TMAnalysed, public dependencies: DAnalysed, public recipe: CallbackR) {}
