@@ -6,6 +6,10 @@
  */
 
 import { VarValue } from "./VarValue";
+
+/**
+ * Var tree
+ */
 export class VarTree {
   [ns: string]:
     | {

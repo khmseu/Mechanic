@@ -8,7 +8,12 @@
 import { DAnalysed } from "./DAnalysed";
 import { DependencySpec } from "./DependencySpec";
 import { DependencyStringMatcher } from "./DependencyStringMatcher";
-
+/**
+ * 
+ * @export
+ * @param  {DependencySpec[]} depends 
+ * @return DAnalysed[] 
+ */
 export function dAnalyse(depends: DependencySpec[]): DAnalysed[] {
   const ret: DAnalysed = [];
   depends.forEach((depend) => {

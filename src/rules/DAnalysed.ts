@@ -6,6 +6,7 @@
  */
 
 import { IDependencyGenerator } from "./IDependencyGenerator";
+
 export type DAnalysed = Array<{
   generator: IDependencyGenerator;
 }>;

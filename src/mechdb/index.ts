@@ -52,6 +52,10 @@ const db = new sqlite3.Database(".mechanic.db", (err) => {
   });
 });
 
+/**
+ *
+ * @return {void}
+ */
 function rebuild() {
   // try to empty
   db.all("select * from sqlite_master where type = 'table'", [], (err, rows) => {

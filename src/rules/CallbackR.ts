@@ -6,4 +6,5 @@
  */
 
 import { VarTree } from "./VarTree";
+
 export type CallbackR = (vars: VarTree) => void;

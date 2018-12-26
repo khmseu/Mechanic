@@ -10,10 +10,11 @@ import { isAbsolute, normalize, parse, resolve } from "path";
 import { string3 } from "./string3";
 
 /**
- * Paths search
- * @param path
- * @param name
- * @returns search
+ *
+ * @export
+ * @param  {string[]} path
+ * @param  {string} name
+ * @return string3
  * modified from path-search module
  */
 export function pathSearch(path: string[], name: string): string3 {

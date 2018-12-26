@@ -12,8 +12,27 @@ import { DAnalysed } from "./DAnalysed";
 import { TMAnalysed } from "./TMAnalysed";
 import { VarTree } from "./VarTree";
 
+/**
+ *
+ * @export
+ * @class RuleObject
+ */
 export class RuleObject {
+  /**
+   * Creates an instance of RuleObject.
+   * @param  {TMAnalysed} targets
+   * @param  {DAnalysed} dependencies
+   * @param  {CallbackR} recipe
+   * @memberof RuleObject
+   */
   constructor(public targets: TMAnalysed, public dependencies: DAnalysed, public recipe: CallbackR) {}
+  /**
+   *
+   * @param  {string} target
+   * @param  {VarTree} vars
+   * @return (string[] | null)
+   * @memberof RuleObject
+   */
   public matches(target: string, vars: VarTree): string[] | null {
     const grouplist: string[][] = [];
     this.targets.forEach((element) => {

@@ -8,9 +8,27 @@
 import { IDependencyGenerator } from "./IDependencyGenerator";
 import { VarTree } from "./VarTree";
 import { VarValue } from "./VarValue";
+
+/**
+ *
+ * @export
+ * @class DependencyStringMatcher
+ * @implements IDependencyGenerator
+ */
 export class DependencyStringMatcher implements IDependencyGenerator {
+  /**
+   *
+   * @private
+   * @type string[]
+   * @memberof DependencyStringMatcher
+   */
   private readonly fp: string[];
-  private readonly cn: number[];
+
+  /**
+   * Creates an instance of DependencyStringMatcher.
+   * @param  {string} d
+   * @memberof DependencyStringMatcher
+   */
   constructor(private readonly d: string) {
     this.fp = [];
     this.cn = [];
@@ -18,8 +36,8 @@ export class DependencyStringMatcher implements IDependencyGenerator {
     const m = /^(\w+):(.*)$/.exec(depend);
     if (m) {
       ret.push({
-        ns: m[ 1 ],
-        name: m[ 2 ],
+        ns: m[1],
+        name: m[2],
       });
     } else {
       ret.push({
@@ -27,17 +45,28 @@ export class DependencyStringMatcher implements IDependencyGenerator {
       });
     }
   }
+  /**
+   *
+   * @param  {VarTree} vars
+   * @return string[]
+   * @memberof DependencyStringMatcher
+   */
   public generate(vars: VarTree): string[] {
     const n: {
-      [ vn: string ]: VarValue;
-    } = vars[ "" ] || {};
+      [vn: string]: VarValue;
+    } = vars[""] || {};
     const c: string[] = n.capture as string[];
     let r = "";
     for (let i = 0; i < this.cn.length; i++) {
-      r += this.fp[ i ] + c[ this.cn[ i ] ];
+      r += this.fp[i] + c[this.cn[i]];
     }
-    return [ r + this.fp[ this.cn.length ] ];
+    return [r + this.fp[this.cn.length]];
   }
+  /**
+   *
+   * @return string
+   * @memberof DependencyStringMatcher
+   */
   public toString(): string {
     return this.d;
   }

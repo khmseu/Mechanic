@@ -9,6 +9,12 @@ import { TargetSpec } from "./TargetSpec";
 import { TargetStringMatcher } from "./TargetStringMatcher";
 import { TMAnalysed } from "./TMAnalysed";
 
+/**
+ *
+ * @export
+ * @param  {TargetSpec[]} targets
+ * @return TMAnalysed
+ */
 export function tmAnalyse(targets: TargetSpec[]): TMAnalysed {
   const ret: TMAnalysed = [];
   targets.forEach((target) => {

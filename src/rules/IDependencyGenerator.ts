@@ -6,7 +6,23 @@
  */
 
 import { VarTree } from "./VarTree";
+/**
+ *
+ * @export
+ * @interface IDependencyGenerator
+ */
 export interface IDependencyGenerator {
+  /**
+   *
+   * @param  {VarTree} vars
+   * @return string[]
+   * @memberof IDependencyGenerator
+   */
   generate(vars: VarTree): string[];
+  /**
+   *
+   * @return string
+   * @memberof IDependencyGenerator
+   */
   toString(): string;
 }

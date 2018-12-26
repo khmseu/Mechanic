@@ -1,0 +1,87 @@
+Skript gestartet auf Mi 26 Dez 2018 12:09:03 CET
+NAME                      | DESCRIPTION          | AUTHOR          | DATE       | VERSION  | KEYWORDS                                      
+[31mtypedoc[0m                   | Create api           | =aciccarello    | 2018-10-10 | 0.13.0   | typescript documentation generator gruntplugin
+                          | documentations for   | =blakeembrey    |            |          |                                               
+                          | typescript projects. | =sebastian-lenz |            |          |                                               [31m[0m
+[31mtypedoc[0m-plugin-markdown   | A plugin for [31mTypeDoc[0m | =tgreyuk        | 2018-12-22 | 1.1.20   | markdown typescript [31mtypedoc[0mplugin [31mtypedoc[0m
+                          | that exposes a theme |                 |            |          |                                          
+                          | and additional       |                 |            |          |                                          
+                          | arguments for        |                 |            |          |                                          
+                          | rendering markdown.  |                 |            |          |                                          [31m[0m
+[31mtypedoc[0m-plugin-external-m | Specify the [31mTypedoc[0m  | =christopherth… | 2018-07-21 | 1.1.3    | [31mtypedoc[0mplugin [31mtypedoc[0m
+odule-name                | Module of a file     | ielen           |            |          |                      
+                          | using @module        |                 |            |          |                      
+                          | annotation           |                 |            |          |                      [31m[0m
+gulp-[31mtypedoc[0m              | Gulp plugin for the  | =rogierschouten | 2018-11-27 | 2.2.1    | [31mtypedoc[0m typescript gulpplugin
+                          | [31mTypeDoc[0m typescript   |                 |            |          |                              
+                          | documentation tool.  |                 |            |          |                              [31m[0m
+typescript-starter        | A typescript starter | =jasondreyzehn… | 2018-11-28 | 2.4.2    | typescript starter template boilerplate library node [31mtypedoc[0m ava nyc tslint prettier standard-ver
+                          | for building         | er              |            |          |                                                                                                  
+                          | javascript libraries |                 |            |          |                                                                                                  
+                          | and projects         |                 |            |          |                                                                                                  [31m[0m
+[31mtypedoc[0m-plugin-docusaurus | A plugin for [31mTypedoc[0m | =offgridnetwor… | 2018-02-16 | 1.0.14   | markdown [31mtypedoc[0mplugin [31mtypedoc[0m docusaurus
+                          | that exposes themes  | ks              |            |          |                                          
+                          | and options for      |                 |            |          |                                          
+                          | rendering markdown   |                 |            |          |                                          
+                          | for docusaurus.      |                 |            |          |                                          [31m[0m
+[31mtypedoc[0m-plugin-no-inherit | [31mTypedoc[0m plugin to    | =jonchardy      | 2018-11-08 | 1.0.2    | [31mtypedoc[0m plugin [31mtypedoc[0mplugin documentation
+                          | exclude inherited    |                 |            |          |                                           
+                          | members from a       |                 |            |          |                                           
+                          | [31mTypedoc[0m              |                 |            |          |                                           
+                          | class/interface      |                 |            |          |                                           [31m[0m
+@bigcommerce/[31mtypedoc[0m-plug | A plugin for [31mTypedoc[0m | =capsula4       | 2018-11-29 | 1.3.0    | markdown typescript [31mtypedoc[0mplugin [31mtypedoc[0m
+in-markdown               | that exposes a theme | =chris.boulton  |            |          |                                          
+                          | and additional       | =davidchin      |            |          |                                          
+                          | arguments for        | =delcore92      |            |          |                                          
+                          | rendering markdown.  | =icatalina      |            |          |                                          
+                          |                      | =junedkazi      |            |          |                                          
+                          |                      | =mattolson      |            |          |                                          
+                          |                      | =sure-round     |            |          |                                          
+                          |                      | =zoharmuzafi    |            |          |                                          [31m[0m
+[31mtypedoc[0m-plugin-as-member- | [31mTypeDoc[0m plugin to    | =cancerberosgx  | 2018-04-27 | 1.0.2    | [31mTypeDoc[0m TypeScript JavaScript jsdoc documentation
+of                        | 'move' declarations  |                 |            |          |                                                  
+                          | as members of        |                 |            |          |                                                  
+                          | existing classes,    |                 |            |          |                                                  
+                          | interfaces, objects, |                 |            |          |                                                  
+                          | etc                  |                 |            |          |                                                  [31m[0m
+@fly/[31mtypedoc[0m-plugin-exter | Specify the [31mTypedoc[0m  | =michaeldwan    | 2018-04-02 | 1.1.3    | [31mtypedoc[0mplugin [31mtypedoc[0m
+nal-module-name           | Module of a file     | =jeromegn       |            |          |                      
+                          | using @module        | =mrkurt         |            |          |                      
+                          | annotation           |                 |            |          |                      [31m[0m
+[31mtypedoc[0m-plugin-localizati | [31mTypedoc[0m plugin which | =igniteui       | 2018-12-13 | 1.4.1    | [31mtypedoc[0m localizaiton plugin [31mtypedoc[0mplugin
+on                        | localize your        |                 |            |          |                                          
+                          | documentation        |                 |            |          |                                          [31m[0m
+@vovkasm/[31mtypedoc[0m          | Create api           | =vovkasm        | 2018-08-12 | 0.11.1-… | typescript documentation generator gruntplugin
+                          | documentations for   |                 |            | vovkasm… |                                               
+                          | typescript projects. |                 |            | .0       |                                               [31m[0m
+@agrarium/plugin-[31mtypedoc[0m  | Agrarium plugin for  | =awinogradov    | 2018-07-30 | 2.0.2    | 
+                          | types definitions    | =qfox           |            |          | 
+                          | resolving            | =verybigman     |            |          | [31m[0m
+[31mtypedoc[0m-loader            | A Webpack loader     | =andrewbranch   | 2018-08-31 | 5.0.0    | Webpack loader TypeScript [31mTypeDoc[0m
+                          | that converts        |                 |            |          |                                  
+                          | TypeScript to        |                 |            |          |                                  
+                          | [31mTypeDoc[0m JSON.        |                 |            |          |                                  [31m[0m
+[?25l[[90m..................[0m] \ : [7msill[0m [35mesearch[0m request stream opened, code: 200[0m[K[K[?25h[31mtypedoc[0m-format            | [31mtypedoc[0m-format       | =heifade        | 2018-10-25 | 1.0.30   | [31mtypedoc[0m-format[31m[0m
+[31mtypedoc[0m-plantuml          | Plugin for [31mTypeDoc[0m   | =artifacthealth | 2016-06-05 | 1.4.1    | uml plantuml [31mtypedoc[0m [31mtypedoc[0mplugin
+                          | that generates       |                 |            |          |                                   
+                          | images for PlantUML  |                 |            |          |                                   
+                          | diagrams embedded in |                 |            |          |                                   
+                          | comments.            |                 |            |          |                                   [31m[0m
+@vamship/grunt-[31mtypedoc[0m    | Grunt task to        | =vamship        | 2018-12-05 | 1.2.2    | grunt typescript documentation
+                          | generate type docs   |                 |            |          |                               
+                          | for a given project  |                 |            |          |                               [31m[0m
+@sensenet/[31mtypedoc[0m-theme   | sensenet theme to    | =bezoo =kultsar | 2018-03-20 | 1.1.1    | sensenet [31mtypedoc[0m [31mtypedoc[0m-theme theme
+                          | API docs generated   | =herflis        |            |          |                                     
+                          | by [31mtypedoc[0m           | =tusmester      |            |          |                                     
+                          |                      | =kavics         |            |          |                                     
+                          |                      | =gallayl        |            |          |                                     [31m[0m
+[31mtypedoc[0m-default-themes    | Default themes for   | =blakeembrey    | 2017-05-12 | 0.5.0    | typescript documentation generator
+                          | [31mTypeDoc[0m.             | =sebastian-lenz |            |          |                                   
+                          |                      | =aciccarello    |            |          |                                   [31m[0m
+adr                       | 轻量级架构记录工具 - | =phodal         | 2018-07-29 | 1.1.1    | async ava await boilerplate conventional-changelog ES6 ES7 library javascript-modules node nyc rollup star
+                          | Command-line tools   |                 |            |          |                                                                                                  
+                          | for working with     |                 |            |          |                                                                                                  
+                          | Architecture         |                 |            |          |                                                                                                  
+                          | Decision Records     |                 |            |          |                                                                                                  [31m[0m
+
+Skript beendet: Mi 26 Dez 2018 12:09:05 CET

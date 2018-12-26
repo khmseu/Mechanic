@@ -5,6 +5,12 @@
  * https://opensource.org/licenses/MIT
  */
 
+/**
+ *
+ * @export
+ * @param  {string} m
+ * @return
+ */
 export function parseTargetName(m: string) {
   const fp = m.split(/(%|(?:\$(?:\w+:)?\w+))/);
   const rx: string[] = [];
@@ -19,14 +25,16 @@ export function parseTargetName(m: string) {
     } else if (/^\$/.test(v)) {
       rx.push(rs.join(""));
       rs = [];
-      const [ ns, name ] = /^\$(?:(\w+):)(\w+)$/.exec(v)!;
+      const [ns, name] = /^\$(?:(\w+):)(\w+)$/.exec(v)!;
       vr.push({ ns, name });
     } else {
-      rs.push([ ...v ]
-        .map((c: string) => {
-          c.replace(/\W/, "\\$&");
-        })
-        .join(""));
+      rs.push(
+        [...v]
+          .map((c: string) => {
+            c.replace(/\W/, "\\$&");
+          })
+          .join(""),
+      );
     }
   });
   rx.push(rs.join(""));
