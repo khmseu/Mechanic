@@ -8,7 +8,7 @@
 import { appId, db, userVer } from "./globals";
 /**
  *
- * @return {void}
+ * @return
  */
 export function rebuild() {
   // try to empty

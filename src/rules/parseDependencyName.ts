@@ -6,9 +6,9 @@
  */
 
 /**
- *
- * @param  {string} m
- * @return
+ * Parses dependency name
+ * @param m
+ * @returns
  */
 function parseDependencyName(m: string) {
   const fp = m.split(/(%|(?:\$(?:\w+:)?\w+))/);

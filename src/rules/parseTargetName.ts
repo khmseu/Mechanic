@@ -6,10 +6,9 @@
  */
 
 /**
- *
- * @export
- * @param  {string} m
- * @return
+ * Parses target name
+ * @param m
+ * @returns
  */
 export function parseTargetName(m: string) {
   const fp = m.split(/(%|(?:\$(?:\w+:)?\w+))/);

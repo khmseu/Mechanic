@@ -9,6 +9,11 @@ import { promisify } from "util";
 import { CallbackGD } from "./CallbackGD";
 import { db } from "./globals";
 
+/**
+ * Gets dependency
+ * @param outerName
+ * @returns dependency
+ */
 export function getDependency(outerName: string): Promise<void> {
   return promisify((name: string, callback: CallbackGD) => {
     db.get("select generation, status from dependencies where name = ?", [name], (err, row) => {

@@ -12,30 +12,20 @@ import { VarTree } from "./VarTree";
 import { VarValue } from "./VarValue";
 
 /**
- *
- * @export
- * @class TargetStringMatcher
- * @implements ITargetMatcher
+ * Target string matcher
  */
 export class TargetStringMatcher implements ITargetMatcher {
   /**
-   *
-   * @private
-   * @type string[]
-   * @memberof TargetStringMatcher
+   * Fp  of target string matcher
    */
   private readonly fp: string[];
   /**
-   *
-   * @private
-   * @type RegExp
-   * @memberof TargetStringMatcher
+   * Rx  of target string matcher
    */
   private readonly rx: RegExp;
   /**
-   * Creates an instance of TargetStringMatcher.
-   * @param  {string} m
-   * @memberof TargetStringMatcher
+   * Creates an instance of target string matcher.
+   * @param m
    */
   constructor(private readonly m: string) {
     const pr = parseTargetName(m);
@@ -53,21 +43,19 @@ export class TargetStringMatcher implements ITargetMatcher {
     );
   }
   /**
-   *
-   * @param  {string} _
-   * @param  {string} __
-   * @param  {string} child
-   * @return (ITargetDetails | null)
-   * @memberof TargetStringMatcher
+   * Matchs target string matcher
+   * @param _
+   * @param __
+   * @param child
+   * @returns match
    */
   public match(_: string, __: string, child: string): ITargetDetails | null {
     return this.rx.exec(child);
   }
   /**
-   *
-   * @param  {VarTree} vars
-   * @return string
-   * @memberof TargetStringMatcher
+   * Generates target string matcher
+   * @param vars
+   * @returns generate
    */
   public generate(vars: VarTree): string {
     const n: {
@@ -81,9 +69,8 @@ export class TargetStringMatcher implements ITargetMatcher {
     return r + this.fp[this.fp.length - 1];
   }
   /**
-   *
-   * @return string
-   * @memberof TargetStringMatcher
+   * To string
+   * @returns string
    */
   public toString(): string {
     return this.m;

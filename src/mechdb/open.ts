@@ -9,6 +9,10 @@ import { verbose } from "sqlite3";
 import { appId, db, userVer } from "./globals";
 import { rebuild } from "./rebuild";
 
+/**
+ *
+ * @return
+ */
 export function open() {
   // while initializing, use throw
   const sqlite3 = verbose();

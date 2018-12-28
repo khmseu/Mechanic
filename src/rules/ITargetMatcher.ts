@@ -9,31 +9,26 @@ import { ITargetDetails } from "./ITargetDetails";
 import { VarTree } from "./VarTree";
 
 /**
- *
- * @export
- * @interface ITargetMatcher
+ * Itarget matcher
  */
 export interface ITargetMatcher {
   /**
    *
-   * @param  {string} full
-   * @param  {string} parent
-   * @param  {string} child
-   * @return (ITargetDetails | null)
-   * @memberof ITargetMatcher
+   * @param full
+   * @param parent
+   * @param child
+   * @returns match
    */
   match(full: string, parent: string, child: string): ITargetDetails | null;
   /**
    *
-   * @param  {VarTree} vars
-   * @return string
-   * @memberof ITargetMatcher
+   * @param vars
+   * @returns generate
    */
   generate(vars: VarTree): string;
   /**
    *
-   * @return string
-   * @memberof ITargetMatcher
+   * @returns string
    */
   toString(): string;
 }

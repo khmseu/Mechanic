@@ -10,10 +10,9 @@ import { TargetStringMatcher } from "./TargetStringMatcher";
 import { TMAnalysed } from "./TMAnalysed";
 
 /**
- *
- * @export
- * @param  {TargetSpec[]} targets
- * @return TMAnalysed
+ * analyse
+ * @param targets
+ * @returns analyse
  */
 export function tmAnalyse(targets: TargetSpec[]): TMAnalysed {
   const ret: TMAnalysed = [];

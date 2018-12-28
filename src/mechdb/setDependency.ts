@@ -9,6 +9,12 @@ import { promisify } from "util";
 import { CallbackSD } from "./CallbackSD";
 import { db } from "./globals";
 
+/**
+ * Sets dependency
+ * @param outerName
+ * @param outerStatus
+ * @returns
+ */
 export function setDependency(outerName: string, outerStatus: any) {
   return promisify((name: string, status: any, callback: CallbackSD) => {
     status = JSON.stringify(status);

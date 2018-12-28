@@ -10,24 +10,17 @@ import { VarTree } from "./VarTree";
 import { VarValue } from "./VarValue";
 
 /**
- *
- * @export
- * @class DependencyStringMatcher
- * @implements IDependencyGenerator
+ * Dependency string matcher
  */
 export class DependencyStringMatcher implements IDependencyGenerator {
   /**
-   *
-   * @private
-   * @type string[]
-   * @memberof DependencyStringMatcher
+   * Fp  of dependency string matcher
    */
   private readonly fp: string[];
 
   /**
-   * Creates an instance of DependencyStringMatcher.
-   * @param  {string} d
-   * @memberof DependencyStringMatcher
+   * Creates an instance of dependency string matcher.
+   * @param d
    */
   constructor(private readonly d: string) {
     this.fp = [];
@@ -46,10 +39,9 @@ export class DependencyStringMatcher implements IDependencyGenerator {
     }
   }
   /**
-   *
-   * @param  {VarTree} vars
-   * @return string[]
-   * @memberof DependencyStringMatcher
+   * Generates dependency string matcher
+   * @param vars
+   * @returns generate
    */
   public generate(vars: VarTree): string[] {
     const n: {
@@ -63,9 +55,8 @@ export class DependencyStringMatcher implements IDependencyGenerator {
     return [r + this.fp[this.cn.length]];
   }
   /**
-   *
-   * @return string
-   * @memberof DependencyStringMatcher
+   * To string
+   * @returns string
    */
   public toString(): string {
     return this.d;

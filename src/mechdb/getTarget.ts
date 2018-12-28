@@ -10,6 +10,11 @@ import { CallbackGT } from "./CallbackGT";
 import { db } from "./globals";
 
 // after initializing, use promises
+/**
+ * Gets target
+ * @param outerName
+ * @returns target
+ */
 export function getTarget(outerName: string): Promise<void> {
   return promisify((name: string, callback: CallbackGT) => {
     //  export const getTarget: StringToPromise = promisify((name: string, callback: CallbackGT) => {

@@ -13,9 +13,8 @@ import { TargetSpec } from "./TargetSpec";
 import { tmAnalyse } from "./tmAnalyse";
 
 /**
- *
- * @param  {{ Targets: TargetSpec[]; Dependencies: DependencySpec[]; Recipe: CallbackR }} spec
- * @return {void}
+ * Specs rule
+ * @param spec
  */
 const Rule = (spec: { Targets: TargetSpec[]; Dependencies: DependencySpec[]; Recipe: CallbackR }): void => {
   const t = tmAnalyse(spec.Targets);

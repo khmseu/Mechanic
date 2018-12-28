@@ -13,25 +13,21 @@ import { TMAnalysed } from "./TMAnalysed";
 import { VarTree } from "./VarTree";
 
 /**
- *
- * @export
- * @class RuleObject
+ * Rule object
  */
 export class RuleObject {
   /**
-   * Creates an instance of RuleObject.
-   * @param  {TMAnalysed} targets
-   * @param  {DAnalysed} dependencies
-   * @param  {CallbackR} recipe
-   * @memberof RuleObject
+   * Creates an instance of rule object.
+   * @param targets
+   * @param dependencies
+   * @param recipe
    */
   constructor(public targets: TMAnalysed, public dependencies: DAnalysed, public recipe: CallbackR) {}
   /**
-   *
-   * @param  {string} target
-   * @param  {VarTree} vars
-   * @return (string[] | null)
-   * @memberof RuleObject
+   * Matches rule object
+   * @param target
+   * @param vars
+   * @returns matches
    */
   public matches(target: string, vars: VarTree): string[] | null {
     const grouplist: string[][] = [];

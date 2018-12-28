@@ -9,6 +9,12 @@ import { promisify } from "util";
 import { CallbackST } from "./CallbackST";
 import { db } from "./globals";
 
+/**
+ * Sets target
+ * @param outerName
+ * @param outerDependlistJ
+ * @returns target
+ */
 export function setTarget(outerName: string, outerDependlistJ: string[]): Promise<void> {
   return promisify((name: string, dependlistJ: string[], callback: CallbackST) => {
     const dependlist = JSON.stringify(dependlistJ);
