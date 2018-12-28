@@ -7,8 +7,8 @@
 
 import { ok } from "assert";
 import { pathSearch } from "../../io/pathSearch";
-import { DAnalysed } from "../dependencies/DAnalysed";
-import { TMAnalysed } from "../targets/TMAnalysed";
+import { DependencyGeneratorList } from "../dependencies/DependencyGeneratorList";
+import { TargetMatcherList } from "../targets/TargetMatcherList";
 import { VarTree } from "../variables/VarTree";
 import { CallbackR } from "./CallbackR";
 
@@ -22,7 +22,11 @@ export class RuleObject {
    * @param dependencies
    * @param recipe
    */
-  constructor(public targets: TMAnalysed, public dependencies: DAnalysed, public recipe: CallbackR) {}
+  constructor(
+    public targets: TargetMatcherList, //
+    public dependencies: DependencyGeneratorList,
+    public recipe: CallbackR,
+  ) {}
   /**
    * Matches rule object
    * @param target

@@ -5,8 +5,8 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { ITargetDetails } from "./ITargetDetails";
 import { VarTree } from "../variables/VarTree";
+import { ITargetDetails } from "./ITargetDetails";
 
 /**
  * Itarget matcher

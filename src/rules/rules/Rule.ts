@@ -5,20 +5,20 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { analyseDependencySpec } from "../dependencies/analyseDependencySpec";
+import { DependencySpecList } from "../dependencies/DependencySpecList";
+import { analyseTargetSpecs } from "../targets/analyseTargetSpecs";
+import { TargetSpecList } from "../targets/TargetSpecList";
 import { CallbackR } from "./CallbackR";
-import { dAnalyse } from "../dependencies/dAnalyse";
-import { DependencySpec } from "../dependencies/DependencySpec";
 import { RuleObject, rules } from "./RuleObject";
-import { TargetSpec } from "../targets/TargetSpec";
-import { tmAnalyse } from "../targets/tmAnalyse";
 
 /**
  *
  * @param spec
  * @return
  */
-export function Rule(spec: { Targets: TargetSpec[]; Dependencies: DependencySpec[]; Recipe: CallbackR }): void {
-  const t = tmAnalyse(spec.Targets);
-  const d = dAnalyse(spec.Dependencies);
+export function Rule(spec: { Targets: TargetSpecList; Dependencies: DependencySpecList; Recipe: CallbackR }): void {
+  const t = analyseTargetSpecs(spec.Targets);
+  const d = analyseDependencySpec(spec.Dependencies);
   rules.push(new RuleObject(t, d, spec.Recipe));
 }

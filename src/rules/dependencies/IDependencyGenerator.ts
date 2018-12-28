@@ -6,6 +6,7 @@
  */
 
 import { VarTree } from "../variables/VarTree";
+import { DependencyList } from "./DependencyList";
 
 /**
  * Idependency generator
@@ -16,7 +17,7 @@ export interface IDependencyGenerator {
    * @param vars
    * @returns generate
    */
-  generate(vars: VarTree): string[];
+  generate(vars: VarTree): DependencyList;
   /**
    *
    * @returns string

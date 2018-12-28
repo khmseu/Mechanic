@@ -5,11 +5,11 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { VarTree } from "../variables/VarTree";
+import { VarValue } from "../variables/VarValue";
 import { ITargetDetails } from "./ITargetDetails";
 import { ITargetMatcher } from "./ITargetMatcher";
 import { parseTargetName } from "./parseTargetName";
-import { VarTree } from "../variables/VarTree";
-import { VarValue } from "../variables/VarValue";
 
 /**
  * Target string matcher

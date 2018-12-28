@@ -5,15 +5,11 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { VarValue } from "./VarValue";
+import { VarNameSpace } from "./VarNameSpace";
 
 /**
  * Var tree
  */
 export class VarTree {
-  [ns: string]:
-    | {
-        [vn: string]: VarValue;
-      }
-    | undefined;
+  [ns: string]: VarNameSpace | undefined;
 }
