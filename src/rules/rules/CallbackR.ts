@@ -5,6 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { VarTree } from "./VarTree";
+import { VarTree } from "../variables/VarTree";
 
 export type CallbackR = (vars: VarTree) => void;

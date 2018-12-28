@@ -6,11 +6,11 @@
  */
 
 import { ok } from "assert";
-import { pathSearch } from "../io/pathSearch";
-import { CallbackR } from "./CallbackR";
-import { DAnalysed } from "./DAnalysed";
-import { TMAnalysed } from "./TMAnalysed";
-import { VarTree } from "./VarTree";
+import { pathSearch } from "../../io/pathSearch";
+import { DAnalysed } from "../dependencies/DAnalysed";
+import { CallbackR } from "../rules/CallbackR";
+import { TMAnalysed } from "../targets/TMAnalysed";
+import { VarTree } from "../variables/VarTree";
 
 /**
  * Rule object

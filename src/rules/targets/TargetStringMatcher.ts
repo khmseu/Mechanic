@@ -8,8 +8,8 @@
 import { ITargetDetails } from "./ITargetDetails";
 import { ITargetMatcher } from "./ITargetMatcher";
 import { parseTargetName } from "./parseTargetName";
-import { VarTree } from "./VarTree";
-import { VarValue } from "./VarValue";
+import { VarTree } from "../variables/VarTree";
+import { VarValue } from "../variables/VarValue";
 
 /**
  * Target string matcher

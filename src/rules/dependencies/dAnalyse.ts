@@ -5,9 +5,9 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { DAnalysed } from "./dependencies/DAnalysed";
-import { DependencySpec } from "./dependencies/DependencySpec";
-import { DependencyStringMatcher } from "./dependencies/DependencyStringMatcher";
+import { DAnalysed } from "./DAnalysed";
+import { DependencySpec } from "./DependencySpec";
+import { DependencyStringMatcher } from "./DependencyStringMatcher";
 
 /**
  * Determines whether analyse d

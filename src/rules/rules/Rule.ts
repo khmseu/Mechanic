@@ -5,12 +5,12 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { RuleObject, rules } from "./actions/RuleObject";
-import { dAnalyse } from "./dependencies/dAnalyse";
-import { DependencySpec } from "./dependencies/DependencySpec";
-import { CallbackR } from "./rules/CallbackR";
-import { TargetSpec } from "./targets/TargetSpec";
-import { tmAnalyse } from "./targets/tmAnalyse";
+import { CallbackR } from "./CallbackR";
+import { dAnalyse } from "../dependencies/dAnalyse";
+import { DependencySpec } from "../dependencies/DependencySpec";
+import { RuleObject, rules } from "./RuleObject";
+import { TargetSpec } from "../targets/TargetSpec";
+import { tmAnalyse } from "../targets/tmAnalyse";
 
 /**
  *

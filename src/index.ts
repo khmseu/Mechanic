@@ -50,6 +50,7 @@ import * as close from "./mechdb/close";
 import * as mdb from "./mechdb/globals";
 // tslint:disable-next-line:no-console
 console.error({ mdb });
-import * as rules from "./rules/Rule";
+import { Rule } from "./rules/rules/Rule";
+Rule({});
 // tslint:disable-next-line:no-console
 close.close().catch((err) => console.error(err));

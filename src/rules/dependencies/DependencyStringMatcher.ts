@@ -5,9 +5,9 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { VarTree } from "../variables/VarTree";
+import { VarValue } from "../variables/VarValue";
 import { IDependencyGenerator } from "./IDependencyGenerator";
-import { VarTree } from "./VarTree";
-import { VarValue } from "./VarValue";
 
 /**
  * Dependency string matcher

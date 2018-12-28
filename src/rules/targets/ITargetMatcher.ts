@@ -6,7 +6,7 @@
  */
 
 import { ITargetDetails } from "./ITargetDetails";
-import { VarTree } from "./VarTree";
+import { VarTree } from "../variables/VarTree";
 
 /**
  * Itarget matcher
