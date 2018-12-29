@@ -1,0 +1,8 @@
+// Copyright (c) 2018 Kai Henningsen <kai.extern+mechanic@gmail.com>
+// 
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+
+Separate Path out. We'll have a Path at runtime, not part of the rule, or
+rather a set of paths controlled by regexes on target/dependency names
+(non-pathsearched versions).
