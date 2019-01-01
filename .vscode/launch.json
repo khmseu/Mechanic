@@ -7,6 +7,12 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "Create Documentation",
+            "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/typedoc"
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "Programm starten",
             "program": "${workspaceFolder}/built/index.js",
             "preLaunchTask": "tsc: build - tsconfig.json",
