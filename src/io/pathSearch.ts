@@ -7,6 +7,7 @@
 
 import { existsSync } from "fs";
 import { isAbsolute, normalize, parse, resolve } from "path";
+import { Path } from "./Path";
 import { string3 } from "./string3";
 
 /**
@@ -16,7 +17,7 @@ import { string3 } from "./string3";
  * @param name
  * @returns search
  */
-export function pathSearch(path: string[], name: string): string3 {
+export function pathSearch(path: Path, name: string): string3 {
   const triple = (dir: string): string3 => {
     if (isAbsolute(name)) {
       return [resolve(name), parse(name).root, normalize(name)];

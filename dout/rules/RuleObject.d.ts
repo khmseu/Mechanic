@@ -1,12 +1,35 @@
-import { CallbackR } from "./common";
-import { DAnalysed } from "./dAnalyse";
-import { TMAnalysed } from "./tmAnalyse";
+/**
+ * Copyright (c) 2018 Kai Henningsen <kai.extern+mechanic@gmail.com>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+import { DependencyGeneratorList } from "../dependencies/DependencyGeneratorList";
+import { TargetMatcherList } from "../targets/TargetMatcherList";
+import { VarTree } from "../variables/VarTree";
+import { CallbackR } from "./CallbackR";
+/**
+ * Rule object
+ */
 export declare class RuleObject {
-    targets: TMAnalysed;
-    dependencies: DAnalysed;
+    targets: TargetMatcherList;
+    dependencies: DependencyGeneratorList;
     recipe: CallbackR;
-    constructor(targets: TMAnalysed, dependencies: DAnalysed, recipe: CallbackR);
-    matches(target: string): string[] | null;
+    /**
+     * Creates an instance of rule object.
+     * @param targets
+     * @param dependencies
+     * @param recipe
+     */
+    constructor(targets: TargetMatcherList, //
+    dependencies: DependencyGeneratorList, recipe: CallbackR);
+    /**
+     * Matches rule object
+     * @param target
+     * @param vars
+     * @returns matches
+     */
+    matches(target: string, vars: VarTree): string[] | null;
 }
 export declare const rules: RuleObject[];
 //# sourceMappingURL=RuleObject.d.ts.map

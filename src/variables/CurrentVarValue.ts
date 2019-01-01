@@ -5,4 +5,4 @@
  * https://opensource.org/licenses/MIT
  */
 
-export type CurrentVarValue = string | undefined;
+export type CurrentVarValue = string | null | undefined;

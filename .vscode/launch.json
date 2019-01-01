@@ -19,7 +19,7 @@
             "outFiles": [
                 "${workspaceFolder}/built/**/*.js"
             ]
-        }
+        },
         {
             "type": "node",
             "request": "launch",

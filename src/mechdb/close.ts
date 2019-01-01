@@ -14,6 +14,6 @@ import { db } from "./globals";
  */
 export function close(): Promise<void> {
   return promisify((callback: CallbackC) => {
-    db.close((errp?: Error | null) => callback(errp || undefined, null));
+    db.close((errp?: Error | null | undefined) => callback(errp || undefined, null));
   })();
 }

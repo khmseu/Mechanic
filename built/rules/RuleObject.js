@@ -1,39 +1,48 @@
 "use strict";
+/**
+ * Copyright (c) 2018 Kai Henningsen <kai.extern+mechanic@gmail.com>
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
 Object.defineProperty(exports, "__esModule", { value: true });
-// MIT License
-//
-// Copyright (c) 2018 Kai Henningsen
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all
-// copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-// SOFTWARE.
+const assert_1 = require("assert");
+const pathSearch_1 = require("../io/pathSearch");
+/**
+ * Rule object
+ */
 class RuleObject {
-    constructor(targets, dependencies, recipe) {
+    /**
+     * Creates an instance of rule object.
+     * @param targets
+     * @param dependencies
+     * @param recipe
+     */
+    constructor(targets, //
+    dependencies, recipe) {
         this.targets = targets;
         this.dependencies = dependencies;
         this.recipe = recipe;
     }
-    matches(target) {
+    /**
+     * Matches rule object
+     * @param target
+     * @param vars
+     * @returns matches
+     */
+    matches(target, vars) {
         const grouplist = [];
         this.targets.forEach((element) => {
-            const groups = element.match(target);
-            if (groups) {
-                grouplist.push(groups);
+            const pathvar = element.pathvar;
+            const path = vars.PATH[pathvar];
+            assert_1.ok(Array.isArray(path), "A Path must be a string list");
+            const candidate = pathSearch_1.pathSearch(path, target);
+            if (candidate) {
+                const matcher = element.matcher;
+                const groups = matcher.match(...candidate);
+                if (groups) {
+                    grouplist.push(groups);
+                }
             }
         });
         if (grouplist.length > 1) {

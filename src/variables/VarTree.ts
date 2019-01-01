@@ -11,5 +11,5 @@ import { VarNameSpace } from "./VarNameSpace";
  * Var tree
  */
 export class VarTree {
-  [ns: string]: VarNameSpace | undefined;
+  [ns: string]: VarNameSpace | null | undefined;
 }
