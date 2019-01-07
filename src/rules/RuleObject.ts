@@ -5,9 +5,8 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { ok } from "assert";
-import { pathSearch } from "../io/pathSearch";
 import { DependencyGeneratorList } from "../dependencies/DependencyGeneratorList";
+import { findInPath } from "../paths/findInPath";
 import { TargetMatcherList } from "../targets/TargetMatcherList";
 import { VarTree } from "../variables/VarTree";
 import { CallbackR } from "./CallbackR";
@@ -29,23 +28,17 @@ export class RuleObject {
   ) {}
   /**
    * Matches rule object
-   * @param target
+   * @param wantedTarget
    * @param vars
    * @returns matches
    */
-  public matches(target: string, vars: VarTree): string[] | null {
+  public matches(wantedTarget: string, vars: VarTree): string[] | null {
     const grouplist: string[][] = [];
+    const candidate = findInPath(wantedTarget);
     this.targets.forEach((element) => {
-      const pathvar = element.pathvar;
-      const path = vars.PATH![pathvar] as string[];
-      ok(Array.isArray(path), "A Path must be a string list");
-      const candidate = pathSearch(path, target);
-      if (candidate) {
-        const matcher = element.matcher;
-        const groups = matcher.match(...candidate);
-        if (groups) {
-          grouplist.push(groups);
-        }
+      const groups = element.match(vars, ...candidate);
+      if (groups) {
+        grouplist.push(groups);
       }
     });
     if (grouplist.length > 1) {

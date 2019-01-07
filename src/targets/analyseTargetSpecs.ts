@@ -17,18 +17,10 @@ import { TargetStringMatcher } from "./TargetStringMatcher";
 export function analyseTargetSpecs(targets: TargetSpecList): TargetMatcherList {
   const ret: TargetMatcherList = [];
   targets.forEach((target) => {
-    if (Array.isArray(target)) {
-      const [n, m] = target;
-      ret.push({ pathvar: n, matcher: typeof m === "string" ? new TargetStringMatcher(m) : m });
-    } else if (typeof target === "string") {
-      const m = /^(\w+):(.*)$/.exec(target);
-      if (m) {
-        ret.push({ pathvar: m[1], matcher: new TargetStringMatcher(m[2]) });
-      } else {
-        ret.push({ pathvar: "", matcher: new TargetStringMatcher(target) });
-      }
+    if (typeof target === "string") {
+      ret.push(new TargetStringMatcher(target));
     } else {
-      ret.push({ pathvar: "", matcher: target });
+      ret.push(target);
     }
   });
   return ret;

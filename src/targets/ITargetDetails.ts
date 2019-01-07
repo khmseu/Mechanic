@@ -5,4 +5,4 @@
  * https://opensource.org/licenses/MIT
  */
 
-export type ITargetDetails = string[];
+export type ITargetDetails = string[] | null;

@@ -5,8 +5,9 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { getVar } from "../variables/getVar";
 import { VarTree } from "../variables/VarTree";
-import { VarValue } from "../variables/VarValue";
+import { IParsedTargetName } from "./IParsedTargetName";
 import { ITargetDetails } from "./ITargetDetails";
 import { ITargetMatcher } from "./ITargetMatcher";
 import { parseTargetName } from "./parseTargetName";
@@ -15,42 +16,34 @@ import { parseTargetName } from "./parseTargetName";
  * Target string matcher
  */
 export class TargetStringMatcher implements ITargetMatcher {
+  public rx:
+    | {
+        exec: (arg0: string) => ITargetDetails;
+      }
+    | undefined;
+  public fp: any;
   /**
-   * Fp  of target string matcher
+   * Parsed  of target string matcher
    */
-  private readonly fp: string[];
-  /**
-   * Rx  of target string matcher
-   */
-  private readonly rx: RegExp;
+  private parsed: IParsedTargetName;
   /**
    * Creates an instance of target string matcher.
-   * @param m
+   * @param pattern
    */
-  constructor(private readonly m: string) {
-    const pr = parseTargetName(m);
-    this.fp = m.split("%");
-    this.rx = new RegExp(
-      this.fp
-        .map((v: string) => {
-          return [...v]
-            .map((c: string) => {
-              c.replace(/\W/, "\\$&");
-            })
-            .join("");
-        })
-        .join("(.*)"),
-    );
+  constructor(private readonly pattern: string) {
+    this.parsed = parseTargetName(pattern);
   }
   /**
    * Matchs target string matcher
+   * @param vars
    * @param _
    * @param __
    * @param child
    * @returns match
    */
-  public match(_: string, __: string, child: string): ITargetDetails | null {
-    return this.rx.exec(child);
+  public match(vars: VarTree, _: string, __: string, child: string): ITargetDetails {
+    const rex = new RegExp(this.parsed.parts.map((v) => (/^\$/.test(v) ? getVar(vars, v) : v)).join(""));
+    return rex.exec(child);
   }
   /**
    * Generates target string matcher
@@ -58,21 +51,13 @@ export class TargetStringMatcher implements ITargetMatcher {
    * @returns generate
    */
   public generate(vars: VarTree): string {
-    const n: {
-      [vn: string]: VarValue;
-    } = vars[""] || {};
-    const c: string[] = n.capture as string[];
-    let r = "";
-    for (let i = 0; i < this.fp.length - 1; i++) {
-      r += this.fp[i] + (c[i] || "");
-    }
-    return r + this.fp[this.fp.length - 1];
+    return this.parsed.split.map((v) => (/^\$/.test(v) ? getVar(vars, v) : v)).join("");
   }
   /**
    * To string
    * @returns string
    */
   public toString(): string {
-    return this.m;
+    return this.pattern;
   }
 }

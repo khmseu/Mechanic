@@ -9,6 +9,7 @@ import { VarNameSpace } from "./VarNameSpace";
  * Var tree
  */
 export declare class VarTree {
-    [ns: string]: VarNameSpace | null | undefined;
+    [ns: string]: VarNameSpace | null | undefined | typeof process.env;
+    constructor();
 }
 //# sourceMappingURL=VarTree.d.ts.map

@@ -1,8 +1,9 @@
+"use strict";
 /**
  * Copyright (c) 2018 Kai Henningsen <kai.extern+mechanic@gmail.com>
  *
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-export declare type string3 = [string, string, string];
-//# sourceMappingURL=string3.d.ts.map
+Object.defineProperty(exports, "__esModule", { value: true });
+//# sourceMappingURL=PathDescriptorTriple.js.map

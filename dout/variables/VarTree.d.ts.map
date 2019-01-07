@@ -1,1 +1,1 @@
-{"version":3,"file":"VarTree.d.ts","sourceRoot":"","sources":["../../src/variables/VarTree.ts"],"names":[],"mappings":"AAAA;;;;;GAKG;AAEH,OAAO,EAAE,YAAY,EAAE,MAAM,gBAAgB,CAAC;AAE9C;;GAEG;AACH,qBAAa,OAAO;IAClB,CAAC,EAAE,EAAE,MAAM,GAAG,YAAY,GAAG,IAAI,GAAG,SAAS,CAAC;CAC/C"}
+{"version":3,"file":"VarTree.d.ts","sourceRoot":"","sources":["../../src/variables/VarTree.ts"],"names":[],"mappings":"AAAA;;;;;GAKG;AAEH,OAAO,EAAE,YAAY,EAAE,MAAM,gBAAgB,CAAC;AAE9C;;GAEG;AACH,qBAAa,OAAO;IAClB,CAAC,EAAE,EAAE,MAAM,GAAG,YAAY,GAAG,IAAI,GAAG,SAAS,GAAG,OAAO,OAAO,CAAC,GAAG,CAAC;;CAKpE"}

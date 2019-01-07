@@ -5,10 +5,11 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { ok } from "assert";
 import { existsSync } from "fs";
 import { isAbsolute, normalize, parse, resolve } from "path";
 import { Path } from "./Path";
-import { string3 } from "./string3";
+import { PathDescriptorTriple } from "./PathDescriptorTriple";
 
 /**
  * Paths search
@@ -17,21 +18,25 @@ import { string3 } from "./string3";
  * @param name
  * @returns search
  */
-export function pathSearch(path: Path, name: string): string3 {
-  const triple = (dir: string): string3 => {
-    if (isAbsolute(name)) {
-      return [resolve(name), parse(name).root, normalize(name)];
-    }
-    return [resolve(dir, name), resolve(dir), normalize(name)];
-  };
+export function pathSearch(path: Path, name: string): PathDescriptorTriple {
+  ok(path.length > 0, "path may not be empty");
+  const nn = normalize(name);
   if (isAbsolute(name)) {
-    return triple("");
+    const rn = resolve(name);
+    return [rn, parse(rn).root, nn];
   }
+  let c0;
+  let d0;
+  // tslint:disable-next-line:no-shadowed-variable
   for (const dir of path) {
     const candidate = resolve(dir, name);
     if (existsSync(candidate)) {
-      return triple(dir);
+      return [candidate, resolve(dir), nn];
+    }
+    if (!c0 && !d0) {
+      c0 = candidate;
+      d0 = dir;
     }
   }
-  return triple(path[0]);
+  return [c0!, resolve(d0!), nn];
 }

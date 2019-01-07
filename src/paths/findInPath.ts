@@ -6,8 +6,8 @@
  */
 
 import { ok } from "assert";
+import { PathDescriptorTriple } from "../io/PathDescriptorTriple";
 import { pathSearch } from "../io/pathSearch";
-import { string3 } from "../io/string3";
 import { PSArray } from "./PSArray";
 
 /**
@@ -15,9 +15,8 @@ import { PSArray } from "./PSArray";
  * @param target
  * @returns in path
  */
-export function findInPath(target: string): string3 {
-  ok(typeof target === "string", TypeError("parameter must be a string"));
+export function findInPath(target: string): PathDescriptorTriple {
   const found = PSArray.find((cur) => cur[0].test(target));
-  ok(found, "Missing catch-all path");
+  ok(found, "Missing catch-all path: did not match " + target);
   return pathSearch(found![1], target);
 }

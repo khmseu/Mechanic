@@ -17,7 +17,7 @@ export interface ITargetMatcher {
      * @param child
      * @returns match
      */
-    match(full: string, parent: string, child: string): ITargetDetails | null;
+    match(vars: VarTree, full: string, parent: string, child: string): ITargetDetails;
     /**
      *
      * @param vars

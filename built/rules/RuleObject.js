@@ -6,8 +6,7 @@
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-const assert_1 = require("assert");
-const pathSearch_1 = require("../io/pathSearch");
+const findInPath_1 = require("../paths/findInPath");
 /**
  * Rule object
  */
@@ -26,23 +25,17 @@ class RuleObject {
     }
     /**
      * Matches rule object
-     * @param target
+     * @param wantedTarget
      * @param vars
      * @returns matches
      */
-    matches(target, vars) {
+    matches(wantedTarget, vars) {
         const grouplist = [];
+        const candidate = findInPath_1.findInPath(wantedTarget);
         this.targets.forEach((element) => {
-            const pathvar = element.pathvar;
-            const path = vars.PATH[pathvar];
-            assert_1.ok(Array.isArray(path), "A Path must be a string list");
-            const candidate = pathSearch_1.pathSearch(path, target);
-            if (candidate) {
-                const matcher = element.matcher;
-                const groups = matcher.match(...candidate);
-                if (groups) {
-                    grouplist.push(groups);
-                }
+            const groups = element.match(vars, ...candidate);
+            if (groups) {
+                grouplist.push(groups);
             }
         });
         if (grouplist.length > 1) {

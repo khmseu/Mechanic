@@ -4,11 +4,11 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-import { string3 } from "../io/string3";
+import { PathDescriptorTriple } from "../io/PathDescriptorTriple";
 /**
  * Finds in path
  * @param target
  * @returns in path
  */
-export declare function findInPath(target: string): string3;
+export declare function findInPath(target: string): PathDescriptorTriple;
 //# sourceMappingURL=findInPath.d.ts.map

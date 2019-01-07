@@ -7,4 +7,4 @@
 
 import { ITargetMatcher } from "./ITargetMatcher";
 
-export type TargetSpec = string | ITargetMatcher | [string, string | ITargetMatcher];
+export type TargetSpec = string | ITargetMatcher;

@@ -6,6 +6,7 @@
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+const assert_1 = require("assert");
 const fs_1 = require("fs");
 const path_1 = require("path");
 /**
@@ -16,22 +17,26 @@ const path_1 = require("path");
  * @returns search
  */
 function pathSearch(path, name) {
-    const triple = (dir) => {
-        if (path_1.isAbsolute(name)) {
-            return [path_1.resolve(name), path_1.parse(name).root, path_1.normalize(name)];
-        }
-        return [path_1.resolve(dir, name), path_1.resolve(dir), path_1.normalize(name)];
-    };
+    assert_1.ok(path.length > 0, "path may not be empty");
+    const nn = path_1.normalize(name);
     if (path_1.isAbsolute(name)) {
-        return triple("");
+        const rn = path_1.resolve(name);
+        return [rn, path_1.parse(rn).root, nn];
     }
+    let c0;
+    let d0;
+    // tslint:disable-next-line:no-shadowed-variable
     for (const dir of path) {
         const candidate = path_1.resolve(dir, name);
         if (fs_1.existsSync(candidate)) {
-            return triple(dir);
+            return [candidate, path_1.resolve(dir), nn];
+        }
+        if (!c0 && !d0) {
+            c0 = candidate;
+            d0 = dir;
         }
     }
-    return triple(path[0]);
+    return [c0, path_1.resolve(d0), nn];
 }
 exports.pathSearch = pathSearch;
 //# sourceMappingURL=pathSearch.js.map

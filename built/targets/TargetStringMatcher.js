@@ -6,6 +6,7 @@
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+const getVar_1 = require("../variables/getVar");
 const parseTargetName_1 = require("./parseTargetName");
 /**
  * Target string matcher
@@ -13,31 +14,23 @@ const parseTargetName_1 = require("./parseTargetName");
 class TargetStringMatcher {
     /**
      * Creates an instance of target string matcher.
-     * @param m
+     * @param pattern
      */
-    constructor(m) {
-        this.m = m;
-        const pr = parseTargetName_1.parseTargetName(m);
-        this.fp = m.split("%");
-        this.rx = new RegExp(this.fp
-            .map((v) => {
-            return [...v]
-                .map((c) => {
-                c.replace(/\W/, "\\$&");
-            })
-                .join("");
-        })
-            .join("(.*)"));
+    constructor(pattern) {
+        this.pattern = pattern;
+        this.parsed = parseTargetName_1.parseTargetName(pattern);
     }
     /**
      * Matchs target string matcher
+     * @param vars
      * @param _
      * @param __
      * @param child
      * @returns match
      */
-    match(_, __, child) {
-        return this.rx.exec(child);
+    match(vars, _, __, child) {
+        const rex = new RegExp(this.parsed.parts.map((v) => (/^\$/.test(v) ? getVar_1.getVar(vars, v) : v)).join(""));
+        return rex.exec(child);
     }
     /**
      * Generates target string matcher
@@ -45,20 +38,14 @@ class TargetStringMatcher {
      * @returns generate
      */
     generate(vars) {
-        const n = vars[""] || {};
-        const c = n.capture;
-        let r = "";
-        for (let i = 0; i < this.fp.length - 1; i++) {
-            r += this.fp[i] + (c[i] || "");
-        }
-        return r + this.fp[this.fp.length - 1];
+        return this.parsed.split.map((v) => (/^\$/.test(v) ? getVar_1.getVar(vars, v) : v)).join("");
     }
     /**
      * To string
      * @returns string
      */
     toString() {
-        return this.m;
+        return this.pattern;
     }
 }
 exports.TargetStringMatcher = TargetStringMatcher;

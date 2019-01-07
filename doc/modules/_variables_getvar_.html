@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;io/string3&quot; | Mechanic</title>
+	<title>&quot;variables/getVar&quot; | Mechanic</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_io_string3_.html">&quot;io/string3&quot;</a>
+					<a href="_variables_getvar_.html">&quot;variables/getVar&quot;</a>
 				</li>
 			</ul>
-			<h1>External module &quot;io/string3&quot;</h1>
+			<h1>External module &quot;variables/getVar&quot;</h1>
 		</div>
 	</div>
 </header>
@@ -70,33 +70,67 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
-							<h3>Type aliases</h3>
+						<section class="tsd-index-section tsd-is-not-exported">
+							<h3>Variables</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-type-alias tsd-parent-kind-external-module"><a href="_io_string3_.html#string3" class="tsd-kind-icon">string3</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="_variables_getvar_.html#rexparseasvar" class="tsd-kind-icon">rex<wbr>Parse<wbr>AsVar</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Functions</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_variables_getvar_.html#getvar" class="tsd-kind-icon">get<wbr>Var</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Type aliases</h2>
-				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module">
-					<a name="string3" class="tsd-anchor"></a>
-					<h3>string3</h3>
-					<div class="tsd-signature tsd-kind-icon">string3<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]</span></div>
+			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
+				<h2>Variables</h2>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="rexparseasvar" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> rex<wbr>Parse<wbr>AsVar</h3>
+					<div class="tsd-signature tsd-kind-icon">rex<wbr>Parse<wbr>AsVar<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RegExp</span><span class="tsd-signature-symbol"> =&nbsp;new RegExp(&#x60;^${parseVar}$&#x60;)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/3380b4f/src/io/string3.ts#L8">io/string3.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/18672a4/src/variables/getVar.ts#L14">variables/getVar.ts:14</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Copyright (c) 2018 Kai Henningsen <a href="mailto:&#107;&#97;&#105;&#46;&#x65;&#120;&#x74;&#x65;&#x72;&#x6e;&#43;&#x6d;&#x65;&#99;&#104;&#97;&#x6e;&#x69;&#x63;&#64;&#103;&#x6d;&#x61;&#105;&#108;&#46;&#x63;&#111;&#x6d;">&#107;&#97;&#105;&#46;&#x65;&#120;&#x74;&#x65;&#x72;&#x6e;&#43;&#x6d;&#x65;&#99;&#104;&#97;&#x6e;&#x69;&#x63;&#64;&#103;&#x6d;&#x61;&#105;&#108;&#46;&#x63;&#111;&#x6d;</a></p>
-						</div>
-						<p>This software is released under the MIT License.
-						<a href="https://opensource.org/licenses/MIT">https://opensource.org/licenses/MIT</a></p>
-					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="getvar" class="tsd-anchor"></a>
+					<h3>get<wbr>Var</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Var<span class="tsd-signature-symbol">(</span>vt<span class="tsd-signature-symbol">: </span><a href="../classes/_variables_vartree_.vartree.html" class="tsd-signature-type">VarTree</a>, varName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_variables_currentvarvalue_.html#currentvarvalue" class="tsd-signature-type">CurrentVarValue</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/18672a4/src/variables/getVar.ts#L21">variables/getVar.ts:21</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets var</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>vt: <a href="../classes/_variables_vartree_.vartree.html" class="tsd-signature-type">VarTree</a></h5>
+								</li>
+								<li>
+									<h5>varName: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_variables_currentvarvalue_.html#currentvarvalue" class="tsd-signature-type">CurrentVarValue</a></h4>
+							<p>var</p>
+						</li>
+					</ul>
 				</section>
 			</section>
 		</div>
@@ -107,14 +141,17 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="_io_string3_.html">"io/string3"</a>
+						<a href="_variables_getvar_.html">"variables/get<wbr>Var"</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
-						<a href="_io_string3_.html#string3" class="tsd-kind-icon">string3</a>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_variables_getvar_.html#rexparseasvar" class="tsd-kind-icon">rex<wbr>Parse<wbr>AsVar</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_variables_getvar_.html#getvar" class="tsd-kind-icon">get<wbr>Var</a>
 					</li>
 				</ul>
 			</nav>

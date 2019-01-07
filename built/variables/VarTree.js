@@ -10,6 +10,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Var tree
  */
 class VarTree {
+    constructor() {
+        const v = {};
+        v.ENV = process.env;
+    }
 }
 exports.VarTree = VarTree;
 //# sourceMappingURL=VarTree.js.map

@@ -25,11 +25,11 @@ export declare class RuleObject {
     dependencies: DependencyGeneratorList, recipe: CallbackR);
     /**
      * Matches rule object
-     * @param target
+     * @param wantedTarget
      * @param vars
      * @returns matches
      */
-    matches(target: string, vars: VarTree): string[] | null;
+    matches(wantedTarget: string, vars: VarTree): string[] | null;
 }
 export declare const rules: RuleObject[];
 //# sourceMappingURL=RuleObject.d.ts.map

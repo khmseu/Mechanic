@@ -15,21 +15,11 @@ const TargetStringMatcher_1 = require("./TargetStringMatcher");
 function analyseTargetSpecs(targets) {
     const ret = [];
     targets.forEach((target) => {
-        if (Array.isArray(target)) {
-            const [n, m] = target;
-            ret.push({ pathvar: n, matcher: typeof m === "string" ? new TargetStringMatcher_1.TargetStringMatcher(m) : m });
-        }
-        else if (typeof target === "string") {
-            const m = /^(\w+):(.*)$/.exec(target);
-            if (m) {
-                ret.push({ pathvar: m[1], matcher: new TargetStringMatcher_1.TargetStringMatcher(m[2]) });
-            }
-            else {
-                ret.push({ pathvar: "", matcher: new TargetStringMatcher_1.TargetStringMatcher(target) });
-            }
+        if (typeof target === "string") {
+            ret.push(new TargetStringMatcher_1.TargetStringMatcher(target));
         }
         else {
-            ret.push({ pathvar: "", matcher: target });
+            ret.push(target);
         }
     });
     return ret;

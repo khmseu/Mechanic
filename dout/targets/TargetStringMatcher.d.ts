@@ -11,28 +11,29 @@ import { ITargetMatcher } from "./ITargetMatcher";
  * Target string matcher
  */
 export declare class TargetStringMatcher implements ITargetMatcher {
-    private readonly m;
+    private readonly pattern;
+    rx: {
+        exec: (arg0: string) => ITargetDetails;
+    } | undefined;
+    fp: any;
     /**
-     * Fp  of target string matcher
+     * Parsed  of target string matcher
      */
-    private readonly fp;
-    /**
-     * Rx  of target string matcher
-     */
-    private readonly rx;
+    private parsed;
     /**
      * Creates an instance of target string matcher.
-     * @param m
+     * @param pattern
      */
-    constructor(m: string);
+    constructor(pattern: string);
     /**
      * Matchs target string matcher
+     * @param vars
      * @param _
      * @param __
      * @param child
      * @returns match
      */
-    match(_: string, __: string, child: string): ITargetDetails | null;
+    match(vars: VarTree, _: string, __: string, child: string): ITargetDetails;
     /**
      * Generates target string matcher
      * @param vars

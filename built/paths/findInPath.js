@@ -15,9 +15,8 @@ const PSArray_1 = require("./PSArray");
  * @returns in path
  */
 function findInPath(target) {
-    assert_1.ok(typeof target === "string", TypeError("parameter must be a string"));
     const found = PSArray_1.PSArray.find((cur) => cur[0].test(target));
-    assert_1.ok(found, "Missing catch-all path");
+    assert_1.ok(found, "Missing catch-all path: did not match " + target);
     return pathSearch_1.pathSearch(found[1], target);
 }
 exports.findInPath = findInPath;

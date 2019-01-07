@@ -5,7 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 import { Path } from "./Path";
-import { string3 } from "./string3";
+import { PathDescriptorTriple } from "./PathDescriptorTriple";
 /**
  * Paths search
  * modified from path-search module
@@ -13,5 +13,5 @@ import { string3 } from "./string3";
  * @param name
  * @returns search
  */
-export declare function pathSearch(path: Path, name: string): string3;
+export declare function pathSearch(path: Path, name: string): PathDescriptorTriple;
 //# sourceMappingURL=pathSearch.d.ts.map

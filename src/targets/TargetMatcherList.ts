@@ -7,7 +7,4 @@
 
 import { ITargetMatcher } from "./ITargetMatcher";
 
-export type TargetMatcherList = Array<{
-  pathvar: string;
-  matcher: ITargetMatcher;
-}>;
+export type TargetMatcherList = ITargetMatcher[];
