@@ -14,7 +14,7 @@ import { DependencyStringGenerator } from "./DependencyStringGenerator";
  * @param depends
  * @returns dependency spec
  */
-export function analyseDependencySpec(depends: DependencySpecList): DependencyGeneratorList {
+export function analyseDependencySpecs(depends: DependencySpecList): DependencyGeneratorList {
   const ret: DependencyGeneratorList = [];
   depends.forEach((depend) => {
     if (typeof depend === "string") {

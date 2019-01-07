@@ -8,4 +8,3 @@
 import { IDependencyGenerator } from "./IDependencyGenerator";
 
 export type DependencySpec = string | IDependencyGenerator;
-

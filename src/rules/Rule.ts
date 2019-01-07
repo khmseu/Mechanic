@@ -5,7 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { analyseDependencySpec } from "../dependencies/analyseDependencySpec";
+import { analyseDependencySpecs } from "../dependencies/analyseDependencySpecs";
 import { DependencySpecList } from "../dependencies/DependencySpecList";
 import { analyseTargetSpecs } from "../targets/analyseTargetSpecs";
 import { TargetSpecList } from "../targets/TargetSpecList";
@@ -19,6 +19,6 @@ import { RuleObject, rules } from "./RuleObject";
  */
 export function Rule(spec: { Targets: TargetSpecList; Dependencies: DependencySpecList; Recipe: CallbackR }): void {
   const t = analyseTargetSpecs(spec.Targets);
-  const d = analyseDependencySpec(spec.Dependencies);
+  const d = analyseDependencySpecs(spec.Dependencies);
   rules.push(new RuleObject(t, d, spec.Recipe));
 }
