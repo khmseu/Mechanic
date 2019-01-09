@@ -12,17 +12,17 @@ const DependencyStringGenerator_1 = require("./DependencyStringGenerator");
  * @param depends
  * @returns dependency spec
  */
-function analyseDependencySpec(depends) {
+function analyseDependencySpecs(depends) {
     const ret = [];
     depends.forEach((depend) => {
         if (typeof depend === "string") {
-            ret.push({ generator: new DependencyStringGenerator_1.DependencyStringGenerator(depend) });
+            ret.push(new DependencyStringGenerator_1.DependencyStringGenerator(depend));
         }
         else {
-            ret.push({ generator: depend });
+            ret.push(depend);
         }
     });
     return ret;
 }
-exports.analyseDependencySpec = analyseDependencySpec;
-//# sourceMappingURL=analyseDependencySpec.js.map
+exports.analyseDependencySpecs = analyseDependencySpecs;
+//# sourceMappingURL=analyseDependencySpecs.js.map

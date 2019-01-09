@@ -11,16 +11,16 @@ import { IDependencyGenerator } from "./IDependencyGenerator";
  * Dependency string matcher
  */
 export declare class DependencyStringGenerator implements IDependencyGenerator {
-    private readonly d;
+    private readonly rawName;
     /**
-     * Fp  of dependency string matcher
+     * Parsed  of dependency string generator
      */
-    private readonly fp;
+    private parsed;
     /**
-     * Creates an instance of dependency string matcher.
-     * @param d
+     * Creates an instance of dependency string generator.
+     * @param rawName
      */
-    constructor(d: string);
+    constructor(rawName: string);
     /**
      * Generates dependency string matcher
      * @param vars

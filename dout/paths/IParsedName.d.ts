@@ -6,9 +6,9 @@
  */
 import { VarSet } from "../variables/VarSet";
 /**
- * Iparsed target name
+ * Iparsed name
  */
-export interface IParsedTargetName {
+export interface IParsedName {
     /**
      *
      */
@@ -22,4 +22,4 @@ export interface IParsedTargetName {
      */
     parts: string[];
 }
-//# sourceMappingURL=IParsedTargetName.d.ts.map
+//# sourceMappingURL=IParsedName.d.ts.map

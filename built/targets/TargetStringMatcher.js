@@ -6,19 +6,19 @@
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+const parseRawName_1 = require("../paths/parseRawName");
 const getVar_1 = require("../variables/getVar");
-const parseTargetName_1 = require("./parseTargetName");
 /**
  * Target string matcher
  */
 class TargetStringMatcher {
     /**
      * Creates an instance of target string matcher.
-     * @param pattern
+     * @param rawName
      */
-    constructor(pattern) {
-        this.pattern = pattern;
-        this.parsed = parseTargetName_1.parseTargetName(pattern);
+    constructor(rawName) {
+        this.rawName = rawName;
+        this.parsed = parseRawName_1.parseRawName(rawName);
     }
     /**
      * Matchs target string matcher
@@ -45,7 +45,7 @@ class TargetStringMatcher {
      * @returns string
      */
     toString() {
-        return this.pattern;
+        return this.rawName;
     }
 }
 exports.TargetStringMatcher = TargetStringMatcher;

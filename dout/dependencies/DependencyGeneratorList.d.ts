@@ -5,7 +5,5 @@
  * https://opensource.org/licenses/MIT
  */
 import { IDependencyGenerator } from "./IDependencyGenerator";
-export declare type DependencyGeneratorList = Array<{
-    generator: IDependencyGenerator;
-}>;
+export declare type DependencyGeneratorList = IDependencyGenerator[];
 //# sourceMappingURL=DependencyGeneratorList.d.ts.map

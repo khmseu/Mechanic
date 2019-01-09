@@ -4,11 +4,11 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-import { IParsedTargetName } from "./IParsedTargetName";
+import { IParsedName } from "./IParsedName";
 /**
- * Parses target name
+ * Parses raw name
  *
- * @param targetName
+ * @param rawName
  * Names consist of literal text interspersed with special sequences
  * - `%` is a wildcard
  * - `${ns:name}` is a variable to interpolate
@@ -21,5 +21,5 @@ import { IParsedTargetName } from "./IParsedTargetName";
  *
  * @returns
  */
-export declare function parseTargetName(targetName: string): IParsedTargetName;
-//# sourceMappingURL=parseTargetName.d.ts.map
+export declare function parseRawName(rawName: string): IParsedName;
+//# sourceMappingURL=parseRawName.d.ts.map

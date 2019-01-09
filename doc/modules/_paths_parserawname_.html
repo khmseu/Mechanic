@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;dependencies/analyseDependencySpec&quot; | Mechanic</title>
+	<title>&quot;paths/parseRawName&quot; | Mechanic</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_dependencies_analysedependencyspec_.html">&quot;dependencies/analyseDependencySpec&quot;</a>
+					<a href="_paths_parserawname_.html">&quot;paths/parseRawName&quot;</a>
 				</li>
 			</ul>
-			<h1>External module &quot;dependencies/analyseDependencySpec&quot;</h1>
+			<h1>External module &quot;paths/parseRawName&quot;</h1>
 		</div>
 	</div>
 </header>
@@ -70,43 +70,83 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
+						<section class="tsd-index-section tsd-is-not-exported">
+							<h3>Variables</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="_paths_parserawname_.html#rexsplitvar" class="tsd-kind-icon">rex<wbr>Split<wbr>Var</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="_paths_parserawname_.html#rextestnameisvar" class="tsd-kind-icon">rex<wbr>Test<wbr>Name<wbr>IsVar</a></li>
+							</ul>
+						</section>
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_dependencies_analysedependencyspec_.html#analysedependencyspec" class="tsd-kind-icon">analyse<wbr>Dependency<wbr>Spec</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_paths_parserawname_.html#parserawname" class="tsd-kind-icon">parse<wbr>Raw<wbr>Name</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
+				<h2>Variables</h2>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="rexsplitvar" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> rex<wbr>Split<wbr>Var</h3>
+					<div class="tsd-signature tsd-kind-icon">rex<wbr>Split<wbr>Var<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RegExp</span><span class="tsd-signature-symbol"> =&nbsp;new RegExp(&#x60;(%|${testVar})&#x60;)</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/239c04e/src/paths/parseRawName.ts#L13">paths/parseRawName.ts:13</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="rextestnameisvar" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> rex<wbr>Test<wbr>Name<wbr>IsVar</h3>
+					<div class="tsd-signature tsd-kind-icon">rex<wbr>Test<wbr>Name<wbr>IsVar<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RegExp</span><span class="tsd-signature-symbol"> =&nbsp;new RegExp(&#x60;^#(${testVar})$&#x60;)</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/239c04e/src/paths/parseRawName.ts#L12">paths/parseRawName.ts:12</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
-					<a name="analysedependencyspec" class="tsd-anchor"></a>
-					<h3>analyse<wbr>Dependency<wbr>Spec</h3>
+					<a name="parserawname" class="tsd-anchor"></a>
+					<h3>parse<wbr>Raw<wbr>Name</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">analyse<wbr>Dependency<wbr>Spec<span class="tsd-signature-symbol">(</span>depends<span class="tsd-signature-symbol">: </span><a href="_dependencies_dependencyspeclist_.html#dependencyspeclist" class="tsd-signature-type">DependencySpecList</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_dependencies_dependencygeneratorlist_.html#dependencygeneratorlist" class="tsd-signature-type">DependencyGeneratorList</a></li>
+						<li class="tsd-signature tsd-kind-icon">parse<wbr>Raw<wbr>Name<span class="tsd-signature-symbol">(</span>rawName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_paths_iparsedname_.iparsedname.html" class="tsd-signature-type">IParsedName</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/18672a4/src/dependencies/analyseDependencySpec.ts#L17">dependencies/analyseDependencySpec.ts:17</a></li>
+									<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/239c04e/src/paths/parseRawName.ts#L30">paths/parseRawName.ts:30</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Analyses dependency spec</p>
+									<p>Parses raw name</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>depends: <a href="_dependencies_dependencyspeclist_.html#dependencyspeclist" class="tsd-signature-type">DependencySpecList</a></h5>
+									<h5>rawName: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Names consist of literal text interspersed with special sequences</p>
+										<ul>
+											<li><code>%</code> is a wildcard</li>
+											<li><code>${ns:name}</code> is a variable to interpolate</li>
+											<li><code>${name}</code> is the same in a default namespace</li>
+											<li>or the whole string could match <code>#${ns:name}</code> or <code>#${name}</code> which means the variable itself</li>
+										</ul>
+										<p><code>ns</code> and <code>name</code> must match <code>\p{IDS}\p{IDC}*</code>, unless in the default namespace when <code>name</code> can also match <code>^\d+$</code></p>
+										<p>Names matching <code>\p{Upper}+</code> are reserved</p>
+									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_dependencies_dependencygeneratorlist_.html#dependencygeneratorlist" class="tsd-signature-type">DependencyGeneratorList</a></h4>
-							<p>dependency spec</p>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_paths_iparsedname_.iparsedname.html" class="tsd-signature-type">IParsedName</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -119,14 +159,20 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="_dependencies_analysedependencyspec_.html">"dependencies/analyse<wbr>Dependency<wbr>Spec"</a>
+						<a href="_paths_parserawname_.html">"paths/parse<wbr>Raw<wbr>Name"</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_paths_parserawname_.html#rexsplitvar" class="tsd-kind-icon">rex<wbr>Split<wbr>Var</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_paths_parserawname_.html#rextestnameisvar" class="tsd-kind-icon">rex<wbr>Test<wbr>Name<wbr>IsVar</a>
+					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="_dependencies_analysedependencyspec_.html#analysedependencyspec" class="tsd-kind-icon">analyse<wbr>Dependency<wbr>Spec</a>
+						<a href="_paths_parserawname_.html#parserawname" class="tsd-kind-icon">parse<wbr>Raw<wbr>Name</a>
 					</li>
 				</ul>
 			</nav>

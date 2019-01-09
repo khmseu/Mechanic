@@ -6,31 +6,19 @@
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+const parseRawName_1 = require("../paths/parseRawName");
+const getVar_1 = require("../variables/getVar");
 /**
  * Dependency string matcher
  */
 class DependencyStringGenerator {
     /**
-     * Creates an instance of dependency string matcher.
-     * @param d
+     * Creates an instance of dependency string generator.
+     * @param rawName
      */
-    constructor(d) {
-        this.d = d;
-        this.fp = [];
-        this.cn = [];
-        xxx;
-        const m = /^(\w+):(.*)$/.exec(depend);
-        if (m) {
-            ret.push({
-                ns: m[1],
-                name: m[2],
-            });
-        }
-        else {
-            ret.push({
-                name: depend,
-            });
-        }
+    constructor(rawName) {
+        this.rawName = rawName;
+        this.parsed = parseRawName_1.parseRawName(rawName);
     }
     /**
      * Generates dependency string matcher
@@ -38,20 +26,14 @@ class DependencyStringGenerator {
      * @returns generate
      */
     generate(vars) {
-        const n = vars[""] || {};
-        const c = n.capture;
-        let r = "";
-        for (let i = 0; i < this.cn.length; i++) {
-            r += this.fp[i] + c[this.cn[i]];
-        }
-        return [r + this.fp[this.cn.length]];
+        return [this.parsed.split.map((v) => (/^\$/.test(v) ? getVar_1.getVar(vars, v) : v)).join("")];
     }
     /**
      * To string
      * @returns string
      */
     toString() {
-        return this.d;
+        return this.rawName;
     }
 }
 exports.DependencyStringGenerator = DependencyStringGenerator;

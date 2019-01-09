@@ -11,5 +11,5 @@ import { DependencySpecList } from "./DependencySpecList";
  * @param depends
  * @returns dependency spec
  */
-export declare function analyseDependencySpec(depends: DependencySpecList): DependencyGeneratorList;
-//# sourceMappingURL=analyseDependencySpec.d.ts.map
+export declare function analyseDependencySpecs(depends: DependencySpecList): DependencyGeneratorList;
+//# sourceMappingURL=analyseDependencySpecs.d.ts.map

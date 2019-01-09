@@ -11,9 +11,9 @@ const VarSet_1 = require("../variables/VarSet");
 const rexTestNameIsVar = new RegExp(`^#(${patterns_1.testVar})$`);
 const rexSplitVar = new RegExp(`(%|${patterns_1.testVar})`);
 /**
- * Parses target name
+ * Parses raw name
  *
- * @param targetName
+ * @param rawName
  * Names consist of literal text interspersed with special sequences
  * - `%` is a wildcard
  * - `${ns:name}` is a variable to interpolate
@@ -26,12 +26,12 @@ const rexSplitVar = new RegExp(`(%|${patterns_1.testVar})`);
  *
  * @returns
  */
-function parseTargetName(targetName) {
-    const res = rexTestNameIsVar.exec(targetName);
+function parseRawName(rawName) {
+    const res = rexTestNameIsVar.exec(rawName);
     if (res) {
         return { vars: new VarSet_1.VarSet(res[0]), split: [], parts: [] };
     }
-    const raw = targetName.split(rexSplitVar);
+    const raw = rawName.split(rexSplitVar);
     const parts = [];
     let rs = [];
     const vars = new VarSet_1.VarSet();
@@ -67,5 +67,5 @@ function parseTargetName(targetName) {
     }
     return { vars, split, parts };
 }
-exports.parseTargetName = parseTargetName;
-//# sourceMappingURL=parseTargetName.js.map
+exports.parseRawName = parseRawName;
+//# sourceMappingURL=parseRawName.js.map

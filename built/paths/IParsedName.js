@@ -6,4 +6,4 @@
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-//# sourceMappingURL=IParsedTargetName.js.map
+//# sourceMappingURL=IParsedName.js.map
