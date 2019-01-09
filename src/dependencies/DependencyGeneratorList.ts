@@ -7,6 +7,4 @@
 
 import { IDependencyGenerator } from "./IDependencyGenerator";
 
-export type DependencyGeneratorList = Array<{
-  generator: IDependencyGenerator;
-}>;
+export type DependencyGeneratorList = IDependencyGenerator[];

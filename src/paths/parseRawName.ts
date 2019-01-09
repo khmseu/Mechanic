@@ -7,14 +7,14 @@
 
 import { testVar } from "../variables/patterns";
 import { VarSet } from "../variables/VarSet";
-import { IParsedTargetName } from "./IParsedTargetName";
+import { IParsedName } from "./IParsedName";
 
 const rexTestNameIsVar = new RegExp(`^#(${testVar})$`);
 const rexSplitVar = new RegExp(`(%|${testVar})`);
 /**
- * Parses target name
+ * Parses raw name
  *
- * @param targetName
+ * @param rawName
  * Names consist of literal text interspersed with special sequences
  * - `%` is a wildcard
  * - `${ns:name}` is a variable to interpolate
@@ -27,12 +27,12 @@ const rexSplitVar = new RegExp(`(%|${testVar})`);
  *
  * @returns
  */
-export function parseTargetName(targetName: string): IParsedTargetName {
-  const res = rexTestNameIsVar.exec(targetName);
+export function parseRawName(rawName: string): IParsedName {
+  const res = rexTestNameIsVar.exec(rawName);
   if (res) {
     return { vars: new VarSet(res[0]), split: [], parts: [] };
   }
-  const raw = targetName.split(rexSplitVar);
+  const raw = rawName.split(rexSplitVar);
   const parts: string[] = [];
   let rs: string[] = [];
   const vars = new VarSet();

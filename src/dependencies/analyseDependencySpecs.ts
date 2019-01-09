@@ -18,9 +18,9 @@ export function analyseDependencySpecs(depends: DependencySpecList): DependencyG
   const ret: DependencyGeneratorList = [];
   depends.forEach((depend) => {
     if (typeof depend === "string") {
-      ret.push({ generator: new DependencyStringGenerator(depend) });
+      ret.push(new DependencyStringGenerator(depend));
     } else {
-      ret.push({ generator: depend });
+      ret.push(depend);
     }
   });
   return ret;

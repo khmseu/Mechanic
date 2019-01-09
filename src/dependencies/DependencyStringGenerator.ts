@@ -5,8 +5,10 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { IParsedName } from "../paths/IParsedName";
+import { parseRawName } from "../paths/parseRawName";
+import { getVar } from "../variables/getVar";
 import { VarTree } from "../variables/VarTree";
-import { VarValue } from "../variables/VarValue";
 import { DependencyList } from "./DependencyList";
 import { IDependencyGenerator } from "./IDependencyGenerator";
 
@@ -15,29 +17,16 @@ import { IDependencyGenerator } from "./IDependencyGenerator";
  */
 export class DependencyStringGenerator implements IDependencyGenerator {
   /**
-   * Fp  of dependency string matcher
+   * Parsed  of dependency string generator
    */
-  private readonly fp: string[];
+  private parsed: IParsedName;
 
   /**
-   * Creates an instance of dependency string matcher.
-   * @param d
+   * Creates an instance of dependency string generator.
+   * @param rawName
    */
-  constructor(private readonly d: string) {
-    this.fp = [];
-    this.cn = [];
-    xxx;
-    const m = /^(\w+):(.*)$/.exec(depend);
-    if (m) {
-      ret.push({
-        ns: m[1],
-        name: m[2],
-      });
-    } else {
-      ret.push({
-        name: depend,
-      });
-    }
+  constructor(private readonly rawName: string) {
+    this.parsed = parseRawName(rawName);
   }
   /**
    * Generates dependency string matcher
@@ -45,21 +34,13 @@ export class DependencyStringGenerator implements IDependencyGenerator {
    * @returns generate
    */
   public generate(vars: VarTree): DependencyList {
-    const n: {
-      [vn: string]: VarValue;
-    } = vars[""] || {};
-    const c: string[] = n.capture as string[];
-    let r = "";
-    for (let i = 0; i < this.cn.length; i++) {
-      r += this.fp[i] + c[this.cn[i]];
-    }
-    return [r + this.fp[this.cn.length]];
+    return [this.parsed.split.map((v) => (/^\$/.test(v) ? getVar(vars, v) : v)).join("")];
   }
   /**
    * To string
    * @returns string
    */
   public toString(): string {
-    return this.d;
+    return this.rawName;
   }
 }

@@ -5,33 +5,27 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { IParsedName } from "../paths/IParsedName";
+import { parseRawName } from "../paths/parseRawName";
 import { getVar } from "../variables/getVar";
 import { VarTree } from "../variables/VarTree";
-import { IParsedTargetName } from "./IParsedTargetName";
 import { ITargetDetails } from "./ITargetDetails";
 import { ITargetMatcher } from "./ITargetMatcher";
-import { parseTargetName } from "./parseTargetName";
 
 /**
  * Target string matcher
  */
 export class TargetStringMatcher implements ITargetMatcher {
-  public rx:
-    | {
-        exec: (arg0: string) => ITargetDetails;
-      }
-    | undefined;
-  public fp: any;
   /**
    * Parsed  of target string matcher
    */
-  private parsed: IParsedTargetName;
+  private parsed: IParsedName;
   /**
    * Creates an instance of target string matcher.
-   * @param pattern
+   * @param rawName
    */
-  constructor(private readonly pattern: string) {
-    this.parsed = parseTargetName(pattern);
+  constructor(private readonly rawName: string) {
+    this.parsed = parseRawName(rawName);
   }
   /**
    * Matchs target string matcher
@@ -58,6 +52,6 @@ export class TargetStringMatcher implements ITargetMatcher {
    * @returns string
    */
   public toString(): string {
-    return this.pattern;
+    return this.rawName;
   }
 }
