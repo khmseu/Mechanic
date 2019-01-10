@@ -10,8 +10,8 @@ https://opensource.org/licenses/MIT
 3. Testing.
 4. Rule dependencies (a.k.a. build phases).
 5. Testing.
-6. config.guess/config.sub sh to JS (beginning with Perl/Lex/Yacc).
-7. libtool sh to JS
-8. automake perl to JS
+6. `config.guess`/`config.sub` `sh` to `JS` (beginning with Perl/Lex/Yacc).
+7. `libtool` `sh` to `JS`
+8. `automake` `perl` to `JS`
 9. Testing
-10. autoconf m4+sh to JS/Testing, iterate
+10. `autoconf` `m4`+`sh` to `JS`/Testing, iterate
