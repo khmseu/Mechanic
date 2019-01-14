@@ -6,4 +6,5 @@
  */
 export declare const parseVar: string;
 export declare const testVar: string;
+export declare const rexParseAsVar: RegExp;
 //# sourceMappingURL=patterns.d.ts.map

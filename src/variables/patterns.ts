@@ -8,3 +8,4 @@
 const identifier = "p{IDS}p{IDC}*";
 export const parseVar = `\\\${(?:(${identifier}):)?(${identifier})`;
 export const testVar = `\\\${(?:(?:${identifier}):)?(?:${identifier}})`;
+export const rexParseAsVar = new RegExp(`^${parseVar}$`);

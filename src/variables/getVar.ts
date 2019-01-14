@@ -7,11 +7,11 @@
 
 import { ok } from "assert";
 import { CurrentVarValue } from "./CurrentVarValue";
-import { parseVar } from "./patterns";
+import { getNS } from "./getNS";
+import { rexParseAsVar } from "./patterns";
 import { VarTree } from "./VarTree";
 import { VarValue } from "./VarValue";
 
-const rexParseAsVar = new RegExp(`^${parseVar}$`);
 /**
  * Gets var
  * @param vt
@@ -23,8 +23,7 @@ export function getVar(vt: VarTree, varName: string): CurrentVarValue {
   const r = rexParseAsVar.exec(varName);
   ok(r, "not a valid var name " + varName);
   const [ns, name] = r!;
-  const vn = vt[ns ? ns : "DEFAULT"];
-  ok(vn, "No such namespace " + ns);
+  const vn = getNS(vt, ns);
   let vv: VarValue = vn![name];
   if (!vv) {
     return vv;

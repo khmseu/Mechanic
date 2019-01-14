@@ -34,12 +34,12 @@ if (opts.opt.version) {
     console.log(verstr);
     process.exit();
 }
+const readRuleFile_1 = require("./io/readRuleFile");
+readRuleFile_1.readRuleFile(".");
 const close = require("./mechdb/close");
 const mdb = require("./mechdb/globals");
 // tslint:disable-next-line:no-console
 console.error({ mdb });
-const Rule_1 = require("./rules/Rule");
-Rule_1.Rule({});
 // tslint:disable-next-line:no-console
 close.close().catch((err) => console.error(err));
 //# sourceMappingURL=index.js.map

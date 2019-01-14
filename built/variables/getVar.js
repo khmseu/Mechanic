@@ -7,8 +7,8 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 const assert_1 = require("assert");
+const getNS_1 = require("./getNS");
 const patterns_1 = require("./patterns");
-const rexParseAsVar = new RegExp(`^${patterns_1.parseVar}$`);
 /**
  * Gets var
  * @param vt
@@ -17,11 +17,10 @@ const rexParseAsVar = new RegExp(`^${patterns_1.parseVar}$`);
  */
 function getVar(vt, varName) {
     assert_1.ok(vt, "missing VarTree");
-    const r = rexParseAsVar.exec(varName);
+    const r = patterns_1.rexParseAsVar.exec(varName);
     assert_1.ok(r, "not a valid var name " + varName);
     const [ns, name] = r;
-    const vn = vt[ns ? ns : "DEFAULT"];
-    assert_1.ok(vn, "No such namespace " + ns);
+    const vn = getNS_1.getNS(vt, ns);
     let vv = vn[name];
     if (!vv) {
         return vv;

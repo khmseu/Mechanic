@@ -9,4 +9,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const identifier = "p{IDS}p{IDC}*";
 exports.parseVar = `\\\${(?:(${identifier}):)?(${identifier})`;
 exports.testVar = `\\\${(?:(?:${identifier}):)?(?:${identifier}})`;
+exports.rexParseAsVar = new RegExp(`^${exports.parseVar}$`);
 //# sourceMappingURL=patterns.js.map
