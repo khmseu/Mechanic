@@ -16,6 +16,9 @@ import { TargetStringMatcher } from "./TargetStringMatcher";
  */
 export function analyseTargetSpecs(targets: TargetSpecList): TargetMatcherList {
   const ret: TargetMatcherList = [];
+  if (!targets) {
+    return ret;
+  }
   targets.forEach((target) => {
     if (typeof target === "string") {
       ret.push(new TargetStringMatcher(target));

@@ -6,6 +6,8 @@
  */
 
 import * as options from "options-parser";
+import { readRuleFile } from "./io/readRuleFile";
+import { MechDB } from "./mechdb/MechDB";
 
 const footer = `Home page:      https://github.com/khmseu/Mechanic
 Documentation:  https://github.com/khmseu/Mechanic/wiki
@@ -46,13 +48,11 @@ if (opts.opt.version) {
   process.exit();
 }
 
-import { readRuleFile } from "./io/readRuleFile";
+const mdb = new MechDB();
 
 readRuleFile(".");
 
-import * as close from "./mechdb/close";
-import * as mdb from "./mechdb/globals";
 // tslint:disable-next-line:no-console
 console.error({ mdb });
 // tslint:disable-next-line:no-console
-close.close().catch((err) => console.error(err));
+mdb.close().catch((err) => console.error(err));
