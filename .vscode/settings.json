@@ -9,4 +9,10 @@
     "licenser.author": "Kai Henningsen <kai.extern+mechanic@gmail.com>",
     "licenser.projectName": "Mechanic",
     "licenser.useSingleLineStyle": false,
+    "bump.files": {
+        "src/index.ts": [
+            ["Mechanic ([0-9.-]+)$","Mechanic [version]"],
+            ["Copyright © ([0-9-]+)","Copyright © [date]"]
+        ]
+    }
 }
