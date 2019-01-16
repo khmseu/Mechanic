@@ -18,6 +18,6 @@
             ["Mechanic ([0-9.-]+)","Mechanic [version]"],
             ["Copyright © ([0-9-]+)","Copyright © [date]"]
         ],
-        "test.test": [ "Bla: (.*)", "Bla: [version]" ]
+        "test.test": [ "Bla:\\s*(.*)", "Bla: [version]" ]
     }
 }
