@@ -15,8 +15,7 @@
     "test": "node built/index.js",
     "build": "tsc"
   },
-  "dependencies": { 
-    "@fabiospampinato/bump": "^1.0.2",
+  "dependencies": {
     "options-parser": "^0.4.0",
     "sqlite3": "^4.0.3",
     "vm2": "^3.6.6"
