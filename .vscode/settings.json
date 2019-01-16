@@ -9,6 +9,10 @@
     "licenser.author": "Kai Henningsen <kai.extern+mechanic@gmail.com>",
     "licenser.projectName": "Mechanic",
     "licenser.useSingleLineStyle": false,
+    "bump.changelog.open": true,
+    "bump.scripts.precommit": "./prepare-checkin.sh",
+    "bump.tag.enabled": true,
+    "bump.changelog.create": true,
     "bump.files": {
         "src/index.ts": [
             ["Mechanic ([0-9.-]+)$","Mechanic [version]"],
