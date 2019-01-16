@@ -11,7 +11,7 @@
   },
   "files": {
     "./XyZZy": ["bla(blubb)", "foo[version]bar"],
-    "./test.test": ["Bla:\\s*(.*)", "Bla: [version]"],
+    "./test.test": ["Bla:\\s*(.*)", "Bla: [date]"],
     "./src/index.ts": [["Mechanic ([0-9.-]+)", "Mechanic [version]"], ["Copyright © ([0-9-]+)", "Copyright © [date]"]]
   }
 }

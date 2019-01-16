@@ -1,7 +1,5 @@
 ### Version [date]
-
-### Version [date]
-- Test
+- Bumped version to [date]
 
 ### Version 0.1.12-0
 
