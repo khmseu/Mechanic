@@ -1,0 +1,14 @@
+{
+    "changelog.open": true,
+    "scripts.precommit": "./prepare-checkin.sh",
+    "tag.enabled": true,
+    "changelog.create": true,
+    "files": {
+        "./XyZZy": ["bla(blubb)", "foo[version]bar"],
+        "./test.test": [ "Bla:\\s*(.*)", "Bla: [version]" ],
+        "./src/index.ts": [
+            ["Mechanic ([0-9.-]+)","Mechanic [version]"],
+            ["Copyright © ([0-9-]+)","Copyright © [date]"]
+        ]
+    }
+}

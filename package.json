@@ -1,6 +1,6 @@
 {
   "name": "mechanic",
-  "version": "0.1.10-0",
+  "version": "patch",
   "description": "Mechanic is a build tool",
   "main": "src/index.js",
   "repository": "github:khmseu/Mechanic",
@@ -16,6 +16,7 @@
     "build": "tsc"
   },
   "dependencies": {
+    "@fabiospampinato/bump": "^1.0.2",
     "options-parser": "^0.4.0",
     "sqlite3": "^4.0.3",
     "vm2": "^3.6.6"

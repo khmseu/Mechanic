@@ -1,3 +1,9 @@
+### Version 0
+- Bumped version to 0.1.7-0
+- Bumped version to 0.1.8-0
+- Bumped version to 0.1.9-0
+- Bumped version to 0.1.10-0
+
 ### Version 0.1.10-0
 
 ### Version 0.1.9-0
