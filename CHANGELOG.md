@@ -1,3 +1,8 @@
+### Version 0.1.17-0
+- Cleanup
+- Bumped version to 0.1.16
+- Bumped version to 0.1.17
+
 ### Version 0.1.17
 
 ### Version 0.1.16

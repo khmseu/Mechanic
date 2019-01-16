@@ -1,7 +1,7 @@
 {
   "name": "mechanic",
   "description": "Mechanic is a build tool",
-  "version": "0.1.17",
+  "version": "0.1.18-0",
   "main": "src/index.js",
   "repository": "github:khmseu/Mechanic",
   "author": {
