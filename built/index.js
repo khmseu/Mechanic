@@ -12,8 +12,8 @@ const MechDB_1 = require("./mechdb/MechDB");
 const footer = `Home page:      https://github.com/khmseu/Mechanic
 Documentation:  https://github.com/khmseu/Mechanic/wiki
 Report bugs to: https://github.com/khmseu/Mechanic/issues`;
-const verstr = `Mechanic 0.1.0
-Copyright © 2018 Kai Henningsen
+const verstr = `Mechanic 0.1.11
+Copyright © [date] Kai Henningsen
 License: MIT`;
 const opts = options.parse({
     help: {
