@@ -11,6 +11,7 @@
 - bla
 - Bumped version to 0
 - Bumped version to 0
+- Bumped version to 0
 
 ### Version 0.1.4-1
 - Try badges
