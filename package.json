@@ -1,6 +1,5 @@
 {
   "name": "mechanic",
-  "version": "patch",
   "description": "Mechanic is a build tool",
   "main": "src/index.js",
   "repository": "github:khmseu/Mechanic",
