@@ -17,6 +17,7 @@
         "src/index.ts": [
             ["Mechanic ([0-9.-]+)","Mechanic [version]"],
             ["Copyright © ([0-9-]+)","Copyright © [date]"]
-        ]
+        ],
+        "test.test": [ "Bla: (.*)", "Bla: [version]" ]
     }
 }
