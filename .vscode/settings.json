@@ -15,7 +15,7 @@
     "bump.changelog.create": true,
     "bump.files": {
         "src/index.ts": [
-            ["Mechanic ([0-9.-]+)$","Mechanic [version]"],
+            ["Mechanic ([0-9.-]+)","Mechanic [version]"],
             ["Copyright © ([0-9-]+)","Copyright © [date]"]
         ]
     }
