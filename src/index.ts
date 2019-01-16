@@ -13,7 +13,7 @@ const footer = `Home page:      https://github.com/khmseu/Mechanic
 Documentation:  https://github.com/khmseu/Mechanic/wiki
 Report bugs to: https://github.com/khmseu/Mechanic/issues`;
 
-const verstr = `Mechanic 0.1.13-0
+const verstr = `Mechanic 0.1.15-0
 Copyright © [date] Kai Henningsen
 License: MIT`;
 
