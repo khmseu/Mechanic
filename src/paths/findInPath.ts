@@ -17,6 +17,6 @@ import { PSArray } from "./PSArray";
  */
 export function findInPath(target: string): PathDescriptorTriple {
   const found = PSArray.find((cur) => cur[0].test(target));
-  ok(found, "Missing catch-all path: did not match " + target);
+  ok(found, Error("Missing catch-all path: did not match " + target));
   return pathSearch(found![1], target);
 }

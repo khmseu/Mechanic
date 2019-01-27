@@ -19,7 +19,7 @@ import { PathDescriptorTriple } from "./PathDescriptorTriple";
  * @returns search
  */
 export function pathSearch(path: Path, name: string): PathDescriptorTriple {
-  ok(path.length > 0, "path may not be empty");
+  ok(path.length > 0, Error("path may not be empty"));
   const nn = normalize(name);
   if (isAbsolute(name)) {
     const rn = resolve(name);

@@ -21,7 +21,7 @@
             "request": "launch",
             "name": "Programm starten",
             "program": "${workspaceFolder}/built/index.js",
-            "preLaunchTask": "tsc: build - tsconfig.json",
+            "preLaunchTask": "ttsc: build - tsconfig.json",
             "outFiles": [
                 "${workspaceFolder}/built/**/*.js"
             ]

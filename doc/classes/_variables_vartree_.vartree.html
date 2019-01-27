@@ -84,15 +84,6 @@
 					</li>
 				</ul>
 			</section>
-			<section class="tsd-panel tsd-kind-class tsd-parent-kind-external-module">
-				<h3 class="tsd-before-signature">Indexable</h3>
-				<div class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">[</span>ns: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><a href="_variables_varnamespace_.varnamespace.html" class="tsd-signature-type">VarNameSpace</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ProcessEnv</span></div>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Var tree</p>
-					</div>
-				</div>
-			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
@@ -101,6 +92,20 @@
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_variables_vartree_.vartree.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_variables_vartree_.vartree.html#vars" class="tsd-kind-icon">vars</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_variables_vartree_.vartree.html#getns" class="tsd-kind-icon">getNS</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_variables_vartree_.vartree.html#getvar" class="tsd-kind-icon">get<wbr>Var</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_variables_vartree_.vartree.html#setvar" class="tsd-kind-icon">set<wbr>Var</a></li>
 							</ul>
 						</section>
 					</div>
@@ -118,10 +123,141 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/9e298fd/src/variables/VarTree.ts#L14">variables/VarTree.ts:14</a></li>
+									<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/33fd14c/src/variables/VarTree.ts#L25">variables/VarTree.ts:25</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Creates an instance of var tree.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <a href="_variables_vartree_.vartree.html" class="tsd-signature-type">VarTree</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="vars" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> vars</h3>
+					<div class="tsd-signature tsd-kind-icon">vars<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/33fd14c/src/variables/VarTree.ts#L23">variables/VarTree.ts:23</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Vars  of var tree</p>
+						</div>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-index-signature">
+								<h5><span class="tsd-signature-symbol">[</span>ns: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><a href="_variables_varnamespace_.varnamespace.html" class="tsd-signature-type">VarNameSpace</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ProcessEnv</span></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="getns" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> getNS</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">getNS<span class="tsd-signature-symbol">(</span>ns<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="_variables_varnamespace_.varnamespace.html" class="tsd-signature-type">VarNameSpace</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ProcessEnv</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/33fd14c/src/variables/VarTree.ts#L68">variables/VarTree.ts:68</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets ns</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>ns: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span>
+								<span class="tsd-signature-symbol"> | </span>
+								<span class="tsd-signature-type">null</span>
+								<span class="tsd-signature-symbol"> | </span>
+								<a href="_variables_varnamespace_.varnamespace.html" class="tsd-signature-type">VarNameSpace</a>
+								<span class="tsd-signature-symbol"> | </span>
+								<span class="tsd-signature-type">ProcessEnv</span>
+							</h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getvar" class="tsd-anchor"></a>
+					<h3>get<wbr>Var</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Var<span class="tsd-signature-symbol">(</span>varName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/_variables_currentvarvalue_.html#currentvarvalue" class="tsd-signature-type">CurrentVarValue</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/33fd14c/src/variables/VarTree.ts#L39">variables/VarTree.ts:39</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets var</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>varName: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../modules/_variables_currentvarvalue_.html#currentvarvalue" class="tsd-signature-type">CurrentVarValue</a></h4>
+							<p>var</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setvar" class="tsd-anchor"></a>
+					<h3>set<wbr>Var</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Var<span class="tsd-signature-symbol">(</span>varName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, varValue<span class="tsd-signature-symbol">: </span><a href="../modules/_variables_varvalue_.html#varvalue" class="tsd-signature-type">VarValue</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/33fd14c/src/variables/VarTree.ts#L56">variables/VarTree.ts:56</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets var</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>varName: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>varValue: <a href="../modules/_variables_varvalue_.html#varvalue" class="tsd-signature-type">VarValue</a></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -147,6 +283,18 @@
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
 								<a href="_variables_vartree_.vartree.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_variables_vartree_.vartree.html#vars" class="tsd-kind-icon">vars</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="_variables_vartree_.vartree.html#getns" class="tsd-kind-icon">getNS</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_variables_vartree_.vartree.html#getvar" class="tsd-kind-icon">get<wbr>Var</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_variables_vartree_.vartree.html#setvar" class="tsd-kind-icon">set<wbr>Var</a>
 							</li>
 						</ul>
 					</li>

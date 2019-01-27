@@ -21,7 +21,8 @@
     "strictFunctionTypes": true,
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
-    "inlineSourceMap": true
+    "inlineSourceMap": true,
+    "plugins": [{ "transform": "typescript-is/lib/transform-inline/transformer" }]
   },
   "include": ["./src/**/*"],
   "typedocOptions": {

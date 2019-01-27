@@ -24,7 +24,7 @@ export function setPath(rex: RegExp, path: Path) {
     }
   } else {
     ok(Array.isArray(path), TypeError("second parameter must be Path or undefined"));
-    ok(path.length > 0, "path may not be empty");
+    ok(path.length > 0, Error("path may not be empty"));
     if (n >= 0) {
       PSArray[n][1] = path;
     } else {

@@ -7,7 +7,6 @@
 
 import { IParsedName } from "../paths/IParsedName";
 import { parseRawName } from "../paths/parseRawName";
-import { getVar } from "../variables/getVar";
 import { VarTree } from "../variables/VarTree";
 import { ITargetDetails } from "./ITargetDetails";
 import { ITargetMatcher } from "./ITargetMatcher";
@@ -36,7 +35,7 @@ export class TargetStringMatcher implements ITargetMatcher {
    * @returns match
    */
   public match(vars: VarTree, _: string, __: string, child: string): ITargetDetails {
-    const rex = new RegExp(this.parsed.parts.map((v) => (/^\$/.test(v) ? getVar(vars, v) : v)).join(""));
+    const rex = new RegExp(this.parsed.parts.map((v) => (/^\$/.test(v) ? vars.getVar(v) : v)).join(""));
     return rex.exec(child);
   }
   /**
@@ -45,7 +44,7 @@ export class TargetStringMatcher implements ITargetMatcher {
    * @returns generate
    */
   public generate(vars: VarTree): string {
-    return this.parsed.split.map((v) => (/^\$/.test(v) ? getVar(vars, v) : v)).join("");
+    return this.parsed.split.map((v) => (/^\$/.test(v) ? vars.getVar(v) : v)).join("");
   }
   /**
    * To string

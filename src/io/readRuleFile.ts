@@ -5,15 +5,33 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { ok } from "assert";
 import { resolve } from "path";
+import { assertType } from "typescript-is";
 import { NodeVM, NodeVMOptions, VMScript } from "vm2";
 import { Rule } from "../rules/Rule";
-import { getVar } from "../variables/getVar";
-import { setVar } from "../variables/setVar";
+import { VarTree } from "../variables/VarTree";
+import { VarValue } from "../variables/VarValue";
+
+function jsGetVar(...args: any[]) {
+  ok(args.length === 2, Error("getVar must have 2 parameters"));
+  ok(args[0] instanceof VarTree, TypeError("first parameter must be a VarTree"));
+  const vt: VarTree = args[0];
+  const vn = assertType<string>(args[1]);
+  return (vt as VarTree).getVar(vn as string);
+}
+function jsSetVar(...args: any) {
+  ok(args.length === 3, Error("setVar must have 3 parameters"));
+  ok(args[0] instanceof VarTree, TypeError("first parameter must be a VarTree"));
+  const vt: VarTree = args[0];
+  const vn = assertType<string>(args[1]);
+  const vv = assertType<VarValue>(args[2]);
+  return vt.setVar(vn, vv);
+}
 
 const vmopts: NodeVMOptions = {
   console: "inherit",
-  sandbox: { Rule, getVar, setVar },
+  sandbox: { Rule, getVar: jsGetVar, setVar: jsSetVar },
   require: {
     external: true,
     builtin: ["*"],

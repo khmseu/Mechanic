@@ -81,6 +81,8 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="_io_readrulefile_.html#jsgetvar" class="tsd-kind-icon">js<wbr>Get<wbr>Var</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="_io_readrulefile_.html#jssetvar" class="tsd-kind-icon">js<wbr>Set<wbr>Var</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_io_readrulefile_.html#readrulefile" class="tsd-kind-icon">read<wbr>Rule<wbr>File</a></li>
 							</ul>
 						</section>
@@ -101,7 +103,7 @@
 					<div class="tsd-signature tsd-kind-icon">req<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;vm.run(reqScript)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/9e298fd/src/io/readRuleFile.ts#L31">io/readRuleFile.ts:31</a></li>
+							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/33fd14c/src/io/readRuleFile.ts#L49">io/readRuleFile.ts:49</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -111,7 +113,7 @@
 					<div class="tsd-signature tsd-kind-icon">req<wbr>Script<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">VMScript</span><span class="tsd-signature-symbol"> =&nbsp;new VMScript(&#x60;module.exports &#x3D; function(what) {require(what);};&#x60;)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/9e298fd/src/io/readRuleFile.ts#L26">io/readRuleFile.ts:26</a></li>
+							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/33fd14c/src/io/readRuleFile.ts#L44">io/readRuleFile.ts:44</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -121,13 +123,64 @@
 					<div class="tsd-signature tsd-kind-icon">vm<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">NodeVM</span><span class="tsd-signature-symbol"> =&nbsp;new NodeVM(vmopts)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/9e298fd/src/io/readRuleFile.ts#L25">io/readRuleFile.ts:25</a></li>
+							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/33fd14c/src/io/readRuleFile.ts#L43">io/readRuleFile.ts:43</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="jsgetvar" class="tsd-anchor"></a>
+					<h3>js<wbr>Get<wbr>Var</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">js<wbr>Get<wbr>Var<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/33fd14c/src/io/readRuleFile.ts#L16">io/readRuleFile.ts:16</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span>
+								<span class="tsd-signature-symbol"> | </span>
+								<span class="tsd-signature-type">null</span>
+								<span class="tsd-signature-symbol"> | </span>
+								<span class="tsd-signature-type">string</span>
+							</h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="jssetvar" class="tsd-anchor"></a>
+					<h3>js<wbr>Set<wbr>Var</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">js<wbr>Set<wbr>Var<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/33fd14c/src/io/readRuleFile.ts#L23">io/readRuleFile.ts:23</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
 					<a name="readrulefile" class="tsd-anchor"></a>
 					<h3>read<wbr>Rule<wbr>File</h3>
@@ -138,7 +191,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/9e298fd/src/io/readRuleFile.ts#L33">io/readRuleFile.ts:33</a></li>
+									<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/33fd14c/src/io/readRuleFile.ts#L51">io/readRuleFile.ts:51</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -160,7 +213,7 @@
 					<div class="tsd-signature tsd-kind-icon">vmopts<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/9e298fd/src/io/readRuleFile.ts#L14">io/readRuleFile.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/33fd14c/src/io/readRuleFile.ts#L32">io/readRuleFile.ts:32</a></li>
 						</ul>
 					</aside>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
@@ -169,7 +222,7 @@
 						<div class="tsd-signature tsd-kind-icon">console<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"inherit"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;inherit&quot;</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/9e298fd/src/io/readRuleFile.ts#L15">io/readRuleFile.ts:15</a></li>
+								<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/33fd14c/src/io/readRuleFile.ts#L33">io/readRuleFile.ts:33</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -179,7 +232,7 @@
 						<div class="tsd-signature tsd-kind-icon">source<wbr>Extensions<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[&quot;mechanic&quot;]</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/9e298fd/src/io/readRuleFile.ts#L23">io/readRuleFile.ts:23</a></li>
+								<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/33fd14c/src/io/readRuleFile.ts#L41">io/readRuleFile.ts:41</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -189,7 +242,7 @@
 						<div class="tsd-signature tsd-kind-icon">require<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/9e298fd/src/io/readRuleFile.ts#L17">io/readRuleFile.ts:17</a></li>
+								<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/33fd14c/src/io/readRuleFile.ts#L35">io/readRuleFile.ts:35</a></li>
 							</ul>
 						</aside>
 						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
@@ -198,7 +251,7 @@
 							<div class="tsd-signature tsd-kind-icon">builtin<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[&quot;*&quot;]</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/9e298fd/src/io/readRuleFile.ts#L19">io/readRuleFile.ts:19</a></li>
+									<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/33fd14c/src/io/readRuleFile.ts#L37">io/readRuleFile.ts:37</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -208,7 +261,7 @@
 							<div class="tsd-signature tsd-kind-icon">context<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"sandbox"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;sandbox&quot;</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/9e298fd/src/io/readRuleFile.ts#L21">io/readRuleFile.ts:21</a></li>
+									<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/33fd14c/src/io/readRuleFile.ts#L39">io/readRuleFile.ts:39</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -218,7 +271,7 @@
 							<div class="tsd-signature tsd-kind-icon">external<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/9e298fd/src/io/readRuleFile.ts#L18">io/readRuleFile.ts:18</a></li>
+									<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/33fd14c/src/io/readRuleFile.ts#L36">io/readRuleFile.ts:36</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -228,7 +281,7 @@
 							<div class="tsd-signature tsd-kind-icon">root<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;./&quot;</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/9e298fd/src/io/readRuleFile.ts#L20">io/readRuleFile.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/33fd14c/src/io/readRuleFile.ts#L38">io/readRuleFile.ts:38</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -239,7 +292,7 @@
 						<div class="tsd-signature tsd-kind-icon">sandbox<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/9e298fd/src/io/readRuleFile.ts#L16">io/readRuleFile.ts:16</a></li>
+								<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/33fd14c/src/io/readRuleFile.ts#L34">io/readRuleFile.ts:34</a></li>
 							</ul>
 						</aside>
 						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
@@ -248,27 +301,27 @@
 							<div class="tsd-signature tsd-kind-icon">Rule<span class="tsd-signature-symbol">:</span> <a href="_rules_rule_.html#rule" class="tsd-signature-type">Rule</a></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/9e298fd/src/io/readRuleFile.ts#L16">io/readRuleFile.ts:16</a></li>
+									<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/33fd14c/src/io/readRuleFile.ts#L34">io/readRuleFile.ts:34</a></li>
 								</ul>
 							</aside>
 						</section>
 						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
 							<a name="vmopts.sandbox.getvar" class="tsd-anchor"></a>
 							<h3>get<wbr>Var</h3>
-							<div class="tsd-signature tsd-kind-icon">get<wbr>Var<span class="tsd-signature-symbol">:</span> <a href="_variables_getvar_.html#getvar" class="tsd-signature-type">getVar</a></div>
+							<div class="tsd-signature tsd-kind-icon">get<wbr>Var<span class="tsd-signature-symbol">:</span> <a href="_io_readrulefile_.html#jsgetvar" class="tsd-signature-type">jsGetVar</a><span class="tsd-signature-symbol"> =&nbsp;jsGetVar</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/9e298fd/src/io/readRuleFile.ts#L16">io/readRuleFile.ts:16</a></li>
+									<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/33fd14c/src/io/readRuleFile.ts#L34">io/readRuleFile.ts:34</a></li>
 								</ul>
 							</aside>
 						</section>
 						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
 							<a name="vmopts.sandbox.setvar" class="tsd-anchor"></a>
 							<h3>set<wbr>Var</h3>
-							<div class="tsd-signature tsd-kind-icon">set<wbr>Var<span class="tsd-signature-symbol">:</span> <a href="_variables_setvar_.html#setvar" class="tsd-signature-type">setVar</a></div>
+							<div class="tsd-signature tsd-kind-icon">set<wbr>Var<span class="tsd-signature-symbol">:</span> <a href="_io_readrulefile_.html#jssetvar" class="tsd-signature-type">jsSetVar</a><span class="tsd-signature-symbol"> =&nbsp;jsSetVar</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/9e298fd/src/io/readRuleFile.ts#L16">io/readRuleFile.ts:16</a></li>
+									<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/33fd14c/src/io/readRuleFile.ts#L34">io/readRuleFile.ts:34</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -297,6 +350,12 @@
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
 						<a href="_io_readrulefile_.html#vm" class="tsd-kind-icon">vm</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_io_readrulefile_.html#jsgetvar" class="tsd-kind-icon">js<wbr>Get<wbr>Var</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_io_readrulefile_.html#jssetvar" class="tsd-kind-icon">js<wbr>Set<wbr>Var</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="_io_readrulefile_.html#readrulefile" class="tsd-kind-icon">read<wbr>Rule<wbr>File</a>

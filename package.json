@@ -13,11 +13,12 @@
   "bugs": "https://github.com/khmseu/Mechanic/issues",
   "scripts": {
     "test": "node built/index.js",
-    "build": "tsc"
+    "build": "ttsc"
   },
   "dependencies": {
     "options-parser": "^0.4.0",
     "sqlite3": "^4.0.3",
+    "typescript-is": "^0.7.18",
     "vm2": "^3.6.6"
   },
   "devDependencies": {
@@ -25,7 +26,8 @@
     "@types/sqlite3": "^3.1.3",
     "eslint": "^5.9.0",
     "tslint": "^5.11.0",
+    "ttypescript": "^1.5.6",
     "typedoc": "^0.13.0",
-    "typescript": "^3.1.6"
+    "typescript": "^3.2.4"
   }
 }

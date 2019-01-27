@@ -7,7 +7,6 @@
 
 import { IParsedName } from "../paths/IParsedName";
 import { parseRawName } from "../paths/parseRawName";
-import { getVar } from "../variables/getVar";
 import { VarTree } from "../variables/VarTree";
 import { DependencyList } from "./DependencyList";
 import { IDependencyGenerator } from "./IDependencyGenerator";
@@ -34,7 +33,7 @@ export class DependencyStringGenerator implements IDependencyGenerator {
    * @returns generate
    */
   public generate(vars: VarTree): DependencyList {
-    return [this.parsed.split.map((v) => (/^\$/.test(v) ? getVar(vars, v) : v)).join("")];
+    return [this.parsed.split.map((v) => (/^\$/.test(v) ? vars.getVar(v) : v)).join("")];
   }
   /**
    * To string
