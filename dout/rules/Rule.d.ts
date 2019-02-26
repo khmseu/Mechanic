@@ -4,17 +4,10 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-import { DependencySpecList } from "../dependencies/DependencySpecList";
-import { TargetSpecList } from "../targets/TargetSpecList";
-import { CallbackR } from "./CallbackR";
+import { IRuleArg } from "./IRuleArg";
 /**
  *
- * @param spec
- * @return
+ * @param   spec
  */
-export declare function Rule(spec: {
-    Targets: TargetSpecList;
-    Dependencies: DependencySpecList;
-    Recipe: CallbackR;
-}): void;
+export declare function Rule(spec: IRuleArg): void;
 //# sourceMappingURL=Rule.d.ts.map

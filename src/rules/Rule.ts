@@ -6,18 +6,15 @@
  */
 
 import { analyseDependencySpecs } from "../dependencies/analyseDependencySpecs";
-import { DependencySpecList } from "../dependencies/DependencySpecList";
 import { analyseTargetSpecs } from "../targets/analyseTargetSpecs";
-import { TargetSpecList } from "../targets/TargetSpecList";
-import { CallbackR } from "./CallbackR";
+import { IRuleArg } from "./IRuleArg";
 import { RuleObject, rules } from "./RuleObject";
 
 /**
  *
- * @param spec
- * @return
+ * @param   spec
  */
-export function Rule(spec: { Targets: TargetSpecList; Dependencies: DependencySpecList; Recipe: CallbackR }): void {
+export function Rule(spec: IRuleArg): void {
   const t = analyseTargetSpecs(spec.Targets);
   const d = analyseDependencySpecs(spec.Dependencies);
   rules.push(new RuleObject(t, d, spec.Recipe));

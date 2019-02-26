@@ -4,6 +4,7 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
+import { DataFromJS } from "../js/DataFromJS";
 import { VarTree } from "../variables/VarTree";
 import { DependencyList } from "./DependencyList";
 /**
@@ -21,5 +22,9 @@ export interface IDependencyGenerator {
      * @returns string
      */
     toString(): string;
+}
+export interface IDependencyGeneratorRaw {
+    generate: DataFromJS;
+    toString: DataFromJS;
 }
 //# sourceMappingURL=IDependencyGenerator.d.ts.map

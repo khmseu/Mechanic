@@ -4,6 +4,7 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
+import { DataFromJS } from "../js/DataFromJS";
 import { VarTree } from "../variables/VarTree";
 import { ITargetDetails } from "./ITargetDetails";
 /**
@@ -29,5 +30,10 @@ export interface ITargetMatcher {
      * @returns string
      */
     toString(): string;
+}
+export interface ITargetMatcherRaw {
+    match: DataFromJS;
+    generate: DataFromJS;
+    toString: DataFromJS;
 }
 //# sourceMappingURL=ITargetMatcher.d.ts.map
