@@ -7,6 +7,12 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "Launch GnuConfigConverter",
+            "program": "${workspaceFolder}/built/GnuConfigConverter/index.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "Launch Program",
             "program": "${workspaceFolder}/built/index.js"
         },
