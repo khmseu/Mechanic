@@ -10,6 +10,21 @@ import { readFileSync } from "fs";
 import { resolve } from "path";
 import { inspect } from "util";
 
+function __stack() {
+  const origPrep = Error.prepareStackTrace;
+  const origLim = Error.stackTraceLimit;
+  Error.prepareStackTrace = (_, stk) => {
+    return stk;
+  };
+  Error.stackTraceLimit = Infinity;
+  const err = new Error();
+  Error.captureStackTrace(err /*arguments.callee*/);
+  const { stack } = err;
+  Error.prepareStackTrace = origPrep;
+  Error.stackTraceLimit = origLim;
+  return stack as any;
+}
+
 function logg(thing: object) {
   // tslint:disable-next-line:no-console
   console.log(
@@ -22,118 +37,193 @@ function logg(thing: object) {
   );
 }
 
-function comm(thing: object, dflt: string = "#"): string {
-  if (JSON.stringify(thing) === dflt) {
+function comm(thing: object, dflt: string | null = null): string {
+  const stk = __stack();
+  //  logg(stk[2].getFunctionName());
+  let js = JSON.stringify(thing);
+  if (js === dflt || (!dflt && js === "{}")) {
     return "";
   } else {
-    // logg({ thing: JSON.stringify(thing), dflt });
+    // logg({ thing: js, dflt });
   }
-  return (
-    "/*" +
-    inspect(thing, {
+  if (js.length > 200) {
+    js = inspect(thing, {
       depth: 2,
       breakLength: 999999,
-    }) +
-    "*/\n"
-  );
+    });
+  }
+  return "/*" + stk[2].getFunctionName() + " -> " + js + "*/\n";
+}
+
+const known: { [key: string]: { [key: string]: number } } = {};
+
+function typelist(thing: object, dscr: [string, string, string]) {
+  const hull: { [key: string]: any } = {};
+  for (const key in thing) {
+    if (thing.hasOwnProperty(key)) {
+      hull[key] = typeof (thing as any)[key];
+    }
+  }
+  const kt = thing && thing.hasOwnProperty("Type") ? ((thing as any).Type as string) : "";
+  const stack = __stack();
+  const stk: string[] = [];
+  for (let n = 2; n < stack.length; n++) {
+    const fn = stack[n].getFunctionName();
+    stk.unshift(fn);
+    if (n > 2 && /^(bt|perFile)/.test(fn)) {
+      break;
+    }
+  }
+  const dor = {
+    aatypeclaimed: kt,
+    afield: dscr[2],
+    // tslint:disable-next-line:max-line-length
+    afrom: stk.join("->"),
+    aname: dscr[0],
+    atype: dscr[1],
+    parms: hull,
+  };
+  const dorj = JSON.stringify(dor);
+  const dorkj = JSON.stringify({ [kt]: dor.parms });
+  if (!known[dorkj]) {
+    known[dorkj] = {};
+  }
+  if (!known[dorkj][dorj]) {
+    known[dorkj][dorj] = 0;
+  }
+  known[dorkj][dorj]++;
 }
 
 function joiner(list: string[], dlm: string): string {
   return list.filter((s) => !!s).join(dlm);
 }
 
-interface IPos {
+interface IZPos {
   Col: never;
   Line: never;
   Offset: number;
 }
-interface ICommentLine {
-  End: IPos;
-  Pos: IPos;
+interface IZPosition {
+  End: IZPos;
+  Pos: IZPos;
+}
+interface IMyComment extends IZPosition {
+  End: IZPos;
+  Pos: IZPos;
   // ---------
   Text: string;
 }
-interface IBlock {
-  End: IPos;
-  Pos: IPos;
-  // ---------
-  Last: never[];
-  Stmts: IStatement[];
+interface IMyBlock {
+  Last: IMyComment[];
+  Stmts: IMyStmt[];
 }
-interface IWhileClause extends ICmd {
-  End: IPos;
-  Pos: IPos;
+interface IBlock extends IByType {
+  End: IZPos;
+  Pos: IZPos;
   Type: string;
   // ---------
-  Cond: IBlock;
-  Do: IBlock;
+  Last: IMyComment[];
+  Stmts: IMyStmt[];
+}
+interface IWhileClause extends IByType {
+  End: IZPos;
+  Pos: IZPos;
+  Type: string;
+  // ---------
+  Cond: IMyBlock;
+  Do: IMyBlock;
   Until: boolean;
 }
-interface ICmd {
-  End: IPos;
-  Pos: IPos;
+interface IByType extends IZPosition {
+  End: IZPos;
+  Pos: IZPos;
   // ---------
   Type: string;
 }
-interface IFuncDecl extends ICmd {
-  End: IPos;
-  Pos: IPos;
+interface IWordIter extends IByType {
+  End: IZPos;
+  Pos: IZPos;
   Type: string;
   // ---------
-  Body: IBlock;
-  Name: IName;
+  Items: IXWord[];
+  Name: IZName;
+}
+interface IForClause extends IByType {
+  End: IZPos;
+  Pos: IZPos;
+  Type: string;
+  // ---------
+  Do: IMyBlock;
+  Loop: IByType;
+  Select: boolean;
+}
+interface ISubshell extends IByType {
+  End: IZPos;
+  Pos: IZPos;
+  Type: string;
+  // ---------
+  Last: IMyComment[];
+  Stmts: IMyStmt[];
+}
+interface IFuncDecl extends IByType {
+  End: IZPos;
+  Pos: IZPos;
+  Type: string;
+  // ---------
+  Body: IMyStmt;
+  Name: IZName;
   RsrvWord: boolean;
 }
-interface IIfClause extends ICmd {
-  End: IPos;
-  Pos: IPos;
+interface IIfClause extends IByType {
+  End: IZPos;
+  Pos: IZPos;
   Type: string;
   // ---------
-  Cond: IBlock;
+  Cond: IMyBlock;
   Elif: boolean;
-  Else: IBlock;
-  ElseComments: ICommentLine[];
-  FiComments: ICommentLine[];
-  Then: IBlock;
+  Else: IMyBlock;
+  ElseComments: IMyComment[];
+  FiComments: IMyComment[];
+  Then: IMyBlock;
 }
-interface IArg {
-  End: IPos;
-  Pos: IPos;
+interface IXArg extends IZPosition {
+  End: IZPos;
+  Pos: IZPos;
   // ---------
-  Parts: IPart[];
+  Parts: IByType[];
 }
-interface ICallExpr extends ICmd {
-  End: IPos;
-  Pos: IPos;
+interface ICallExpr extends IByType {
+  End: IZPos;
+  Pos: IZPos;
   Type: string;
   // ---------
-  Args: IArg[];
-  Assigns: IAssign[];
+  Args: IXArg[];
+  Assigns: IMyAssign[];
 }
-interface IPattern {
-  End: IPos;
-  Pos: IPos;
+interface IXPattern extends IZPosition {
+  End: IZPos;
+  Pos: IZPos;
   // ---------
-  Parts: IPart[];
+  Parts: IByType[];
 }
-interface IItem {
-  End: IPos;
-  Pos: IPos;
+interface IMyItem extends IZPosition {
+  End: IZPos;
+  Pos: IZPos;
   // ---------
-  Comments: ICommentLine[];
-  Last: never[];
+  Comments: IMyComment[];
+  Last: IMyComment[];
   Op: Token;
-  Patterns: IPattern[];
-  Stmts: IStatement[];
+  Patterns: IXPattern[];
+  Stmts: IMyStmt[];
 }
-interface ICaseClause extends ICmd {
-  End: IPos;
-  Pos: IPos;
+interface ICaseClause extends IByType {
+  End: IZPos;
+  Pos: IZPos;
   Type: string;
   // ---------
-  Items: IItem[];
-  Last: never;
-  Word: IWord;
+  Items: IMyItem[];
+  Last: IMyComment[];
+  Word: IXWord;
 }
 
 // from https://github.com/mvdan/sh/blob/master/syntax/tokens.go
@@ -317,9 +407,9 @@ opcode[Token.rightBrace] = " } ";
 opcode[Token.rightBrack] = " ] ";
 opcode[Token.rightParen] = " ) ";
 opcode[Token.dblRightParen] = " )) ";
-opcode[Token.semicolon] = " ; ";
+opcode[Token.semicolon] = " ;\n";
 
-opcode[Token.dblSemicolon] = " ;; ";
+opcode[Token.dblSemicolon] = " ;;\n";
 opcode[Token.semiAnd] = " ;& ";
 opcode[Token.dblSemiAnd] = " ;;& ";
 opcode[Token.semiOr] = " ;| ";
@@ -361,7 +451,7 @@ opcode[Token.appAll] = " &>> ";
 opcode[Token.cmdIn] = " <( ";
 opcode[Token.cmdOut] = " >( ";
 
-opcode[Token.plus] = " + ";
+opcode[Token.plus] = " + /*1*/";
 opcode[Token.colPlus] = " :+ ";
 opcode[Token.minus] = " - ";
 opcode[Token.colMinus] = " :- ";
@@ -424,137 +514,149 @@ opcode[Token.globPlus] = " +( ";
 opcode[Token.globAt] = " @( ";
 opcode[Token.globExcl] = " !( ";
 
-interface IBinaryCmd extends ICmd {
-  End: IPos;
-  Pos: IPos;
+function op(o: Token) {
+  return opcode[o] || "Op=" + o;
+}
+
+interface IBinaryCmd extends IByType {
+  End: IZPos;
+  Pos: IZPos;
   Type: string;
   // ---------
   Op: Token;
-  X: IStatement;
-  Y: IStatement;
+  X: IMyStmt;
+  Y: IMyStmt;
 }
-interface IRedir {
-  End: IPos;
-  Pos: IPos;
+interface IMyHdoc extends IZPosition {
+  End: IZPos;
+  Pos: IZPos;
   // ---------
-  Hdoc: never;
-  N: never;
-  Op: Token;
-  Word: IWord;
+  Parts: IByType[];
 }
-interface IStatement {
-  End: IPos;
-  Pos: IPos;
+interface IMyRedir extends IZPosition {
+  End: IZPos;
+  Pos: IZPos;
+  // ---------
+  Hdoc: IMyHdoc;
+  N: ILit;
+  Op: Token;
+  Word: IXWord;
+}
+interface IMyStmt extends IZPosition {
+  End: IZPos;
+  Pos: IZPos;
   // ---------
   Background: boolean;
-  Cmd: ICmd;
-  Comments: ICommentLine[];
+  Cmd: IByType;
+  Comments: IMyComment[];
   Coprocess: boolean;
   Negated: boolean;
-  Redirs: IRedir[];
+  Redirs: IMyRedir[];
 }
-interface IShellFile {
-  End: IPos;
-  Pos: IPos;
+interface IMyShellFile extends IZPosition {
+  End: IZPos;
+  Pos: IZPos;
   // ---------
-  Last: ICommentLine[];
-  Name: never;
-  Stmts: IStatement[];
+  Last: IMyComment[];
+  Name: string;
+  Stmts: IMyStmt[];
 }
-interface IName {
-  End: IPos;
-  Pos: IPos;
+interface IZName extends IZPosition {
+  End: IZPos;
+  Pos: IZPos;
   // ---------
   Value: string;
 }
-interface IPart {
-  End: IPos;
-  Pos: IPos;
-  // ---------
-  Type: string;
-}
-interface ILit extends IPart {
-  End: IPos;
-  Pos: IPos;
+interface ILit extends IByType {
+  End: IZPos;
+  Pos: IZPos;
   Type: string;
   // ---------
   Value: string;
 }
-interface ICmdSubst extends IPart {
-  End: IPos;
-  Pos: IPos;
+interface ICmdSubst extends IByType {
+  End: IZPos;
+  Pos: IZPos;
   Type: string;
   // ---------
-  Last: never;
-  ReplyVar: never;
-  Stmts: IStatement[];
-  TempFile: never;
+  Last: IMyComment[];
+  ReplyVar: boolean;
+  Stmts: IMyStmt[];
+  TempFile: boolean;
 }
-interface ISglQuoted extends IPart {
-  End: IPos;
-  Pos: IPos;
-  Type: string;
-  // ---------
-  Dollar: never;
-  Value: never;
-}
-interface IDblQuoted extends IPart {
-  End: IPos;
-  Pos: IPos;
+interface ISglQuoted extends IByType {
+  End: IZPos;
+  Pos: IZPos;
   Type: string;
   // ---------
   Dollar: boolean;
-  Parts: IPart[];
+  Value: string;
 }
-interface IParam {
-  End: IPos;
-  Pos: IPos;
+interface IDblQuoted extends IByType {
+  End: IZPos;
+  Pos: IZPos;
+  Type: string;
+  // ---------
+  Dollar: boolean;
+  Parts: IByType[];
+}
+interface IMyParam extends IZPosition {
+  End: IZPos;
+  Pos: IZPos;
   // ---------
   Value: string;
 }
-interface IParamExp extends IPart {
-  End: IPos;
-  Pos: IPos;
+interface IMyExp {
+  Op: Token;
+  Word: IXWord;
+}
+interface IParamExp extends IByType {
+  End: IZPos;
+  Pos: IZPos;
   Type: string;
   // ---------
   Excl: boolean;
-  Exp: never;
+  Exp: IMyExp;
   Index: never;
   Length: boolean;
   Names: number;
-  Param: IParam;
+  Param: IMyParam;
   Repl: never;
   Short: boolean;
   Slice: never;
   Width: boolean;
 }
-interface IValue {
-  End: IPos;
-  Pos: IPos;
+interface IXValue extends IZPosition {
+  End: IZPos;
+  Pos: IZPos;
   // ---------
-  Parts: IPart[];
+  Parts: IByType[];
 }
-interface IWord {
-  End: IPos;
-  Pos: IPos;
+interface IXWord extends IZPosition {
+  End: IZPos;
+  Pos: IZPos;
   // ---------
-  Parts: IPart[];
+  Parts: IByType[];
 }
-interface IAssign {
-  End: IPos;
-  Pos: IPos;
+interface IMyAssign extends IZPosition {
+  End: IZPos;
+  Pos: IZPos;
   // ---------
-  Append: never;
+  Append: boolean;
   Array: never;
   Index: never;
-  Naked: never;
-  Name: IName;
-  Value: IValue;
+  Naked: boolean;
+  Name: IZName;
+  Value: IXValue;
 }
 
-function comments(lines: ICommentLine[]): string {
+function comments(lines: IMyComment[], fromField: string): string {
+  if (!lines) {
+    return comm({ empty_lines: lines });
+  }
   let res = joiner(
     lines.map((l) => {
+      typelist(l, ["l", "IMyComment", fromField + "[]"]);
       if (l.Pos.Offset === 0 && l.Text[0] === "!") {
         return "";
       }
@@ -568,203 +670,317 @@ function comments(lines: ICommentLine[]): string {
   return res;
 }
 
-function prtSglQuoted(prt: ISglQuoted): string[] {
+function btSglQuoted(prt: ISglQuoted, fromField: string): string[] {
+  typelist(prt, ["prt", "ISglQuoted", fromField]);
   const { Pos, End, Type, Value, ...rest_psq } = prt;
   return [JSON.stringify(Value), comm({ rest_psq }, '{"rest_psq":{"Dollar":false}}')];
 }
 
-function prtCmdSubst(prt: ICmdSubst): string[] {
+function btCmdSubst(prt: ICmdSubst, fromField: string): string[] {
+  typelist(prt, ["prt", "ICmdSubst", fromField]);
   const { Pos, End, Type, Stmts, ...rest_pcs } = prt;
   // tslint:disable-next-line:max-line-length
-  return ["$( " + joiner([statements(Stmts), comm({ rest_pcs }, '{"rest_pcs":{"Last":[],"ReplyVar":false,"TempFile":false}}')], " + ") + " )"];
+  return ["$( " + joiner([statements(Stmts, "Stmts"), comm({ rest_pcs }, '{"rest_pcs":{"Last":[],"ReplyVar":false,"TempFile":false}}')], " + /*2*/") + " )"];
 }
 
-function prtLit(prt: ILit): string[] {
+function btLit(prt: ILit, fromField: string): string[] {
+  typelist(prt, ["prt", "ILit", fromField]);
   const { Pos, End, Type, Value, ...rest_pl } = prt;
   return [JSON.stringify(Value), comm({ rest_pl }, '{"rest_pl":{}}')];
 }
 
-function prtDblQuoted(prt: IDblQuoted): string[] {
+function btDblQuoted(prt: IDblQuoted, fromField: string): string[] {
+  typelist(prt, ["prt", "IDblQuoted", fromField]);
   const { Pos, End, Type, Parts, ...rest_pdq } = prt;
-  return [...parts(Parts), comm({ rest_pdq }, '{"rest_pdq":{"Dollar":false}}')];
+  return [...parts(Parts, "Parts"), comm({ rest_pdq }, '{"rest_pdq":{"Dollar":false}}')];
 }
 
-function param(prm: IParam): string[] {
+function param(prm: IMyParam, fromField: string): string[] {
+  typelist(prm, ["prm", "IMyParam", fromField]);
   const { Pos, End, Value, ...rest_prm } = prm;
   // tslint:disable-next-line:max-line-length
-  return [/^[a-zA-Z_]\w*$/.test(Value) ? Value : Value === "0" ? "process.argv0" : /^\d+$/.test(Value) ? "process.argv[" + Value + "]" : Value === "#" ? "process.argv.length" : comm({ Value }), comm({ rest_prm }, '{"rest_prm":{}}')];
+  return [
+    /^[a-zA-Z_]\w*$/.test(Value)
+      ? Value //
+      : Value === "0"
+      ? "process.argv0"
+      : /^\d+$/.test(Value)
+      ? "process.argv[" + Value + "]"
+      : Value === "#"
+      ? "process.argv.length"
+      : Value === "$"
+      ? "process.pid"
+      : Value == "?"
+      ? "process.exitCode"
+      : comm({ Value }),
+    comm({ rest_prm }, '{"rest_prm":{}}'),
+  ];
 }
 
-function prtParamExp(prt: IParamExp): string[] {
-  const { Pos, End, Type, Param, ...rest_ppe } = prt;
-  // tslint:disable-next-line:max-line-length
-  return [...param(Param), comm({ rest_ppe }, '{"rest_ppe":{"Excl":false,"Exp":null,"Index":null,"Length":false,"Names":0,"Repl":null,"Short":true,"Slice":null,"Width":false}}')];
+function exp(e: IMyExp, fromField: string): string {
+  typelist(e, ["e", "IMyExp", fromField]);
+  if (!e) {
+    return comm({ e }, '{"e":null}');
+  }
+  const { Op, Word, ...rest_exp } = e;
+  return joiner([op(Op), ...word(Word, "Word"), comm({ rest_exp }, '{"rest_exp":{}}')], " ");
 }
 
-function parts(prts: IPart[]): string[] {
+function btParamExp(prt: IParamExp, fromField: string): string[] {
+  typelist(prt, ["prt", "IParamExp", fromField]);
+  const { Pos, End, Type, Param, Exp, Short, ...rest_ppe } = prt;
+  if (Short) {
+    // tslint:disable-next-line:max-line-length
+    return [joiner([...param(Param, "Param"), exp(Exp, "Exp"), comm({ rest_ppe }, '{"rest_ppe":{"Excl":false,"Index":null,"Length":false,"Names":0,"Repl":null,"Slice":null,"Width":false}}')], " ")];
+  } else {
+    // tslint:disable-next-line:max-line-length
+    return [joiner(["(", ...param(Param, "Param"), exp(Exp, "Exp"), comm({ rest_ppe }, '{"rest_ppe":{"Excl":false,"Index":null,"Length":false,"Names":0,"Repl":null,"Slice":null,"Width":false}}'), ")"], " ")];
+  }
+}
+
+function byType(rec: IByType, fromField: string): string[] {
+  if (!rec || !rec.Type) {
+    return [comm({ empty_rec: rec })];
+  }
+  switch (rec.Type) {
+    case "BinaryCmd":
+      return btBinaryCmd(rec as IBinaryCmd, fromField);
+    case "Block":
+      return btBlock(rec as IBlock, fromField);
+    case "CallExpr":
+      return btCallExpr(rec as ICallExpr, fromField);
+    case "CaseClause":
+      return btCaseClause(rec as ICaseClause, fromField);
+    case "CmdSubst":
+      return btCmdSubst(rec as ICmdSubst, fromField);
+    case "DblQuoted":
+      return btDblQuoted(rec as IDblQuoted, fromField);
+    case "ForClause":
+      return btForClause(rec as IForClause, fromField);
+    case "FuncDecl":
+      return btFuncDecl(rec as IFuncDecl, fromField);
+    case "IfClause":
+      return btIfClause(rec as IIfClause, fromField);
+    case "Lit":
+      return btLit(rec as ILit, fromField);
+    case "ParamExp":
+      return btParamExp(rec as IParamExp, fromField);
+    case "SglQuoted":
+      return btSglQuoted(rec as ISglQuoted, fromField);
+    case "Subshell":
+      return btSubshell(rec as ISubshell, fromField);
+    case "WhileClause":
+      return btWhileClause(rec as IWhileClause, fromField);
+    case "WordIter":
+      return btWordIter(rec as IWordIter, fromField);
+    default:
+      return [comm({ unknown_rec: rec })];
+  }
+}
+
+function parts(prts: IByType[], fromField: string): string[] {
   if (!prts) {
     return [comm({ prts })];
   }
   const res: string[] = [];
   prts.forEach((part) => {
-    if (!part) {
-      res.push(comm({ empty_part: part }));
-    }
-    switch (part.Type) {
-      case "SglQuoted":
-        res.push(...prtSglQuoted(part as ISglQuoted));
-        break;
-      case "CmdSubst":
-        res.push(...prtCmdSubst(part as ICmdSubst));
-        break;
-      case "Lit":
-        res.push(...prtLit(part as ILit));
-        break;
-      case "DblQuoted":
-        res.push(...prtDblQuoted(part as IDblQuoted));
-        break;
-      case "ParamExp":
-        res.push(...prtParamExp(part as IParamExp));
-        break;
-      default:
-        res.push(comm({ unknown_part: part }));
-        break;
-    }
+    // typelist(part, ["part", "IByType", fromField + "[]"]);
+    res.push(...byType(part, fromField + "[]"));
   });
-  return [joiner(res, " + ")];
+  return [joiner(res, " + /*3*/")];
 }
 
-function value(val: IValue): string[] {
+function value(val: IXValue, fromField: string): string[] {
+  typelist(val, ["val", "IXValue", fromField]);
   if (!val) {
     return ['""', comm({ empty_val: val }, '{"empty_val":null}')];
   }
   const { Pos, End, Parts, ...rest_val } = val;
-  return [...parts(Parts), comm({ rest_val }, '{"rest_val":{}}')];
+  return [...parts(Parts, "Parts"), comm({ rest_val }, '{"rest_val":{}}')];
 }
 
-function assigns(ass: IAssign[]): string {
+function assigns(ass: IMyAssign[], fromField: string): string {
   const res: string[] = [];
   ass.forEach((a) => {
+    typelist(a, ["a", "IMyAssign", fromField + "[]"]);
     const { Pos, End, Name, Value, ...rest_ass } = a;
     // tslint:disable-next-line:max-line-length
-    res.push("let " + a.Name.Value + " = " + joiner(value(Value), " + ") + comm({ rest_ass }, '{"rest_ass":{"Append":false,"Array":null,"Index":null,"Naked":false}}'));
+    res.push("let " + a.Name.Value + " = " + joiner(value(Value, "Value"), " + /*4*/") + comm({ rest_ass }, '{"rest_ass":{"Append":false,"Array":null,"Index":null,"Naked":false}}'));
   });
   return joiner(res, " ;//1\n");
 }
 
-function arglist(args: IArg[]): string[] {
+function arglist(args: IXArg[], fromField: string): string[] {
   const res: string[] = [];
   args.forEach((a) => {
+    typelist(a, ["a", "IXArg", fromField + "[]"]);
     const { Pos, End, Parts, ...rest_args } = a;
-    res.push(...parts(Parts));
+    res.push(...parts(Parts, "Parts"));
     res.push(comm({ rest_args }, '{"rest_args":{}}'));
   });
   return res;
 }
 
-function cmdCallExpr(cmd: ICallExpr): string[] {
+function btCallExpr(cmd: ICallExpr, fromField: string): string[] {
+  typelist(cmd, ["cmd", "ICallExpr", fromField]);
   const { Pos, End, Type, Assigns, Args, ...rest_cce } = cmd;
-  return [assigns(Assigns), ...arglist(Args), comm({ rest_cce }, '{"rest_cce":{}}')];
+  return [assigns(Assigns, "Assigns"), ...arglist(Args, "Args"), comm({ rest_cce }, '{"rest_cce":{}}')];
 }
 
-function cmdBinaryCmd(cmd: IBinaryCmd): string[] {
+function btBinaryCmd(cmd: IBinaryCmd, fromField: string): string[] {
+  typelist(cmd, ["cmd", "IBinaryCmd", fromField]);
   const { Pos, End, Type, Op, X, Y, ...rest_cbc } = cmd;
-  return [statements([X]), opcode[Op] || "Op=" + Op, statements([Y]), comm({ rest_cbc }, '{"rest_cbc":{}}')];
+  return ["{\n", statements([X], "[X]"), op(Op), statements([Y], "[Y]"), comm({ rest_cbc }, '{"rest_cbc":{}}'), "\n}"];
 }
 
-function block(blk: IBlock): string {
-  const { Pos, End, Stmts, ...rest_blk } = blk;
-  return joiner([statements(Stmts), comm({ rest_blk }, '{"rest_blk":{"Last":[]}}')], " ;//3\n");
-}
-
-function cmdWhileClause(cmd: IWhileClause): string[] {
+function btWhileClause(cmd: IWhileClause, fromField: string): string[] {
+  typelist(cmd, ["cmd", "IWhileClause", fromField]);
   const { Pos, End, Type, Cond, Do, ...rest_cwc } = cmd;
   // tslint:disable-next-line:max-line-length
-  return ["while (" + block(Cond) + ") {\n" + block(Do) + "\n}", comm({ rest_cwc }, '{"rest_cwc":{"Until":false}}')];
+  return ["while (" + block(Cond, "Cond") + ") {\n" + block(Do, "Do") + "\n}", comm({ rest_cwc }, '{"rest_cwc":{"Until":false}}')];
 }
 
-function word(wrd: IWord) {
+function word(wrd: IXWord, fromField: string) {
+  typelist(wrd, ["wrd", "IXWord", fromField]);
   if (!wrd) {
     return ['""', comm({ empty_wrd: wrd }, '{"empty_wrd":null}')];
   }
   const { Pos, End, Parts, ...rest_wrd } = wrd;
-  return [...parts(Parts), comm({ rest_wrd }, '{"rest_wrd":{}}')];
+  return [...parts(Parts, "Parts"), comm({ rest_wrd }, '{"rest_wrd":{}}')];
 }
 
-function patterns(pts: IPattern[]): string[] {
+function patterns(pts: IXPattern[], fromField: string): string[] {
   const res: string[] = [];
   pts.forEach((pat) => {
+    typelist(pat, ["pat", "IXPattern", fromField + "[]"]);
     const { Pos, End, Parts, ...rest_pts } = pat;
-    res.push(...parts(Parts).map((p) => "case " + p + " :\n"), comm({ rest_pts }, '{"rest_pts":{}}'));
+    res.push(...parts(Parts, "Parts").map((p) => "case " + p + " :\n"), comm({ rest_pts }, '{"rest_pts":{}}'));
   });
   return res;
 }
 
-function item(itm: IItem[]): string[] {
+function item(itm: IMyItem[], fromField: string): string[] {
   const res: string[] = [];
   itm.forEach((i) => {
-    const { Pos, End, Comments, Patterns, Stmts, Op, ...rest_itm } = i;
+    typelist(i, ["i", "IMyItem", fromField + "[]"]);
+    const { Pos, End, Comments, Patterns, Stmts, Op, Last, ...rest_itm } = i;
     // tslint:disable-next-line:max-line-length
-    res.push(comments(Comments), ...patterns(Patterns), statements(Stmts), opcode[Op] || "Op=" + Op, comm({ rest_itm }, '{"rest_itm":{"Last":[]}}'));
+    res.push(comments(Comments, "Comments"), ...patterns(Patterns, "Patterns"), statements(Stmts, "Stmts"), op(Op), comments(Last, "Last"), comm({ rest_itm }, '{"rest_itm":{}}'));
   });
   return res;
 }
 
-function cmdCaseClause(cmd: ICaseClause): string[] {
+function btCaseClause(cmd: ICaseClause, fromField: string): string[] {
+  typelist(cmd, ["cmd", "ICaseClause", fromField]);
   const { Pos, End, Type, Items, Word, ...rest_ccc } = cmd;
   // tslint:disable-next-line:max-line-length
-  return ["switch ( " + joiner(word(Word), " + ") + " ) {\n", ...item(Items), "\n}", comm({ rest_ccc }, '{"rest_ccc":{"Last":[]}}')];
+  return ["switch ( " + joiner(word(Word, "Word"), " + /*5*/") + " ) {\n", ...item(Items, "Items"), "\n}", comm({ rest_ccc }, '{"rest_ccc":{"Last":[]}}')];
 }
 
-function cmdIfClause(cmd: IIfClause): string[] {
-  const { Pos, End, Type, Cond, Then, Else, ...rest_cic } = cmd;
-  // tslint:disable-next-line:max-line-length
-  return ["if ( " + block(Cond) + " ) {\n" + block(Then) + "\n}else{\n" + block(Else) + "\n)", comm({ rest_cic }, '{"rest_cic":{"Elif":false,"ElseComments":[],"FiComments":[]}}')];
+function btIfClause(cmd: IIfClause, fromField: string): string[] {
+  typelist(cmd, ["cmd", "IIfClause", fromField]);
+  const { Pos, End, Type, Cond, Then, Else, Elif, ElseComments, FiComments, ...rest_cic } = cmd;
+  return [
+    (Elif ? " else " : "") + //
+      "if ( " +
+      block(Cond, "Cond") +
+      " ) {\n" +
+      block(Then, "Then") +
+      "\n} " +
+      comments(ElseComments, "ElseComments") +
+      " else {\n" +
+      block(Else, "Else") +
+      "\n} " +
+      comments(FiComments, "FiComments"),
+    comm({ rest_cic }, '{"rest_cic":{}}'),
+  ];
 }
 
-function cmdFuncDecl(cmd: IFuncDecl) {
+function btFuncDecl(cmd: IFuncDecl, fromField: string) {
+  typelist(cmd, ["cmd", "IFuncDecl", fromField]);
   const { Pos, End, Type, Name, Body, ...rest_cfd } = cmd;
   // tslint:disable-next-line:max-line-length
-  return ["function " + Name.Value + " () {\n" + block(Body) + "\n}", comm({ rest_cfd }, '{"rest_cfd":{"RsrvWord":false}}')];
+  return ["function " + Name.Value + " () {\n" + statements([Body], "[Body]") + "\n}", comm({ rest_cfd }, '{"rest_cfd":{"RsrvWord":false}}')];
 }
 
-function command(cmd: ICmd): string[] {
-  switch (cmd.Type) {
-    case "CallExpr":
-      return cmdCallExpr(cmd as ICallExpr);
-    case "BinaryCmd":
-      return cmdBinaryCmd(cmd as IBinaryCmd);
-    case "WhileClause":
-      return cmdWhileClause(cmd as IWhileClause);
-    case "CaseClause":
-      return cmdCaseClause(cmd as ICaseClause);
-    case "IfClause":
-      return cmdIfClause(cmd as IIfClause);
-    case "FuncDecl":
-      return cmdFuncDecl(cmd as IFuncDecl);
-    default:
-      return [comm({ unknown_command: cmd })];
+function block(cmd: IMyBlock, fromField: string): string[] {
+  typelist(cmd, ["cmd", "IMyBlock", fromField]);
+  const { Stmts, ...rest_cb } = cmd;
+  // tslint:disable-next-line:max-line-length
+  return [joiner([statements(Stmts, "Stmts"), comm({ rest_cb }, '{"rest_cb":{"Last":[]}}')], " ;//3\n")];
+}
+
+function btBlock(cmd: IBlock, fromField: string): string[] {
+  typelist(cmd, ["cmd", "IBlock", fromField]);
+  const { Pos, End, Type, Stmts, ...rest_cb } = cmd;
+  // tslint:disable-next-line:max-line-length
+  return [joiner([statements(Stmts, "Stmts"), comm({ rest_cb }, '{"rest_cb":{"Last":[]}}')], " ;//3\n")];
+}
+
+function btSubshell(cmd: ISubshell, fromField: string): string[] {
+  typelist(cmd, ["cmd", "ISubshell", fromField]);
+  const { Pos, End, Type, Stmts, ...rest_css } = cmd;
+  return [" ( " + joiner([statements(Stmts, "Stmts"), comm({ rest_css }, '{"rest_css":{"Last":[]}}')], " ") + " ) "];
+}
+
+function btForClause(cmd: IForClause, fromField: string): string[] {
+  typelist(cmd, ["cmd", "IForClause", fromField]);
+  const { Pos, End, Type, Do, Loop, ...rest_cfc } = cmd;
+  // tslint:disable-next-line:max-line-length
+  return ["for", ...command(Loop, "Loop"), "{\n", ...block(Do, "Do"), "\n}", comm({ rest_cfc }, '{"rest_cfc":{"Select":false}}')];
+}
+
+function btWordIter(cmd: IWordIter, fromField: string): string[] {
+  typelist(cmd, ["cmd", "IWordIter", fromField]);
+  const { Pos, End, Type, Items, Name, ...rest_cwi } = cmd;
+  const items: string[] = [];
+  Items.forEach((i) => {
+    items.push(...word(i, "Items[]"));
+  });
+  return ["(const " + Name.Value + " of [ " + joiner(items, " , ") + " ])", comm({ rest_cwi }, '{"rest_cwi":{}}')];
+}
+
+function command(cmd: IByType, fromField: string): string[] {
+  // typelist(cmd, ["cmd", "IByType", fromField]);
+  return byType(cmd, fromField);
+}
+
+function hdoc(doc: IMyHdoc, fromField: string): string {
+  typelist(doc, ["doc", "IMyHdoc", fromField]);
+  if (!doc) {
+    return comm({ empty_doc: doc }, '{"empty_doc":null}');
   }
+  const { Pos, End, Parts, ...rest_doc } = doc;
+  return joiner([...parts(Parts, "Parts"), comm({ rest_doc }, '{"rest_doc":{}}')], " ");
 }
 
-function redirs(red: IRedir[]): string {
+function redirs(red: IMyRedir[], fromField: string): string {
+  if (!red) {
+    return comm({ empty_red: red });
+  }
   const res: string[] = [];
   red.forEach((r) => {
-    const { Pos, End, Op, Word, ...rest_red } = r;
-    res.push(opcode[Op] || "Op=" + Op, ...word(Word));
-    res.push(comm({ rest_red }, '{"rest_red":{"Hdoc":null,"N":null}}'));
+    typelist(r, ["r", "IMyRedir", fromField + "[]"]);
+    const { Pos, End, Op, Word, N, Hdoc, ...rest_red } = r;
+    if (N) {
+      res.push(N.Value);
+    }
+    res.push(op(Op), ...word(Word, "Word"));
+    res.push(hdoc(Hdoc, "Hdoc"));
+    res.push(comm({ rest_red }, '{"rest_red":{}}'));
   });
   return joiner(res, " ");
 }
 
-function statements(stmts: IStatement[]): string {
+function statements(stmts: IMyStmt[], fromField: string): string {
   if (!stmts) {
     return comm({ empty_stmts: stmts });
   }
   const res: string[] = [];
   stmts.forEach((stmt) => {
+    typelist(stmt, ["stmts", "IMyStmt", fromField + "[]"]);
     const { Pos, End, Comments, Cmd, Redirs, ...rest_stmt } = stmt;
-    res.push(comments(Comments) + joiner(command(Cmd), " ") + redirs(Redirs));
+    res.push(comments(Comments, "Comments") + joiner([...command(Cmd, "Cmd"), redirs(Redirs, "Redirs")], " "));
     // tslint:disable-next-line:max-line-length
     res.push(comm({ rest_stmt }, '{"rest_stmt":{"Background":false,"Coprocess":false,"Negated":false}}'));
   });
@@ -773,7 +989,7 @@ function statements(stmts: IStatement[]): string {
 
 // ---------------------------------------------------------------------------------------------------------------------
 
-["config.guess", "config.sub"].forEach((f) => {
+function perFile(f: string): void {
   logg({ f });
   const t = readFileSync(resolve("gnu-config", f), { encoding: "ascii" });
   // FIXME: replace with mvdan-sh!
@@ -786,9 +1002,26 @@ function statements(stmts: IStatement[]): string {
     logg({ res });
     throw res.error;
   }
-  const j: IShellFile = JSON.parse(res.stdout);
+  const j: IMyShellFile = JSON.parse(res.stdout);
+  typelist(j, ["j", "IMyShellFile", "res.stdout"]);
   // logg({ j });
-  const js = statements(j.Stmts) + "\n" + comments(j.Last);
+  const js = statements(j.Stmts, "Stmts") + "\n" + comments(j.Last, "Last");
   // tslint:disable-next-line:no-console
   console.log(js);
-});
+}
+["config.guess", "config.sub"].forEach(perFile);
+// tslint:disable-next-line:no-console
+console.log(
+  Object.keys(known)
+    .map(
+      (k) =>
+        k +
+        "\n\t" +
+        Object.keys(known[k])
+          .map((v) => known[k][v] + " " + v)
+          .sort()
+          .join("\n\t"),
+    )
+    .sort()
+    .join("\n"),
+);

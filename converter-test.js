@@ -3,7 +3,7 @@
 }
 //  Attempt to guess a canonical system name.
 //    Copyright 1992-2019 Free Software Foundation, Inc.
-let timestamp = "2019-01-15" ;//2
+let timestamp = "2019-02-19" ;//2
 //  This file is free software; you can redistribute it and/or modify it
 //  under the terms of the GNU General Public License as published by
 //  the Free Software Foundation; either version 3 of the License, or
@@ -30,10 +30,12 @@ let timestamp = "2019-01-15" ;//2
 //  https://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.guess
 // 
 //  Please send patches to <config-patches@gnu.org>.
-let me = $( "echo" process.argv0  |  "sed" "-e" "s,.*/,," ) ;//2
-let usage = "\\\nUsage: " + process.argv0 + " [OPTION]\n\nOutput the configuration name of the system \\`" + me + "' is run on.\n\nOptions:\n  -h, --help         print this help, then exit\n  -t, --time-stamp   print date of last modification, then exit\n  -v, --version      print version number, then exit\n\nReport bugs and patches to <config-patches@gnu.org>." ;//2
-let version = "\\\nGNU config.guess (" + timestamp + ")\n\nOriginally written by Per Bothner.\nCopyright 1992-2019 Free Software Foundation, Inc.\n\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE." ;//2
-let help = "\nTry \\`" + me + " --help' for more information." ;//2
+let me = $( {
+ "echo" process.argv0  |  "sed" "-e" "s,.*/,," 
+} ) ;//2
+let usage = "\\\nUsage: " + /*3*/process.argv0 + /*3*/" [OPTION]\n\nOutput the configuration name of the system \\`" + /*3*/me + /*3*/"' is run on.\n\nOptions:\n  -h, --help         print this help, then exit\n  -t, --time-stamp   print date of last modification, then exit\n  -v, --version      print version number, then exit\n\nReport bugs and patches to <config-patches@gnu.org>." ;//2
+let version = "\\\nGNU config.guess (" + /*3*/timestamp + /*3*/")\n\nOriginally written by Per Bothner.\nCopyright 1992-2019 Free Software Foundation, Inc.\n\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE." ;//2
+let help = "\nTry \\`" + /*3*/me + /*3*/" --help' for more information." ;//2
 //  Parse command line
 while ("test" process.argv.length "-gt" "0") {
 switch ( process.argv[1] ) {
@@ -41,30 +43,37 @@ switch ( process.argv[1] ) {
  case "--time*" :
  case "-t" :
  "echo" timestamp ;//2
-"exit"  ;;  case "--version" :
+"exit"  ;;
+ case "--version" :
  case "-v" :
  "echo" version ;//2
-"exit"  ;;  case "--help" :
+"exit"  ;;
+ case "--help" :
  case "--h*" :
  case "-h" :
  "echo" usage ;//2
-"exit"  ;;  case "--" :
+"exit"  ;;
+ case "--" :
  //  Stop option processing
 "shift" ;//2
-"break"  ;;  case "-" :
+"break"  ;;
+ case "-" :
  //  Use stdin as input.
-"break"  ;;  case "-*" :
- "echo" me + ": invalid option " + process.argv[1] + help >&  "2" ;//2
-"exit" "1"  ;;  case "*" :
- "break"  ;;  
+"break"  ;;
+ case "-*" :
+ "echo" me + /*3*/": invalid option " + /*3*/process.argv[1] + /*3*/help  >&  "2" ;//2
+"exit" "1"  ;;
+ case "*" :
+ "break"  ;;
+ 
 }
 } ;//2
 if ( "test" process.argv.length "!=" "0" ) {
-"echo" me + ": too many arguments" + help >&  "2" ;//2
+"echo" me + /*3*/": too many arguments" + /*3*/help  >&  "2" ;//2
 "exit" "1"
-}else{
+}  else {
 
-) ;//2
+}  ;//2
 //  CC_FOR_BUILD -- compiler used by this script. Note that the use of a
 //  compiler to aid in system detection is discouraged as it requires
 //  temporary files to be created and, as you can see below, it is a
@@ -76,31 +85,78 @@ let tmp = "" ;//2
 //  shellcheck disable=SC2172
 "trap" "test -z \"$tmp\" || rm -fr \"$tmp\"" "0" "1" "2" "13" "15" ;//2
 function set_cc_for_build () {
-/*{ empty_stmts: undefined }*/
- ;//3
-/*{ rest_blk: { Background: false, Cmd: { End: [Object], Last: [], Pos: [Object], Stmts: [Array], Type: 'Block' }, Comments: [], Coprocess: false, Negated: false, Redirs: [] } }*/
+":" ( TMPDIR  =  "/tmp" ) ;//2
+//  shellcheck disable=SC2039
+{
+ {
+ {
+ {
+ {
+ let tmp = $(  ( {
+ "umask" "077"  &&  "mktemp" "-d" TMPDIR + /*3*/"/cgXXXXXX" 
+} )  2  >  "/dev/null" )  &&  "test" "-n" tmp 
+}  &&  "test" "-d" tmp 
+}  ||  {
+ {
+ "test" "-n" RANDOM  &&  let tmp = TMPDIR + /*3*/"/cg" + /*3*/process.pid + /*3*/"-" + /*3*/RANDOM 
+}  &&   ( {
+ "umask" "077"  &&  "mkdir" tmp 2  >  "/dev/null" 
+} )  
+} 
+}  ||  {
+ {
+ let tmp = TMPDIR + /*3*/"/cg-" + /*3*/process.pid  &&   ( {
+ "umask" "077"  &&  "mkdir" tmp 2  >  "/dev/null" 
+} )  
+}  &&  "echo" "Warning: creating insecure temp directory"  >&  "2" 
+} 
+}  ||  "echo" me + /*3*/": cannot create a temporary directory in " + /*3*/TMPDIR  >&  "2" ;//2
+"exit" "1" 
+} ;//2
+let dummy = tmp + /*3*/"/dummy" ;//2
+switch ( ( CC_FOR_BUILD  -  "" ) + /*3*/"," + /*3*/( HOST_CC  -  "" ) + /*3*/"," + /*3*/( CC  -  "" ) ) {
+ case ",," :
+ "echo" "int x;"  >  dummy + /*3*/".c" ;//2
+for (const driver of [ "cc" , "gcc" , "c89" , "c99" ]) {
+ if (  ( driver "-c" "-o" dummy + /*3*/".o" dummy + /*3*/".c" )   >  "/dev/null" 2  >&  "1" ) {
+let CC_FOR_BUILD = driver ;//2
+"break"
+}  else {
 
+}  
+} ;//2
+if ( "test" "x" + /*3*/CC_FOR_BUILD "=" "x" ) {
+let CC_FOR_BUILD = "no_compiler_found"
+}  else {
+
+}   ;;
+ case ",,*" :
+ let CC_FOR_BUILD = CC  ;;
+ case ",*,*" :
+ let CC_FOR_BUILD = HOST_CC  ;;
+ 
+}
 } ;//2
 //  This is needed to find uname on a Pyramid OSx when run in the BSD universe.
 //  (ghazi@noc.rutgers.edu 1994-08-24)
 if ( "test" "-f" "/.attbin/uname" ) {
-let PATH = PATH + ":/.attbin" ;//2
+let PATH = PATH + /*3*/":/.attbin" ;//2
 "export" "PATH"
-}else{
+}  else {
 
-) ;//2
-let UNAME_MACHINE = $( /*{ unknown_command: { End: { Col: 26, Line: 132, Offset: 4332 }, Last: [], Pos: { Col: 16, Line: 132, Offset: 4322 }, Stmts: [ [Object] ], Type: 'Subshell' } }*/
- >  "/dev/null" /*{ rest_red: { Hdoc: null, N: { End: [Object], Pos: [Object], Value: '2' } } }*/
- )  ||  let UNAME_MACHINE = "unknown" ;//2
-let UNAME_RELEASE = $( /*{ unknown_command: { End: { Col: 26, Line: 133, Offset: 4396 }, Last: [], Pos: { Col: 16, Line: 133, Offset: 4386 }, Stmts: [ [Object] ], Type: 'Subshell' } }*/
- >  "/dev/null" /*{ rest_red: { Hdoc: null, N: { End: [Object], Pos: [Object], Value: '2' } } }*/
- )  ||  let UNAME_RELEASE = "unknown" ;//2
-let UNAME_SYSTEM = $( /*{ unknown_command: { End: { Col: 25, Line: 134, Offset: 4459 }, Last: [], Pos: { Col: 15, Line: 134, Offset: 4449 }, Stmts: [ [Object] ], Type: 'Subshell' } }*/
- >  "/dev/null" /*{ rest_red: { Hdoc: null, N: { End: [Object], Pos: [Object], Value: '2' } } }*/
- )  ||  let UNAME_SYSTEM = "unknown" ;//2
-let UNAME_VERSION = $( /*{ unknown_command: { End: { Col: 26, Line: 135, Offset: 4523 }, Last: [], Pos: { Col: 16, Line: 135, Offset: 4513 }, Stmts: [ [Object] ], Type: 'Subshell' } }*/
- >  "/dev/null" /*{ rest_red: { Hdoc: null, N: { End: [Object], Pos: [Object], Value: '2' } } }*/
- )  ||  let UNAME_VERSION = "unknown" ;//2
+}  ;//2
+{
+ let UNAME_MACHINE = $(  ( "uname" "-m" )  2  >  "/dev/null" )  ||  let UNAME_MACHINE = "unknown" 
+} ;//2
+{
+ let UNAME_RELEASE = $(  ( "uname" "-r" )  2  >  "/dev/null" )  ||  let UNAME_RELEASE = "unknown" 
+} ;//2
+{
+ let UNAME_SYSTEM = $(  ( "uname" "-s" )  2  >  "/dev/null" )  ||  let UNAME_SYSTEM = "unknown" 
+} ;//2
+{
+ let UNAME_VERSION = $(  ( "uname" "-v" )  2  >  "/dev/null" )  ||  let UNAME_VERSION = "unknown" 
+} ;//2
 switch ( UNAME_SYSTEM ) {
  case "Linux" :
  case "GNU" :
@@ -109,20 +165,26 @@ switch ( UNAME_SYSTEM ) {
 //  We could probably try harder.
 let LIBC = "gnu" ;//2
 "set_cc_for_build" ;//2
-"cat" <<-  "EOF" /*{ rest_red: { Hdoc: { End: [Object], Parts: [Array], Pos: [Object] }, N: null } }*/
-  >  dummy + ".c" ;//2
-"eval" $( CC_FOR_BUILD "-E" dummy + ".c" >  "/dev/null" /*{ rest_red: { Hdoc: null, N: { End: [Object], Pos: [Object], Value: '2' } } }*/
-  |  "grep" "^LIBC"  |  "sed" "s, ,,g" ) ;//2
+"cat"  <<-  "EOF" "\t#include <features.h>\n\t#if defined(__UCLIBC__)\n\tLIBC=uclibc\n\t#elif defined(__dietlibc__)\n\tLIBC=dietlibc\n\t#else\n\tLIBC=gnu\n\t#endif\n\t"  >  dummy + /*3*/".c" ;//2
+"eval" $( {
+ CC_FOR_BUILD "-E" dummy + /*3*/".c" 2  >  "/dev/null"  |  {
+ "grep" "^LIBC"  |  "sed" "s, ,,g" 
+} 
+} ) ;//2
 //  If ldd exists, use it to detect musl libc.
-if ( "command" "-v" "ldd" >  "/dev/null"  &&  "ldd" "--version" >&  "1" /*{ rest_red: { Hdoc: null, N: { End: [Object], Pos: [Object], Value: '2' } } }*/
-  |  "grep" "-q" "^musl" ) {
+if ( {
+ "command" "-v" "ldd"  >  "/dev/null"  &&  {
+ "ldd" "--version" 2  >&  "1"  |  "grep" "-q" "^musl" 
+} 
+} ) {
 let LIBC = "musl"
-}else{
+}  else {
 
-)  ;;  
+}   ;;
+ 
 } ;//2
 //  Note: order is significant - the case branches are not exclusive.
-switch ( UNAME_MACHINE + ":" + UNAME_SYSTEM + ":" + UNAME_RELEASE + ":" + UNAME_VERSION ) {
+switch ( UNAME_MACHINE + /*3*/":" + /*3*/UNAME_SYSTEM + /*3*/":" + /*3*/UNAME_RELEASE + /*3*/":" + /*3*/UNAME_VERSION ) {
  case "*:NetBSD:*:*" :
  //  NetBSD (nbsd) targets should (where applicable) match one or
 //  more of the tuples: *-*-netbsdelf*, *-*-netbsdaout*,
@@ -135,27 +197,42 @@ switch ( UNAME_MACHINE + ":" + UNAME_SYSTEM + ":" + UNAME_RELEASE + ":" + UNAME_
 //  Note: NetBSD doesn't particularly care about the vendor
 //  portion of the name.  We always set it to "unknown".
 let sysctl = "sysctl -n hw.machine_arch" ;//2
-let UNAME_MACHINE_ARCH = $( /*{ unknown_command: { End: { Col: 19, Line: 183, Offset: 5946 }, Last: [], Pos: { Col: 22, Line: 180, Offset: 5821 }, Stmts: [ [Object] ], Type: 'Subshell' } }*/
- ) ;//2
+let UNAME_MACHINE_ARCH = $(  ( {
+ {
+ {
+ "uname" "-p" 2  >  "/dev/null"  ||  "/sbin/" + /*3*/sysctl 2  >  "/dev/null" 
+}  ||  "/usr/sbin/" + /*3*/sysctl 2  >  "/dev/null" 
+}  ||  "echo" "unknown" 
+} )  ) ;//2
 switch ( UNAME_MACHINE_ARCH ) {
  case "armeb" :
- let machine = "armeb-unknown"  ;;  case "arm*" :
- let machine = "arm-unknown"  ;;  case "sh3el" :
- let machine = "shl-unknown"  ;;  case "sh3eb" :
- let machine = "sh-unknown"  ;;  case "sh5el" :
- let machine = "sh5le-unknown"  ;;  case "earmv*" :
- let arch = $( "echo" UNAME_MACHINE_ARCH  |  "sed" "-e" "s,^e\\(armv[0-9]\\).*$,\\1," ) ;//2
-let endian = $( "echo" UNAME_MACHINE_ARCH  |  "sed" "-ne" "s,^.*\\(eb\\)$,\\1,p" ) ;//2
-let machine = arch + /*{ rest_ppe: { Excl: false, Exp: null, Index: null, Length: false, Names: 0, Repl: null, Short: false, Slice: null, Width: false } }*/
- + endian + /*{ rest_ppe: { Excl: false, Exp: null, Index: null, Length: false, Names: 0, Repl: null, Short: false, Slice: null, Width: false } }*/
- + "-unknown"  ;;  case "*" :
- let machine = UNAME_MACHINE_ARCH + "-unknown"  ;;  
+ let machine = "armeb-unknown"  ;;
+ case "arm*" :
+ let machine = "arm-unknown"  ;;
+ case "sh3el" :
+ let machine = "shl-unknown"  ;;
+ case "sh3eb" :
+ let machine = "sh-unknown"  ;;
+ case "sh5el" :
+ let machine = "sh5le-unknown"  ;;
+ case "earmv*" :
+ let arch = $( {
+ "echo" UNAME_MACHINE_ARCH  |  "sed" "-e" "s,^e\\(armv[0-9]\\).*$,\\1," 
+} ) ;//2
+let endian = $( {
+ "echo" UNAME_MACHINE_ARCH  |  "sed" "-ne" "s,^.*\\(eb\\)$,\\1,p" 
+} ) ;//2
+let machine = ( arch ) + /*3*/( endian ) + /*3*/"-unknown"  ;;
+ case "*" :
+ let machine = UNAME_MACHINE_ARCH + /*3*/"-unknown"  ;;
+ 
 } ;//2
 //  The Operating System including object format, if it has switched
 //  to ELF recently (or will in the future) and ABI.
 switch ( UNAME_MACHINE_ARCH ) {
  case "earm*" :
- let os = "netbsdelf"  ;;  case "arm*" :
+ let os = "netbsdelf"  ;;
+ case "arm*" :
  case "i386" :
  case "m68k" :
  case "ns32k" :
@@ -163,21 +240,29 @@ switch ( UNAME_MACHINE_ARCH ) {
  case "sparc" :
  case "vax" :
  "set_cc_for_build" ;//2
-if ( "echo" "__ELF__"  |  CC_FOR_BUILD "-E" "-" >  "/dev/null" /*{ rest_red: { Hdoc: null, N: { End: [Object], Pos: [Object], Value: '2' } } }*/
-  |  "grep" "-q" "__ELF__" ) {
+if ( {
+ "echo" "__ELF__"  |  {
+ CC_FOR_BUILD "-E" "-" 2  >  "/dev/null"  |  "grep" "-q" "__ELF__" 
+} 
+} ) {
 //  Once all utilities can be ECOFF (netbsdecoff) or a.out (netbsdaout).
 //  Return netbsd for either.  FIX?
 let os = "netbsd"
-}else{
+}  else {
 let os = "netbsdelf"
-)  ;;  case "*" :
- let os = "netbsd"  ;;  
+}   ;;
+ case "*" :
+ let os = "netbsd"  ;;
+ 
 } ;//2
 //  Determine ABI tags.
 switch ( UNAME_MACHINE_ARCH ) {
  case "earm*" :
  let expr = "s/^earmv[0-9]/-eabi/;s/eb$//" ;//2
-let abi = $( "echo" UNAME_MACHINE_ARCH  |  "sed" "-e" expr )  ;;  
+let abi = $( {
+ "echo" UNAME_MACHINE_ARCH  |  "sed" "-e" expr 
+} )  ;;
+ 
 } ;//2
 //  The OS release
 //  Debian GNU/NetBSD machines have a different userland, and
@@ -186,133 +271,205 @@ let abi = $( "echo" UNAME_MACHINE_ARCH  |  "sed" "-e" expr )  ;;
 //  suitable tag, in the style of linux-gnu.
 switch ( UNAME_VERSION ) {
  case "Debian*" :
- let release = "-gnu"  ;;  case "*" :
- let release = $( "echo" UNAME_RELEASE  |  "sed" "-e" "s/[-_].*//"  |  "cut" "-d." "-f1,2" )  ;;  
+ let release = "-gnu"  ;;
+ case "*" :
+ let release = $( {
+ "echo" UNAME_RELEASE  |  {
+ "sed" "-e" "s/[-_].*//"  |  "cut" "-d." "-f1,2" 
+} 
+} )  ;;
+ 
 } ;//2
 //  Since CPU_TYPE-MANUFACTURER-KERNEL-OPERATING_SYSTEM:
 //  contains redundant information, the shorter form:
 //  CPU_TYPE-MANUFACTURER-OPERATING_SYSTEM is used.
-"echo" machine + "-" + os + /*{ rest_ppe: { Excl: false, Exp: null, Index: null, Length: false, Names: 0, Repl: null, Short: false, Slice: null, Width: false } }*/
- + release + /*{ rest_ppe: { Excl: false, Exp: null, Index: null, Length: false, Names: 0, Repl: null, Short: false, Slice: null, Width: false } }*/
- + abi + /*{ rest_ppe: { Excl: false, Exp: { Op: 69, Word: null }, Index: null, Length: false, Names: 0, Repl: null, Short: false, Slice: null, Width: false } }*/
- ;//2
-"exit"  ;;  case "*:Bitrig:*:*" :
- let UNAME_MACHINE_ARCH = $( "arch"  |  "sed" "s/Bitrig.//" ) ;//2
-"echo" UNAME_MACHINE_ARCH + "-unknown-bitrig" + UNAME_RELEASE ;//2
-"exit"  ;;  case "*:OpenBSD:*:*" :
- let UNAME_MACHINE_ARCH = $( "arch"  |  "sed" "s/OpenBSD.//" ) ;//2
-"echo" UNAME_MACHINE_ARCH + "-unknown-openbsd" + UNAME_RELEASE ;//2
-"exit"  ;;  case "*:LibertyBSD:*:*" :
- let UNAME_MACHINE_ARCH = $( "arch"  |  "sed" "s/^.*BSD\\.//" ) ;//2
-"echo" UNAME_MACHINE_ARCH + "-unknown-libertybsd" + UNAME_RELEASE ;//2
-"exit"  ;;  case "*:MidnightBSD:*:*" :
- "echo" UNAME_MACHINE + "-unknown-midnightbsd" + UNAME_RELEASE ;//2
-"exit"  ;;  case "*:ekkoBSD:*:*" :
- "echo" UNAME_MACHINE + "-unknown-ekkobsd" + UNAME_RELEASE ;//2
-"exit"  ;;  case "*:SolidBSD:*:*" :
- "echo" UNAME_MACHINE + "-unknown-solidbsd" + UNAME_RELEASE ;//2
-"exit"  ;;  case "macppc:MirBSD:*:*" :
- "echo" "powerpc-unknown-mirbsd" + UNAME_RELEASE ;//2
-"exit"  ;;  case "*:MirBSD:*:*" :
- "echo" UNAME_MACHINE + "-unknown-mirbsd" + UNAME_RELEASE ;//2
-"exit"  ;;  case "*:Sortix:*:*" :
- "echo" UNAME_MACHINE + "-unknown-sortix" ;//2
-"exit"  ;;  case "*:Redox:*:*" :
- "echo" UNAME_MACHINE + "-unknown-redox" ;//2
-"exit"  ;;  case "mips:OSF1:*.*" :
+"echo" machine + /*3*/"-" + /*3*/( os ) + /*3*/( release ) + /*3*/( abi  -  "" ) ;//2
+"exit"  ;;
+ case "*:Bitrig:*:*" :
+ let UNAME_MACHINE_ARCH = $( {
+ "arch"  |  "sed" "s/Bitrig.//" 
+} ) ;//2
+"echo" UNAME_MACHINE_ARCH + /*3*/"-unknown-bitrig" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "*:OpenBSD:*:*" :
+ let UNAME_MACHINE_ARCH = $( {
+ "arch"  |  "sed" "s/OpenBSD.//" 
+} ) ;//2
+"echo" UNAME_MACHINE_ARCH + /*3*/"-unknown-openbsd" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "*:LibertyBSD:*:*" :
+ let UNAME_MACHINE_ARCH = $( {
+ "arch"  |  "sed" "s/^.*BSD\\.//" 
+} ) ;//2
+"echo" UNAME_MACHINE_ARCH + /*3*/"-unknown-libertybsd" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "*:MidnightBSD:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-unknown-midnightbsd" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "*:ekkoBSD:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-unknown-ekkobsd" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "*:SolidBSD:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-unknown-solidbsd" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "macppc:MirBSD:*:*" :
+ "echo" "powerpc-unknown-mirbsd" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "*:MirBSD:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-unknown-mirbsd" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "*:Sortix:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-unknown-sortix" ;//2
+"exit"  ;;
+ case "*:Redox:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-unknown-redox" ;//2
+"exit"  ;;
+ case "mips:OSF1:*.*" :
  "echo" "mips-dec-osf1" ;//2
-"exit"  ;;  case "alpha:OSF1:*:*" :
+"exit"  ;;
+ case "alpha:OSF1:*:*" :
  switch ( UNAME_RELEASE ) {
  case "*4.0" :
- let UNAME_RELEASE = $( "/usr/sbin/sizer" "-v"  |  "awk" "{print $3}" )  ;;  case "*5.*" :
- let UNAME_RELEASE = $( "/usr/sbin/sizer" "-v"  |  "awk" "{print $4}" )  ;;  
+ let UNAME_RELEASE = $( {
+ "/usr/sbin/sizer" "-v"  |  "awk" "{print $3}" 
+} )  ;;
+ case "*5.*" :
+ let UNAME_RELEASE = $( {
+ "/usr/sbin/sizer" "-v"  |  "awk" "{print $4}" 
+} )  ;;
+ 
 } ;//2
 //  According to Compaq, /usr/sbin/psrinfo has been available on
 //  OSF/1 and Tru64 systems produced since 1995.  I hope that
 //  covers most systems running today.  This code pipes the CPU
 //  types through head -n 1, so we only detect the type of CPU 0.
-let ALPHA_CPU_TYPE = $( "/usr/sbin/psrinfo" "-v"  |  "sed" "-n" "-e" "s/^  The alpha \\(.*\\) processor.*$/\\1/p"  |  "head" "-n" "1" ) ;//2
+let ALPHA_CPU_TYPE = $( {
+ "/usr/sbin/psrinfo" "-v"  |  {
+ "sed" "-n" "-e" "s/^  The alpha \\(.*\\) processor.*$/\\1/p"  |  "head" "-n" "1" 
+} 
+} ) ;//2
 switch ( ALPHA_CPU_TYPE ) {
  case "EV4 (21064)" :
- let UNAME_MACHINE = "alpha"  ;;  case "EV4.5 (21064)" :
- let UNAME_MACHINE = "alpha"  ;;  case "LCA4 (21066/21068)" :
- let UNAME_MACHINE = "alpha"  ;;  case "EV5 (21164)" :
- let UNAME_MACHINE = "alphaev5"  ;;  case "EV5.6 (21164A)" :
- let UNAME_MACHINE = "alphaev56"  ;;  case "EV5.6 (21164PC)" :
- let UNAME_MACHINE = "alphapca56"  ;;  case "EV5.7 (21164PC)" :
- let UNAME_MACHINE = "alphapca57"  ;;  case "EV6 (21264)" :
- let UNAME_MACHINE = "alphaev6"  ;;  case "EV6.7 (21264A)" :
- let UNAME_MACHINE = "alphaev67"  ;;  case "EV6.8CB (21264C)" :
- let UNAME_MACHINE = "alphaev68"  ;;  case "EV6.8AL (21264B)" :
- let UNAME_MACHINE = "alphaev68"  ;;  case "EV6.8CX (21264D)" :
- let UNAME_MACHINE = "alphaev68"  ;;  case "EV6.9A (21264/EV69A)" :
- let UNAME_MACHINE = "alphaev69"  ;;  case "EV7 (21364)" :
- let UNAME_MACHINE = "alphaev7"  ;;  case "EV7.9 (21364A)" :
- let UNAME_MACHINE = "alphaev79"  ;;  
+ let UNAME_MACHINE = "alpha"  ;;
+ case "EV4.5 (21064)" :
+ let UNAME_MACHINE = "alpha"  ;;
+ case "LCA4 (21066/21068)" :
+ let UNAME_MACHINE = "alpha"  ;;
+ case "EV5 (21164)" :
+ let UNAME_MACHINE = "alphaev5"  ;;
+ case "EV5.6 (21164A)" :
+ let UNAME_MACHINE = "alphaev56"  ;;
+ case "EV5.6 (21164PC)" :
+ let UNAME_MACHINE = "alphapca56"  ;;
+ case "EV5.7 (21164PC)" :
+ let UNAME_MACHINE = "alphapca57"  ;;
+ case "EV6 (21264)" :
+ let UNAME_MACHINE = "alphaev6"  ;;
+ case "EV6.7 (21264A)" :
+ let UNAME_MACHINE = "alphaev67"  ;;
+ case "EV6.8CB (21264C)" :
+ let UNAME_MACHINE = "alphaev68"  ;;
+ case "EV6.8AL (21264B)" :
+ let UNAME_MACHINE = "alphaev68"  ;;
+ case "EV6.8CX (21264D)" :
+ let UNAME_MACHINE = "alphaev68"  ;;
+ case "EV6.9A (21264/EV69A)" :
+ let UNAME_MACHINE = "alphaev69"  ;;
+ case "EV7 (21364)" :
+ let UNAME_MACHINE = "alphaev7"  ;;
+ case "EV7.9 (21364A)" :
+ let UNAME_MACHINE = "alphaev79"  ;;
+ 
 } ;//2
 //  A Pn.n version is a patched version.
 //  A Vn.n version is a released version.
 //  A Tn.n version is a released field test version.
 //  A Xn.n version is an unreleased experimental baselevel.
 //  1.2 uses "1.2" for uname -r.
-"echo" UNAME_MACHINE + "-dec-osf" + $( "echo" UNAME_RELEASE  |  "sed" "-e" "s/^[PVTX]//"  |  "tr" "ABCDEFGHIJKLMNOPQRSTUVWXYZ" "abcdefghijklmnopqrstuvwxyz" ) ;//2
+"echo" UNAME_MACHINE + /*3*/"-dec-osf" + /*3*/$( {
+ "echo" UNAME_RELEASE  |  {
+ "sed" "-e" "s/^[PVTX]//"  |  "tr" "ABCDEFGHIJKLMNOPQRSTUVWXYZ" "abcdefghijklmnopqrstuvwxyz" 
+} 
+} ) ;//2
 //  Reset EXIT trap before exiting to avoid spurious non-zero exit code.
-let exitcode = /*{ Value: '?' }*/
- ;//2
+let exitcode = process.exitCode ;//2
 "trap" "" "0" ;//2
-"exit" exitcode  ;;  case "Amiga*:UNIX_System_V:4.0:*" :
+"exit" exitcode  ;;
+ case "Amiga*:UNIX_System_V:4.0:*" :
  "echo" "m68k-unknown-sysv4" ;//2
-"exit"  ;;  case "*:[Aa]miga[Oo][Ss]:*:*" :
- "echo" UNAME_MACHINE + "-unknown-amigaos" ;//2
-"exit"  ;;  case "*:[Mm]orph[Oo][Ss]:*:*" :
- "echo" UNAME_MACHINE + "-unknown-morphos" ;//2
-"exit"  ;;  case "*:OS/390:*:*" :
+"exit"  ;;
+ case "*:[Aa]miga[Oo][Ss]:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-unknown-amigaos" ;//2
+"exit"  ;;
+ case "*:[Mm]orph[Oo][Ss]:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-unknown-morphos" ;//2
+"exit"  ;;
+ case "*:OS/390:*:*" :
  "echo" "i370-ibm-openedition" ;//2
-"exit"  ;;  case "*:z/VM:*:*" :
+"exit"  ;;
+ case "*:z/VM:*:*" :
  "echo" "s390-ibm-zvmoe" ;//2
-"exit"  ;;  case "*:OS400:*:*" :
+"exit"  ;;
+ case "*:OS400:*:*" :
  "echo" "powerpc-ibm-os400" ;//2
-"exit"  ;;  case "arm:RISC*:1.[012]*:*" :
+"exit"  ;;
+ case "arm:RISC*:1.[012]*:*" :
  case "arm:riscix:1.[012]*:*" :
- "echo" "arm-acorn-riscix" + UNAME_RELEASE ;//2
-"exit"  ;;  case "arm*:riscos:*:*" :
+ "echo" "arm-acorn-riscix" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "arm*:riscos:*:*" :
  case "arm*:RISCOS:*:*" :
  "echo" "arm-unknown-riscos" ;//2
-"exit"  ;;  case "SR2?01:HI-UX/MPP:*:*" :
+"exit"  ;;
+ case "SR2?01:HI-UX/MPP:*:*" :
  case "SR8000:HI-UX/MPP:*:*" :
  "echo" "hppa1.1-hitachi-hiuxmpp" ;//2
-"exit"  ;;  case "Pyramid*:OSx*:*:*" :
+"exit"  ;;
+ case "Pyramid*:OSx*:*:*" :
  case "MIS*:OSx*:*:*" :
  case "MIS*:SMP_DC-OSx*:*:*" :
  //  akee@wpdis03.wpafb.af.mil (Earle F. Ake) contributed MIS and NILE.
-if ( "test" $( /*{ unknown_command: { End: { Col: 27, Line: 365, Offset: 11328 }, Last: [], Pos: { Col: 12, Line: 365, Offset: 11313 }, Stmts: [ [Object] ], Type: 'Subshell' } }*/
- >  "/dev/null" /*{ rest_red: { Hdoc: null, N: { End: [Object], Pos: [Object], Value: '2' } } }*/
- ) "=" "att" ) {
+if ( "test" $(  ( "/bin/universe" )  2  >  "/dev/null" ) "=" "att" ) {
 "echo" "pyramid-pyramid-sysv3"
-}else{
+}  else {
 "echo" "pyramid-pyramid-bsd"
-) ;//2
-"exit"  ;;  case "NILE*:*:*:dcosx" :
+}  ;//2
+"exit"  ;;
+ case "NILE*:*:*:dcosx" :
  "echo" "pyramid-pyramid-svr4" ;//2
-"exit"  ;;  case "DRS?6000:unix:4.0:6*" :
+"exit"  ;;
+ case "DRS?6000:unix:4.0:6*" :
  "echo" "sparc-icl-nx6" ;//2
-"exit"  ;;  case "DRS?6000:UNIX_SV:4.2*:7*" :
+"exit"  ;;
+ case "DRS?6000:UNIX_SV:4.2*:7*" :
  case "DRS?6000:isis:4.2*:7*" :
  switch ( $( "/usr/bin/uname" "-p" ) ) {
  case "sparc" :
  "echo" "sparc-icl-nx7" ;//2
-"exit"  ;;  
-}  ;;  case "s390x:SunOS:*:*" :
- "echo" UNAME_MACHINE + "-ibm-solaris2" + $( "echo" UNAME_RELEASE  |  "sed" "-e" "s/[^.]*//" ) ;//2
-"exit"  ;;  case "sun4H:SunOS:5.*:*" :
- "echo" "sparc-hal-solaris2" + $( "echo" UNAME_RELEASE  |  "sed" "-e" "s/[^.]*//" ) ;//2
-"exit"  ;;  case "sun4*:SunOS:5.*:*" :
+"exit"  ;;
+ 
+}  ;;
+ case "s390x:SunOS:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-ibm-solaris2" + /*3*/$( {
+ "echo" UNAME_RELEASE  |  "sed" "-e" "s/[^.]*//" 
+} ) ;//2
+"exit"  ;;
+ case "sun4H:SunOS:5.*:*" :
+ "echo" "sparc-hal-solaris2" + /*3*/$( {
+ "echo" UNAME_RELEASE  |  "sed" "-e" "s/[^.]*//" 
+} ) ;//2
+"exit"  ;;
+ case "sun4*:SunOS:5.*:*" :
  case "tadpole*:SunOS:5.*:*" :
- "echo" "sparc-sun-solaris2" + $( "echo" UNAME_RELEASE  |  "sed" "-e" "s/[^.]*//" ) ;//2
-"exit"  ;;  case "i86pc:AuroraUX:5.*:*" :
+ "echo" "sparc-sun-solaris2" + /*3*/$( {
+ "echo" UNAME_RELEASE  |  "sed" "-e" "s/[^.]*//" 
+} ) ;//2
+"exit"  ;;
+ case "i86pc:AuroraUX:5.*:*" :
  case "i86xen:AuroraUX:5.*:*" :
- "echo" "i386-pc-auroraux" + UNAME_RELEASE ;//2
-"exit"  ;;  case "i86pc:SunOS:5.*:*" :
+ "echo" "i386-pc-auroraux" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "i86pc:SunOS:5.*:*" :
  case "i86xen:SunOS:5.*:*" :
  "set_cc_for_build" ;//2
 let SUN_ARCH = "i386" ;//2
@@ -320,45 +477,66 @@ let SUN_ARCH = "i386" ;//2
 //  Note that the Sun cc does not turn __LP64__ into 1 like gcc does.
 //  This test works for both compilers.
 if ( "[" CC_FOR_BUILD "!=" "no_compiler_found" "]" ) {
-if ( /*{ unknown_command: { End: { Col: 67, Line: 400, Offset: 12485 }, Last: [], Pos: { Col: 9, Line: 400, Offset: 12427 }, Stmts: [ [Object], [Object], [Object] ], Type: 'Subshell' } }*/
-  |  /*{ unknown_command: { End: { Col: 45, Line: 401, Offset: 12534 }, Last: [], Pos: { Col: 3, Line: 401, Offset: 12492 }, Stmts: [ [Object] ], Type: 'Subshell' } }*/
-  |  "grep" "IS_64BIT_ARCH" >  "/dev/null" ) {
+if ( {
+  ( "echo" "#ifdef __amd64" ;//2
+"echo" "IS_64BIT_ARCH" ;//2
+"echo" "#endif" )   |  {
+  ( let CCOPTS =  CC_FOR_BUILD "-E" "-" 2  >  "/dev/null" )   |  "grep" "IS_64BIT_ARCH"  >  "/dev/null" 
+} 
+} ) {
 let SUN_ARCH = "x86_64"
-}else{
+}  else {
 
-)
-}else{
+} 
+}  else {
 
-) ;//2
-"echo" SUN_ARCH + "-pc-solaris2" + $( "echo" UNAME_RELEASE  |  "sed" "-e" "s/[^.]*//" ) ;//2
-"exit"  ;;  case "sun4*:SunOS:6*:*" :
+}  ;//2
+"echo" SUN_ARCH + /*3*/"-pc-solaris2" + /*3*/$( {
+ "echo" UNAME_RELEASE  |  "sed" "-e" "s/[^.]*//" 
+} ) ;//2
+"exit"  ;;
+ case "sun4*:SunOS:6*:*" :
  //  According to config.sub, this is the proper way to canonicalize
 //  SunOS6.  Hard to guess exactly what SunOS6 will be like, but
 //  it's likely to be more like Solaris than SunOS4.
-"echo" "sparc-sun-solaris3" + $( "echo" UNAME_RELEASE  |  "sed" "-e" "s/[^.]*//" ) ;//2
-"exit"  ;;  case "sun4*:SunOS:*:*" :
+"echo" "sparc-sun-solaris3" + /*3*/$( {
+ "echo" UNAME_RELEASE  |  "sed" "-e" "s/[^.]*//" 
+} ) ;//2
+"exit"  ;;
+ case "sun4*:SunOS:*:*" :
  switch ( $( "/usr/bin/arch" "-k" ) ) {
  case "Series*" :
  case "S4*" :
- let UNAME_RELEASE = $( "uname" "-v" )  ;;  
+ let UNAME_RELEASE = $( "uname" "-v" )  ;;
+ 
 } ;//2
 //  Japanese Language versions have a version number like `4.1.3-JL'.
-"echo" "sparc-sun-sunos" + $( "echo" UNAME_RELEASE  |  "sed" "-e" "s/-/_/" ) ;//2
-"exit"  ;;  case "sun3*:SunOS:*:*" :
- "echo" "m68k-sun-sunos" + UNAME_RELEASE ;//2
-"exit"  ;;  case "sun*:*:4.2BSD:*" :
- let UNAME_RELEASE = $( /*{ unknown_command: { End: { Col: 66, Line: 428, Offset: 13378 }, Last: [], Pos: { Col: 17, Line: 428, Offset: 13329 }, Stmts: [ [Object] ], Type: 'Subshell' } }*/
- >  "/dev/null" /*{ rest_red: { Hdoc: null, N: { End: [Object], Pos: [Object], Value: '2' } } }*/
- ) ;//2
-"test" "x" + UNAME_RELEASE "=" "x"  &&  let UNAME_RELEASE = "3" ;//2
+"echo" "sparc-sun-sunos" + /*3*/$( {
+ "echo" UNAME_RELEASE  |  "sed" "-e" "s/-/_/" 
+} ) ;//2
+"exit"  ;;
+ case "sun3*:SunOS:*:*" :
+ "echo" "m68k-sun-sunos" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "sun*:*:4.2BSD:*" :
+ let UNAME_RELEASE = $(  ( {
+ "sed" "1q" "/etc/motd"  |  "awk" "{print substr($5,1,3)}" 
+} )  2  >  "/dev/null" ) ;//2
+{
+ "test" "x" + /*3*/UNAME_RELEASE "=" "x"  &&  let UNAME_RELEASE = "3" 
+} ;//2
 switch ( $( "/bin/arch" ) ) {
  case "sun3" :
- "echo" "m68k-sun-sunos" + UNAME_RELEASE  ;;  case "sun4" :
- "echo" "sparc-sun-sunos" + UNAME_RELEASE  ;;  
+ "echo" "m68k-sun-sunos" + /*3*/UNAME_RELEASE  ;;
+ case "sun4" :
+ "echo" "sparc-sun-sunos" + /*3*/UNAME_RELEASE  ;;
+ 
 } ;//2
-"exit"  ;;  case "aushp:SunOS:*:*" :
- "echo" "sparc-auspex-sunos" + UNAME_RELEASE ;//2
-"exit"  ;;  //  The situation for MiNT is a little confusing.  The machine name
+"exit"  ;;
+ case "aushp:SunOS:*:*" :
+ "echo" "sparc-auspex-sunos" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ //  The situation for MiNT is a little confusing.  The machine name
 //  can be virtually everything (everything which is not
 //  "atarist" or "atariste" at least should have a processor
 //  > m68000).  The system name ranges from "MiNT" over "FreeMiNT"
@@ -369,196 +547,265 @@ switch ( $( "/bin/arch" ) ) {
  case "atarist[e]:*MiNT:*:*" :
  case "atarist[e]:*mint:*:*" :
  case "atarist[e]:*TOS:*:*" :
- "echo" "m68k-atari-mint" + UNAME_RELEASE ;//2
-"exit"  ;;  case "atari*:*MiNT:*:*" :
+ "echo" "m68k-atari-mint" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "atari*:*MiNT:*:*" :
  case "atari*:*mint:*:*" :
  case "atarist[e]:*TOS:*:*" :
- "echo" "m68k-atari-mint" + UNAME_RELEASE ;//2
-"exit"  ;;  case "*falcon*:*MiNT:*:*" :
+ "echo" "m68k-atari-mint" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "*falcon*:*MiNT:*:*" :
  case "*falcon*:*mint:*:*" :
  case "*falcon*:*TOS:*:*" :
- "echo" "m68k-atari-mint" + UNAME_RELEASE ;//2
-"exit"  ;;  case "milan*:*MiNT:*:*" :
+ "echo" "m68k-atari-mint" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "milan*:*MiNT:*:*" :
  case "milan*:*mint:*:*" :
  case "*milan*:*TOS:*:*" :
- "echo" "m68k-milan-mint" + UNAME_RELEASE ;//2
-"exit"  ;;  case "hades*:*MiNT:*:*" :
+ "echo" "m68k-milan-mint" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "hades*:*MiNT:*:*" :
  case "hades*:*mint:*:*" :
  case "*hades*:*TOS:*:*" :
- "echo" "m68k-hades-mint" + UNAME_RELEASE ;//2
-"exit"  ;;  case "*:*MiNT:*:*" :
+ "echo" "m68k-hades-mint" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "*:*MiNT:*:*" :
  case "*:*mint:*:*" :
  case "*:*TOS:*:*" :
- "echo" "m68k-unknown-mint" + UNAME_RELEASE ;//2
-"exit"  ;;  case "m68k:machten:*:*" :
- "echo" "m68k-apple-machten" + UNAME_RELEASE ;//2
-"exit"  ;;  case "powerpc:machten:*:*" :
- "echo" "powerpc-apple-machten" + UNAME_RELEASE ;//2
-"exit"  ;;  case "RISC*:Mach:*:*" :
+ "echo" "m68k-unknown-mint" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "m68k:machten:*:*" :
+ "echo" "m68k-apple-machten" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "powerpc:machten:*:*" :
+ "echo" "powerpc-apple-machten" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "RISC*:Mach:*:*" :
  "echo" "mips-dec-mach_bsd4.3" ;//2
-"exit"  ;;  case "RISC*:ULTRIX:*:*" :
- "echo" "mips-dec-ultrix" + UNAME_RELEASE ;//2
-"exit"  ;;  case "VAX*:ULTRIX*:*:*" :
- "echo" "vax-dec-ultrix" + UNAME_RELEASE ;//2
-"exit"  ;;  case "2020:CLIX:*:*" :
+"exit"  ;;
+ case "RISC*:ULTRIX:*:*" :
+ "echo" "mips-dec-ultrix" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "VAX*:ULTRIX*:*:*" :
+ "echo" "vax-dec-ultrix" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "2020:CLIX:*:*" :
  case "2430:CLIX:*:*" :
- "echo" "clipper-intergraph-clix" + UNAME_RELEASE ;//2
-"exit"  ;;  case "mips:*:*:UMIPS" :
+ "echo" "clipper-intergraph-clix" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "mips:*:*:UMIPS" :
  case "mips:*:*:RISCos" :
  "set_cc_for_build" ;//2
-"sed" "s/^\t//" <<  "EOF" /*{ rest_red: { Hdoc: { End: [Object], Parts: [Array], Pos: [Object] }, N: null } }*/
-  >  dummy + ".c" ;//2
-CC_FOR_BUILD "-o" dummy dummy + ".c"  &&  let dummyarg = $( "echo" UNAME_RELEASE  |  "sed" "-n" "s/\\([0-9]*\\).*/\\1/p" )  &&  let SYSTEM_NAME = $( dummy dummyarg )  &&  /*{ unknown_command: { End: { Col: 36, Line: 512, Offset: 16048 }, Last: [], Pos: { Col: 6, Line: 512, Offset: 16018 }, Stmts: [ [Object], [Object] ], Type: 'Block' } }*/
- ;//2
-"echo" "mips-mips-riscos" + UNAME_RELEASE ;//2
-"exit"  ;;  case "Motorola:PowerMAX_OS:*:*" :
+"sed" "s/^\t//"  <<  "EOF" "#ifdef __cplusplus\n#include <stdio.h>  /* for printf() prototype */\n\tint main (int argc, char *argv[]) {\n#else\n\tint main (argc, argv) int argc; char *argv[]; {\n#endif\n\t#if defined (host_mips) && defined (MIPSEB)\n\t#if defined (SYSTYPE_SYSV)\n\t  printf (\"mips-mips-riscos%ssysv\\\\n\", argv[1]); exit (0);\n\t#endif\n\t#if defined (SYSTYPE_SVR4)\n\t  printf (\"mips-mips-riscos%ssvr4\\\\n\", argv[1]); exit (0);\n\t#endif\n\t#if defined (SYSTYPE_BSD43) || defined(SYSTYPE_BSD)\n\t  printf (\"mips-mips-riscos%sbsd\\\\n\", argv[1]); exit (0);\n\t#endif\n\t#endif\n\t  exit (-1);\n\t}\n"  >  dummy + /*3*/".c" ;//2
+{
+ {
+ {
+ CC_FOR_BUILD "-o" dummy dummy + /*3*/".c"  &&  let dummyarg = $( {
+ "echo" UNAME_RELEASE  |  "sed" "-n" "s/\\([0-9]*\\).*/\\1/p" 
+} ) 
+}  &&  let SYSTEM_NAME = $( dummy dummyarg ) 
+}  &&  "echo" SYSTEM_NAME ;//2
+"exit" 
+} ;//2
+"echo" "mips-mips-riscos" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "Motorola:PowerMAX_OS:*:*" :
  "echo" "powerpc-motorola-powermax" ;//2
-"exit"  ;;  case "Motorola:*:4.3:PL8-*" :
+"exit"  ;;
+ case "Motorola:*:4.3:PL8-*" :
  "echo" "powerpc-harris-powermax" ;//2
-"exit"  ;;  case "Night_Hawk:*:*:PowerMAX_OS" :
+"exit"  ;;
+ case "Night_Hawk:*:*:PowerMAX_OS" :
  case "Synergy:PowerMAX_OS:*:*" :
  "echo" "powerpc-harris-powermax" ;//2
-"exit"  ;;  case "Night_Hawk:Power_UNIX:*:*" :
+"exit"  ;;
+ case "Night_Hawk:Power_UNIX:*:*" :
  "echo" "powerpc-harris-powerunix" ;//2
-"exit"  ;;  case "m88k:CX/UX:7*:*" :
+"exit"  ;;
+ case "m88k:CX/UX:7*:*" :
  "echo" "m88k-harris-cxux7" ;//2
-"exit"  ;;  case "m88k:*:4*:R4*" :
+"exit"  ;;
+ case "m88k:*:4*:R4*" :
  "echo" "m88k-motorola-sysv4" ;//2
-"exit"  ;;  case "m88k:*:3*:R3*" :
+"exit"  ;;
+ case "m88k:*:3*:R3*" :
  "echo" "m88k-motorola-sysv3" ;//2
-"exit"  ;;  case "AViiON:dgux:*:*" :
+"exit"  ;;
+ case "AViiON:dgux:*:*" :
  //  DG/UX returns AViiON for all architectures
 let UNAME_PROCESSOR = $( "/usr/bin/uname" "-p" ) ;//2
-if ( "[" UNAME_PROCESSOR "=" "mc88100" "]"  ||  "[" UNAME_PROCESSOR "=" "mc88110" "]" ) {
-if ( "[" TARGET_BINARY_INTERFACE + "x" "=" "m88kdguxelfx" "]"  ||  "[" TARGET_BINARY_INTERFACE + "x" "=" "x" "]" ) {
-"echo" "m88k-dg-dgux" + UNAME_RELEASE
-}else{
-"echo" "m88k-dg-dguxbcs" + UNAME_RELEASE
-)
-}else{
-"echo" "i586-dg-dgux" + UNAME_RELEASE
-) ;//2
-"exit"  ;;  case "M88*:DolphinOS:*:*" :
+if ( {
+ "[" UNAME_PROCESSOR "=" "mc88100" "]"  ||  "[" UNAME_PROCESSOR "=" "mc88110" "]" 
+} ) {
+if ( {
+ "[" TARGET_BINARY_INTERFACE + /*3*/"x" "=" "m88kdguxelfx" "]"  ||  "[" TARGET_BINARY_INTERFACE + /*3*/"x" "=" "x" "]" 
+} ) {
+"echo" "m88k-dg-dgux" + /*3*/UNAME_RELEASE
+}  else {
+"echo" "m88k-dg-dguxbcs" + /*3*/UNAME_RELEASE
+} 
+}  else {
+"echo" "i586-dg-dgux" + /*3*/UNAME_RELEASE
+}  ;//2
+"exit"  ;;
+ case "M88*:DolphinOS:*:*" :
  //  DolphinOS (SVR3)
 "echo" "m88k-dolphin-sysv3" ;//2
-"exit"  ;;  case "M88*:*:R3*:*" :
+"exit"  ;;
+ case "M88*:*:R3*:*" :
  //  Delta 88k system running SVR3
 "echo" "m88k-motorola-sysv3" ;//2
-"exit"  ;;  case "XD88*:*:*:*" :
+"exit"  ;;
+ case "XD88*:*:*:*" :
  //  Tektronix XD88 system running UTekV (SVR3)
 "echo" "m88k-tektronix-sysv3" ;//2
-"exit"  ;;  case "Tek43[0-9][0-9]:UTek:*:*" :
+"exit"  ;;
+ case "Tek43[0-9][0-9]:UTek:*:*" :
  //  Tektronix 4300 system running UTek (BSD)
 "echo" "m68k-tektronix-bsd" ;//2
-"exit"  ;;  case "*:IRIX*:*:*" :
- "echo" "mips-sgi-irix" + $( "echo" UNAME_RELEASE  |  "sed" "-e" "s/-/_/g" ) ;//2
-"exit"  ;;  //  Note that: echo "'`uname -s`'" gives 'AIX '
+"exit"  ;;
+ case "*:IRIX*:*:*" :
+ "echo" "mips-sgi-irix" + /*3*/$( {
+ "echo" UNAME_RELEASE  |  "sed" "-e" "s/-/_/g" 
+} ) ;//2
+"exit"  ;;
+ //  Note that: echo "'`uname -s`'" gives 'AIX '
  case "????????:AIX?:[12].1:2" :
  //  AIX 2.2.1 or AIX 2.1.1 is RT/PC AIX.
 //  uname -m gives an 8 hex-code CPU id
 "echo" "romp-ibm-aix" ;//2
-"exit"  ;;  case "i*86:AIX:*:*" :
+"exit"  ;;
+ case "i*86:AIX:*:*" :
  "echo" "i386-ibm-aix" ;//2
-"exit"  ;;  case "ia64:AIX:*:*" :
+"exit"  ;;
+ case "ia64:AIX:*:*" :
  if ( "[" "-x" "/usr/bin/oslevel" "]" ) {
 let IBM_REV = $( "/usr/bin/oslevel" )
-}else{
-let IBM_REV = UNAME_VERSION + "." + UNAME_RELEASE
-) ;//2
-"echo" UNAME_MACHINE + "-ibm-aix" + IBM_REV ;//2
-"exit"  ;;  case "*:AIX:2:3" :
- if ( "grep" "bos325" "/usr/include/stdio.h" >  "/dev/null"  >&  "1" /*{ rest_red: { Hdoc: null, N: { End: [Object], Pos: [Object], Value: '2' } } }*/
- ) {
+}  else {
+let IBM_REV = UNAME_VERSION + /*3*/"." + /*3*/UNAME_RELEASE
+}  ;//2
+"echo" UNAME_MACHINE + /*3*/"-ibm-aix" + /*3*/IBM_REV ;//2
+"exit"  ;;
+ case "*:AIX:2:3" :
+ if ( "grep" "bos325" "/usr/include/stdio.h"  >  "/dev/null" 2  >&  "1" ) {
 "set_cc_for_build" ;//2
-"sed" "s/^\t\t//" <<  "EOF" /*{ rest_red: { Hdoc: { End: [Object], Parts: [Array], Pos: [Object] }, N: null } }*/
-  >  dummy + ".c" ;//2
-if ( CC_FOR_BUILD "-o" dummy dummy + ".c"  &&  let SYSTEM_NAME = $( dummy ) ) {
+"sed" "s/^\t\t//"  <<  "EOF" "\t\t#include <sys/systemcfg.h>\n\n\t\tmain()\n\t\t\t{\n\t\t\tif (!__power_pc())\n\t\t\t\texit(1);\n\t\t\tputs(\"powerpc-ibm-aix3.2.5\");\n\t\t\texit(0);\n\t\t\t}\n"  >  dummy + /*3*/".c" ;//2
+if ( {
+ CC_FOR_BUILD "-o" dummy dummy + /*3*/".c"  &&  let SYSTEM_NAME = $( dummy ) 
+} ) {
 "echo" SYSTEM_NAME
-}else{
+}  else {
 "echo" "rs6000-ibm-aix3.2.5"
-)
-}else{
-if ( "grep" "bos324" "/usr/include/stdio.h" >  "/dev/null"  >&  "1" /*{ rest_red: { Hdoc: null, N: { End: [Object], Pos: [Object], Value: '2' } } }*/
- ) {
+} 
+}  else {
+ else if ( "grep" "bos324" "/usr/include/stdio.h"  >  "/dev/null" 2  >&  "1" ) {
 "echo" "rs6000-ibm-aix3.2.4"
-}else{
+}  else {
 "echo" "rs6000-ibm-aix3.2"
-) /*{ rest_cic: { Elif: true, ElseComments: [], FiComments: [] } }*/
-
-) ;//2
-"exit"  ;;  case "*:AIX:*:[4567]" :
- let IBM_CPU_ID = $( "/usr/sbin/lsdev" "-C" "-c" "processor" "-S" "available"  |  "sed" "1q"  |  "awk" "{ print $1 }" ) ;//2
-if ( "/usr/sbin/lsattr" "-El" IBM_CPU_ID  |  "grep" " POWER" >  "/dev/null"  >&  "1" /*{ rest_red: { Hdoc: null, N: { End: [Object], Pos: [Object], Value: '2' } } }*/
- ) {
+} 
+}  ;//2
+"exit"  ;;
+ case "*:AIX:*:[4567]" :
+ let IBM_CPU_ID = $( {
+ "/usr/sbin/lsdev" "-C" "-c" "processor" "-S" "available"  |  {
+ "sed" "1q"  |  "awk" "{ print $1 }" 
+} 
+} ) ;//2
+if ( {
+ "/usr/sbin/lsattr" "-El" IBM_CPU_ID  |  "grep" " POWER"  >  "/dev/null" 2  >&  "1" 
+} ) {
 let IBM_ARCH = "rs6000"
-}else{
+}  else {
 let IBM_ARCH = "powerpc"
-) ;//2
+}  ;//2
 if ( "[" "-x" "/usr/bin/lslpp" "]" ) {
-let IBM_REV = $( "/usr/bin/lslpp" "-Lqc" "bos.rte.libc"  |  "awk" "-F:" "{ print $3 }"  |  "sed" "s/[0-9]*" + "$" + "/0/" )
-}else{
-let IBM_REV = UNAME_VERSION + "." + UNAME_RELEASE
-) ;//2
-"echo" IBM_ARCH + "-ibm-aix" + IBM_REV ;//2
-"exit"  ;;  case "*:AIX:*:*" :
+let IBM_REV = $( {
+ "/usr/bin/lslpp" "-Lqc" "bos.rte.libc"  |  {
+ "awk" "-F:" "{ print $3 }"  |  "sed" "s/[0-9]*" + /*3*/"$" + /*3*/"/0/" 
+} 
+} )
+}  else {
+let IBM_REV = UNAME_VERSION + /*3*/"." + /*3*/UNAME_RELEASE
+}  ;//2
+"echo" IBM_ARCH + /*3*/"-ibm-aix" + /*3*/IBM_REV ;//2
+"exit"  ;;
+ case "*:AIX:*:*" :
  "echo" "rs6000-ibm-aix" ;//2
-"exit"  ;;  case "ibmrt:4.4BSD:*" :
+"exit"  ;;
+ case "ibmrt:4.4BSD:*" :
  case "romp-ibm:4.4BSD:*" :
  "echo" "romp-ibm-bsd4.4" ;//2
-"exit"  ;;  //  report: romp-ibm BSD 4.3
+"exit"  ;;
+ //  report: romp-ibm BSD 4.3
  case "ibmrt:*BSD:*" :
  case "romp-ibm:BSD:*" :
  //  covers RT/PC BSD and
 //  4.3 with uname added to
-"echo" "romp-ibm-bsd" + UNAME_RELEASE ;//2
-"exit"  ;;  case "*:BOSX:*:*" :
+"echo" "romp-ibm-bsd" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "*:BOSX:*:*" :
  "echo" "rs6000-bull-bosx" ;//2
-"exit"  ;;  case "DPX/2?00:B.O.S.:*:*" :
+"exit"  ;;
+ case "DPX/2?00:B.O.S.:*:*" :
  "echo" "m68k-bull-sysv3" ;//2
-"exit"  ;;  case "9000/[34]??:4.3bsd:1.*:*" :
+"exit"  ;;
+ case "9000/[34]??:4.3bsd:1.*:*" :
  "echo" "m68k-hp-bsd" ;//2
-"exit"  ;;  case "hp300:4.4BSD:*:*" :
+"exit"  ;;
+ case "hp300:4.4BSD:*:*" :
  case "9000/[34]??:4.3bsd:2.*:*" :
  "echo" "m68k-hp-bsd4.4" ;//2
-"exit"  ;;  case "9000/[34678]??:HP-UX:*:*" :
- let HPUX_REV = $( "echo" UNAME_RELEASE  |  "sed" "-e" "s/[^.]*.[0B]*//" ) ;//2
+"exit"  ;;
+ case "9000/[34678]??:HP-UX:*:*" :
+ let HPUX_REV = $( {
+ "echo" UNAME_RELEASE  |  "sed" "-e" "s/[^.]*.[0B]*//" 
+} ) ;//2
 switch ( UNAME_MACHINE ) {
  case "9000/31?" :
- let HP_ARCH = "m68000"  ;;  case "9000/[34]??" :
- let HP_ARCH = "m68k"  ;;  case "9000/[678][0-9][0-9]" :
+ let HP_ARCH = "m68000"  ;;
+ case "9000/[34]??" :
+ let HP_ARCH = "m68k"  ;;
+ case "9000/[678][0-9][0-9]" :
  if ( "[" "-x" "/usr/bin/getconf" "]" ) {
-let sc_cpu_version = $( "/usr/bin/getconf" "SC_CPU_VERSION" >  "/dev/null" /*{ rest_red: { Hdoc: null, N: { End: [Object], Pos: [Object], Value: '2' } } }*/
- ) ;//2
-let sc_kernel_bits = $( "/usr/bin/getconf" "SC_KERNEL_BITS" >  "/dev/null" /*{ rest_red: { Hdoc: null, N: { End: [Object], Pos: [Object], Value: '2' } } }*/
- ) ;//2
+let sc_cpu_version = $( "/usr/bin/getconf" "SC_CPU_VERSION" 2  >  "/dev/null" ) ;//2
+let sc_kernel_bits = $( "/usr/bin/getconf" "SC_KERNEL_BITS" 2  >  "/dev/null" ) ;//2
 switch ( sc_cpu_version ) {
  //  CPU_PA_RISC1_0
  case "523" :
- let HP_ARCH = "hppa1.0"  ;;  //  CPU_PA_RISC1_1
+ let HP_ARCH = "hppa1.0"  ;;
+ //  CPU_PA_RISC1_1
  case "528" :
- let HP_ARCH = "hppa1.1"  ;;  case "532" :
+ let HP_ARCH = "hppa1.1"  ;;
+ case "532" :
  //  CPU_PA_RISC2_0
 switch ( sc_kernel_bits ) {
  case "32" :
- let HP_ARCH = "hppa2.0n"  ;;  case "64" :
- let HP_ARCH = "hppa2.0w"  ;;  //  HP-UX 10.20
+ let HP_ARCH = "hppa2.0n"  ;;
+ case "64" :
+ let HP_ARCH = "hppa2.0w"  ;;
+ //  HP-UX 10.20
  case "" :
- let HP_ARCH = "hppa2.0"  ;;  
-}  ;;  
+ let HP_ARCH = "hppa2.0"  ;;
+ 
+}  ;;
+ 
 }
-}else{
+}  else {
 
-) ;//2
+}  ;//2
 if ( "[" HP_ARCH "=" "]" ) {
 "set_cc_for_build" ;//2
-"sed" "s/^\t\t//" <<  "EOF" /*{ rest_red: { Hdoc: { End: [Object], Parts: [Array], Pos: [Object] }, N: null } }*/
-  >  dummy + ".c" ;//2
-/*{ unknown_command: { End: { Col: 67, Line: 699, Offset: 21028 }, Last: [], Pos: { Col: 7, Line: 699, Offset: 20968 }, Stmts: [ [Object] ], Type: 'Subshell' } }*/
-  &&  let HP_ARCH = $( dummy ) ;//2
-"test" "-z" HP_ARCH  &&  let HP_ARCH = "hppa"
-}else{
+"sed" "s/^\t\t//"  <<  "EOF" "\n\t\t#define _HPUX_SOURCE\n\t\t#include <stdlib.h>\n\t\t#include <unistd.h>\n\n\t\tint main ()\n\t\t{\n\t\t#if defined(_SC_KERNEL_BITS)\n\t\t    long bits = sysconf(_SC_KERNEL_BITS);\n\t\t#endif\n\t\t    long cpu  = sysconf (_SC_CPU_VERSION);\n\n\t\t    switch (cpu)\n\t\t\t{\n\t\t\tcase CPU_PA_RISC1_0: puts (\"hppa1.0\"); break;\n\t\t\tcase CPU_PA_RISC1_1: puts (\"hppa1.1\"); break;\n\t\t\tcase CPU_PA_RISC2_0:\n\t\t#if defined(_SC_KERNEL_BITS)\n\t\t\t    switch (bits)\n\t\t\t\t{\n\t\t\t\tcase 64: puts (\"hppa2.0w\"); break;\n\t\t\t\tcase 32: puts (\"hppa2.0n\"); break;\n\t\t\t\tdefault: puts (\"hppa2.0\"); break;\n\t\t\t\t} break;\n\t\t#else  /* !defined(_SC_KERNEL_BITS) */\n\t\t\t    puts (\"hppa2.0\"); break;\n\t\t#endif\n\t\t\tdefault: puts (\"hppa1.0\"); break;\n\t\t\t}\n\t\t    exit (0);\n\t\t}\n"  >  dummy + /*3*/".c" ;//2
+{
+  ( let CCOPTS =  CC_FOR_BUILD "-o" dummy dummy + /*3*/".c" 2  >  "/dev/null" )   &&  let HP_ARCH = $( dummy ) 
+} ;//2
+{
+ "test" "-z" HP_ARCH  &&  let HP_ARCH = "hppa" 
+}
+}  else {
 
-)  ;;  
+}   ;;
+ 
 } ;//2
 if ( "[" HP_ARCH "=" "hppa2.0w" "]" ) {
 "set_cc_for_build" ;//2
@@ -570,351 +817,528 @@ if ( "[" HP_ARCH "=" "hppa2.0w" "]" ) {
 //  => hppa2.0w-hp-hpux11.23
 //  $ CC_FOR_BUILD="cc +DA2.0w" ./config.guess
 //  => hppa64-hp-hpux11.23
-if ( "echo" "__LP64__"  |  /*{ unknown_command: { End: { Col: 67, Line: 716, Offset: 21605 }, Last: [], Pos: { Col: 25, Line: 716, Offset: 21563 }, Stmts: [ [Object] ], Type: 'Subshell' } }*/
-  |  "grep" "-q" "__LP64__" ) {
+if ( {
+ "echo" "__LP64__"  |  {
+  ( let CCOPTS =  CC_FOR_BUILD "-E" "-" 2  >  "/dev/null" )   |  "grep" "-q" "__LP64__" 
+} 
+} ) {
 let HP_ARCH = "hppa2.0w"
-}else{
+}  else {
 let HP_ARCH = "hppa64"
-)
-}else{
+} 
+}  else {
 
-) ;//2
-"echo" HP_ARCH + "-hp-hpux" + HPUX_REV ;//2
-"exit"  ;;  case "ia64:HP-UX:*:*" :
- let HPUX_REV = $( "echo" UNAME_RELEASE  |  "sed" "-e" "s/[^.]*.[0B]*//" ) ;//2
-"echo" "ia64-hp-hpux" + HPUX_REV ;//2
-"exit"  ;;  case "3050*:HI-UX:*:*" :
+}  ;//2
+"echo" HP_ARCH + /*3*/"-hp-hpux" + /*3*/HPUX_REV ;//2
+"exit"  ;;
+ case "ia64:HP-UX:*:*" :
+ let HPUX_REV = $( {
+ "echo" UNAME_RELEASE  |  "sed" "-e" "s/[^.]*.[0B]*//" 
+} ) ;//2
+"echo" "ia64-hp-hpux" + /*3*/HPUX_REV ;//2
+"exit"  ;;
+ case "3050*:HI-UX:*:*" :
  "set_cc_for_build" ;//2
-"sed" "s/^\t//" <<  "EOF" /*{ rest_red: { Hdoc: { End: [Object], Parts: [Array], Pos: [Object] }, N: null } }*/
-  >  dummy + ".c" ;//2
-CC_FOR_BUILD "-o" dummy dummy + ".c"  &&  let SYSTEM_NAME = $( dummy )  &&  /*{ unknown_command: { End: { Col: 33, Line: 758, Offset: 22722 }, Last: [], Pos: { Col: 3, Line: 758, Offset: 22692 }, Stmts: [ [Object], [Object] ], Type: 'Block' } }*/
- ;//2
+"sed" "s/^\t//"  <<  "EOF" "\t#include <unistd.h>\n\tint\n\tmain ()\n\t{\n\t  long cpu = sysconf (_SC_CPU_VERSION);\n\t  /* The order matters, because CPU_IS_HP_MC68K erroneously returns\n\t     true for CPU_PA_RISC1_0.  CPU_IS_PA_RISC returns correct\n\t     results, however.  */\n\t  if (CPU_IS_PA_RISC (cpu))\n\t    {\n\t      switch (cpu)\n\t\t{\n\t\t  case CPU_PA_RISC1_0: puts (\"hppa1.0-hitachi-hiuxwe2\"); break;\n\t\t  case CPU_PA_RISC1_1: puts (\"hppa1.1-hitachi-hiuxwe2\"); break;\n\t\t  case CPU_PA_RISC2_0: puts (\"hppa2.0-hitachi-hiuxwe2\"); break;\n\t\t  default: puts (\"hppa-hitachi-hiuxwe2\"); break;\n\t\t}\n\t    }\n\t  else if (CPU_IS_HP_MC68K (cpu))\n\t    puts (\"m68k-hitachi-hiuxwe2\");\n\t  else puts (\"unknown-hitachi-hiuxwe2\");\n\t  exit (0);\n\t}\n"  >  dummy + /*3*/".c" ;//2
+{
+ {
+ CC_FOR_BUILD "-o" dummy dummy + /*3*/".c"  &&  let SYSTEM_NAME = $( dummy ) 
+}  &&  "echo" SYSTEM_NAME ;//2
+"exit" 
+} ;//2
 "echo" "unknown-hitachi-hiuxwe2" ;//2
-"exit"  ;;  case "9000/7??:4.3bsd:*:*" :
+"exit"  ;;
+ case "9000/7??:4.3bsd:*:*" :
  case "9000/8?[79]:4.3bsd:*:*" :
  "echo" "hppa1.1-hp-bsd" ;//2
-"exit"  ;;  case "9000/8??:4.3bsd:*:*" :
+"exit"  ;;
+ case "9000/8??:4.3bsd:*:*" :
  "echo" "hppa1.0-hp-bsd" ;//2
-"exit"  ;;  case "*9??*:MPE/iX:*:*" :
+"exit"  ;;
+ case "*9??*:MPE/iX:*:*" :
  case "*3000*:MPE/iX:*:*" :
  "echo" "hppa1.0-hp-mpeix" ;//2
-"exit"  ;;  case "hp7??:OSF1:*:*" :
+"exit"  ;;
+ case "hp7??:OSF1:*:*" :
  case "hp8?[79]:OSF1:*:*" :
  "echo" "hppa1.1-hp-osf" ;//2
-"exit"  ;;  case "hp8??:OSF1:*:*" :
+"exit"  ;;
+ case "hp8??:OSF1:*:*" :
  "echo" "hppa1.0-hp-osf" ;//2
-"exit"  ;;  case "i*86:OSF1:*:*" :
+"exit"  ;;
+ case "i*86:OSF1:*:*" :
  if ( "[" "-x" "/usr/sbin/sysversion" "]" ) {
-"echo" UNAME_MACHINE + "-unknown-osf1mk"
-}else{
-"echo" UNAME_MACHINE + "-unknown-osf1"
-) ;//2
-"exit"  ;;  case "parisc*:Lites*:*:*" :
+"echo" UNAME_MACHINE + /*3*/"-unknown-osf1mk"
+}  else {
+"echo" UNAME_MACHINE + /*3*/"-unknown-osf1"
+}  ;//2
+"exit"  ;;
+ case "parisc*:Lites*:*:*" :
  "echo" "hppa1.1-hp-lites" ;//2
-"exit"  ;;  case "C1*:ConvexOS:*:*" :
+"exit"  ;;
+ case "C1*:ConvexOS:*:*" :
  case "convex:ConvexOS:C1*:*" :
  "echo" "c1-convex-bsd" ;//2
-"exit"  ;;  case "C2*:ConvexOS:*:*" :
+"exit"  ;;
+ case "C2*:ConvexOS:*:*" :
  case "convex:ConvexOS:C2*:*" :
  if ( "getsysinfo" "-f" "scalar_acc" ) {
 "echo" "c32-convex-bsd"
-}else{
+}  else {
 "echo" "c2-convex-bsd"
-) ;//2
-"exit"  ;;  case "C34*:ConvexOS:*:*" :
+}  ;//2
+"exit"  ;;
+ case "C34*:ConvexOS:*:*" :
  case "convex:ConvexOS:C34*:*" :
  "echo" "c34-convex-bsd" ;//2
-"exit"  ;;  case "C38*:ConvexOS:*:*" :
+"exit"  ;;
+ case "C38*:ConvexOS:*:*" :
  case "convex:ConvexOS:C38*:*" :
  "echo" "c38-convex-bsd" ;//2
-"exit"  ;;  case "C4*:ConvexOS:*:*" :
+"exit"  ;;
+ case "C4*:ConvexOS:*:*" :
  case "convex:ConvexOS:C4*:*" :
  "echo" "c4-convex-bsd" ;//2
-"exit"  ;;  case "CRAY*Y-MP:*:*:*" :
- "echo" "ymp-cray-unicos" + UNAME_RELEASE  |  "sed" "-e" "s/\\.[^.]*$/.X/" ;//2
-"exit"  ;;  case "CRAY*[A-Z]90:*:*:*" :
- "echo" UNAME_MACHINE + "-cray-unicos" + UNAME_RELEASE  |  "sed" "-e" "s/CRAY.*\\([A-Z]90\\)/\\1/" "-e" "y/ABCDEFGHIJKLMNOPQRSTUVWXYZ/abcdefghijklmnopqrstuvwxyz/" "-e" "s/\\.[^.]*$/.X/" ;//2
-"exit"  ;;  case "CRAY*TS:*:*:*" :
- "echo" "t90-cray-unicos" + UNAME_RELEASE  |  "sed" "-e" "s/\\.[^.]*$/.X/" ;//2
-"exit"  ;;  case "CRAY*T3E:*:*:*" :
- "echo" "alphaev5-cray-unicosmk" + UNAME_RELEASE  |  "sed" "-e" "s/\\.[^.]*$/.X/" ;//2
-"exit"  ;;  case "CRAY*SV1:*:*:*" :
- "echo" "sv1-cray-unicos" + UNAME_RELEASE  |  "sed" "-e" "s/\\.[^.]*$/.X/" ;//2
-"exit"  ;;  case "*:UNICOS/mp:*:*" :
- "echo" "craynv-cray-unicosmp" + UNAME_RELEASE  |  "sed" "-e" "s/\\.[^.]*$/.X/" ;//2
-"exit"  ;;  case "F30[01]:UNIX_System_V:*:*" :
+"exit"  ;;
+ case "CRAY*Y-MP:*:*:*" :
+ {
+ "echo" "ymp-cray-unicos" + /*3*/UNAME_RELEASE  |  "sed" "-e" "s/\\.[^.]*$/.X/" 
+} ;//2
+"exit"  ;;
+ case "CRAY*[A-Z]90:*:*:*" :
+ {
+ "echo" UNAME_MACHINE + /*3*/"-cray-unicos" + /*3*/UNAME_RELEASE  |  "sed" "-e" "s/CRAY.*\\([A-Z]90\\)/\\1/" "-e" "y/ABCDEFGHIJKLMNOPQRSTUVWXYZ/abcdefghijklmnopqrstuvwxyz/" "-e" "s/\\.[^.]*$/.X/" 
+} ;//2
+"exit"  ;;
+ case "CRAY*TS:*:*:*" :
+ {
+ "echo" "t90-cray-unicos" + /*3*/UNAME_RELEASE  |  "sed" "-e" "s/\\.[^.]*$/.X/" 
+} ;//2
+"exit"  ;;
+ case "CRAY*T3E:*:*:*" :
+ {
+ "echo" "alphaev5-cray-unicosmk" + /*3*/UNAME_RELEASE  |  "sed" "-e" "s/\\.[^.]*$/.X/" 
+} ;//2
+"exit"  ;;
+ case "CRAY*SV1:*:*:*" :
+ {
+ "echo" "sv1-cray-unicos" + /*3*/UNAME_RELEASE  |  "sed" "-e" "s/\\.[^.]*$/.X/" 
+} ;//2
+"exit"  ;;
+ case "*:UNICOS/mp:*:*" :
+ {
+ "echo" "craynv-cray-unicosmp" + /*3*/UNAME_RELEASE  |  "sed" "-e" "s/\\.[^.]*$/.X/" 
+} ;//2
+"exit"  ;;
+ case "F30[01]:UNIX_System_V:*:*" :
  case "F700:UNIX_System_V:*:*" :
- let FUJITSU_PROC = $( "uname" "-m"  |  "tr" "ABCDEFGHIJKLMNOPQRSTUVWXYZ" "abcdefghijklmnopqrstuvwxyz" ) ;//2
-let FUJITSU_SYS = $( "uname" "-p"  |  "tr" "ABCDEFGHIJKLMNOPQRSTUVWXYZ" "abcdefghijklmnopqrstuvwxyz"  |  "sed" "-e" "s/\\///" ) ;//2
-let FUJITSU_REL = $( "echo" UNAME_RELEASE  |  "sed" "-e" "s/ /_/" ) ;//2
-"echo" FUJITSU_PROC + /*{ rest_ppe: { Excl: false, Exp: null, Index: null, Length: false, Names: 0, Repl: null, Short: false, Slice: null, Width: false } }*/
- + "-fujitsu-" + FUJITSU_SYS + /*{ rest_ppe: { Excl: false, Exp: null, Index: null, Length: false, Names: 0, Repl: null, Short: false, Slice: null, Width: false } }*/
- + FUJITSU_REL + /*{ rest_ppe: { Excl: false, Exp: null, Index: null, Length: false, Names: 0, Repl: null, Short: false, Slice: null, Width: false } }*/
- ;//2
-"exit"  ;;  case "5000:UNIX_System_V:4.*:*" :
- let FUJITSU_SYS = $( "uname" "-p"  |  "tr" "ABCDEFGHIJKLMNOPQRSTUVWXYZ" "abcdefghijklmnopqrstuvwxyz"  |  "sed" "-e" "s/\\///" ) ;//2
-let FUJITSU_REL = $( "echo" UNAME_RELEASE  |  "tr" "ABCDEFGHIJKLMNOPQRSTUVWXYZ" "abcdefghijklmnopqrstuvwxyz"  |  "sed" "-e" "s/ /_/" ) ;//2
-"echo" "sparc-fujitsu-" + FUJITSU_SYS + /*{ rest_ppe: { Excl: false, Exp: null, Index: null, Length: false, Names: 0, Repl: null, Short: false, Slice: null, Width: false } }*/
- + FUJITSU_REL + /*{ rest_ppe: { Excl: false, Exp: null, Index: null, Length: false, Names: 0, Repl: null, Short: false, Slice: null, Width: false } }*/
- ;//2
-"exit"  ;;  case "i*86:BSD/386:*:*" :
+ let FUJITSU_PROC = $( {
+ "uname" "-m"  |  "tr" "ABCDEFGHIJKLMNOPQRSTUVWXYZ" "abcdefghijklmnopqrstuvwxyz" 
+} ) ;//2
+let FUJITSU_SYS = $( {
+ "uname" "-p"  |  {
+ "tr" "ABCDEFGHIJKLMNOPQRSTUVWXYZ" "abcdefghijklmnopqrstuvwxyz"  |  "sed" "-e" "s/\\///" 
+} 
+} ) ;//2
+let FUJITSU_REL = $( {
+ "echo" UNAME_RELEASE  |  "sed" "-e" "s/ /_/" 
+} ) ;//2
+"echo" ( FUJITSU_PROC ) + /*3*/"-fujitsu-" + /*3*/( FUJITSU_SYS ) + /*3*/( FUJITSU_REL ) ;//2
+"exit"  ;;
+ case "5000:UNIX_System_V:4.*:*" :
+ let FUJITSU_SYS = $( {
+ "uname" "-p"  |  {
+ "tr" "ABCDEFGHIJKLMNOPQRSTUVWXYZ" "abcdefghijklmnopqrstuvwxyz"  |  "sed" "-e" "s/\\///" 
+} 
+} ) ;//2
+let FUJITSU_REL = $( {
+ "echo" UNAME_RELEASE  |  {
+ "tr" "ABCDEFGHIJKLMNOPQRSTUVWXYZ" "abcdefghijklmnopqrstuvwxyz"  |  "sed" "-e" "s/ /_/" 
+} 
+} ) ;//2
+"echo" "sparc-fujitsu-" + /*3*/( FUJITSU_SYS ) + /*3*/( FUJITSU_REL ) ;//2
+"exit"  ;;
+ case "i*86:BSD/386:*:*" :
  case "i*86:BSD/OS:*:*" :
  case "*:Ascend\\ Embedded/OS:*:*" :
- "echo" UNAME_MACHINE + "-pc-bsdi" + UNAME_RELEASE ;//2
-"exit"  ;;  case "sparc*:BSD/OS:*:*" :
- "echo" "sparc-unknown-bsdi" + UNAME_RELEASE ;//2
-"exit"  ;;  case "*:BSD/OS:*:*" :
- "echo" UNAME_MACHINE + "-unknown-bsdi" + UNAME_RELEASE ;//2
-"exit"  ;;  case "arm:FreeBSD:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-pc-bsdi" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "sparc*:BSD/OS:*:*" :
+ "echo" "sparc-unknown-bsdi" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "*:BSD/OS:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-unknown-bsdi" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "arm:FreeBSD:*:*" :
  let UNAME_PROCESSOR = $( "uname" "-p" ) ;//2
 "set_cc_for_build" ;//2
-if ( "echo" "__ARM_PCS_VFP"  |  CC_FOR_BUILD "-E" "-" >  "/dev/null" /*{ rest_red: { Hdoc: null, N: { End: [Object], Pos: [Object], Value: '2' } } }*/
-  |  "grep" "-q" "__ARM_PCS_VFP" ) {
-"echo" UNAME_PROCESSOR + /*{ rest_ppe: { Excl: false, Exp: null, Index: null, Length: false, Names: 0, Repl: null, Short: false, Slice: null, Width: false } }*/
- + "-unknown-freebsd" + $( "echo" UNAME_RELEASE + /*{ rest_ppe: { Excl: false, Exp: null, Index: null, Length: false, Names: 0, Repl: null, Short: false, Slice: null, Width: false } }*/
-  |  "sed" "-e" "s/[-(].*//" ) + "-gnueabi"
-}else{
-"echo" UNAME_PROCESSOR + /*{ rest_ppe: { Excl: false, Exp: null, Index: null, Length: false, Names: 0, Repl: null, Short: false, Slice: null, Width: false } }*/
- + "-unknown-freebsd" + $( "echo" UNAME_RELEASE + /*{ rest_ppe: { Excl: false, Exp: null, Index: null, Length: false, Names: 0, Repl: null, Short: false, Slice: null, Width: false } }*/
-  |  "sed" "-e" "s/[-(].*//" ) + "-gnueabihf"
-) ;//2
-"exit"  ;;  case "*:FreeBSD:*:*" :
+if ( {
+ "echo" "__ARM_PCS_VFP"  |  {
+ CC_FOR_BUILD "-E" "-" 2  >  "/dev/null"  |  "grep" "-q" "__ARM_PCS_VFP" 
+} 
+} ) {
+"echo" ( UNAME_PROCESSOR ) + /*3*/"-unknown-freebsd" + /*3*/$( {
+ "echo" ( UNAME_RELEASE )  |  "sed" "-e" "s/[-(].*//" 
+} ) + /*3*/"-gnueabi"
+}  else {
+"echo" ( UNAME_PROCESSOR ) + /*3*/"-unknown-freebsd" + /*3*/$( {
+ "echo" ( UNAME_RELEASE )  |  "sed" "-e" "s/[-(].*//" 
+} ) + /*3*/"-gnueabihf"
+}  ;//2
+"exit"  ;;
+ case "*:FreeBSD:*:*" :
  let UNAME_PROCESSOR = $( "/usr/bin/uname" "-p" ) ;//2
 switch ( UNAME_PROCESSOR ) {
  case "amd64" :
- let UNAME_PROCESSOR = "x86_64"  ;;  case "i386" :
- let UNAME_PROCESSOR = "i586"  ;;  
+ let UNAME_PROCESSOR = "x86_64"  ;;
+ case "i386" :
+ let UNAME_PROCESSOR = "i586"  ;;
+ 
 } ;//2
-"echo" UNAME_PROCESSOR + "-unknown-freebsd" + $( "echo" UNAME_RELEASE  |  "sed" "-e" "s/[-(].*//" ) ;//2
-"exit"  ;;  case "i*:CYGWIN*:*" :
- "echo" UNAME_MACHINE + "-pc-cygwin" ;//2
-"exit"  ;;  case "*:MINGW64*:*" :
- "echo" UNAME_MACHINE + "-pc-mingw64" ;//2
-"exit"  ;;  case "*:MINGW*:*" :
- "echo" UNAME_MACHINE + "-pc-mingw32" ;//2
-"exit"  ;;  case "*:MSYS*:*" :
- "echo" UNAME_MACHINE + "-pc-msys" ;//2
-"exit"  ;;  case "i*:PW*:*" :
- "echo" UNAME_MACHINE + "-pc-pw32" ;//2
-"exit"  ;;  case "*:Interix*:*" :
+"echo" UNAME_PROCESSOR + /*3*/"-unknown-freebsd" + /*3*/$( {
+ "echo" UNAME_RELEASE  |  "sed" "-e" "s/[-(].*//" 
+} ) ;//2
+"exit"  ;;
+ case "i*:CYGWIN*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-pc-cygwin" ;//2
+"exit"  ;;
+ case "*:MINGW64*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-pc-mingw64" ;//2
+"exit"  ;;
+ case "*:MINGW*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-pc-mingw32" ;//2
+"exit"  ;;
+ case "*:MSYS*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-pc-msys" ;//2
+"exit"  ;;
+ case "i*:PW*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-pc-pw32" ;//2
+"exit"  ;;
+ case "*:Interix*:*" :
  switch ( UNAME_MACHINE ) {
  case "x86" :
- "echo" "i586-pc-interix" + UNAME_RELEASE ;//2
-"exit"  ;;  case "authenticamd" :
+ "echo" "i586-pc-interix" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "authenticamd" :
  case "genuineintel" :
  case "EM64T" :
- "echo" "x86_64-unknown-interix" + UNAME_RELEASE ;//2
-"exit"  ;;  case "IA64" :
- "echo" "ia64-unknown-interix" + UNAME_RELEASE ;//2
-"exit"  ;;  
-}  ;;  case "i*:UWIN*:*" :
- "echo" UNAME_MACHINE + "-pc-uwin" ;//2
-"exit"  ;;  case "amd64:CYGWIN*:*:*" :
+ "echo" "x86_64-unknown-interix" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "IA64" :
+ "echo" "ia64-unknown-interix" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ 
+}  ;;
+ case "i*:UWIN*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-pc-uwin" ;//2
+"exit"  ;;
+ case "amd64:CYGWIN*:*:*" :
  case "x86_64:CYGWIN*:*:*" :
  "echo" "x86_64-pc-cygwin" ;//2
-"exit"  ;;  case "prep*:SunOS:5.*:*" :
- "echo" "powerpcle-unknown-solaris2" + $( "echo" UNAME_RELEASE  |  "sed" "-e" "s/[^.]*//" ) ;//2
-"exit"  ;;  case "*:GNU:*:*" :
+"exit"  ;;
+ case "prep*:SunOS:5.*:*" :
+ "echo" "powerpcle-unknown-solaris2" + /*3*/$( {
+ "echo" UNAME_RELEASE  |  "sed" "-e" "s/[^.]*//" 
+} ) ;//2
+"exit"  ;;
+ case "*:GNU:*:*" :
  //  the GNU system
-"echo" $( "echo" UNAME_MACHINE  |  "sed" "-e" "s,[-/].*$,," ) + "-unknown-" + LIBC + $( "echo" UNAME_RELEASE  |  "sed" "-e" "s,/.*$,," ) ;//2
-"exit"  ;;  case "*:GNU/*:*:*" :
+"echo" $( {
+ "echo" UNAME_MACHINE  |  "sed" "-e" "s,[-/].*$,," 
+} ) + /*3*/"-unknown-" + /*3*/LIBC + /*3*/$( {
+ "echo" UNAME_RELEASE  |  "sed" "-e" "s,/.*$,," 
+} ) ;//2
+"exit"  ;;
+ case "*:GNU/*:*:*" :
  //  other systems with GNU libc and userland
-"echo" UNAME_MACHINE + "-unknown-" + $( "echo" UNAME_SYSTEM  |  "sed" "s,^[^/]*/,,"  |  "tr" "[:upper:]" "[:lower:]" ) + $( "echo" UNAME_RELEASE  |  "sed" "-e" "s/[-(].*//" ) + "-" + LIBC ;//2
-"exit"  ;;  case "*:Minix:*:*" :
- "echo" UNAME_MACHINE + "-unknown-minix" ;//2
-"exit"  ;;  case "aarch64:Linux:*:*" :
- "echo" UNAME_MACHINE + "-unknown-linux-" + LIBC ;//2
-"exit"  ;;  case "aarch64_be:Linux:*:*" :
+"echo" UNAME_MACHINE + /*3*/"-unknown-" + /*3*/$( {
+ "echo" UNAME_SYSTEM  |  {
+ "sed" "s,^[^/]*/,,"  |  "tr" "[:upper:]" "[:lower:]" 
+} 
+} ) + /*3*/$( {
+ "echo" UNAME_RELEASE  |  "sed" "-e" "s/[-(].*//" 
+} ) + /*3*/"-" + /*3*/LIBC ;//2
+"exit"  ;;
+ case "*:Minix:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-unknown-minix" ;//2
+"exit"  ;;
+ case "aarch64:Linux:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-unknown-linux-" + /*3*/LIBC ;//2
+"exit"  ;;
+ case "aarch64_be:Linux:*:*" :
  let UNAME_MACHINE = "aarch64_be" ;//2
-"echo" UNAME_MACHINE + "-unknown-linux-" + LIBC ;//2
-"exit"  ;;  case "alpha:Linux:*:*" :
- switch ( $( "sed" "-n" "/^cpu model/s/^.*: \\(.*\\)/\\1/p" <  "/proc/cpuinfo" ) ) {
+"echo" UNAME_MACHINE + /*3*/"-unknown-linux-" + /*3*/LIBC ;//2
+"exit"  ;;
+ case "alpha:Linux:*:*" :
+ switch ( $( "sed" "-n" "/^cpu model/s/^.*: \\(.*\\)/\\1/p"  <  "/proc/cpuinfo" ) ) {
  case "EV5" :
- let UNAME_MACHINE = "alphaev5"  ;;  case "EV56" :
- let UNAME_MACHINE = "alphaev56"  ;;  case "PCA56" :
- let UNAME_MACHINE = "alphapca56"  ;;  case "PCA57" :
- let UNAME_MACHINE = "alphapca56"  ;;  case "EV6" :
- let UNAME_MACHINE = "alphaev6"  ;;  case "EV67" :
- let UNAME_MACHINE = "alphaev67"  ;;  case "EV68*" :
- let UNAME_MACHINE = "alphaev68"  ;;  
+ let UNAME_MACHINE = "alphaev5"  ;;
+ case "EV56" :
+ let UNAME_MACHINE = "alphaev56"  ;;
+ case "PCA56" :
+ let UNAME_MACHINE = "alphapca56"  ;;
+ case "PCA57" :
+ let UNAME_MACHINE = "alphapca56"  ;;
+ case "EV6" :
+ let UNAME_MACHINE = "alphaev6"  ;;
+ case "EV67" :
+ let UNAME_MACHINE = "alphaev67"  ;;
+ case "EV68*" :
+ let UNAME_MACHINE = "alphaev68"  ;;
+ 
 } ;//2
-"objdump" "--private-headers" "/bin/sh"  |  "grep" "-q" "ld.so.1" ;//2
-if ( "test" /*{ Value: '?' }*/
- "=" "0" ) {
+{
+ "objdump" "--private-headers" "/bin/sh"  |  "grep" "-q" "ld.so.1" 
+} ;//2
+if ( "test" process.exitCode "=" "0" ) {
 let LIBC = "gnulibc1"
-}else{
+}  else {
 
-) ;//2
-"echo" UNAME_MACHINE + "-unknown-linux-" + LIBC ;//2
-"exit"  ;;  case "arc:Linux:*:*" :
+}  ;//2
+"echo" UNAME_MACHINE + /*3*/"-unknown-linux-" + /*3*/LIBC ;//2
+"exit"  ;;
+ case "arc:Linux:*:*" :
  case "arceb:Linux:*:*" :
- "echo" UNAME_MACHINE + "-unknown-linux-" + LIBC ;//2
-"exit"  ;;  case "arm*:Linux:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-unknown-linux-" + /*3*/LIBC ;//2
+"exit"  ;;
+ case "arm*:Linux:*:*" :
  "set_cc_for_build" ;//2
-if ( "echo" "__ARM_EABI__"  |  CC_FOR_BUILD "-E" "-" >  "/dev/null" /*{ rest_red: { Hdoc: null, N: { End: [Object], Pos: [Object], Value: '2' } } }*/
-  |  "grep" "-q" "__ARM_EABI__" ) {
-"echo" UNAME_MACHINE + "-unknown-linux-" + LIBC
-}else{
-if ( "echo" "__ARM_PCS_VFP"  |  CC_FOR_BUILD "-E" "-" >  "/dev/null" /*{ rest_red: { Hdoc: null, N: { End: [Object], Pos: [Object], Value: '2' } } }*/
-  |  "grep" "-q" "__ARM_PCS_VFP" ) {
-"echo" UNAME_MACHINE + "-unknown-linux-" + LIBC + "eabi"
-}else{
-"echo" UNAME_MACHINE + "-unknown-linux-" + LIBC + "eabihf"
-)
-) ;//2
-"exit"  ;;  case "avr32*:Linux:*:*" :
- "echo" UNAME_MACHINE + "-unknown-linux-" + LIBC ;//2
-"exit"  ;;  case "cris:Linux:*:*" :
- "echo" UNAME_MACHINE + "-axis-linux-" + LIBC ;//2
-"exit"  ;;  case "crisv32:Linux:*:*" :
- "echo" UNAME_MACHINE + "-axis-linux-" + LIBC ;//2
-"exit"  ;;  case "e2k:Linux:*:*" :
- "echo" UNAME_MACHINE + "-unknown-linux-" + LIBC ;//2
-"exit"  ;;  case "frv:Linux:*:*" :
- "echo" UNAME_MACHINE + "-unknown-linux-" + LIBC ;//2
-"exit"  ;;  case "hexagon:Linux:*:*" :
- "echo" UNAME_MACHINE + "-unknown-linux-" + LIBC ;//2
-"exit"  ;;  case "i*86:Linux:*:*" :
- "echo" UNAME_MACHINE + "-pc-linux-" + LIBC ;//2
-"exit"  ;;  case "ia64:Linux:*:*" :
- "echo" UNAME_MACHINE + "-unknown-linux-" + LIBC ;//2
-"exit"  ;;  case "k1om:Linux:*:*" :
- "echo" UNAME_MACHINE + "-unknown-linux-" + LIBC ;//2
-"exit"  ;;  case "m32r*:Linux:*:*" :
- "echo" UNAME_MACHINE + "-unknown-linux-" + LIBC ;//2
-"exit"  ;;  case "m68*:Linux:*:*" :
- "echo" UNAME_MACHINE + "-unknown-linux-" + LIBC ;//2
-"exit"  ;;  case "mips:Linux:*:*" :
+if ( {
+ "echo" "__ARM_EABI__"  |  {
+ CC_FOR_BUILD "-E" "-" 2  >  "/dev/null"  |  "grep" "-q" "__ARM_EABI__" 
+} 
+} ) {
+"echo" UNAME_MACHINE + /*3*/"-unknown-linux-" + /*3*/LIBC
+}  else {
+if ( {
+ "echo" "__ARM_PCS_VFP"  |  {
+ CC_FOR_BUILD "-E" "-" 2  >  "/dev/null"  |  "grep" "-q" "__ARM_PCS_VFP" 
+} 
+} ) {
+"echo" UNAME_MACHINE + /*3*/"-unknown-linux-" + /*3*/LIBC + /*3*/"eabi"
+}  else {
+"echo" UNAME_MACHINE + /*3*/"-unknown-linux-" + /*3*/LIBC + /*3*/"eabihf"
+} 
+}  ;//2
+"exit"  ;;
+ case "avr32*:Linux:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-unknown-linux-" + /*3*/LIBC ;//2
+"exit"  ;;
+ case "cris:Linux:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-axis-linux-" + /*3*/LIBC ;//2
+"exit"  ;;
+ case "crisv32:Linux:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-axis-linux-" + /*3*/LIBC ;//2
+"exit"  ;;
+ case "e2k:Linux:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-unknown-linux-" + /*3*/LIBC ;//2
+"exit"  ;;
+ case "frv:Linux:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-unknown-linux-" + /*3*/LIBC ;//2
+"exit"  ;;
+ case "hexagon:Linux:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-unknown-linux-" + /*3*/LIBC ;//2
+"exit"  ;;
+ case "i*86:Linux:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-pc-linux-" + /*3*/LIBC ;//2
+"exit"  ;;
+ case "ia64:Linux:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-unknown-linux-" + /*3*/LIBC ;//2
+"exit"  ;;
+ case "k1om:Linux:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-unknown-linux-" + /*3*/LIBC ;//2
+"exit"  ;;
+ case "m32r*:Linux:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-unknown-linux-" + /*3*/LIBC ;//2
+"exit"  ;;
+ case "m68*:Linux:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-unknown-linux-" + /*3*/LIBC ;//2
+"exit"  ;;
+ case "mips:Linux:*:*" :
  case "mips64:Linux:*:*" :
  "set_cc_for_build" ;//2
-"sed" "s/^\t//" <<  "EOF" /*{ rest_red: { Hdoc: { End: [Object], Parts: [Array], Pos: [Object] }, N: null } }*/
-  >  dummy + ".c" ;//2
-"eval" $( CC_FOR_BUILD "-E" dummy + ".c" >  "/dev/null" /*{ rest_red: { Hdoc: null, N: { End: [Object], Pos: [Object], Value: '2' } } }*/
-  |  "grep" "^CPU" ) ;//2
-"test" "x" + CPU "!=" "x"  &&  /*{ unknown_command: { End: { Col: 65, Line: 1003, Offset: 29821 }, Last: [], Pos: { Col: 23, Line: 1003, Offset: 29779 }, Stmts: [ [Object], [Object] ], Type: 'Block' } }*/
-  ;;  case "mips64el:Linux:*:*" :
- "echo" UNAME_MACHINE + "-unknown-linux-" + LIBC ;//2
-"exit"  ;;  case "openrisc*:Linux:*:*" :
- "echo" "or1k-unknown-linux-" + LIBC ;//2
-"exit"  ;;  case "or32:Linux:*:*" :
+"sed" "s/^\t//"  <<  "EOF" "\t#undef CPU\n\t#undef " + /*3*/( UNAME_MACHINE ) + /*3*/"\n\t#undef " + /*3*/( UNAME_MACHINE ) + /*3*/"el\n\t#if defined(__MIPSEL__) || defined(__MIPSEL) || defined(_MIPSEL) || defined(MIPSEL)\n\tCPU=" + /*3*/( UNAME_MACHINE ) + /*3*/"el\n\t#else\n\t#if defined(__MIPSEB__) || defined(__MIPSEB) || defined(_MIPSEB) || defined(MIPSEB)\n\tCPU=" + /*3*/( UNAME_MACHINE ) + /*3*/"\n\t#else\n\tCPU=\n\t#endif\n\t#endif\n"  >  dummy + /*3*/".c" ;//2
+"eval" $( {
+ CC_FOR_BUILD "-E" dummy + /*3*/".c" 2  >  "/dev/null"  |  "grep" "^CPU" 
+} ) ;//2
+{
+ "test" "x" + /*3*/CPU "!=" "x"  &&  "echo" CPU + /*3*/"-unknown-linux-" + /*3*/LIBC ;//2
+"exit" 
+}  ;;
+ case "mips64el:Linux:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-unknown-linux-" + /*3*/LIBC ;//2
+"exit"  ;;
+ case "openrisc*:Linux:*:*" :
+ "echo" "or1k-unknown-linux-" + /*3*/LIBC ;//2
+"exit"  ;;
+ case "or32:Linux:*:*" :
  case "or1k*:Linux:*:*" :
- "echo" UNAME_MACHINE + "-unknown-linux-" + LIBC ;//2
-"exit"  ;;  case "padre:Linux:*:*" :
- "echo" "sparc-unknown-linux-" + LIBC ;//2
-"exit"  ;;  case "parisc64:Linux:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-unknown-linux-" + /*3*/LIBC ;//2
+"exit"  ;;
+ case "padre:Linux:*:*" :
+ "echo" "sparc-unknown-linux-" + /*3*/LIBC ;//2
+"exit"  ;;
+ case "parisc64:Linux:*:*" :
  case "hppa64:Linux:*:*" :
- "echo" "hppa64-unknown-linux-" + LIBC ;//2
-"exit"  ;;  case "parisc:Linux:*:*" :
+ "echo" "hppa64-unknown-linux-" + /*3*/LIBC ;//2
+"exit"  ;;
+ case "parisc:Linux:*:*" :
  case "hppa:Linux:*:*" :
  //  Look for CPU level
-switch ( $( "grep" "^cpu[^a-z]*:" "/proc/cpuinfo" >  "/dev/null" /*{ rest_red: { Hdoc: null, N: { End: [Object], Pos: [Object], Value: '2' } } }*/
-  |  "cut" "-d" + " " "-f2" ) ) {
+switch ( $( {
+ "grep" "^cpu[^a-z]*:" "/proc/cpuinfo" 2  >  "/dev/null"  |  "cut" "-d" + /*3*/" " "-f2" 
+} ) ) {
  case "PA7*" :
- "echo" "hppa1.1-unknown-linux-" + LIBC  ;;  case "PA8*" :
- "echo" "hppa2.0-unknown-linux-" + LIBC  ;;  case "*" :
- "echo" "hppa-unknown-linux-" + LIBC  ;;  
+ "echo" "hppa1.1-unknown-linux-" + /*3*/LIBC  ;;
+ case "PA8*" :
+ "echo" "hppa2.0-unknown-linux-" + /*3*/LIBC  ;;
+ case "*" :
+ "echo" "hppa-unknown-linux-" + /*3*/LIBC  ;;
+ 
 } ;//2
-"exit"  ;;  case "ppc64:Linux:*:*" :
- "echo" "powerpc64-unknown-linux-" + LIBC ;//2
-"exit"  ;;  case "ppc:Linux:*:*" :
- "echo" "powerpc-unknown-linux-" + LIBC ;//2
-"exit"  ;;  case "ppc64le:Linux:*:*" :
- "echo" "powerpc64le-unknown-linux-" + LIBC ;//2
-"exit"  ;;  case "ppcle:Linux:*:*" :
- "echo" "powerpcle-unknown-linux-" + LIBC ;//2
-"exit"  ;;  case "riscv32:Linux:*:*" :
+"exit"  ;;
+ case "ppc64:Linux:*:*" :
+ "echo" "powerpc64-unknown-linux-" + /*3*/LIBC ;//2
+"exit"  ;;
+ case "ppc:Linux:*:*" :
+ "echo" "powerpc-unknown-linux-" + /*3*/LIBC ;//2
+"exit"  ;;
+ case "ppc64le:Linux:*:*" :
+ "echo" "powerpc64le-unknown-linux-" + /*3*/LIBC ;//2
+"exit"  ;;
+ case "ppcle:Linux:*:*" :
+ "echo" "powerpcle-unknown-linux-" + /*3*/LIBC ;//2
+"exit"  ;;
+ case "riscv32:Linux:*:*" :
  case "riscv64:Linux:*:*" :
- "echo" UNAME_MACHINE + "-unknown-linux-" + LIBC ;//2
-"exit"  ;;  case "s390:Linux:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-unknown-linux-" + /*3*/LIBC ;//2
+"exit"  ;;
+ case "s390:Linux:*:*" :
  case "s390x:Linux:*:*" :
- "echo" UNAME_MACHINE + "-ibm-linux-" + LIBC ;//2
-"exit"  ;;  case "sh64*:Linux:*:*" :
- "echo" UNAME_MACHINE + "-unknown-linux-" + LIBC ;//2
-"exit"  ;;  case "sh*:Linux:*:*" :
- "echo" UNAME_MACHINE + "-unknown-linux-" + LIBC ;//2
-"exit"  ;;  case "sparc:Linux:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-ibm-linux-" + /*3*/LIBC ;//2
+"exit"  ;;
+ case "sh64*:Linux:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-unknown-linux-" + /*3*/LIBC ;//2
+"exit"  ;;
+ case "sh*:Linux:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-unknown-linux-" + /*3*/LIBC ;//2
+"exit"  ;;
+ case "sparc:Linux:*:*" :
  case "sparc64:Linux:*:*" :
- "echo" UNAME_MACHINE + "-unknown-linux-" + LIBC ;//2
-"exit"  ;;  case "tile*:Linux:*:*" :
- "echo" UNAME_MACHINE + "-unknown-linux-" + LIBC ;//2
-"exit"  ;;  case "vax:Linux:*:*" :
- "echo" UNAME_MACHINE + "-dec-linux-" + LIBC ;//2
-"exit"  ;;  case "x86_64:Linux:*:*" :
- "echo" UNAME_MACHINE + "-pc-linux-" + LIBC ;//2
-"exit"  ;;  case "xtensa*:Linux:*:*" :
- "echo" UNAME_MACHINE + "-unknown-linux-" + LIBC ;//2
-"exit"  ;;  case "i*86:DYNIX/ptx:4*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-unknown-linux-" + /*3*/LIBC ;//2
+"exit"  ;;
+ case "tile*:Linux:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-unknown-linux-" + /*3*/LIBC ;//2
+"exit"  ;;
+ case "vax:Linux:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-dec-linux-" + /*3*/LIBC ;//2
+"exit"  ;;
+ case "x86_64:Linux:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-pc-linux-" + /*3*/LIBC ;//2
+"exit"  ;;
+ case "xtensa*:Linux:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-unknown-linux-" + /*3*/LIBC ;//2
+"exit"  ;;
+ case "i*86:DYNIX/ptx:4*:*" :
  //  ptx 4.0 does uname -s correctly, with DYNIX/ptx in there.
 //  earlier versions are messed up and put the nodename in both
 //  sysname and nodename.
 "echo" "i386-sequent-sysv4" ;//2
-"exit"  ;;  case "i*86:UNIX_SV:4.2MP:2.*" :
+"exit"  ;;
+ case "i*86:UNIX_SV:4.2MP:2.*" :
  //  Unixware is an offshoot of SVR4, but it has its own version
 //  number series starting with 2...
 //  I am not positive that other SVR4 systems won't match this,
 //  I just have to hope.  -- rms.
 //  Use sysv4.2uw... so that sysv4* matches it.
-"echo" UNAME_MACHINE + "-pc-sysv4.2uw" + UNAME_VERSION ;//2
-"exit"  ;;  case "i*86:OS/2:*:*" :
+"echo" UNAME_MACHINE + /*3*/"-pc-sysv4.2uw" + /*3*/UNAME_VERSION ;//2
+"exit"  ;;
+ case "i*86:OS/2:*:*" :
  //  If we were able to find `uname', then EMX Unix compatibility
 //  is probably installed.
-"echo" UNAME_MACHINE + "-pc-os2-emx" ;//2
-"exit"  ;;  case "i*86:XTS-300:*:STOP" :
- "echo" UNAME_MACHINE + "-unknown-stop" ;//2
-"exit"  ;;  case "i*86:atheos:*:*" :
- "echo" UNAME_MACHINE + "-unknown-atheos" ;//2
-"exit"  ;;  case "i*86:syllable:*:*" :
- "echo" UNAME_MACHINE + "-pc-syllable" ;//2
-"exit"  ;;  case "i*86:LynxOS:2.*:*" :
+"echo" UNAME_MACHINE + /*3*/"-pc-os2-emx" ;//2
+"exit"  ;;
+ case "i*86:XTS-300:*:STOP" :
+ "echo" UNAME_MACHINE + /*3*/"-unknown-stop" ;//2
+"exit"  ;;
+ case "i*86:atheos:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-unknown-atheos" ;//2
+"exit"  ;;
+ case "i*86:syllable:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-pc-syllable" ;//2
+"exit"  ;;
+ case "i*86:LynxOS:2.*:*" :
  case "i*86:LynxOS:3.[01]*:*" :
  case "i*86:LynxOS:4.[02]*:*" :
- "echo" "i386-unknown-lynxos" + UNAME_RELEASE ;//2
-"exit"  ;;  case "i*86:*DOS:*:*" :
- "echo" UNAME_MACHINE + "-pc-msdosdjgpp" ;//2
-"exit"  ;;  case "i*86:*:4.*:*" :
- let UNAME_REL = $( "echo" UNAME_RELEASE  |  "sed" "s/\\/MP$//" ) ;//2
-if ( "grep" "Novell" "/usr/include/link.h" >  "/dev/null"  >  "/dev/null" /*{ rest_red: { Hdoc: null, N: { End: [Object], Pos: [Object], Value: '2' } } }*/
- ) {
-"echo" UNAME_MACHINE + "-univel-sysv" + UNAME_REL
-}else{
-"echo" UNAME_MACHINE + "-pc-sysv" + UNAME_REL
-) ;//2
-"exit"  ;;  case "i*86:*:5:[678]*" :
+ "echo" "i386-unknown-lynxos" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "i*86:*DOS:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-pc-msdosdjgpp" ;//2
+"exit"  ;;
+ case "i*86:*:4.*:*" :
+ let UNAME_REL = $( {
+ "echo" UNAME_RELEASE  |  "sed" "s/\\/MP$//" 
+} ) ;//2
+if ( "grep" "Novell" "/usr/include/link.h"  >  "/dev/null" 2  >  "/dev/null" ) {
+"echo" UNAME_MACHINE + /*3*/"-univel-sysv" + /*3*/UNAME_REL
+}  else {
+"echo" UNAME_MACHINE + /*3*/"-pc-sysv" + /*3*/UNAME_REL
+}  ;//2
+"exit"  ;;
+ case "i*86:*:5:[678]*" :
  //  UnixWare 7.x, OpenUNIX and OpenServer 6.
-switch ( $( "/bin/uname" "-X"  |  "grep" "^Machine" ) ) {
+switch ( $( {
+ "/bin/uname" "-X"  |  "grep" "^Machine" 
+} ) ) {
  case "*486*" :
- let UNAME_MACHINE = "i486"  ;;  case "*Pentium" :
- let UNAME_MACHINE = "i586"  ;;  case "*Pent*" :
+ let UNAME_MACHINE = "i486"  ;;
+ case "*Pentium" :
+ let UNAME_MACHINE = "i586"  ;;
+ case "*Pent*" :
  case "*Celeron" :
- let UNAME_MACHINE = "i686"  ;;  
+ let UNAME_MACHINE = "i686"  ;;
+ 
 } ;//2
-"echo" UNAME_MACHINE + "-unknown-sysv" + UNAME_RELEASE + /*{ rest_ppe: { Excl: false, Exp: null, Index: null, Length: false, Names: 0, Repl: null, Short: false, Slice: null, Width: false } }*/
- + UNAME_SYSTEM + /*{ rest_ppe: { Excl: false, Exp: null, Index: null, Length: false, Names: 0, Repl: null, Short: false, Slice: null, Width: false } }*/
- + "{" + UNAME_VERSION + "}" ;//2
-"exit"  ;;  case "i*86:*:3.2:*" :
+"echo" UNAME_MACHINE + /*3*/"-unknown-sysv" + /*3*/( UNAME_RELEASE ) + /*3*/( UNAME_SYSTEM ) + /*3*/( UNAME_VERSION ) ;//2
+"exit"  ;;
+ case "i*86:*:3.2:*" :
  if ( "test" "-f" "/usr/options/cb.name" ) {
-let UNAME_REL = $( "sed" "-n" "s/.*Version //p" <  "/usr/options/cb.name" ) ;//2
-"echo" UNAME_MACHINE + "-pc-isc" + UNAME_REL
-}else{
-if ( "/bin/uname" "-X" >  "/dev/null" /*{ rest_red: { Hdoc: null, N: { End: [Object], Pos: [Object], Value: '2' } } }*/
-  >  "/dev/null" ) {
-let UNAME_REL = $( /*{ unknown_command: { End: { Col: 60, Line: 1123, Offset: 33424 }, Last: [], Pos: { Col: 14, Line: 1123, Offset: 33378 }, Stmts: [ [Object] ], Type: 'Subshell' } }*/
- ) ;//2
-/*{ unknown_command: { End: { Col: 41, Line: 1124, Offset: 33466 }, Last: [], Pos: { Col: 3, Line: 1124, Offset: 33428 }, Stmts: [ [Object] ], Type: 'Subshell' } }*/
-  &&  let UNAME_MACHINE = "i486" ;//2
-/*{ unknown_command: { End: { Col: 54, Line: 1125, Offset: 33542 }, Last: [], Pos: { Col: 3, Line: 1125, Offset: 33491 }, Stmts: [ [Object] ], Type: 'Subshell' } }*/
-  &&  let UNAME_MACHINE = "i586" ;//2
-/*{ unknown_command: { End: { Col: 55, Line: 1127, Offset: 33624 }, Last: [], Pos: { Col: 3, Line: 1127, Offset: 33572 }, Stmts: [ [Object] ], Type: 'Subshell' } }*/
-  &&  let UNAME_MACHINE = "i686" ;//2
-/*{ unknown_command: { End: { Col: 58, Line: 1129, Offset: 33709 }, Last: [], Pos: { Col: 3, Line: 1129, Offset: 33654 }, Stmts: [ [Object] ], Type: 'Subshell' } }*/
-  &&  let UNAME_MACHINE = "i686" ;//2
-"echo" UNAME_MACHINE + "-pc-sco" + UNAME_REL
-}else{
-"echo" UNAME_MACHINE + "-pc-sysv32"
-) /*{ rest_cic: { Elif: true, ElseComments: [], FiComments: [] } }*/
-
-) ;//2
-"exit"  ;;  case "pc:*:*:*" :
+let UNAME_REL = $( "sed" "-n" "s/.*Version //p"  <  "/usr/options/cb.name" ) ;//2
+"echo" UNAME_MACHINE + /*3*/"-pc-isc" + /*3*/UNAME_REL
+}  else {
+ else if ( "/bin/uname" "-X" 2  >  "/dev/null"  >  "/dev/null" ) {
+let UNAME_REL = $(  ( {
+ "/bin/uname" "-X"  |  {
+ "grep" "Release"  |  "sed" "-e" "s/.*= //" 
+} 
+} )  ) ;//2
+{
+  ( {
+ "/bin/uname" "-X"  |  "grep" "i80486"  >  "/dev/null" 
+} )   &&  let UNAME_MACHINE = "i486" 
+} ;//2
+{
+  ( {
+ "/bin/uname" "-X"  |  "grep" "^Machine.*Pentium"  >  "/dev/null" 
+} )   &&  let UNAME_MACHINE = "i586" 
+} ;//2
+{
+  ( {
+ "/bin/uname" "-X"  |  "grep" "^Machine.*Pent *II"  >  "/dev/null" 
+} )   &&  let UNAME_MACHINE = "i686" 
+} ;//2
+{
+  ( {
+ "/bin/uname" "-X"  |  "grep" "^Machine.*Pentium Pro"  >  "/dev/null" 
+} )   &&  let UNAME_MACHINE = "i686" 
+} ;//2
+"echo" UNAME_MACHINE + /*3*/"-pc-sco" + /*3*/UNAME_REL
+}  else {
+"echo" UNAME_MACHINE + /*3*/"-pc-sysv32"
+} 
+}  ;//2
+"exit"  ;;
+ case "pc:*:*:*" :
  //  Left here for compatibility:
 //  uname -m prints for DJGPP always 'pc', but it prints nothing about
 //  the processor, so we play safe by assuming i586.
@@ -922,31 +1346,40 @@ let UNAME_REL = $( /*{ unknown_command: { End: { Col: 60, Line: 1123, Offset: 33
 //  prints for the "djgpp" host, or else GDB configure will decide that
 //  this is a cross-build.
 "echo" "i586-pc-msdosdjgpp" ;//2
-"exit"  ;;  case "Intel:Mach:3*:*" :
+"exit"  ;;
+ case "Intel:Mach:3*:*" :
  "echo" "i386-pc-mach3" ;//2
-"exit"  ;;  case "paragon:*:*:*" :
+"exit"  ;;
+ case "paragon:*:*:*" :
  "echo" "i860-intel-osf1" ;//2
-"exit"  ;;  case "i860:*:4.*:*" :
+"exit"  ;;
+ case "i860:*:4.*:*" :
  //  i860-SVR4
-if ( "grep" "Stardent" "/usr/include/sys/uadmin.h" >  "/dev/null"  >&  "1" /*{ rest_red: { Hdoc: null, N: { End: [Object], Pos: [Object], Value: '2' } } }*/
- ) {
+if ( "grep" "Stardent" "/usr/include/sys/uadmin.h"  >  "/dev/null" 2  >&  "1" ) {
 //  Stardent Vistra i860-SVR4
-"echo" "i860-stardent-sysv" + UNAME_RELEASE
-}else{
+"echo" "i860-stardent-sysv" + /*3*/UNAME_RELEASE
+} //  Add other i860-SVR4 vendors below as they are discovered.
+ else {
 //  Unknown i860-SVR4
-"echo" "i860-unknown-sysv" + UNAME_RELEASE
-) /*{ rest_cic: { Elif: false, ElseComments: [ [Object] ], FiComments: [] } }*/
- ;//2
-"exit"  ;;  case "mini*:CTIX:SYS*5:*" :
+"echo" "i860-unknown-sysv" + /*3*/UNAME_RELEASE
+}  ;//2
+"exit"  ;;
+ case "mini*:CTIX:SYS*5:*" :
  //  "miniframe"
 "echo" "m68010-convergent-sysv" ;//2
-"exit"  ;;  case "mc68k:UNIX:SYSTEM5:3.51m" :
+"exit"  ;;
+ case "mc68k:UNIX:SYSTEM5:3.51m" :
  "echo" "m68k-convergent-sysv" ;//2
-"exit"  ;;  case "M680?0:D-NIX:5.3:*" :
+"exit"  ;;
+ case "M680?0:D-NIX:5.3:*" :
  "echo" "m68k-diab-dnix" ;//2
-"exit"  ;;  case "M68*:*:R3V[5678]*:*" :
- "test" "-r" "/sysV68"  &&  /*{ unknown_command: { End: { Col: 57, Line: 1169, Offset: 34886 }, Last: [], Pos: { Col: 21, Line: 1169, Offset: 34850 }, Stmts: [ [Object], [Object] ], Type: 'Block' } }*/
-  ;;  case "3[345]??:*:4.0:3.0" :
+"exit"  ;;
+ case "M68*:*:R3V[5678]*:*" :
+ {
+ "test" "-r" "/sysV68"  &&  "echo" "m68k-motorola-sysv" ;//2
+"exit" 
+}  ;;
+ case "3[345]??:*:4.0:3.0" :
  case "3[34]??A:*:4.0:3.0" :
  case "3[34]??,*:*:4.0:3.0" :
  case "3[34]??/*:*:4.0:3.0" :
@@ -957,152 +1390,219 @@ if ( "grep" "Stardent" "/usr/include/sys/uadmin.h" >  "/dev/null"  >&  "1" /*{ r
  case "SHG2:*:4.0:3.0" :
  case "S7501*:*:4.0:3.0" :
  let OS_REL = "" ;//2
-"test" "-r" "/etc/.relid"  &&  let OS_REL = "." + $( "sed" "-n" "s/[^ ]* [^ ]* \\([0-9][0-9]\\).*/\\1/p" <  "/etc/.relid" ) ;//2
-"/bin/uname" "-p" >  "/dev/null" /*{ rest_red: { Hdoc: null, N: { End: [Object], Pos: [Object], Value: '2' } } }*/
-  |  "grep" "86" >  "/dev/null"  &&  /*{ unknown_command: { End: { Col: 48, Line: 1175, Offset: 35288 }, Last: [], Pos: { Col: 7, Line: 1175, Offset: 35247 }, Stmts: [ [Object], [Object] ], Type: 'Block' } }*/
- ;//2
-"/bin/uname" "-p" >  "/dev/null" /*{ rest_red: { Hdoc: null, N: { End: [Object], Pos: [Object], Value: '2' } } }*/
-  |  "/bin/grep" "entium" >  "/dev/null"  &&  /*{ unknown_command: { End: { Col: 48, Line: 1177, Offset: 35395 }, Last: [], Pos: { Col: 7, Line: 1177, Offset: 35354 }, Stmts: [ [Object], [Object] ], Type: 'Block' } }*/
-  ;;  case "3[34]??:*:4.0:*" :
+{
+ "test" "-r" "/etc/.relid"  &&  let OS_REL = "." + /*3*/$( "sed" "-n" "s/[^ ]* [^ ]* \\([0-9][0-9]\\).*/\\1/p"  <  "/etc/.relid" ) 
+} ;//2
+{
+ {
+ "/bin/uname" "-p" 2  >  "/dev/null"  |  "grep" "86"  >  "/dev/null" 
+}  &&  "echo" "i486-ncr-sysv4.3" + /*3*/OS_REL ;//2
+"exit" 
+} ;//2
+{
+ {
+ "/bin/uname" "-p" 2  >  "/dev/null"  |  "/bin/grep" "entium"  >  "/dev/null" 
+}  &&  "echo" "i586-ncr-sysv4.3" + /*3*/OS_REL ;//2
+"exit" 
+}  ;;
+ case "3[34]??:*:4.0:*" :
  case "3[34]??,*:*:4.0:*" :
- "/bin/uname" "-p" >  "/dev/null" /*{ rest_red: { Hdoc: null, N: { End: [Object], Pos: [Object], Value: '2' } } }*/
-  |  "grep" "86" >  "/dev/null"  &&  /*{ unknown_command: { End: { Col: 37, Line: 1180, Offset: 35526 }, Last: [], Pos: { Col: 7, Line: 1180, Offset: 35496 }, Stmts: [ [Object], [Object] ], Type: 'Block' } }*/
-  ;;  case "NCR*:*:4.2:*" :
+ {
+ {
+ "/bin/uname" "-p" 2  >  "/dev/null"  |  "grep" "86"  >  "/dev/null" 
+}  &&  "echo" "i486-ncr-sysv4" ;//2
+"exit" 
+}  ;;
+ case "NCR*:*:4.2:*" :
  case "MPRAS*:*:4.2:*" :
  let OS_REL = ".3" ;//2
-"test" "-r" "/etc/.relid"  &&  let OS_REL = "." + $( "sed" "-n" "s/[^ ]* [^ ]* \\([0-9][0-9]\\).*/\\1/p" <  "/etc/.relid" ) ;//2
-"/bin/uname" "-p" >  "/dev/null" /*{ rest_red: { Hdoc: null, N: { End: [Object], Pos: [Object], Value: '2' } } }*/
-  |  "grep" "86" >  "/dev/null"  &&  /*{ unknown_command: { End: { Col: 50, Line: 1186, Offset: 35777 }, Last: [], Pos: { Col: 9, Line: 1186, Offset: 35736 }, Stmts: [ [Object], [Object] ], Type: 'Block' } }*/
- ;//2
-"/bin/uname" "-p" >  "/dev/null" /*{ rest_red: { Hdoc: null, N: { End: [Object], Pos: [Object], Value: '2' } } }*/
-  |  "/bin/grep" "entium" >  "/dev/null"  &&  /*{ unknown_command: { End: { Col: 50, Line: 1188, Offset: 35886 }, Last: [], Pos: { Col: 9, Line: 1188, Offset: 35845 }, Stmts: [ [Object], [Object] ], Type: 'Block' } }*/
- ;//2
-"/bin/uname" "-p" >  "/dev/null" /*{ rest_red: { Hdoc: null, N: { End: [Object], Pos: [Object], Value: '2' } } }*/
-  |  "/bin/grep" "pteron" >  "/dev/null"  &&  /*{ unknown_command: { End: { Col: 50, Line: 1190, Offset: 35995 }, Last: [], Pos: { Col: 9, Line: 1190, Offset: 35954 }, Stmts: [ [Object], [Object] ], Type: 'Block' } }*/
-  ;;  case "m68*:LynxOS:2.*:*" :
+{
+ "test" "-r" "/etc/.relid"  &&  let OS_REL = "." + /*3*/$( "sed" "-n" "s/[^ ]* [^ ]* \\([0-9][0-9]\\).*/\\1/p"  <  "/etc/.relid" ) 
+} ;//2
+{
+ {
+ "/bin/uname" "-p" 2  >  "/dev/null"  |  "grep" "86"  >  "/dev/null" 
+}  &&  "echo" "i486-ncr-sysv4.3" + /*3*/OS_REL ;//2
+"exit" 
+} ;//2
+{
+ {
+ "/bin/uname" "-p" 2  >  "/dev/null"  |  "/bin/grep" "entium"  >  "/dev/null" 
+}  &&  "echo" "i586-ncr-sysv4.3" + /*3*/OS_REL ;//2
+"exit" 
+} ;//2
+{
+ {
+ "/bin/uname" "-p" 2  >  "/dev/null"  |  "/bin/grep" "pteron"  >  "/dev/null" 
+}  &&  "echo" "i586-ncr-sysv4.3" + /*3*/OS_REL ;//2
+"exit" 
+}  ;;
+ case "m68*:LynxOS:2.*:*" :
  case "m68*:LynxOS:3.0*:*" :
- "echo" "m68k-unknown-lynxos" + UNAME_RELEASE ;//2
-"exit"  ;;  case "mc68030:UNIX_System_V:4.*:*" :
+ "echo" "m68k-unknown-lynxos" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "mc68030:UNIX_System_V:4.*:*" :
  "echo" "m68k-atari-sysv4" ;//2
-"exit"  ;;  case "TSUNAMI:LynxOS:2.*:*" :
- "echo" "sparc-unknown-lynxos" + UNAME_RELEASE ;//2
-"exit"  ;;  case "rs6000:LynxOS:2.*:*" :
- "echo" "rs6000-unknown-lynxos" + UNAME_RELEASE ;//2
-"exit"  ;;  case "PowerPC:LynxOS:2.*:*" :
+"exit"  ;;
+ case "TSUNAMI:LynxOS:2.*:*" :
+ "echo" "sparc-unknown-lynxos" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "rs6000:LynxOS:2.*:*" :
+ "echo" "rs6000-unknown-lynxos" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "PowerPC:LynxOS:2.*:*" :
  case "PowerPC:LynxOS:3.[01]*:*" :
  case "PowerPC:LynxOS:4.[02]*:*" :
- "echo" "powerpc-unknown-lynxos" + UNAME_RELEASE ;//2
-"exit"  ;;  case "SM[BE]S:UNIX_SV:*:*" :
- "echo" "mips-dde-sysv" + UNAME_RELEASE ;//2
-"exit"  ;;  case "RM*:ReliantUNIX-*:*:*" :
+ "echo" "powerpc-unknown-lynxos" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "SM[BE]S:UNIX_SV:*:*" :
+ "echo" "mips-dde-sysv" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "RM*:ReliantUNIX-*:*:*" :
  "echo" "mips-sni-sysv4" ;//2
-"exit"  ;;  case "RM*:SINIX-*:*:*" :
+"exit"  ;;
+ case "RM*:SINIX-*:*:*" :
  "echo" "mips-sni-sysv4" ;//2
-"exit"  ;;  case "*:SINIX-*:*:*" :
- if ( "uname" "-p" >  "/dev/null" /*{ rest_red: { Hdoc: null, N: { End: [Object], Pos: [Object], Value: '2' } } }*/
-  >  "/dev/null" ) {
-let UNAME_MACHINE = $( /*{ unknown_command: { End: { Col: 28, Line: 1217, Offset: 36716 }, Last: [], Pos: { Col: 18, Line: 1217, Offset: 36706 }, Stmts: [ [Object] ], Type: 'Subshell' } }*/
- >  "/dev/null" /*{ rest_red: { Hdoc: null, N: { End: [Object], Pos: [Object], Value: '2' } } }*/
- ) ;//2
-"echo" UNAME_MACHINE + "-sni-sysv4"
-}else{
+"exit"  ;;
+ case "*:SINIX-*:*:*" :
+ if ( "uname" "-p" 2  >  "/dev/null"  >  "/dev/null" ) {
+let UNAME_MACHINE = $(  ( "uname" "-p" )  2  >  "/dev/null" ) ;//2
+"echo" UNAME_MACHINE + /*3*/"-sni-sysv4"
+}  else {
 "echo" "ns32k-sni-sysv"
-) ;//2
-"exit"  ;;  case "PENTIUM:*:4.0*:*" :
+}  ;//2
+"exit"  ;;
+ case "PENTIUM:*:4.0*:*" :
  //  Unisys `ClearPath HMP IX 4000' SVR4/MP effort
 //  says <Richard.M.Bartel@ccMail.Census.GOV>
 "echo" "i586-unisys-sysv4" ;//2
-"exit"  ;;  case "*:UNIX_System_V:4*:FTX*" :
+"exit"  ;;
+ case "*:UNIX_System_V:4*:FTX*" :
  //  From Gerald Hewes <hewes@openmarket.com>.
 //  How about differentiating between stratus architectures? -djm
 "echo" "hppa1.1-stratus-sysv4" ;//2
-"exit"  ;;  case "*:*:*:FTX*" :
+"exit"  ;;
+ case "*:*:*:FTX*" :
  //  From seanf@swdc.stratus.com.
 "echo" "i860-stratus-sysv4" ;//2
-"exit"  ;;  case "i*86:VOS:*:*" :
+"exit"  ;;
+ case "i*86:VOS:*:*" :
  //  From Paul.Green@stratus.com.
-"echo" UNAME_MACHINE + "-stratus-vos" ;//2
-"exit"  ;;  case "*:VOS:*:*" :
+"echo" UNAME_MACHINE + /*3*/"-stratus-vos" ;//2
+"exit"  ;;
+ case "*:VOS:*:*" :
  //  From Paul.Green@stratus.com.
 "echo" "hppa1.1-stratus-vos" ;//2
-"exit"  ;;  case "mc68*:A/UX:*:*" :
- "echo" "m68k-apple-aux" + UNAME_RELEASE ;//2
-"exit"  ;;  case "news*:NEWS-OS:6*:*" :
+"exit"  ;;
+ case "mc68*:A/UX:*:*" :
+ "echo" "m68k-apple-aux" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "news*:NEWS-OS:6*:*" :
  "echo" "mips-sony-newsos6" ;//2
-"exit"  ;;  case "R[34]000:*System_V*:*:*" :
+"exit"  ;;
+ case "R[34]000:*System_V*:*:*" :
  case "R4000:UNIX_SYSV:*:*" :
  case "R*000:UNIX_SV:*:*" :
  if ( "[" "-d" "/usr/nec" "]" ) {
-"echo" "mips-nec-sysv" + UNAME_RELEASE
-}else{
-"echo" "mips-unknown-sysv" + UNAME_RELEASE
-) ;//2
-"exit"  ;;  case "BeBox:BeOS:*:*" :
+"echo" "mips-nec-sysv" + /*3*/UNAME_RELEASE
+}  else {
+"echo" "mips-unknown-sysv" + /*3*/UNAME_RELEASE
+}  ;//2
+"exit"  ;;
+ case "BeBox:BeOS:*:*" :
  //  BeOS running on hardware made by Be, PPC only.
 "echo" "powerpc-be-beos" ;//2
-"exit"  ;;  case "BeMac:BeOS:*:*" :
+"exit"  ;;
+ case "BeMac:BeOS:*:*" :
  //  BeOS running on Mac or Mac clone, PPC only.
 "echo" "powerpc-apple-beos" ;//2
-"exit"  ;;  case "BePC:BeOS:*:*" :
+"exit"  ;;
+ case "BePC:BeOS:*:*" :
  //  BeOS running on Intel PC compatible.
 "echo" "i586-pc-beos" ;//2
-"exit"  ;;  case "BePC:Haiku:*:*" :
+"exit"  ;;
+ case "BePC:Haiku:*:*" :
  //  Haiku running on Intel PC compatible.
 "echo" "i586-pc-haiku" ;//2
-"exit"  ;;  case "x86_64:Haiku:*:*" :
+"exit"  ;;
+ case "x86_64:Haiku:*:*" :
  "echo" "x86_64-unknown-haiku" ;//2
-"exit"  ;;  case "SX-4:SUPER-UX:*:*" :
- "echo" "sx4-nec-superux" + UNAME_RELEASE ;//2
-"exit"  ;;  case "SX-5:SUPER-UX:*:*" :
- "echo" "sx5-nec-superux" + UNAME_RELEASE ;//2
-"exit"  ;;  case "SX-6:SUPER-UX:*:*" :
- "echo" "sx6-nec-superux" + UNAME_RELEASE ;//2
-"exit"  ;;  case "SX-7:SUPER-UX:*:*" :
- "echo" "sx7-nec-superux" + UNAME_RELEASE ;//2
-"exit"  ;;  case "SX-8:SUPER-UX:*:*" :
- "echo" "sx8-nec-superux" + UNAME_RELEASE ;//2
-"exit"  ;;  case "SX-8R:SUPER-UX:*:*" :
- "echo" "sx8r-nec-superux" + UNAME_RELEASE ;//2
-"exit"  ;;  case "SX-ACE:SUPER-UX:*:*" :
- "echo" "sxace-nec-superux" + UNAME_RELEASE ;//2
-"exit"  ;;  case "Power*:Rhapsody:*:*" :
- "echo" "powerpc-apple-rhapsody" + UNAME_RELEASE ;//2
-"exit"  ;;  case "*:Rhapsody:*:*" :
- "echo" UNAME_MACHINE + "-apple-rhapsody" + UNAME_RELEASE ;//2
-"exit"  ;;  case "*:Darwin:*:*" :
- let UNAME_PROCESSOR = $( "uname" "-p" )  ||  let UNAME_PROCESSOR = "unknown" ;//2
+"exit"  ;;
+ case "SX-4:SUPER-UX:*:*" :
+ "echo" "sx4-nec-superux" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "SX-5:SUPER-UX:*:*" :
+ "echo" "sx5-nec-superux" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "SX-6:SUPER-UX:*:*" :
+ "echo" "sx6-nec-superux" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "SX-7:SUPER-UX:*:*" :
+ "echo" "sx7-nec-superux" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "SX-8:SUPER-UX:*:*" :
+ "echo" "sx8-nec-superux" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "SX-8R:SUPER-UX:*:*" :
+ "echo" "sx8r-nec-superux" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "SX-ACE:SUPER-UX:*:*" :
+ "echo" "sxace-nec-superux" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "Power*:Rhapsody:*:*" :
+ "echo" "powerpc-apple-rhapsody" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "*:Rhapsody:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-apple-rhapsody" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "*:Darwin:*:*" :
+ {
+ let UNAME_PROCESSOR = $( "uname" "-p" )  ||  let UNAME_PROCESSOR = "unknown" 
+} ;//2
 "set_cc_for_build" ;//2
 if ( "test" UNAME_PROCESSOR "=" "unknown" ) {
 let UNAME_PROCESSOR = "powerpc"
-}else{
+}  else {
 
-) ;//2
-if ( "test" $( "echo" UNAME_RELEASE  |  "sed" "-e" "s/\\..*//" ) "-le" "10" ) {
+}  ;//2
+if ( "test" $( {
+ "echo" UNAME_RELEASE  |  "sed" "-e" "s/\\..*//" 
+} ) "-le" "10" ) {
 if ( "[" CC_FOR_BUILD "!=" "no_compiler_found" "]" ) {
-if ( /*{ unknown_command: { End: { Col: 65, Line: 1307, Offset: 39154 }, Last: [], Pos: { Col: 6, Line: 1307, Offset: 39095 }, Stmts: [ [Object], [Object], [Object] ], Type: 'Subshell' } }*/
-  |  /*{ unknown_command: { End: { Col: 52, Line: 1308, Offset: 39210 }, Last: [], Pos: { Col: 10, Line: 1308, Offset: 39168 }, Stmts: [ [Object] ], Type: 'Subshell' } }*/
-  |  "grep" "IS_64BIT_ARCH" >  "/dev/null" ) {
+if ( {
+  ( "echo" "#ifdef __LP64__" ;//2
+"echo" "IS_64BIT_ARCH" ;//2
+"echo" "#endif" )   |  {
+  ( let CCOPTS =  CC_FOR_BUILD "-E" "-" 2  >  "/dev/null" )   |  "grep" "IS_64BIT_ARCH"  >  "/dev/null" 
+} 
+} ) {
 switch ( UNAME_PROCESSOR ) {
  case "i386" :
- let UNAME_PROCESSOR = "x86_64"  ;;  case "powerpc" :
- let UNAME_PROCESSOR = "powerpc64"  ;;  
+ let UNAME_PROCESSOR = "x86_64"  ;;
+ case "powerpc" :
+ let UNAME_PROCESSOR = "powerpc64"  ;;
+ 
 }
-}else{
+}  else {
 
-) ;//2
+}  ;//2
 //  On 10.4-10.6 one might compile for PowerPC via gcc -arch ppc
-if ( /*{ unknown_command: { End: { Col: 61, Line: 1317, Offset: 39509 }, Last: [], Pos: { Col: 6, Line: 1317, Offset: 39454 }, Stmts: [ [Object], [Object], [Object] ], Type: 'Subshell' } }*/
-  |  /*{ unknown_command: { End: { Col: 52, Line: 1318, Offset: 39565 }, Last: [], Pos: { Col: 10, Line: 1318, Offset: 39523 }, Stmts: [ [Object] ], Type: 'Subshell' } }*/
-  |  "grep" "IS_PPC" >  "/dev/null" ) {
+if ( {
+  ( "echo" "#ifdef __POWERPC__" ;//2
+"echo" "IS_PPC" ;//2
+"echo" "#endif" )   |  {
+  ( let CCOPTS =  CC_FOR_BUILD "-E" "-" 2  >  "/dev/null" )   |  "grep" "IS_PPC"  >  "/dev/null" 
+} 
+} ) {
 let UNAME_PROCESSOR = "powerpc"
-}else{
+}  else {
 
-)
-}else{
+} 
+}  else {
 
-)
-}else{
-if ( "test" UNAME_PROCESSOR "=" "i386" ) {
+} 
+}  else {
+ else if ( "test" UNAME_PROCESSOR "=" "i386" ) {
 //  Avoid executing cc on OS X 10.9, as it ships with a stub
 //  that puts up a graphical alert prompting to install
 //  developer tools.  Any system running Mac OS X 10.7 or
@@ -1110,108 +1610,147 @@ if ( "test" UNAME_PROCESSOR "=" "i386" ) {
 //  processor. This is not true of the ARM version of Darwin
 //  that Apple uses in portable devices.
 let UNAME_PROCESSOR = "x86_64"
-}else{
+}  else {
 
-) /*{ rest_cic: { Elif: true, ElseComments: [], FiComments: [] } }*/
-
-) ;//2
-"echo" UNAME_PROCESSOR + "-apple-darwin" + UNAME_RELEASE ;//2
-"exit"  ;;  case "*:procnto*:*:*" :
+} 
+}  ;//2
+"echo" UNAME_PROCESSOR + /*3*/"-apple-darwin" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "*:procnto*:*:*" :
  case "*:QNX:[0123456789]*:*" :
  let UNAME_PROCESSOR = $( "uname" "-p" ) ;//2
 if ( "test" UNAME_PROCESSOR "=" "x86" ) {
 let UNAME_PROCESSOR = "i386" ;//2
 let UNAME_MACHINE = "pc"
-}else{
+}  else {
 
-) ;//2
-"echo" UNAME_PROCESSOR + "-" + UNAME_MACHINE + "-nto-qnx" + UNAME_RELEASE ;//2
-"exit"  ;;  case "*:QNX:*:4*" :
+}  ;//2
+"echo" UNAME_PROCESSOR + /*3*/"-" + /*3*/UNAME_MACHINE + /*3*/"-nto-qnx" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "*:QNX:*:4*" :
  "echo" "i386-pc-qnx" ;//2
-"exit"  ;;  case "NEO-*:NONSTOP_KERNEL:*:*" :
- "echo" "neo-tandem-nsk" + UNAME_RELEASE ;//2
-"exit"  ;;  case "NSE-*:NONSTOP_KERNEL:*:*" :
- "echo" "nse-tandem-nsk" + UNAME_RELEASE ;//2
-"exit"  ;;  case "NSR-*:NONSTOP_KERNEL:*:*" :
- "echo" "nsr-tandem-nsk" + UNAME_RELEASE ;//2
-"exit"  ;;  case "NSV-*:NONSTOP_KERNEL:*:*" :
- "echo" "nsv-tandem-nsk" + UNAME_RELEASE ;//2
-"exit"  ;;  case "NSX-*:NONSTOP_KERNEL:*:*" :
- "echo" "nsx-tandem-nsk" + UNAME_RELEASE ;//2
-"exit"  ;;  case "*:NonStop-UX:*:*" :
+"exit"  ;;
+ case "NEO-*:NONSTOP_KERNEL:*:*" :
+ "echo" "neo-tandem-nsk" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "NSE-*:NONSTOP_KERNEL:*:*" :
+ "echo" "nse-tandem-nsk" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "NSR-*:NONSTOP_KERNEL:*:*" :
+ "echo" "nsr-tandem-nsk" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "NSV-*:NONSTOP_KERNEL:*:*" :
+ "echo" "nsv-tandem-nsk" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "NSX-*:NONSTOP_KERNEL:*:*" :
+ "echo" "nsx-tandem-nsk" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "*:NonStop-UX:*:*" :
  "echo" "mips-compaq-nonstopux" ;//2
-"exit"  ;;  case "BS2000:POSIX*:*:*" :
+"exit"  ;;
+ case "BS2000:POSIX*:*:*" :
  "echo" "bs2000-siemens-sysv" ;//2
-"exit"  ;;  case "DS/*:UNIX_System_V:*:*" :
- "echo" UNAME_MACHINE + "-" + UNAME_SYSTEM + "-" + UNAME_RELEASE ;//2
-"exit"  ;;  case "*:Plan9:*:*" :
+"exit"  ;;
+ case "DS/*:UNIX_System_V:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-" + /*3*/UNAME_SYSTEM + /*3*/"-" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "*:Plan9:*:*" :
  //  "uname -m" is not consistent, so use $cputype instead. 386
 //  is converted to i386 for consistency with other x86
 //  operating systems.
 //  shellcheck disable=SC2154
 if ( "test" cputype "=" "386" ) {
 let UNAME_MACHINE = "i386"
-}else{
+}  else {
 let UNAME_MACHINE = cputype
-) ;//2
-"echo" UNAME_MACHINE + "-unknown-plan9" ;//2
-"exit"  ;;  case "*:TOPS-10:*:*" :
+}  ;//2
+"echo" UNAME_MACHINE + /*3*/"-unknown-plan9" ;//2
+"exit"  ;;
+ case "*:TOPS-10:*:*" :
  "echo" "pdp10-unknown-tops10" ;//2
-"exit"  ;;  case "*:TENEX:*:*" :
+"exit"  ;;
+ case "*:TENEX:*:*" :
  "echo" "pdp10-unknown-tenex" ;//2
-"exit"  ;;  case "KS10:TOPS-20:*:*" :
+"exit"  ;;
+ case "KS10:TOPS-20:*:*" :
  case "KL10:TOPS-20:*:*" :
  case "TYPE4:TOPS-20:*:*" :
  "echo" "pdp10-dec-tops20" ;//2
-"exit"  ;;  case "XKL-1:TOPS-20:*:*" :
+"exit"  ;;
+ case "XKL-1:TOPS-20:*:*" :
  case "TYPE5:TOPS-20:*:*" :
  "echo" "pdp10-xkl-tops20" ;//2
-"exit"  ;;  case "*:TOPS-20:*:*" :
+"exit"  ;;
+ case "*:TOPS-20:*:*" :
  "echo" "pdp10-unknown-tops20" ;//2
-"exit"  ;;  case "*:ITS:*:*" :
+"exit"  ;;
+ case "*:ITS:*:*" :
  "echo" "pdp10-unknown-its" ;//2
-"exit"  ;;  case "SEI:*:*:SEIUX" :
- "echo" "mips-sei-seiux" + UNAME_RELEASE ;//2
-"exit"  ;;  case "*:DragonFly:*:*" :
- "echo" UNAME_MACHINE + "-unknown-dragonfly" + $( "echo" UNAME_RELEASE  |  "sed" "-e" "s/[-(].*//" ) ;//2
-"exit"  ;;  case "*:*VMS:*:*" :
- let UNAME_MACHINE = $( /*{ unknown_command: { End: { Col: 27, Line: 1407, Offset: 41941 }, Last: [], Pos: { Col: 17, Line: 1407, Offset: 41931 }, Stmts: [ [Object] ], Type: 'Subshell' } }*/
- >  "/dev/null" /*{ rest_red: { Hdoc: null, N: { End: [Object], Pos: [Object], Value: '2' } } }*/
- ) ;//2
+"exit"  ;;
+ case "SEI:*:*:SEIUX" :
+ "echo" "mips-sei-seiux" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ case "*:DragonFly:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-unknown-dragonfly" + /*3*/$( {
+ "echo" UNAME_RELEASE  |  "sed" "-e" "s/[-(].*//" 
+} ) ;//2
+"exit"  ;;
+ case "*:*VMS:*:*" :
+ let UNAME_MACHINE = $(  ( "uname" "-p" )  2  >  "/dev/null" ) ;//2
 switch ( UNAME_MACHINE ) {
  case "A*" :
  "echo" "alpha-dec-vms" ;//2
-"exit"  ;;  case "I*" :
+"exit"  ;;
+ case "I*" :
  "echo" "ia64-dec-vms" ;//2
-"exit"  ;;  case "V*" :
+"exit"  ;;
+ case "V*" :
  "echo" "vax-dec-vms" ;//2
-"exit"  ;;  
-}  ;;  case "*:XENIX:*:SysV" :
+"exit"  ;;
+ 
+}  ;;
+ case "*:XENIX:*:SysV" :
  "echo" "i386-pc-xenix" ;//2
-"exit"  ;;  case "i*86:skyos:*:*" :
- "echo" UNAME_MACHINE + "-pc-skyos" + $( "echo" UNAME_RELEASE  |  "sed" "-e" "s/ .*$//" ) ;//2
-"exit"  ;;  case "i*86:rdos:*:*" :
- "echo" UNAME_MACHINE + "-pc-rdos" ;//2
-"exit"  ;;  case "i*86:AROS:*:*" :
- "echo" UNAME_MACHINE + "-pc-aros" ;//2
-"exit"  ;;  case "x86_64:VMkernel:*:*" :
- "echo" UNAME_MACHINE + "-unknown-esx" ;//2
-"exit"  ;;  case "amd64:Isilon\\ OneFS:*:*" :
+"exit"  ;;
+ case "i*86:skyos:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-pc-skyos" + /*3*/$( {
+ "echo" UNAME_RELEASE  |  "sed" "-e" "s/ .*$//" 
+} ) ;//2
+"exit"  ;;
+ case "i*86:rdos:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-pc-rdos" ;//2
+"exit"  ;;
+ case "i*86:AROS:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-pc-aros" ;//2
+"exit"  ;;
+ case "x86_64:VMkernel:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-unknown-esx" ;//2
+"exit"  ;;
+ case "amd64:Isilon\\ OneFS:*:*" :
  "echo" "x86_64-unknown-onefs" ;//2
-"exit"  ;;  case "*:Unleashed:*:*" :
- "echo" UNAME_MACHINE + "-unknown-unleashed" + UNAME_RELEASE ;//2
-"exit"  ;;  
+"exit"  ;;
+ case "*:Unleashed:*:*" :
+ "echo" UNAME_MACHINE + /*3*/"-unknown-unleashed" + /*3*/UNAME_RELEASE ;//2
+"exit"  ;;
+ 
 } ;//2
-"echo" process.argv0 + ": unable to guess system type" >&  "2" ;//2
-switch ( UNAME_MACHINE + ":" + UNAME_SYSTEM ) {
+"echo" process.argv0 + /*3*/": unable to guess system type"  >&  "2" ;//2
+switch ( UNAME_MACHINE + /*3*/":" + /*3*/UNAME_SYSTEM ) {
  case "mips:Linux" :
  case "mips64:Linux" :
  //  If we got here on MIPS GNU/Linux, output extra information.
-"cat" >&  "2"  <<  "EOF" /*{ rest_red: { Hdoc: { End: [Object], Parts: [Array], Pos: [Object] }, N: null } }*/
-  ;;  
+"cat"  >&  "2"  <<  "EOF" "\nNOTE: MIPS GNU/Linux systems require a C compiler to fully recognize\nthe system type. Please install a C compiler and try again.\n"  ;;
+ 
 } ;//2
-"cat" >&  "2"  <<  "EOF" /*{ rest_red: { Hdoc: { End: [Object], Parts: [Array], Pos: [Object] }, N: null } }*/
- ;//2
+"cat"  >&  "2"  <<  "EOF" "\nThis script (version " + /*3*/timestamp + /*3*/"), has failed to recognize the\noperating system you are using. If your script is old, overwrite *all*\ncopies of config.guess and config.sub with the latest versions from:\n\n  https://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.guess\nand\n  https://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.sub\n\nIf " + /*3*/process.argv0 + /*3*/" has already been updated, send the following data and any\ninformation you think might be pertinent to config-patches@gnu.org to\nprovide the necessary information to handle your system.\n\nconfig.guess timestamp = " + /*3*/timestamp + /*3*/"\n\nuname -m = " + /*3*/$( {
+  ( "uname" "-m" )  2  >  "/dev/null"  ||  "echo" "unknown" 
+} ) + /*3*/"\nuname -r = " + /*3*/$( {
+  ( "uname" "-r" )  2  >  "/dev/null"  ||  "echo" "unknown" 
+} ) + /*3*/"\nuname -s = " + /*3*/$( {
+  ( "uname" "-s" )  2  >  "/dev/null"  ||  "echo" "unknown" 
+} ) + /*3*/"\nuname -v = " + /*3*/$( {
+  ( "uname" "-v" )  2  >  "/dev/null"  ||  "echo" "unknown" 
+} ) + /*3*/"\n\n/usr/bin/uname -p = " + /*3*/$(  ( "/usr/bin/uname" "-p" )  2  >  "/dev/null" ) + /*3*/"\n/bin/uname -X     = " + /*3*/$(  ( "/bin/uname" "-X" )  2  >  "/dev/null" ) + /*3*/"\n\nhostinfo               = " + /*3*/$(  ( "hostinfo" )  2  >  "/dev/null" ) + /*3*/"\n/bin/universe          = " + /*3*/$(  ( "/bin/universe" )  2  >  "/dev/null" ) + /*3*/"\n/usr/bin/arch -k       = " + /*3*/$(  ( "/usr/bin/arch" "-k" )  2  >  "/dev/null" ) + /*3*/"\n/bin/arch              = " + /*3*/$(  ( "/bin/arch" )  2  >  "/dev/null" ) + /*3*/"\n/usr/bin/oslevel       = " + /*3*/$(  ( "/usr/bin/oslevel" )  2  >  "/dev/null" ) + /*3*/"\n/usr/convex/getsysinfo = " + /*3*/$(  ( "/usr/convex/getsysinfo" )  2  >  "/dev/null" ) + /*3*/"\n\nUNAME_MACHINE = \"" + /*3*/UNAME_MACHINE + /*3*/"\"\nUNAME_RELEASE = \"" + /*3*/UNAME_RELEASE + /*3*/"\"\nUNAME_SYSTEM  = \"" + /*3*/UNAME_SYSTEM + /*3*/"\"\nUNAME_VERSION = \"" + /*3*/UNAME_VERSION + /*3*/"\"\n" ;//2
 "exit" "1"
 //  Local variables:
 //  eval: (add-hook 'before-save-hook 'time-stamp)
@@ -1266,10 +1805,12 @@ let timestamp = "2019-01-05" ;//2
 //  or in some cases, the newer four-part form:
 // 	CPU_TYPE-MANUFACTURER-KERNEL-OPERATING_SYSTEM
 //  It is wrong to echo any other type of specification.
-let me = $( "echo" process.argv0  |  "sed" "-e" "s,.*/,," ) ;//2
-let usage = "\\\nUsage: " + process.argv0 + " [OPTION] CPU-MFR-OPSYS or ALIAS\n\nCanonicalize a configuration name.\n\nOptions:\n  -h, --help         print this help, then exit\n  -t, --time-stamp   print date of last modification, then exit\n  -v, --version      print version number, then exit\n\nReport bugs and patches to <config-patches@gnu.org>." ;//2
-let version = "\\\nGNU config.sub (" + timestamp + ")\n\nCopyright 1992-2019 Free Software Foundation, Inc.\n\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE." ;//2
-let help = "\nTry \\`" + me + " --help' for more information." ;//2
+let me = $( {
+ "echo" process.argv0  |  "sed" "-e" "s,.*/,," 
+} ) ;//2
+let usage = "\\\nUsage: " + /*3*/process.argv0 + /*3*/" [OPTION] CPU-MFR-OPSYS or ALIAS\n\nCanonicalize a configuration name.\n\nOptions:\n  -h, --help         print this help, then exit\n  -t, --time-stamp   print date of last modification, then exit\n  -v, --version      print version number, then exit\n\nReport bugs and patches to <config-patches@gnu.org>." ;//2
+let version = "\\\nGNU config.sub (" + /*3*/timestamp + /*3*/")\n\nCopyright 1992-2019 Free Software Foundation, Inc.\n\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE." ;//2
+let help = "\nTry \\`" + /*3*/me + /*3*/" --help' for more information." ;//2
 //  Parse command line
 while ("test" process.argv.length "-gt" "0") {
 switch ( process.argv[1] ) {
@@ -1277,49 +1818,61 @@ switch ( process.argv[1] ) {
  case "--time*" :
  case "-t" :
  "echo" timestamp ;//2
-"exit"  ;;  case "--version" :
+"exit"  ;;
+ case "--version" :
  case "-v" :
  "echo" version ;//2
-"exit"  ;;  case "--help" :
+"exit"  ;;
+ case "--help" :
  case "--h*" :
  case "-h" :
  "echo" usage ;//2
-"exit"  ;;  case "--" :
+"exit"  ;;
+ case "--" :
  //  Stop option processing
 "shift" ;//2
-"break"  ;;  case "-" :
+"break"  ;;
+ case "-" :
  //  Use stdin as input.
-"break"  ;;  case "-*" :
- "echo" me + ": invalid option " + process.argv[1] + help >&  "2" ;//2
-"exit" "1"  ;;  case "*local*" :
+"break"  ;;
+ case "-*" :
+ "echo" me + /*3*/": invalid option " + /*3*/process.argv[1] + /*3*/help  >&  "2" ;//2
+"exit" "1"  ;;
+ case "*local*" :
  //  First pass through any local machine types.
 "echo" process.argv[1] ;//2
-"exit"  ;;  case "*" :
- "break"  ;;  
+"exit"  ;;
+ case "*" :
+ "break"  ;;
+ 
 }
 } ;//2
 switch ( process.argv.length ) {
  case "0" :
- "echo" me + ": missing argument" + help >&  "2" ;//2
-"exit" "1"  ;;  case "1" :
-  ;;  case "*" :
- "echo" me + ": too many arguments" + help >&  "2" ;//2
-"exit" "1"  ;;  
+ "echo" me + /*3*/": missing argument" + /*3*/help  >&  "2" ;//2
+"exit" "1"  ;;
+ case "1" :
+  ;;
+ case "*" :
+ "echo" me + /*3*/": too many arguments" + /*3*/help  >&  "2" ;//2
+"exit" "1"  ;;
+ 
 } ;//2
 //  Split fields of configuration type
 //  shellcheck disable=SC2162
-let IFS = "-" "read" "field1" "field2" "field3" "field4" <<  "EOF" /*{ rest_red: { Hdoc: { End: [Object], Parts: [Array], Pos: [Object] }, N: null } }*/
- ;//2
+let IFS = "-" "read" "field1" "field2" "field3" "field4"  <<  "EOF" process.argv[1] + /*3*/"\n" ;//2
 //  Separate into logical components for further validation
 switch ( process.argv[1] ) {
  case "*-*-*-*-*" :
- "echo" "Invalid" "configuration" "\\`" + process.argv[1] + "\\':" "more" "than" "four" "components" >&  "2" ;//2
-"exit" "1"  ;;  case "*-*-*-*" :
- let basic_machine = field1 + "-" + field2 ;//2
-let os = field3 + "-" + field4  ;;  case "*-*-*" :
+ "echo" "Invalid" "configuration" "\\`" + /*3*/process.argv[1] + /*3*/"\\':" "more" "than" "four" "components"  >&  "2" ;//2
+"exit" "1"  ;;
+ case "*-*-*-*" :
+ let basic_machine = field1 + /*3*/"-" + /*3*/field2 ;//2
+let os = field3 + /*3*/"-" + /*3*/field4  ;;
+ case "*-*-*" :
  //  Ambiguous whether COMPANY is present, or skipped and KERNEL-OS is two
 //  parts
-let maybe_os = field2 + "-" + field3 ;//2
+let maybe_os = field2 + /*3*/"-" + /*3*/field3 ;//2
 switch ( maybe_os ) {
  case "nto-qnx*" :
  case "linux-gnu*" :
@@ -1340,23 +1893,29 @@ switch ( maybe_os ) {
  case "os2-emx*" :
  case "rtmk-nova*" :
  let basic_machine = field1 ;//2
-let os = maybe_os  ;;  case "android-linux" :
- let basic_machine = field1 + "-unknown" ;//2
-let os = "linux-android"  ;;  case "*" :
- let basic_machine = field1 + "-" + field2 ;//2
-let os = field3  ;;  
-}  ;;  case "*-*" :
+let os = maybe_os  ;;
+ case "android-linux" :
+ let basic_machine = field1 + /*3*/"-unknown" ;//2
+let os = "linux-android"  ;;
+ case "*" :
+ let basic_machine = field1 + /*3*/"-" + /*3*/field2 ;//2
+let os = field3  ;;
+ 
+}  ;;
+ case "*-*" :
  //  A lone config we happen to match not fitting any pattern
-switch ( field1 + "-" + field2 ) {
+switch ( field1 + /*3*/"-" + /*3*/field2 ) {
  case "decstation-3100" :
  let basic_machine = "mips-dec" ;//2
-let os = ""  ;;  case "*-*" :
+let os = ""  ;;
+ case "*-*" :
  //  Second component is usually, but not always the OS
 switch ( field2 ) {
  //  Prevent following clause from handling this valid os
  case "sun*os*" :
  let basic_machine = field1 ;//2
-let os = field2  ;;  //  Manufacturers
+let os = field2  ;;
+ //  Manufacturers
  case "dec*" :
  case "mips*" :
  case "sequent*" :
@@ -1410,262 +1969,379 @@ let os = field2  ;;  //  Manufacturers
  case "wec" :
  case "wrs" :
  case "winbond" :
- let basic_machine = field1 + "-" + field2 ;//2
-let os = ""  ;;  case "*" :
+ let basic_machine = field1 + /*3*/"-" + /*3*/field2 ;//2
+let os = ""  ;;
+ case "*" :
  let basic_machine = field1 ;//2
-let os = field2  ;;  
-}  ;;  
-}  ;;  case "*" :
+let os = field2  ;;
+ 
+}  ;;
+ 
+}  ;;
+ case "*" :
  //  Convert single-component short-hands not valid as part of
 //  multi-component configurations.
 switch ( field1 ) {
  case "386bsd" :
  let basic_machine = "i386-pc" ;//2
-let os = "bsd"  ;;  case "a29khif" :
+let os = "bsd"  ;;
+ case "a29khif" :
  let basic_machine = "a29k-amd" ;//2
-let os = "udi"  ;;  case "adobe68k" :
+let os = "udi"  ;;
+ case "adobe68k" :
  let basic_machine = "m68010-adobe" ;//2
-let os = "scout"  ;;  case "alliant" :
+let os = "scout"  ;;
+ case "alliant" :
  let basic_machine = "fx80-alliant" ;//2
-let os = ""  ;;  case "altos" :
+let os = ""  ;;
+ case "altos" :
  case "altos3068" :
  let basic_machine = "m68k-altos" ;//2
-let os = ""  ;;  case "am29k" :
+let os = ""  ;;
+ case "am29k" :
  let basic_machine = "a29k-none" ;//2
-let os = "bsd"  ;;  case "amdahl" :
+let os = "bsd"  ;;
+ case "amdahl" :
  let basic_machine = "580-amdahl" ;//2
-let os = "sysv"  ;;  case "amiga" :
+let os = "sysv"  ;;
+ case "amiga" :
  let basic_machine = "m68k-unknown" ;//2
-let os = ""  ;;  case "amigaos" :
+let os = ""  ;;
+ case "amigaos" :
  case "amigados" :
  let basic_machine = "m68k-unknown" ;//2
-let os = "amigaos"  ;;  case "amigaunix" :
+let os = "amigaos"  ;;
+ case "amigaunix" :
  case "amix" :
  let basic_machine = "m68k-unknown" ;//2
-let os = "sysv4"  ;;  case "apollo68" :
+let os = "sysv4"  ;;
+ case "apollo68" :
  let basic_machine = "m68k-apollo" ;//2
-let os = "sysv"  ;;  case "apollo68bsd" :
+let os = "sysv"  ;;
+ case "apollo68bsd" :
  let basic_machine = "m68k-apollo" ;//2
-let os = "bsd"  ;;  case "aros" :
+let os = "bsd"  ;;
+ case "aros" :
  let basic_machine = "i386-pc" ;//2
-let os = "aros"  ;;  case "aux" :
+let os = "aros"  ;;
+ case "aux" :
  let basic_machine = "m68k-apple" ;//2
-let os = "aux"  ;;  case "balance" :
+let os = "aux"  ;;
+ case "balance" :
  let basic_machine = "ns32k-sequent" ;//2
-let os = "dynix"  ;;  case "blackfin" :
+let os = "dynix"  ;;
+ case "blackfin" :
  let basic_machine = "bfin-unknown" ;//2
-let os = "linux"  ;;  case "cegcc" :
+let os = "linux"  ;;
+ case "cegcc" :
  let basic_machine = "arm-unknown" ;//2
-let os = "cegcc"  ;;  case "convex-c1" :
+let os = "cegcc"  ;;
+ case "convex-c1" :
  let basic_machine = "c1-convex" ;//2
-let os = "bsd"  ;;  case "convex-c2" :
+let os = "bsd"  ;;
+ case "convex-c2" :
  let basic_machine = "c2-convex" ;//2
-let os = "bsd"  ;;  case "convex-c32" :
+let os = "bsd"  ;;
+ case "convex-c32" :
  let basic_machine = "c32-convex" ;//2
-let os = "bsd"  ;;  case "convex-c34" :
+let os = "bsd"  ;;
+ case "convex-c34" :
  let basic_machine = "c34-convex" ;//2
-let os = "bsd"  ;;  case "convex-c38" :
+let os = "bsd"  ;;
+ case "convex-c38" :
  let basic_machine = "c38-convex" ;//2
-let os = "bsd"  ;;  case "cray" :
+let os = "bsd"  ;;
+ case "cray" :
  let basic_machine = "j90-cray" ;//2
-let os = "unicos"  ;;  case "crds" :
+let os = "unicos"  ;;
+ case "crds" :
  case "unos" :
  let basic_machine = "m68k-crds" ;//2
-let os = ""  ;;  case "da30" :
+let os = ""  ;;
+ case "da30" :
  let basic_machine = "m68k-da30" ;//2
-let os = ""  ;;  case "decstation" :
+let os = ""  ;;
+ case "decstation" :
  case "pmax" :
  case "pmin" :
  case "dec3100" :
  case "decstatn" :
  let basic_machine = "mips-dec" ;//2
-let os = ""  ;;  case "delta88" :
+let os = ""  ;;
+ case "delta88" :
  let basic_machine = "m88k-motorola" ;//2
-let os = "sysv3"  ;;  case "dicos" :
+let os = "sysv3"  ;;
+ case "dicos" :
  let basic_machine = "i686-pc" ;//2
-let os = "dicos"  ;;  case "djgpp" :
+let os = "dicos"  ;;
+ case "djgpp" :
  let basic_machine = "i586-pc" ;//2
-let os = "msdosdjgpp"  ;;  case "ebmon29k" :
+let os = "msdosdjgpp"  ;;
+ case "ebmon29k" :
  let basic_machine = "a29k-amd" ;//2
-let os = "ebmon"  ;;  case "es1800" :
+let os = "ebmon"  ;;
+ case "es1800" :
  case "OSE68k" :
  case "ose68k" :
  case "ose" :
  case "OSE" :
  let basic_machine = "m68k-ericsson" ;//2
-let os = "ose"  ;;  case "gmicro" :
+let os = "ose"  ;;
+ case "gmicro" :
  let basic_machine = "tron-gmicro" ;//2
-let os = "sysv"  ;;  case "go32" :
+let os = "sysv"  ;;
+ case "go32" :
  let basic_machine = "i386-pc" ;//2
-let os = "go32"  ;;  case "h8300hms" :
+let os = "go32"  ;;
+ case "h8300hms" :
  let basic_machine = "h8300-hitachi" ;//2
-let os = "hms"  ;;  case "h8300xray" :
+let os = "hms"  ;;
+ case "h8300xray" :
  let basic_machine = "h8300-hitachi" ;//2
-let os = "xray"  ;;  case "h8500hms" :
+let os = "xray"  ;;
+ case "h8500hms" :
  let basic_machine = "h8500-hitachi" ;//2
-let os = "hms"  ;;  case "harris" :
+let os = "hms"  ;;
+ case "harris" :
  let basic_machine = "m88k-harris" ;//2
-let os = "sysv3"  ;;  case "hp300" :
- let basic_machine = "m68k-hp"  ;;  case "hp300bsd" :
+let os = "sysv3"  ;;
+ case "hp300" :
+ let basic_machine = "m68k-hp"  ;;
+ case "hp300bsd" :
  let basic_machine = "m68k-hp" ;//2
-let os = "bsd"  ;;  case "hp300hpux" :
+let os = "bsd"  ;;
+ case "hp300hpux" :
  let basic_machine = "m68k-hp" ;//2
-let os = "hpux"  ;;  case "hppaosf" :
+let os = "hpux"  ;;
+ case "hppaosf" :
  let basic_machine = "hppa1.1-hp" ;//2
-let os = "osf"  ;;  case "hppro" :
+let os = "osf"  ;;
+ case "hppro" :
  let basic_machine = "hppa1.1-hp" ;//2
-let os = "proelf"  ;;  case "i386mach" :
+let os = "proelf"  ;;
+ case "i386mach" :
  let basic_machine = "i386-mach" ;//2
-let os = "mach"  ;;  case "vsta" :
+let os = "mach"  ;;
+ case "vsta" :
  let basic_machine = "i386-pc" ;//2
-let os = "vsta"  ;;  case "isi68" :
+let os = "vsta"  ;;
+ case "isi68" :
  case "isi" :
  let basic_machine = "m68k-isi" ;//2
-let os = "sysv"  ;;  case "m68knommu" :
+let os = "sysv"  ;;
+ case "m68knommu" :
  let basic_machine = "m68k-unknown" ;//2
-let os = "linux"  ;;  case "magnum" :
+let os = "linux"  ;;
+ case "magnum" :
  case "m3230" :
  let basic_machine = "mips-mips" ;//2
-let os = "sysv"  ;;  case "merlin" :
+let os = "sysv"  ;;
+ case "merlin" :
  let basic_machine = "ns32k-utek" ;//2
-let os = "sysv"  ;;  case "mingw64" :
+let os = "sysv"  ;;
+ case "mingw64" :
  let basic_machine = "x86_64-pc" ;//2
-let os = "mingw64"  ;;  case "mingw32" :
+let os = "mingw64"  ;;
+ case "mingw32" :
  let basic_machine = "i686-pc" ;//2
-let os = "mingw32"  ;;  case "mingw32ce" :
+let os = "mingw32"  ;;
+ case "mingw32ce" :
  let basic_machine = "arm-unknown" ;//2
-let os = "mingw32ce"  ;;  case "monitor" :
+let os = "mingw32ce"  ;;
+ case "monitor" :
  let basic_machine = "m68k-rom68k" ;//2
-let os = "coff"  ;;  case "morphos" :
+let os = "coff"  ;;
+ case "morphos" :
  let basic_machine = "powerpc-unknown" ;//2
-let os = "morphos"  ;;  case "moxiebox" :
+let os = "morphos"  ;;
+ case "moxiebox" :
  let basic_machine = "moxie-unknown" ;//2
-let os = "moxiebox"  ;;  case "msdos" :
+let os = "moxiebox"  ;;
+ case "msdos" :
  let basic_machine = "i386-pc" ;//2
-let os = "msdos"  ;;  case "msys" :
+let os = "msdos"  ;;
+ case "msys" :
  let basic_machine = "i686-pc" ;//2
-let os = "msys"  ;;  case "mvs" :
+let os = "msys"  ;;
+ case "mvs" :
  let basic_machine = "i370-ibm" ;//2
-let os = "mvs"  ;;  case "nacl" :
+let os = "mvs"  ;;
+ case "nacl" :
  let basic_machine = "le32-unknown" ;//2
-let os = "nacl"  ;;  case "ncr3000" :
+let os = "nacl"  ;;
+ case "ncr3000" :
  let basic_machine = "i486-ncr" ;//2
-let os = "sysv4"  ;;  case "netbsd386" :
+let os = "sysv4"  ;;
+ case "netbsd386" :
  let basic_machine = "i386-pc" ;//2
-let os = "netbsd"  ;;  case "netwinder" :
+let os = "netbsd"  ;;
+ case "netwinder" :
  let basic_machine = "armv4l-rebel" ;//2
-let os = "linux"  ;;  case "news" :
+let os = "linux"  ;;
+ case "news" :
  case "news700" :
  case "news800" :
  case "news900" :
  let basic_machine = "m68k-sony" ;//2
-let os = "newsos"  ;;  case "news1000" :
+let os = "newsos"  ;;
+ case "news1000" :
  let basic_machine = "m68030-sony" ;//2
-let os = "newsos"  ;;  case "necv70" :
+let os = "newsos"  ;;
+ case "necv70" :
  let basic_machine = "v70-nec" ;//2
-let os = "sysv"  ;;  case "nh3000" :
+let os = "sysv"  ;;
+ case "nh3000" :
  let basic_machine = "m68k-harris" ;//2
-let os = "cxux"  ;;  case "nh[45]000" :
+let os = "cxux"  ;;
+ case "nh[45]000" :
  let basic_machine = "m88k-harris" ;//2
-let os = "cxux"  ;;  case "nindy960" :
+let os = "cxux"  ;;
+ case "nindy960" :
  let basic_machine = "i960-intel" ;//2
-let os = "nindy"  ;;  case "mon960" :
+let os = "nindy"  ;;
+ case "mon960" :
  let basic_machine = "i960-intel" ;//2
-let os = "mon960"  ;;  case "nonstopux" :
+let os = "mon960"  ;;
+ case "nonstopux" :
  let basic_machine = "mips-compaq" ;//2
-let os = "nonstopux"  ;;  case "os400" :
+let os = "nonstopux"  ;;
+ case "os400" :
  let basic_machine = "powerpc-ibm" ;//2
-let os = "os400"  ;;  case "OSE68000" :
+let os = "os400"  ;;
+ case "OSE68000" :
  case "ose68000" :
  let basic_machine = "m68000-ericsson" ;//2
-let os = "ose"  ;;  case "os68k" :
+let os = "ose"  ;;
+ case "os68k" :
  let basic_machine = "m68k-none" ;//2
-let os = "os68k"  ;;  case "paragon" :
+let os = "os68k"  ;;
+ case "paragon" :
  let basic_machine = "i860-intel" ;//2
-let os = "osf"  ;;  case "parisc" :
+let os = "osf"  ;;
+ case "parisc" :
  let basic_machine = "hppa-unknown" ;//2
-let os = "linux"  ;;  case "pw32" :
+let os = "linux"  ;;
+ case "pw32" :
  let basic_machine = "i586-unknown" ;//2
-let os = "pw32"  ;;  case "rdos" :
+let os = "pw32"  ;;
+ case "rdos" :
  case "rdos64" :
  let basic_machine = "x86_64-pc" ;//2
-let os = "rdos"  ;;  case "rdos32" :
+let os = "rdos"  ;;
+ case "rdos32" :
  let basic_machine = "i386-pc" ;//2
-let os = "rdos"  ;;  case "rom68k" :
+let os = "rdos"  ;;
+ case "rom68k" :
  let basic_machine = "m68k-rom68k" ;//2
-let os = "coff"  ;;  case "sa29200" :
+let os = "coff"  ;;
+ case "sa29200" :
  let basic_machine = "a29k-amd" ;//2
-let os = "udi"  ;;  case "sei" :
+let os = "udi"  ;;
+ case "sei" :
  let basic_machine = "mips-sei" ;//2
-let os = "seiux"  ;;  case "sequent" :
+let os = "seiux"  ;;
+ case "sequent" :
  let basic_machine = "i386-sequent" ;//2
-let os = ""  ;;  case "sps7" :
+let os = ""  ;;
+ case "sps7" :
  let basic_machine = "m68k-bull" ;//2
-let os = "sysv2"  ;;  case "st2000" :
+let os = "sysv2"  ;;
+ case "st2000" :
  let basic_machine = "m68k-tandem" ;//2
-let os = ""  ;;  case "stratus" :
+let os = ""  ;;
+ case "stratus" :
  let basic_machine = "i860-stratus" ;//2
-let os = "sysv4"  ;;  case "sun2" :
+let os = "sysv4"  ;;
+ case "sun2" :
  let basic_machine = "m68000-sun" ;//2
-let os = ""  ;;  case "sun2os3" :
+let os = ""  ;;
+ case "sun2os3" :
  let basic_machine = "m68000-sun" ;//2
-let os = "sunos3"  ;;  case "sun2os4" :
+let os = "sunos3"  ;;
+ case "sun2os4" :
  let basic_machine = "m68000-sun" ;//2
-let os = "sunos4"  ;;  case "sun3" :
+let os = "sunos4"  ;;
+ case "sun3" :
  let basic_machine = "m68k-sun" ;//2
-let os = ""  ;;  case "sun3os3" :
+let os = ""  ;;
+ case "sun3os3" :
  let basic_machine = "m68k-sun" ;//2
-let os = "sunos3"  ;;  case "sun3os4" :
+let os = "sunos3"  ;;
+ case "sun3os4" :
  let basic_machine = "m68k-sun" ;//2
-let os = "sunos4"  ;;  case "sun4" :
+let os = "sunos4"  ;;
+ case "sun4" :
  let basic_machine = "sparc-sun" ;//2
-let os = ""  ;;  case "sun4os3" :
+let os = ""  ;;
+ case "sun4os3" :
  let basic_machine = "sparc-sun" ;//2
-let os = "sunos3"  ;;  case "sun4os4" :
+let os = "sunos3"  ;;
+ case "sun4os4" :
  let basic_machine = "sparc-sun" ;//2
-let os = "sunos4"  ;;  case "sun4sol2" :
+let os = "sunos4"  ;;
+ case "sun4sol2" :
  let basic_machine = "sparc-sun" ;//2
-let os = "solaris2"  ;;  case "sun386" :
+let os = "solaris2"  ;;
+ case "sun386" :
  case "sun386i" :
  case "roadrunner" :
  let basic_machine = "i386-sun" ;//2
-let os = ""  ;;  case "sv1" :
+let os = ""  ;;
+ case "sv1" :
  let basic_machine = "sv1-cray" ;//2
-let os = "unicos"  ;;  case "symmetry" :
+let os = "unicos"  ;;
+ case "symmetry" :
  let basic_machine = "i386-sequent" ;//2
-let os = "dynix"  ;;  case "t3e" :
+let os = "dynix"  ;;
+ case "t3e" :
  let basic_machine = "alphaev5-cray" ;//2
-let os = "unicos"  ;;  case "t90" :
+let os = "unicos"  ;;
+ case "t90" :
  let basic_machine = "t90-cray" ;//2
-let os = "unicos"  ;;  case "toad1" :
+let os = "unicos"  ;;
+ case "toad1" :
  let basic_machine = "pdp10-xkl" ;//2
-let os = "tops20"  ;;  case "tpf" :
+let os = "tops20"  ;;
+ case "tpf" :
  let basic_machine = "s390x-ibm" ;//2
-let os = "tpf"  ;;  case "udi29k" :
+let os = "tpf"  ;;
+ case "udi29k" :
  let basic_machine = "a29k-amd" ;//2
-let os = "udi"  ;;  case "ultra3" :
+let os = "udi"  ;;
+ case "ultra3" :
  let basic_machine = "a29k-nyu" ;//2
-let os = "sym1"  ;;  case "v810" :
+let os = "sym1"  ;;
+ case "v810" :
  case "necv810" :
  let basic_machine = "v810-nec" ;//2
-let os = "none"  ;;  case "vaxv" :
+let os = "none"  ;;
+ case "vaxv" :
  let basic_machine = "vax-dec" ;//2
-let os = "sysv"  ;;  case "vms" :
+let os = "sysv"  ;;
+ case "vms" :
  let basic_machine = "vax-dec" ;//2
-let os = "vms"  ;;  case "vxworks960" :
+let os = "vms"  ;;
+ case "vxworks960" :
  let basic_machine = "i960-wrs" ;//2
-let os = "vxworks"  ;;  case "vxworks68" :
+let os = "vxworks"  ;;
+ case "vxworks68" :
  let basic_machine = "m68k-wrs" ;//2
-let os = "vxworks"  ;;  case "vxworks29k" :
+let os = "vxworks"  ;;
+ case "vxworks29k" :
  let basic_machine = "a29k-wrs" ;//2
-let os = "vxworks"  ;;  case "xbox" :
+let os = "vxworks"  ;;
+ case "xbox" :
  let basic_machine = "i686-pc" ;//2
-let os = "mingw32"  ;;  case "ymp" :
+let os = "mingw32"  ;;
+ case "ymp" :
  let basic_machine = "ymp-cray" ;//2
-let os = "unicos"  ;;  case "*" :
+let os = "unicos"  ;;
+ case "*" :
  let basic_machine = process.argv[1] ;//2
-let os = ""  ;;  
-}  ;;  
+let os = ""  ;;
+ 
+}  ;;
+ 
 } ;//2
 //  Decode 1-component or ad-hoc basic machines
 switch ( basic_machine ) {
@@ -1673,22 +2349,29 @@ switch ( basic_machine ) {
 //  some cases the only manufacturer, in others, it is the most popular.
  case "w89k" :
  let cpu = "hppa1.1" ;//2
-let vendor = "winbond"  ;;  case "op50n" :
+let vendor = "winbond"  ;;
+ case "op50n" :
  let cpu = "hppa1.1" ;//2
-let vendor = "oki"  ;;  case "op60c" :
+let vendor = "oki"  ;;
+ case "op60c" :
  let cpu = "hppa1.1" ;//2
-let vendor = "oki"  ;;  case "ibm*" :
+let vendor = "oki"  ;;
+ case "ibm*" :
  let cpu = "i370" ;//2
-let vendor = "ibm"  ;;  case "orion105" :
+let vendor = "ibm"  ;;
+ case "orion105" :
  let cpu = "clipper" ;//2
-let vendor = "highlevel"  ;;  case "mac" :
+let vendor = "highlevel"  ;;
+ case "mac" :
  case "mpw" :
  case "mac-mpw" :
  let cpu = "m68k" ;//2
-let vendor = "apple"  ;;  case "pmac" :
+let vendor = "apple"  ;;
+ case "pmac" :
  case "pmac-mpw" :
  let cpu = "powerpc" ;//2
-let vendor = "apple"  ;;  //  Recognize the various machine names and aliases which stand
+let vendor = "apple"  ;;
+ //  Recognize the various machine names and aliases which stand
 //  for a CPU type and a company and sometimes even an OS.
  case "3b1" :
  case "7300" :
@@ -1698,64 +2381,81 @@ let vendor = "apple"  ;;  //  Recognize the various machine names and aliases wh
  case "safari" :
  case "unixpc" :
  let cpu = "m68000" ;//2
-let vendor = "att"  ;;  case "3b*" :
+let vendor = "att"  ;;
+ case "3b*" :
  let cpu = "we32k" ;//2
-let vendor = "att"  ;;  case "bluegene*" :
+let vendor = "att"  ;;
+ case "bluegene*" :
  let cpu = "powerpc" ;//2
 let vendor = "ibm" ;//2
-let os = "cnk"  ;;  case "decsystem10*" :
+let os = "cnk"  ;;
+ case "decsystem10*" :
  case "dec10*" :
  let cpu = "pdp10" ;//2
 let vendor = "dec" ;//2
-let os = "tops10"  ;;  case "decsystem20*" :
+let os = "tops10"  ;;
+ case "decsystem20*" :
  case "dec20*" :
  let cpu = "pdp10" ;//2
 let vendor = "dec" ;//2
-let os = "tops20"  ;;  case "delta" :
+let os = "tops20"  ;;
+ case "delta" :
  case "3300" :
  case "motorola-3300" :
  case "motorola-delta" :
  case "3300-motorola" :
  case "delta-motorola" :
  let cpu = "m68k" ;//2
-let vendor = "motorola"  ;;  case "dpx2*" :
+let vendor = "motorola"  ;;
+ case "dpx2*" :
  let cpu = "m68k" ;//2
 let vendor = "bull" ;//2
-let os = "sysv3"  ;;  case "encore" :
+let os = "sysv3"  ;;
+ case "encore" :
  case "umax" :
  case "mmax" :
  let cpu = "ns32k" ;//2
-let vendor = "encore"  ;;  case "elxsi" :
+let vendor = "encore"  ;;
+ case "elxsi" :
  let cpu = "elxsi" ;//2
 let vendor = "elxsi" ;//2
-let os = os + /*{ rest_ppe: { Excl: false, Exp: { Op: 70, Word: [Object] }, Index: null, Length: false, Names: 0, Repl: null, Short: false, Slice: null, Width: false } }*/
-  ;;  case "fx2800" :
+let os = ( os  :-  "bsd" )  ;;
+ case "fx2800" :
  let cpu = "i860" ;//2
-let vendor = "alliant"  ;;  case "genix" :
+let vendor = "alliant"  ;;
+ case "genix" :
  let cpu = "ns32k" ;//2
-let vendor = "ns"  ;;  case "h3050r*" :
+let vendor = "ns"  ;;
+ case "h3050r*" :
  case "hiux*" :
  let cpu = "hppa1.1" ;//2
 let vendor = "hitachi" ;//2
-let os = "hiuxwe2"  ;;  case "hp3k9[0-9][0-9]" :
+let os = "hiuxwe2"  ;;
+ case "hp3k9[0-9][0-9]" :
  case "hp9[0-9][0-9]" :
  let cpu = "hppa1.0" ;//2
-let vendor = "hp"  ;;  case "hp9k2[0-9][0-9]" :
+let vendor = "hp"  ;;
+ case "hp9k2[0-9][0-9]" :
  case "hp9k31[0-9]" :
  let cpu = "m68000" ;//2
-let vendor = "hp"  ;;  case "hp9k3[2-9][0-9]" :
+let vendor = "hp"  ;;
+ case "hp9k3[2-9][0-9]" :
  let cpu = "m68k" ;//2
-let vendor = "hp"  ;;  case "hp9k6[0-9][0-9]" :
+let vendor = "hp"  ;;
+ case "hp9k6[0-9][0-9]" :
  case "hp6[0-9][0-9]" :
  let cpu = "hppa1.0" ;//2
-let vendor = "hp"  ;;  case "hp9k7[0-79][0-9]" :
+let vendor = "hp"  ;;
+ case "hp9k7[0-79][0-9]" :
  case "hp7[0-79][0-9]" :
  let cpu = "hppa1.1" ;//2
-let vendor = "hp"  ;;  case "hp9k78[0-9]" :
+let vendor = "hp"  ;;
+ case "hp9k78[0-9]" :
  case "hp78[0-9]" :
  //  FIXME: really hppa2.0-hp
 let cpu = "hppa1.1" ;//2
-let vendor = "hp"  ;;  case "hp9k8[67]1" :
+let vendor = "hp"  ;;
+ case "hp9k8[67]1" :
  case "hp8[67]1" :
  case "hp9k80[24]" :
  case "hp80[24]" :
@@ -1765,249 +2465,354 @@ let vendor = "hp"  ;;  case "hp9k8[67]1" :
  case "hp893" :
  //  FIXME: really hppa2.0-hp
 let cpu = "hppa1.1" ;//2
-let vendor = "hp"  ;;  case "hp9k8[0-9][13679]" :
+let vendor = "hp"  ;;
+ case "hp9k8[0-9][13679]" :
  case "hp8[0-9][13679]" :
  let cpu = "hppa1.1" ;//2
-let vendor = "hp"  ;;  case "hp9k8[0-9][0-9]" :
+let vendor = "hp"  ;;
+ case "hp9k8[0-9][0-9]" :
  case "hp8[0-9][0-9]" :
  let cpu = "hppa1.0" ;//2
-let vendor = "hp"  ;;  case "i*86v32" :
- let cpu = $( "echo" process.argv[1]  |  "sed" "-e" "s/86.*/86/" ) ;//2
+let vendor = "hp"  ;;
+ case "i*86v32" :
+ let cpu = $( {
+ "echo" process.argv[1]  |  "sed" "-e" "s/86.*/86/" 
+} ) ;//2
 let vendor = "pc" ;//2
-let os = "sysv32"  ;;  case "i*86v4*" :
- let cpu = $( "echo" process.argv[1]  |  "sed" "-e" "s/86.*/86/" ) ;//2
+let os = "sysv32"  ;;
+ case "i*86v4*" :
+ let cpu = $( {
+ "echo" process.argv[1]  |  "sed" "-e" "s/86.*/86/" 
+} ) ;//2
 let vendor = "pc" ;//2
-let os = "sysv4"  ;;  case "i*86v" :
- let cpu = $( "echo" process.argv[1]  |  "sed" "-e" "s/86.*/86/" ) ;//2
+let os = "sysv4"  ;;
+ case "i*86v" :
+ let cpu = $( {
+ "echo" process.argv[1]  |  "sed" "-e" "s/86.*/86/" 
+} ) ;//2
 let vendor = "pc" ;//2
-let os = "sysv"  ;;  case "i*86sol2" :
- let cpu = $( "echo" process.argv[1]  |  "sed" "-e" "s/86.*/86/" ) ;//2
+let os = "sysv"  ;;
+ case "i*86sol2" :
+ let cpu = $( {
+ "echo" process.argv[1]  |  "sed" "-e" "s/86.*/86/" 
+} ) ;//2
 let vendor = "pc" ;//2
-let os = "solaris2"  ;;  case "j90" :
+let os = "solaris2"  ;;
+ case "j90" :
  case "j90-cray" :
  let cpu = "j90" ;//2
 let vendor = "cray" ;//2
-let os = os + /*{ rest_ppe: { Excl: false, Exp: { Op: 70, Word: [Object] }, Index: null, Length: false, Names: 0, Repl: null, Short: false, Slice: null, Width: false } }*/
-  ;;  case "iris" :
+let os = ( os  :-  "unicos" )  ;;
+ case "iris" :
  case "iris4d" :
  let cpu = "mips" ;//2
 let vendor = "sgi" ;//2
 switch ( os ) {
  case "irix*" :
-  ;;  case "*" :
- let os = "irix4"  ;;  
-}  ;;  case "miniframe" :
+  ;;
+ case "*" :
+ let os = "irix4"  ;;
+ 
+}  ;;
+ case "miniframe" :
  let cpu = "m68000" ;//2
-let vendor = "convergent"  ;;  case "*mint" :
+let vendor = "convergent"  ;;
+ case "*mint" :
  case "mint[0-9]*" :
  case "*MiNT" :
  case "*MiNT[0-9]*" :
  let cpu = "m68k" ;//2
 let vendor = "atari" ;//2
-let os = "mint"  ;;  case "news-3600" :
+let os = "mint"  ;;
+ case "news-3600" :
  case "risc-news" :
  let cpu = "mips" ;//2
 let vendor = "sony" ;//2
-let os = "newsos"  ;;  case "next" :
+let os = "newsos"  ;;
+ case "next" :
  case "m*-next" :
  let cpu = "m68k" ;//2
 let vendor = "next" ;//2
 switch ( os ) {
  case "nextstep*" :
-  ;;  case "ns2*" :
- let os = "nextstep2"  ;;  case "*" :
- let os = "nextstep3"  ;;  
-}  ;;  case "np1" :
+  ;;
+ case "ns2*" :
+ let os = "nextstep2"  ;;
+ case "*" :
+ let os = "nextstep3"  ;;
+ 
+}  ;;
+ case "np1" :
  let cpu = "np1" ;//2
-let vendor = "gould"  ;;  case "op50n-*" :
+let vendor = "gould"  ;;
+ case "op50n-*" :
  case "op60c-*" :
  let cpu = "hppa1.1" ;//2
 let vendor = "oki" ;//2
-let os = "proelf"  ;;  case "pa-hitachi" :
+let os = "proelf"  ;;
+ case "pa-hitachi" :
  let cpu = "hppa1.1" ;//2
 let vendor = "hitachi" ;//2
-let os = "hiuxwe2"  ;;  case "pbd" :
+let os = "hiuxwe2"  ;;
+ case "pbd" :
  let cpu = "sparc" ;//2
-let vendor = "tti"  ;;  case "pbb" :
+let vendor = "tti"  ;;
+ case "pbb" :
  let cpu = "m68k" ;//2
-let vendor = "tti"  ;;  case "pc532" :
+let vendor = "tti"  ;;
+ case "pc532" :
  let cpu = "ns32k" ;//2
-let vendor = "pc532"  ;;  case "pn" :
+let vendor = "pc532"  ;;
+ case "pn" :
  let cpu = "pn" ;//2
-let vendor = "gould"  ;;  case "power" :
+let vendor = "gould"  ;;
+ case "power" :
  let cpu = "power" ;//2
-let vendor = "ibm"  ;;  case "ps2" :
+let vendor = "ibm"  ;;
+ case "ps2" :
  let cpu = "i386" ;//2
-let vendor = "ibm"  ;;  case "rm[46]00" :
+let vendor = "ibm"  ;;
+ case "rm[46]00" :
  let cpu = "mips" ;//2
-let vendor = "siemens"  ;;  case "rtpc" :
+let vendor = "siemens"  ;;
+ case "rtpc" :
  case "rtpc-*" :
  let cpu = "romp" ;//2
-let vendor = "ibm"  ;;  case "sde" :
+let vendor = "ibm"  ;;
+ case "sde" :
  let cpu = "mipsisa32" ;//2
 let vendor = "sde" ;//2
-let os = os + /*{ rest_ppe: { Excl: false, Exp: { Op: 70, Word: [Object] }, Index: null, Length: false, Names: 0, Repl: null, Short: false, Slice: null, Width: false } }*/
-  ;;  case "simso-wrs" :
+let os = ( os  :-  "elf" )  ;;
+ case "simso-wrs" :
  let cpu = "sparclite" ;//2
 let vendor = "wrs" ;//2
-let os = "vxworks"  ;;  case "tower" :
+let os = "vxworks"  ;;
+ case "tower" :
  case "tower-32" :
  let cpu = "m68k" ;//2
-let vendor = "ncr"  ;;  case "vpp*" :
+let vendor = "ncr"  ;;
+ case "vpp*" :
  case "vx" :
  case "vx-*" :
  let cpu = "f301" ;//2
-let vendor = "fujitsu"  ;;  case "w65" :
+let vendor = "fujitsu"  ;;
+ case "w65" :
  let cpu = "w65" ;//2
-let vendor = "wdc"  ;;  case "w89k-*" :
+let vendor = "wdc"  ;;
+ case "w89k-*" :
  let cpu = "hppa1.1" ;//2
 let vendor = "winbond" ;//2
-let os = "proelf"  ;;  case "none" :
+let os = "proelf"  ;;
+ case "none" :
  let cpu = "none" ;//2
-let vendor = "none"  ;;  case "leon" :
+let vendor = "none"  ;;
+ case "leon" :
  case "leon[3-9]" :
  let cpu = "sparc" ;//2
-let vendor = basic_machine  ;;  case "leon-*" :
+let vendor = basic_machine  ;;
+ case "leon-*" :
  case "leon[3-9]-*" :
  let cpu = "sparc" ;//2
-let vendor = $( "echo" basic_machine  |  "sed" "s/-.*//" )  ;;  case "*-*" :
+let vendor = $( {
+ "echo" basic_machine  |  "sed" "s/-.*//" 
+} )  ;;
+ case "*-*" :
  //  shellcheck disable=SC2162
-let IFS = "-" "read" "cpu" "vendor" <<  "EOF" /*{ rest_red: { Hdoc: { End: [Object], Parts: [Array], Pos: [Object] }, N: null } }*/
-  ;;  //  We use `pc' rather than `unknown'
+let IFS = "-" "read" "cpu" "vendor"  <<  "EOF" basic_machine + /*3*/"\n"  ;;
+ //  We use `pc' rather than `unknown'
 //  because (1) that's what they normally are, and
 //  (2) the word "unknown" tends to confuse beginning users.
  case "i*86" :
  case "x86_64" :
  let cpu = basic_machine ;//2
-let vendor = "pc"  ;;  //  These rules are duplicated from below for sake of the special case above;
+let vendor = "pc"  ;;
+ //  These rules are duplicated from below for sake of the special case above;
 //  i.e. things that normalized to x86 arches should also default to "pc"
  case "pc98" :
  let cpu = "i386" ;//2
-let vendor = "pc"  ;;  case "x64" :
+let vendor = "pc"  ;;
+ case "x64" :
  case "amd64" :
  let cpu = "x86_64" ;//2
-let vendor = "pc"  ;;  //  Recognize the basic CPU types without company name.
+let vendor = "pc"  ;;
+ //  Recognize the basic CPU types without company name.
  case "*" :
  let cpu = basic_machine ;//2
-let vendor = "unknown"  ;;  
+let vendor = "unknown"  ;;
+ 
 } ;//2
 "unset" "-v" "basic_machine" ;//2
 //  Decode basic machines in the full and proper CPU-Company form.
-switch ( cpu + "-" + vendor ) {
+switch ( cpu + /*3*/"-" + /*3*/vendor ) {
  //  Here we handle the default manufacturer of certain CPU types in canonical form. It is in
 //  some cases the only manufacturer, in others, it is the most popular.
  case "craynv-unknown" :
  let vendor = "cray" ;//2
-let os = os + /*{ rest_ppe: { Excl: false, Exp: { Op: 70, Word: [Object] }, Index: null, Length: false, Names: 0, Repl: null, Short: false, Slice: null, Width: false } }*/
-  ;;  case "c90-unknown" :
+let os = ( os  :-  "unicosmp" )  ;;
+ case "c90-unknown" :
  case "c90-cray" :
  let vendor = "cray" ;//2
-let os = os + /*{ rest_ppe: { Excl: false, Exp: { Op: 70, Word: [Object] }, Index: null, Length: false, Names: 0, Repl: null, Short: false, Slice: null, Width: false } }*/
-  ;;  case "fx80-unknown" :
- let vendor = "alliant"  ;;  case "romp-unknown" :
- let vendor = "ibm"  ;;  case "mmix-unknown" :
- let vendor = "knuth"  ;;  case "microblaze-unknown" :
+let os = ( os  :-  "unicos" )  ;;
+ case "fx80-unknown" :
+ let vendor = "alliant"  ;;
+ case "romp-unknown" :
+ let vendor = "ibm"  ;;
+ case "mmix-unknown" :
+ let vendor = "knuth"  ;;
+ case "microblaze-unknown" :
  case "microblazeel-unknown" :
- let vendor = "xilinx"  ;;  case "rs6000-unknown" :
- let vendor = "ibm"  ;;  case "vax-unknown" :
- let vendor = "dec"  ;;  case "pdp11-unknown" :
- let vendor = "dec"  ;;  case "we32k-unknown" :
- let vendor = "att"  ;;  case "cydra-unknown" :
- let vendor = "cydrome"  ;;  case "i370-ibm*" :
- let vendor = "ibm"  ;;  case "orion-unknown" :
- let vendor = "highlevel"  ;;  case "xps-unknown" :
+ let vendor = "xilinx"  ;;
+ case "rs6000-unknown" :
+ let vendor = "ibm"  ;;
+ case "vax-unknown" :
+ let vendor = "dec"  ;;
+ case "pdp11-unknown" :
+ let vendor = "dec"  ;;
+ case "we32k-unknown" :
+ let vendor = "att"  ;;
+ case "cydra-unknown" :
+ let vendor = "cydrome"  ;;
+ case "i370-ibm*" :
+ let vendor = "ibm"  ;;
+ case "orion-unknown" :
+ let vendor = "highlevel"  ;;
+ case "xps-unknown" :
  case "xps100-unknown" :
  let cpu = "xps100" ;//2
-let vendor = "honeywell"  ;;  //  Here we normalize CPU types with a missing or matching vendor
+let vendor = "honeywell"  ;;
+ //  Here we normalize CPU types with a missing or matching vendor
  case "dpx20-unknown" :
  case "dpx20-bull" :
  let cpu = "rs6000" ;//2
 let vendor = "bull" ;//2
-let os = os + /*{ rest_ppe: { Excl: false, Exp: { Op: 70, Word: [Object] }, Index: null, Length: false, Names: 0, Repl: null, Short: false, Slice: null, Width: false } }*/
-  ;;  //  Here we normalize CPU types irrespective of the vendor
+let os = ( os  :-  "bosx" )  ;;
+ //  Here we normalize CPU types irrespective of the vendor
  case "amd64-*" :
- let cpu = "x86_64"  ;;  case "blackfin-*" :
+ let cpu = "x86_64"  ;;
+ case "blackfin-*" :
  let cpu = "bfin" ;//2
-let os = "linux"  ;;  case "c54x-*" :
- let cpu = "tic54x"  ;;  case "c55x-*" :
- let cpu = "tic55x"  ;;  case "c6x-*" :
- let cpu = "tic6x"  ;;  case "e500v[12]-*" :
+let os = "linux"  ;;
+ case "c54x-*" :
+ let cpu = "tic54x"  ;;
+ case "c55x-*" :
+ let cpu = "tic55x"  ;;
+ case "c6x-*" :
+ let cpu = "tic6x"  ;;
+ case "e500v[12]-*" :
  let cpu = "powerpc" ;//2
-let os = os + "spe"  ;;  case "mips3*-*" :
- let cpu = "mips64"  ;;  case "ms1-*" :
- let cpu = "mt"  ;;  case "m68knommu-*" :
+let os = os + /*3*/"spe"  ;;
+ case "mips3*-*" :
+ let cpu = "mips64"  ;;
+ case "ms1-*" :
+ let cpu = "mt"  ;;
+ case "m68knommu-*" :
  let cpu = "m68k" ;//2
-let os = "linux"  ;;  case "m9s12z-*" :
+let os = "linux"  ;;
+ case "m9s12z-*" :
  case "m68hcs12z-*" :
  case "hcs12z-*" :
  case "s12z-*" :
- let cpu = "s12z"  ;;  case "openrisc-*" :
- let cpu = "or32"  ;;  case "parisc-*" :
+ let cpu = "s12z"  ;;
+ case "openrisc-*" :
+ let cpu = "or32"  ;;
+ case "parisc-*" :
  let cpu = "hppa" ;//2
-let os = "linux"  ;;  case "pentium-*" :
+let os = "linux"  ;;
+ case "pentium-*" :
  case "p5-*" :
  case "k5-*" :
  case "k6-*" :
  case "nexgen-*" :
  case "viac3-*" :
- let cpu = "i586"  ;;  case "pentiumpro-*" :
+ let cpu = "i586"  ;;
+ case "pentiumpro-*" :
  case "p6-*" :
  case "6x86-*" :
  case "athlon-*" :
  case "athalon_*-*" :
- let cpu = "i686"  ;;  case "pentiumii-*" :
+ let cpu = "i686"  ;;
+ case "pentiumii-*" :
  case "pentium2-*" :
  case "pentiumiii-*" :
  case "pentium3-*" :
- let cpu = "i686"  ;;  case "pentium4-*" :
- let cpu = "i786"  ;;  case "pc98-*" :
- let cpu = "i386"  ;;  case "ppc-*" :
+ let cpu = "i686"  ;;
+ case "pentium4-*" :
+ let cpu = "i786"  ;;
+ case "pc98-*" :
+ let cpu = "i386"  ;;
+ case "ppc-*" :
  case "ppcbe-*" :
- let cpu = "powerpc"  ;;  case "ppcle-*" :
+ let cpu = "powerpc"  ;;
+ case "ppcle-*" :
  case "powerpclittle-*" :
- let cpu = "powerpcle"  ;;  case "ppc64-*" :
- let cpu = "powerpc64"  ;;  case "ppc64le-*" :
+ let cpu = "powerpcle"  ;;
+ case "ppc64-*" :
+ let cpu = "powerpc64"  ;;
+ case "ppc64le-*" :
  case "powerpc64little-*" :
- let cpu = "powerpc64le"  ;;  case "sb1-*" :
- let cpu = "mipsisa64sb1"  ;;  case "sb1el-*" :
- let cpu = "mipsisa64sb1el"  ;;  case "sh5e[lb]-*" :
- let cpu = $( "echo" cpu  |  "sed" "s/^\\(sh.\\)e\\(.\\)$/\\1\\2e/" )  ;;  case "spur-*" :
- let cpu = "spur"  ;;  case "strongarm-*" :
+ let cpu = "powerpc64le"  ;;
+ case "sb1-*" :
+ let cpu = "mipsisa64sb1"  ;;
+ case "sb1el-*" :
+ let cpu = "mipsisa64sb1el"  ;;
+ case "sh5e[lb]-*" :
+ let cpu = $( {
+ "echo" cpu  |  "sed" "s/^\\(sh.\\)e\\(.\\)$/\\1\\2e/" 
+} )  ;;
+ case "spur-*" :
+ let cpu = "spur"  ;;
+ case "strongarm-*" :
  case "thumb-*" :
- let cpu = "arm"  ;;  case "tx39-*" :
- let cpu = "mipstx39"  ;;  case "tx39el-*" :
- let cpu = "mipstx39el"  ;;  case "x64-*" :
- let cpu = "x86_64"  ;;  case "xscale-*" :
+ let cpu = "arm"  ;;
+ case "tx39-*" :
+ let cpu = "mipstx39"  ;;
+ case "tx39el-*" :
+ let cpu = "mipstx39el"  ;;
+ case "x64-*" :
+ let cpu = "x86_64"  ;;
+ case "xscale-*" :
  case "xscalee[bl]-*" :
- let cpu = $( "echo" cpu  |  "sed" "s/^xscale/arm/" )  ;;  //  Recognize the canonical CPU Types that limit and/or modify the
+ let cpu = $( {
+ "echo" cpu  |  "sed" "s/^xscale/arm/" 
+} )  ;;
+ //  Recognize the canonical CPU Types that limit and/or modify the
 //  company names they are paired with.
  case "cr16-*" :
- let os = os + /*{ rest_ppe: { Excl: false, Exp: { Op: 70, Word: [Object] }, Index: null, Length: false, Names: 0, Repl: null, Short: false, Slice: null, Width: false } }*/
-  ;;  case "crisv32-*" :
+ let os = ( os  :-  "elf" )  ;;
+ case "crisv32-*" :
  case "etraxfs*-*" :
  let cpu = "crisv32" ;//2
-let vendor = "axis"  ;;  case "cris-*" :
+let vendor = "axis"  ;;
+ case "cris-*" :
  case "etrax*-*" :
  let cpu = "cris" ;//2
-let vendor = "axis"  ;;  case "crx-*" :
- let os = os + /*{ rest_ppe: { Excl: false, Exp: { Op: 70, Word: [Object] }, Index: null, Length: false, Names: 0, Repl: null, Short: false, Slice: null, Width: false } }*/
-  ;;  case "neo-tandem" :
+let vendor = "axis"  ;;
+ case "crx-*" :
+ let os = ( os  :-  "elf" )  ;;
+ case "neo-tandem" :
  let cpu = "neo" ;//2
-let vendor = "tandem"  ;;  case "nse-tandem" :
+let vendor = "tandem"  ;;
+ case "nse-tandem" :
  let cpu = "nse" ;//2
-let vendor = "tandem"  ;;  case "nsr-tandem" :
+let vendor = "tandem"  ;;
+ case "nsr-tandem" :
  let cpu = "nsr" ;//2
-let vendor = "tandem"  ;;  case "nsv-tandem" :
+let vendor = "tandem"  ;;
+ case "nsv-tandem" :
  let cpu = "nsv" ;//2
-let vendor = "tandem"  ;;  case "nsx-tandem" :
+let vendor = "tandem"  ;;
+ case "nsx-tandem" :
  let cpu = "nsx" ;//2
-let vendor = "tandem"  ;;  case "s390-*" :
+let vendor = "tandem"  ;;
+ case "s390-*" :
  let cpu = "s390" ;//2
-let vendor = "ibm"  ;;  case "s390x-*" :
+let vendor = "ibm"  ;;
+ case "s390x-*" :
  let cpu = "s390x" ;//2
-let vendor = "ibm"  ;;  case "tile*-*" :
- let os = os + /*{ rest_ppe: { Excl: false, Exp: { Op: 70, Word: [Object] }, Index: null, Length: false, Names: 0, Repl: null, Short: false, Slice: null, Width: false } }*/
-  ;;  case "*" :
+let vendor = "ibm"  ;;
+ case "tile*-*" :
+ let os = ( os  :-  "linux-gnu" )  ;;
+ case "*" :
  //  Recognize the canonical CPU types that are allowed with any
 //  company name.
 switch ( cpu ) {
@@ -2257,49 +3062,77 @@ switch ( cpu ) {
  case "ymp" :
  case "z8k" :
  case "z80" :
-  ;;  case "*" :
- "echo" "Invalid" "configuration" "\\`" + process.argv[1] + "\\':" "machine" "\\`" + cpu + "-" + vendor + "\\'" "not" "recognized" >&  "2" /*{ rest_red: { Hdoc: null, N: { End: [Object], Pos: [Object], Value: '1' } } }*/
- ;//2
-"exit" "1"  ;;  
-}  ;;  
+  ;;
+ case "*" :
+ "echo" "Invalid" "configuration" "\\`" + /*3*/process.argv[1] + /*3*/"\\':" "machine" "\\`" + /*3*/cpu + /*3*/"-" + /*3*/vendor + /*3*/"\\'" "not" "recognized" 1  >&  "2" ;//2
+"exit" "1"  ;;
+ 
+}  ;;
+ 
 } ;//2
 //  Here we canonicalize certain aliases for manufacturers.
 switch ( vendor ) {
  case "digital*" :
- let vendor = "dec"  ;;  case "commodore*" :
- let vendor = "cbm"  ;;  case "*" :
-  ;;  
+ let vendor = "dec"  ;;
+ case "commodore*" :
+ let vendor = "cbm"  ;;
+ case "*" :
+  ;;
+ 
 } ;//2
 //  Decode manufacturer-specific aliases for certain operating systems.
-if ( "[" "x" + os "!=" "x" "]" ) {
+if ( "[" "x" + /*3*/os "!=" "x" "]" ) {
 switch ( os ) {
  //  First match some system type aliases that might get confused
 //  with valid system types.
 //  solaris* is a basic system type, with this one exception.
  case "auroraux" :
- let os = "auroraux"  ;;  case "bluegene*" :
- let os = "cnk"  ;;  case "solaris1" :
+ let os = "auroraux"  ;;
+ case "bluegene*" :
+ let os = "cnk"  ;;
+ case "solaris1" :
  case "solaris1.*" :
- let os = $( "echo" os  |  "sed" "-e" "s|solaris1|sunos4|" )  ;;  case "solaris" :
- let os = "solaris2"  ;;  case "unixware*" :
- let os = "sysv4.2uw"  ;;  case "gnu/linux*" :
- let os = $( "echo" os  |  "sed" "-e" "s|gnu/linux|linux-gnu|" )  ;;  //  es1800 is here to avoid being matched by es* (a different OS)
+ let os = $( {
+ "echo" os  |  "sed" "-e" "s|solaris1|sunos4|" 
+} )  ;;
+ case "solaris" :
+ let os = "solaris2"  ;;
+ case "unixware*" :
+ let os = "sysv4.2uw"  ;;
+ case "gnu/linux*" :
+ let os = $( {
+ "echo" os  |  "sed" "-e" "s|gnu/linux|linux-gnu|" 
+} )  ;;
+ //  es1800 is here to avoid being matched by es* (a different OS)
  case "es1800*" :
- let os = "ose"  ;;  //  Some version numbers need modification
+ let os = "ose"  ;;
+ //  Some version numbers need modification
  case "chorusos*" :
- let os = "chorusos"  ;;  case "isc" :
- let os = "isc2.2"  ;;  case "sco6" :
- let os = "sco5v6"  ;;  case "sco5" :
- let os = "sco3.2v5"  ;;  case "sco4" :
- let os = "sco3.2v4"  ;;  case "sco3.2.[4-9]*" :
- let os = $( "echo" os  |  "sed" "-e" "s/sco3.2./sco3.2v/" )  ;;  case "sco3.2v[4-9]*" :
+ let os = "chorusos"  ;;
+ case "isc" :
+ let os = "isc2.2"  ;;
+ case "sco6" :
+ let os = "sco5v6"  ;;
+ case "sco5" :
+ let os = "sco3.2v5"  ;;
+ case "sco4" :
+ let os = "sco3.2v4"  ;;
+ case "sco3.2.[4-9]*" :
+ let os = $( {
+ "echo" os  |  "sed" "-e" "s/sco3.2./sco3.2v/" 
+} )  ;;
+ case "sco3.2v[4-9]*" :
  case "sco5v6*" :
-  ;;  /*{ rest_itm: { Last: [ [Object] ] } }*/
+  ;;
+ //  Don't forget version if it is 3.2v4 or newer.
  case "scout" :
-  ;;  /*{ rest_itm: { Last: [ [Object] ] } }*/
+  ;;
+ //  Don't match below
  case "sco*" :
- let os = "sco3.2v2"  ;;  case "psos*" :
- let os = "psos"  ;;  //  Now accept the basic system types.
+ let os = "sco3.2v2"  ;;
+ case "psos*" :
+ let os = "psos"  ;;
+ //  Now accept the basic system types.
 //  The portable systems comes first.
 //  Each alternative MUST end in a * to match a version number.
 //  sysv* is not here because it comes later, after sysvr4.
@@ -2448,17 +3281,26 @@ switch ( os ) {
  case "amdhsa*" :
  case "unleashed*" :
  case "emscripten*" :
-  ;;  /*{ rest_itm: { Last: [ [Object] ] } }*/
+  ;;
+ //  Remember, each alternative MUST END IN *, to match a version number.
  case "qnx*" :
  switch ( cpu ) {
  case "x86" :
  case "i*86" :
-  ;;  case "*" :
- let os = "nto-" + os  ;;  
-}  ;;  case "hiux*" :
- let os = "hiuxwe2"  ;;  case "nto-qnx*" :
-  ;;  case "nto*" :
- let os = $( "echo" os  |  "sed" "-e" "s|nto|nto-qnx|" )  ;;  case "sim" :
+  ;;
+ case "*" :
+ let os = "nto-" + /*3*/os  ;;
+ 
+}  ;;
+ case "hiux*" :
+ let os = "hiuxwe2"  ;;
+ case "nto-qnx*" :
+  ;;
+ case "nto*" :
+ let os = $( {
+ "echo" os  |  "sed" "-e" "s|nto|nto-qnx|" 
+} )  ;;
+ case "sim" :
  case "xray" :
  case "os68k*" :
  case "v88r*" :
@@ -2473,64 +3315,116 @@ switch ( os ) {
  case "mmixware*" :
  case "mon960*" :
  case "lnews*" :
-  ;;  case "linux-dietlibc" :
- let os = "linux-dietlibc"  ;;  case "linux*" :
- let os = $( "echo" os  |  "sed" "-e" "s|linux|linux-gnu|" )  ;;  case "lynx*178" :
- let os = "lynxos178"  ;;  case "lynx*5" :
- let os = "lynxos5"  ;;  case "lynx*" :
- let os = "lynxos"  ;;  case "mac*" :
- let os = $( "echo" os  |  "sed" "-e" "s|mac|macos|" )  ;;  case "opened*" :
- let os = "openedition"  ;;  case "os400*" :
- let os = "os400"  ;;  case "sunos5*" :
- let os = $( "echo" os  |  "sed" "-e" "s|sunos5|solaris2|" )  ;;  case "sunos6*" :
- let os = $( "echo" os  |  "sed" "-e" "s|sunos6|solaris3|" )  ;;  case "wince*" :
- let os = "wince"  ;;  case "utek*" :
- let os = "bsd"  ;;  case "dynix*" :
- let os = "bsd"  ;;  case "acis*" :
- let os = "aos"  ;;  case "atheos*" :
- let os = "atheos"  ;;  case "syllable*" :
- let os = "syllable"  ;;  case "386bsd" :
- let os = "bsd"  ;;  case "ctix*" :
+  ;;
+ case "linux-dietlibc" :
+ let os = "linux-dietlibc"  ;;
+ case "linux*" :
+ let os = $( {
+ "echo" os  |  "sed" "-e" "s|linux|linux-gnu|" 
+} )  ;;
+ case "lynx*178" :
+ let os = "lynxos178"  ;;
+ case "lynx*5" :
+ let os = "lynxos5"  ;;
+ case "lynx*" :
+ let os = "lynxos"  ;;
+ case "mac*" :
+ let os = $( {
+ "echo" os  |  "sed" "-e" "s|mac|macos|" 
+} )  ;;
+ case "opened*" :
+ let os = "openedition"  ;;
+ case "os400*" :
+ let os = "os400"  ;;
+ case "sunos5*" :
+ let os = $( {
+ "echo" os  |  "sed" "-e" "s|sunos5|solaris2|" 
+} )  ;;
+ case "sunos6*" :
+ let os = $( {
+ "echo" os  |  "sed" "-e" "s|sunos6|solaris3|" 
+} )  ;;
+ case "wince*" :
+ let os = "wince"  ;;
+ case "utek*" :
+ let os = "bsd"  ;;
+ case "dynix*" :
+ let os = "bsd"  ;;
+ case "acis*" :
+ let os = "aos"  ;;
+ case "atheos*" :
+ let os = "atheos"  ;;
+ case "syllable*" :
+ let os = "syllable"  ;;
+ case "386bsd" :
+ let os = "bsd"  ;;
+ case "ctix*" :
  case "uts*" :
- let os = "sysv"  ;;  case "nova*" :
- let os = "rtmk-nova"  ;;  case "ns2" :
- let os = "nextstep2"  ;;  case "nsk*" :
- let os = "nsk"  ;;  //  Preserve the version number of sinix5.
+ let os = "sysv"  ;;
+ case "nova*" :
+ let os = "rtmk-nova"  ;;
+ case "ns2" :
+ let os = "nextstep2"  ;;
+ case "nsk*" :
+ let os = "nsk"  ;;
+ //  Preserve the version number of sinix5.
  case "sinix5.*" :
- let os = $( "echo" os  |  "sed" "-e" "s|sinix|sysv|" )  ;;  case "sinix*" :
- let os = "sysv4"  ;;  case "tpf*" :
- let os = "tpf"  ;;  case "triton*" :
- let os = "sysv3"  ;;  case "oss*" :
- let os = "sysv3"  ;;  case "svr4*" :
- let os = "sysv4"  ;;  case "svr3" :
- let os = "sysv3"  ;;  case "sysvr4" :
- let os = "sysv4"  ;;  //  This must come after sysvr4.
+ let os = $( {
+ "echo" os  |  "sed" "-e" "s|sinix|sysv|" 
+} )  ;;
+ case "sinix*" :
+ let os = "sysv4"  ;;
+ case "tpf*" :
+ let os = "tpf"  ;;
+ case "triton*" :
+ let os = "sysv3"  ;;
+ case "oss*" :
+ let os = "sysv3"  ;;
+ case "svr4*" :
+ let os = "sysv4"  ;;
+ case "svr3" :
+ let os = "sysv3"  ;;
+ case "sysvr4" :
+ let os = "sysv4"  ;;
+ //  This must come after sysvr4.
  case "sysv*" :
-  ;;  case "ose*" :
- let os = "ose"  ;;  case "*mint" :
+  ;;
+ case "ose*" :
+ let os = "ose"  ;;
+ case "*mint" :
  case "mint[0-9]*" :
  case "*MiNT" :
  case "MiNT[0-9]*" :
- let os = "mint"  ;;  case "zvmoe" :
- let os = "zvmoe"  ;;  case "dicos*" :
- let os = "dicos"  ;;  case "pikeos*" :
+ let os = "mint"  ;;
+ case "zvmoe" :
+ let os = "zvmoe"  ;;
+ case "dicos*" :
+ let os = "dicos"  ;;
+ case "pikeos*" :
  //  Until real need of OS specific support for
 //  particular features comes up, bare metal
 //  configurations are quite functional.
 switch ( cpu ) {
  case "arm*" :
- let os = "eabi"  ;;  case "*" :
- let os = "elf"  ;;  
-}  ;;  case "nacl*" :
-  ;;  case "ios" :
-  ;;  case "none" :
-  ;;  case "*-eabi" :
-  ;;  case "*" :
- "echo" "Invalid" "configuration" "\\`" + process.argv[1] + "\\':" "system" "\\`" + os + "\\'" "not" "recognized" >&  "2" /*{ rest_red: { Hdoc: null, N: { End: [Object], Pos: [Object], Value: '1' } } }*/
- ;//2
-"exit" "1"  ;;  
+ let os = "eabi"  ;;
+ case "*" :
+ let os = "elf"  ;;
+ 
+}  ;;
+ case "nacl*" :
+  ;;
+ case "ios" :
+  ;;
+ case "none" :
+  ;;
+ case "*-eabi" :
+  ;;
+ case "*" :
+ "echo" "Invalid" "configuration" "\\`" + /*3*/process.argv[1] + /*3*/"\\':" "system" "\\`" + /*3*/os + /*3*/"\\'" "not" "recognized" 1  >&  "2" ;//2
+"exit" "1"  ;;
+ 
 }
-}else{
+}  else {
 //  Here we handle the default operating systems that come with various machines.
 //  The value should be what the vendor currently ships out the door with their
 //  machine or put another way, the most popular os provided with the machine.
@@ -2539,118 +3433,199 @@ switch ( cpu ) {
 //  that MANUFACTURER isn't an operating system.  Otherwise, code above
 //  will signal an error saying that MANUFACTURER isn't an operating
 //  system, and we'll never get to this point.
-switch ( cpu + "-" + vendor ) {
+switch ( cpu + /*3*/"-" + /*3*/vendor ) {
  case "score-*" :
- let os = "elf"  ;;  case "spu-*" :
- let os = "elf"  ;;  case "*-acorn" :
- let os = "riscix1.2"  ;;  case "arm*-rebel" :
- let os = "linux"  ;;  case "arm*-semi" :
- let os = "aout"  ;;  case "c4x-*" :
+ let os = "elf"  ;;
+ case "spu-*" :
+ let os = "elf"  ;;
+ case "*-acorn" :
+ let os = "riscix1.2"  ;;
+ case "arm*-rebel" :
+ let os = "linux"  ;;
+ case "arm*-semi" :
+ let os = "aout"  ;;
+ case "c4x-*" :
  case "tic4x-*" :
- let os = "coff"  ;;  case "c8051-*" :
- let os = "elf"  ;;  case "clipper-intergraph" :
- let os = "clix"  ;;  case "hexagon-*" :
- let os = "elf"  ;;  case "tic54x-*" :
- let os = "coff"  ;;  case "tic55x-*" :
- let os = "coff"  ;;  case "tic6x-*" :
- let os = "coff"  ;;  //  This must come before the *-dec entry.
+ let os = "coff"  ;;
+ case "c8051-*" :
+ let os = "elf"  ;;
+ case "clipper-intergraph" :
+ let os = "clix"  ;;
+ case "hexagon-*" :
+ let os = "elf"  ;;
+ case "tic54x-*" :
+ let os = "coff"  ;;
+ case "tic55x-*" :
+ let os = "coff"  ;;
+ case "tic6x-*" :
+ let os = "coff"  ;;
+ //  This must come before the *-dec entry.
  case "pdp10-*" :
- let os = "tops20"  ;;  case "pdp11-*" :
- let os = "none"  ;;  case "*-dec" :
+ let os = "tops20"  ;;
+ case "pdp11-*" :
+ let os = "none"  ;;
+ case "*-dec" :
  case "vax-*" :
- let os = "ultrix4.2"  ;;  case "m68*-apollo" :
- let os = "domain"  ;;  case "i386-sun" :
- let os = "sunos4.0.2"  ;;  case "m68000-sun" :
- let os = "sunos3"  ;;  case "m68*-cisco" :
- let os = "aout"  ;;  case "mep-*" :
- let os = "elf"  ;;  case "mips*-cisco" :
- let os = "elf"  ;;  case "mips*-*" :
- let os = "elf"  ;;  case "or32-*" :
- let os = "coff"  ;;  case "*-tti" :
+ let os = "ultrix4.2"  ;;
+ case "m68*-apollo" :
+ let os = "domain"  ;;
+ case "i386-sun" :
+ let os = "sunos4.0.2"  ;;
+ case "m68000-sun" :
+ let os = "sunos3"  ;;
+ case "m68*-cisco" :
+ let os = "aout"  ;;
+ case "mep-*" :
+ let os = "elf"  ;;
+ case "mips*-cisco" :
+ let os = "elf"  ;;
+ case "mips*-*" :
+ let os = "elf"  ;;
+ case "or32-*" :
+ let os = "coff"  ;;
+ case "*-tti" :
  //  must be before sparc entry or we get the wrong os.
-let os = "sysv3"  ;;  case "sparc-*" :
+let os = "sysv3"  ;;
+ case "sparc-*" :
  case "*-sun" :
- let os = "sunos4.1.1"  ;;  case "pru-*" :
- let os = "elf"  ;;  case "*-be" :
- let os = "beos"  ;;  case "*-ibm" :
- let os = "aix"  ;;  case "*-knuth" :
- let os = "mmixware"  ;;  case "*-wec" :
- let os = "proelf"  ;;  case "*-winbond" :
- let os = "proelf"  ;;  case "*-oki" :
- let os = "proelf"  ;;  case "*-hp" :
- let os = "hpux"  ;;  case "*-hitachi" :
- let os = "hiux"  ;;  case "i860-*" :
+ let os = "sunos4.1.1"  ;;
+ case "pru-*" :
+ let os = "elf"  ;;
+ case "*-be" :
+ let os = "beos"  ;;
+ case "*-ibm" :
+ let os = "aix"  ;;
+ case "*-knuth" :
+ let os = "mmixware"  ;;
+ case "*-wec" :
+ let os = "proelf"  ;;
+ case "*-winbond" :
+ let os = "proelf"  ;;
+ case "*-oki" :
+ let os = "proelf"  ;;
+ case "*-hp" :
+ let os = "hpux"  ;;
+ case "*-hitachi" :
+ let os = "hiux"  ;;
+ case "i860-*" :
  case "*-att" :
  case "*-ncr" :
  case "*-altos" :
  case "*-motorola" :
  case "*-convergent" :
- let os = "sysv"  ;;  case "*-cbm" :
- let os = "amigaos"  ;;  case "*-dg" :
- let os = "dgux"  ;;  case "*-dolphin" :
- let os = "sysv3"  ;;  case "m68k-ccur" :
- let os = "rtu"  ;;  case "m88k-omron*" :
- let os = "luna"  ;;  case "*-next" :
- let os = "nextstep"  ;;  case "*-sequent" :
- let os = "ptx"  ;;  case "*-crds" :
- let os = "unos"  ;;  case "*-ns" :
- let os = "genix"  ;;  case "i370-*" :
- let os = "mvs"  ;;  case "*-gould" :
- let os = "sysv"  ;;  case "*-highlevel" :
- let os = "bsd"  ;;  case "*-encore" :
- let os = "bsd"  ;;  case "*-sgi" :
- let os = "irix"  ;;  case "*-siemens" :
- let os = "sysv4"  ;;  case "*-masscomp" :
- let os = "rtu"  ;;  case "f30[01]-fujitsu" :
+ let os = "sysv"  ;;
+ case "*-cbm" :
+ let os = "amigaos"  ;;
+ case "*-dg" :
+ let os = "dgux"  ;;
+ case "*-dolphin" :
+ let os = "sysv3"  ;;
+ case "m68k-ccur" :
+ let os = "rtu"  ;;
+ case "m88k-omron*" :
+ let os = "luna"  ;;
+ case "*-next" :
+ let os = "nextstep"  ;;
+ case "*-sequent" :
+ let os = "ptx"  ;;
+ case "*-crds" :
+ let os = "unos"  ;;
+ case "*-ns" :
+ let os = "genix"  ;;
+ case "i370-*" :
+ let os = "mvs"  ;;
+ case "*-gould" :
+ let os = "sysv"  ;;
+ case "*-highlevel" :
+ let os = "bsd"  ;;
+ case "*-encore" :
+ let os = "bsd"  ;;
+ case "*-sgi" :
+ let os = "irix"  ;;
+ case "*-siemens" :
+ let os = "sysv4"  ;;
+ case "*-masscomp" :
+ let os = "rtu"  ;;
+ case "f30[01]-fujitsu" :
  case "f700-fujitsu" :
- let os = "uxpv"  ;;  case "*-rom68k" :
- let os = "coff"  ;;  case "*-*bug" :
- let os = "coff"  ;;  case "*-apple" :
- let os = "macos"  ;;  case "*-atari*" :
- let os = "mint"  ;;  case "*-wrs" :
- let os = "vxworks"  ;;  case "*" :
- let os = "none"  ;;  
+ let os = "uxpv"  ;;
+ case "*-rom68k" :
+ let os = "coff"  ;;
+ case "*-*bug" :
+ let os = "coff"  ;;
+ case "*-apple" :
+ let os = "macos"  ;;
+ case "*-atari*" :
+ let os = "mint"  ;;
+ case "*-wrs" :
+ let os = "vxworks"  ;;
+ case "*" :
+ let os = "none"  ;;
+ 
 }
-) ;//2
+}  ;//2
 //  Here we handle the case where we know the os, and the CPU type, but not the
 //  manufacturer.  We pick the logical manufacturer.
 switch ( vendor ) {
  case "unknown" :
  switch ( os ) {
  case "riscix*" :
- let vendor = "acorn"  ;;  case "sunos*" :
- let vendor = "sun"  ;;  case "cnk*" :
+ let vendor = "acorn"  ;;
+ case "sunos*" :
+ let vendor = "sun"  ;;
+ case "cnk*" :
  case "-aix*" :
- let vendor = "ibm"  ;;  case "beos*" :
- let vendor = "be"  ;;  case "hpux*" :
- let vendor = "hp"  ;;  case "mpeix*" :
- let vendor = "hp"  ;;  case "hiux*" :
- let vendor = "hitachi"  ;;  case "unos*" :
- let vendor = "crds"  ;;  case "dgux*" :
- let vendor = "dg"  ;;  case "luna*" :
- let vendor = "omron"  ;;  case "genix*" :
- let vendor = "ns"  ;;  case "clix*" :
- let vendor = "intergraph"  ;;  case "mvs*" :
+ let vendor = "ibm"  ;;
+ case "beos*" :
+ let vendor = "be"  ;;
+ case "hpux*" :
+ let vendor = "hp"  ;;
+ case "mpeix*" :
+ let vendor = "hp"  ;;
+ case "hiux*" :
+ let vendor = "hitachi"  ;;
+ case "unos*" :
+ let vendor = "crds"  ;;
+ case "dgux*" :
+ let vendor = "dg"  ;;
+ case "luna*" :
+ let vendor = "omron"  ;;
+ case "genix*" :
+ let vendor = "ns"  ;;
+ case "clix*" :
+ let vendor = "intergraph"  ;;
+ case "mvs*" :
  case "opened*" :
- let vendor = "ibm"  ;;  case "os400*" :
- let vendor = "ibm"  ;;  case "ptx*" :
- let vendor = "sequent"  ;;  case "tpf*" :
- let vendor = "ibm"  ;;  case "vxsim*" :
+ let vendor = "ibm"  ;;
+ case "os400*" :
+ let vendor = "ibm"  ;;
+ case "ptx*" :
+ let vendor = "sequent"  ;;
+ case "tpf*" :
+ let vendor = "ibm"  ;;
+ case "vxsim*" :
  case "vxworks*" :
  case "windiss*" :
- let vendor = "wrs"  ;;  case "aux*" :
- let vendor = "apple"  ;;  case "hms*" :
- let vendor = "hitachi"  ;;  case "mpw*" :
+ let vendor = "wrs"  ;;
+ case "aux*" :
+ let vendor = "apple"  ;;
+ case "hms*" :
+ let vendor = "hitachi"  ;;
+ case "mpw*" :
  case "macos*" :
- let vendor = "apple"  ;;  case "*mint" :
+ let vendor = "apple"  ;;
+ case "*mint" :
  case "mint[0-9]*" :
  case "*MiNT" :
  case "MiNT[0-9]*" :
- let vendor = "atari"  ;;  case "vos*" :
- let vendor = "stratus"  ;;  
-}  ;;  
+ let vendor = "atari"  ;;
+ case "vos*" :
+ let vendor = "stratus"  ;;
+ 
+}  ;;
+ 
 } ;//2
-"echo" cpu + "-" + vendor + "-" + os ;//2
+"echo" cpu + /*3*/"-" + /*3*/vendor + /*3*/"-" + /*3*/os ;//2
 "exit"
 //  Local variables:
 //  eval: (add-hook 'before-save-hook 'time-stamp)
@@ -2659,3 +3634,161 @@ switch ( vendor ) {
 //  time-stamp-end: "'"
 //  End:
 
+{"":{"Append":"boolean","Array":"object","End":"object","Index":"object","Naked":"boolean","Name":"object","Pos":"object","Value":"object"}}
+	751 {"aatypeclaimed":"","afield":"Assigns[]","afrom":"btCallExpr->assigns->forEach->ass.forEach","aname":"a","atype":"IMyAssign","parms":{"Append":"boolean","Array":"object","End":"object","Index":"object","Naked":"boolean","Name":"object","Pos":"object","Value":"object"}}
+{"":{"Background":"boolean","Cmd":"object","Comments":"object","Coprocess":"boolean","End":"object","Negated":"boolean","Pos":"object","Redirs":"object"}}
+	1 {"aatypeclaimed":"","afield":"Stmts[]","afrom":"btForClause->block->statements->forEach->stmts.forEach","aname":"stmts","atype":"IMyStmt","parms":{"Background":"boolean","Cmd":"object","Comments":"object","Coprocess":"boolean","End":"object","Negated":"boolean","Pos":"object","Redirs":"object"}}
+	1 {"aatypeclaimed":"","afield":"[Body][]","afrom":"btFuncDecl->statements->forEach->stmts.forEach","aname":"stmts","atype":"IMyStmt","parms":{"Background":"boolean","Cmd":"object","Comments":"object","Coprocess":"boolean","End":"object","Negated":"boolean","Pos":"object","Redirs":"object"}}
+	105 {"aatypeclaimed":"","afield":"Stmts[]","afrom":"btCmdSubst->statements->forEach->stmts.forEach","aname":"stmts","atype":"IMyStmt","parms":{"Background":"boolean","Cmd":"object","Comments":"object","Coprocess":"boolean","End":"object","Negated":"boolean","Pos":"object","Redirs":"object"}}
+	1254 {"aatypeclaimed":"","afield":"Stmts[]","afrom":"btCaseClause->item->forEach->itm.forEach->statements->forEach->stmts.forEach","aname":"stmts","atype":"IMyStmt","parms":{"Background":"boolean","Cmd":"object","Comments":"object","Coprocess":"boolean","End":"object","Negated":"boolean","Pos":"object","Redirs":"object"}}
+	129 {"aatypeclaimed":"","afield":"Stmts[]","afrom":"btIfClause->block->statements->forEach->stmts.forEach","aname":"stmts","atype":"IMyStmt","parms":{"Background":"boolean","Cmd":"object","Comments":"object","Coprocess":"boolean","End":"object","Negated":"boolean","Pos":"object","Redirs":"object"}}
+	160 {"aatypeclaimed":"","afield":"[X][]","afrom":"btBinaryCmd->statements->forEach->stmts.forEach","aname":"stmts","atype":"IMyStmt","parms":{"Background":"boolean","Cmd":"object","Comments":"object","Coprocess":"boolean","End":"object","Negated":"boolean","Pos":"object","Redirs":"object"}}
+	160 {"aatypeclaimed":"","afield":"[Y][]","afrom":"btBinaryCmd->statements->forEach->stmts.forEach","aname":"stmts","atype":"IMyStmt","parms":{"Background":"boolean","Cmd":"object","Comments":"object","Coprocess":"boolean","End":"object","Negated":"boolean","Pos":"object","Redirs":"object"}}
+	29 {"aatypeclaimed":"","afield":"Stmts[]","afrom":"btBlock->statements->forEach->stmts.forEach","aname":"stmts","atype":"IMyStmt","parms":{"Background":"boolean","Cmd":"object","Comments":"object","Coprocess":"boolean","End":"object","Negated":"boolean","Pos":"object","Redirs":"object"}}
+	38 {"aatypeclaimed":"","afield":"Stmts[]","afrom":"perFile->statements->forEach->stmts.forEach","aname":"stmts","atype":"IMyStmt","parms":{"Background":"boolean","Cmd":"object","Comments":"object","Coprocess":"boolean","End":"object","Negated":"boolean","Pos":"object","Redirs":"object"}}
+	4 {"aatypeclaimed":"","afield":"Stmts[]","afrom":"btWhileClause->block->statements->forEach->stmts.forEach","aname":"stmts","atype":"IMyStmt","parms":{"Background":"boolean","Cmd":"object","Comments":"object","Coprocess":"boolean","End":"object","Negated":"boolean","Pos":"object","Redirs":"object"}}
+	44 {"aatypeclaimed":"","afield":"Stmts[]","afrom":"btSubshell->statements->forEach->stmts.forEach","aname":"stmts","atype":"IMyStmt","parms":{"Background":"boolean","Cmd":"object","Comments":"object","Coprocess":"boolean","End":"object","Negated":"boolean","Pos":"object","Redirs":"object"}}
+{"":{"Comments":"object","End":"object","Last":"object","Op":"number","Patterns":"object","Pos":"object","Stmts":"object"}}
+	724 {"aatypeclaimed":"","afield":"Items[]","afrom":"btCaseClause->item->forEach->itm.forEach","aname":"i","atype":"IMyItem","parms":{"Comments":"object","End":"object","Last":"object","Op":"number","Patterns":"object","Pos":"object","Stmts":"object"}}
+{"":{"End":"object","Hdoc":"object","N":"object","Op":"number","Pos":"object","Word":"object"}}
+	1 {"aatypeclaimed":"","afield":"Redirs[]","afrom":"btBlock->statements->forEach->stmts.forEach->redirs->forEach->red.forEach","aname":"r","atype":"IMyRedir","parms":{"End":"object","Hdoc":"object","N":"object","Op":"number","Pos":"object","Word":"object"}}
+	19 {"aatypeclaimed":"","afield":"Redirs[]","afrom":"btCaseClause->item->forEach->itm.forEach->statements->forEach->stmts.forEach->redirs->forEach->red.forEach","aname":"r","atype":"IMyRedir","parms":{"End":"object","Hdoc":"object","N":"object","Op":"number","Pos":"object","Word":"object"}}
+	19 {"aatypeclaimed":"","afield":"Redirs[]","afrom":"btIfClause->block->statements->forEach->stmts.forEach->redirs->forEach->red.forEach","aname":"r","atype":"IMyRedir","parms":{"End":"object","Hdoc":"object","N":"object","Op":"number","Pos":"object","Word":"object"}}
+	23 {"aatypeclaimed":"","afield":"Redirs[]","afrom":"btCmdSubst->statements->forEach->stmts.forEach->redirs->forEach->red.forEach","aname":"r","atype":"IMyRedir","parms":{"End":"object","Hdoc":"object","N":"object","Op":"number","Pos":"object","Word":"object"}}
+	4 {"aatypeclaimed":"","afield":"Redirs[]","afrom":"perFile->statements->forEach->stmts.forEach->redirs->forEach->red.forEach","aname":"r","atype":"IMyRedir","parms":{"End":"object","Hdoc":"object","N":"object","Op":"number","Pos":"object","Word":"object"}}
+	40 {"aatypeclaimed":"","afield":"Redirs[]","afrom":"btBinaryCmd->statements->forEach->stmts.forEach->redirs->forEach->red.forEach","aname":"r","atype":"IMyRedir","parms":{"End":"object","Hdoc":"object","N":"object","Op":"number","Pos":"object","Word":"object"}}
+	5 {"aatypeclaimed":"","afield":"Redirs[]","afrom":"btSubshell->statements->forEach->stmts.forEach->redirs->forEach->red.forEach","aname":"r","atype":"IMyRedir","parms":{"End":"object","Hdoc":"object","N":"object","Op":"number","Pos":"object","Word":"object"}}
+{"":{"End":"object","Last":"object","Name":"string","Pos":"object","Stmts":"object"}}
+	2 {"aatypeclaimed":"","afield":"res.stdout","afrom":"bootstrapNodeJSCore->startup->Module.runMain->Module._load->tryModuleLoad->Module.load->Module._extensions..js->Module._compile->->forEach->perFile","aname":"j","atype":"IMyShellFile","parms":{"End":"object","Last":"object","Name":"string","Pos":"object","Stmts":"object"}}
+{"":{"End":"object","Parts":"object","Pos":"object"}}
+	1 {"aatypeclaimed":"","afield":"Word","afrom":"btBlock->statements->forEach->stmts.forEach->redirs->forEach->red.forEach->word","aname":"wrd","atype":"IXWord","parms":{"End":"object","Parts":"object","Pos":"object"}}
+	10 {"aatypeclaimed":"","afield":"Word","afrom":"btParamExp->exp->word","aname":"wrd","atype":"IXWord","parms":{"End":"object","Parts":"object","Pos":"object"}}
+	1409 {"aatypeclaimed":"","afield":"Patterns[]","afrom":"btCaseClause->item->forEach->itm.forEach->patterns->forEach->pts.forEach","aname":"pat","atype":"IXPattern","parms":{"End":"object","Parts":"object","Pos":"object"}}
+	1687 {"aatypeclaimed":"","afield":"Args[]","afrom":"btCallExpr->arglist->forEach->args.forEach","aname":"a","atype":"IXArg","parms":{"End":"object","Parts":"object","Pos":"object"}}
+	19 {"aatypeclaimed":"","afield":"Word","afrom":"btCaseClause->item->forEach->itm.forEach->statements->forEach->stmts.forEach->redirs->forEach->red.forEach->word","aname":"wrd","atype":"IXWord","parms":{"End":"object","Parts":"object","Pos":"object"}}
+	19 {"aatypeclaimed":"","afield":"Word","afrom":"btIfClause->block->statements->forEach->stmts.forEach->redirs->forEach->red.forEach->word","aname":"wrd","atype":"IXWord","parms":{"End":"object","Parts":"object","Pos":"object"}}
+	2 {"aatypeclaimed":"","afield":"Hdoc","afrom":"btIfClause->block->statements->forEach->stmts.forEach->redirs->forEach->red.forEach->hdoc","aname":"doc","atype":"IMyHdoc","parms":{"End":"object","Parts":"object","Pos":"object"}}
+	2 {"aatypeclaimed":"","afield":"Hdoc","afrom":"perFile->statements->forEach->stmts.forEach->redirs->forEach->red.forEach->hdoc","aname":"doc","atype":"IMyHdoc","parms":{"End":"object","Parts":"object","Pos":"object"}}
+	23 {"aatypeclaimed":"","afield":"Word","afrom":"btCmdSubst->statements->forEach->stmts.forEach->redirs->forEach->red.forEach->word","aname":"wrd","atype":"IXWord","parms":{"End":"object","Parts":"object","Pos":"object"}}
+	4 {"aatypeclaimed":"","afield":"Items[]","afrom":"btWordIter->forEach->Items.forEach->word","aname":"wrd","atype":"IXWord","parms":{"End":"object","Parts":"object","Pos":"object"}}
+	4 {"aatypeclaimed":"","afield":"Word","afrom":"perFile->statements->forEach->stmts.forEach->redirs->forEach->red.forEach->word","aname":"wrd","atype":"IXWord","parms":{"End":"object","Parts":"object","Pos":"object"}}
+	40 {"aatypeclaimed":"","afield":"Word","afrom":"btBinaryCmd->statements->forEach->stmts.forEach->redirs->forEach->red.forEach->word","aname":"wrd","atype":"IXWord","parms":{"End":"object","Parts":"object","Pos":"object"}}
+	43 {"aatypeclaimed":"","afield":"Word","afrom":"btCaseClause->word","aname":"wrd","atype":"IXWord","parms":{"End":"object","Parts":"object","Pos":"object"}}
+	5 {"aatypeclaimed":"","afield":"Word","afrom":"btSubshell->statements->forEach->stmts.forEach->redirs->forEach->red.forEach->word","aname":"wrd","atype":"IXWord","parms":{"End":"object","Parts":"object","Pos":"object"}}
+	6 {"aatypeclaimed":"","afield":"Hdoc","afrom":"btCaseClause->item->forEach->itm.forEach->statements->forEach->stmts.forEach->redirs->forEach->red.forEach->hdoc","aname":"doc","atype":"IMyHdoc","parms":{"End":"object","Parts":"object","Pos":"object"}}
+	735 {"aatypeclaimed":"","afield":"Value","afrom":"btCallExpr->assigns->forEach->ass.forEach->value","aname":"val","atype":"IXValue","parms":{"End":"object","Parts":"object","Pos":"object"}}
+{"":{"End":"object","Pos":"object","Text":"string"}}
+	1 {"aatypeclaimed":"","afield":"Comments[]","afrom":"btBlock->statements->forEach->stmts.forEach->comments->map->lines.map","aname":"l","atype":"IMyComment","parms":{"End":"object","Pos":"object","Text":"string"}}
+	1 {"aatypeclaimed":"","afield":"ElseComments[]","afrom":"btIfClause->comments->map->lines.map","aname":"l","atype":"IMyComment","parms":{"End":"object","Pos":"object","Text":"string"}}
+	110 {"aatypeclaimed":"","afield":"Comments[]","afrom":"btCaseClause->item->forEach->itm.forEach->statements->forEach->stmts.forEach->comments->map->lines.map","aname":"l","atype":"IMyComment","parms":{"End":"object","Pos":"object","Text":"string"}}
+	12 {"aatypeclaimed":"","afield":"Last[]","afrom":"perFile->comments->map->lines.map","aname":"l","atype":"IMyComment","parms":{"End":"object","Pos":"object","Text":"string"}}
+	27 {"aatypeclaimed":"","afield":"Comments[]","afrom":"btIfClause->block->statements->forEach->stmts.forEach->comments->map->lines.map","aname":"l","atype":"IMyComment","parms":{"End":"object","Pos":"object","Text":"string"}}
+	3 {"aatypeclaimed":"","afield":"Last[]","afrom":"btCaseClause->item->forEach->itm.forEach->comments->map->lines.map","aname":"l","atype":"IMyComment","parms":{"End":"object","Pos":"object","Text":"string"}}
+	43 {"aatypeclaimed":"","afield":"Comments[]","afrom":"btCaseClause->item->forEach->itm.forEach->comments->map->lines.map","aname":"l","atype":"IMyComment","parms":{"End":"object","Pos":"object","Text":"string"}}
+	94 {"aatypeclaimed":"","afield":"Comments[]","afrom":"perFile->statements->forEach->stmts.forEach->comments->map->lines.map","aname":"l","atype":"IMyComment","parms":{"End":"object","Pos":"object","Text":"string"}}
+{"":{"End":"object","Pos":"object","Value":"string"}}
+	501 {"aatypeclaimed":"","afield":"Param","afrom":"btParamExp->param","aname":"prm","atype":"IMyParam","parms":{"End":"object","Pos":"object","Value":"string"}}
+{"":{"Last":"object","Stmts":"object"}}
+	1 {"aatypeclaimed":"","afield":"Do","afrom":"btForClause->block","aname":"cmd","atype":"IMyBlock","parms":{"Last":"object","Stmts":"object"}}
+	2 {"aatypeclaimed":"","afield":"Cond","afrom":"btWhileClause->block","aname":"cmd","atype":"IMyBlock","parms":{"Last":"object","Stmts":"object"}}
+	2 {"aatypeclaimed":"","afield":"Do","afrom":"btWhileClause->block","aname":"cmd","atype":"IMyBlock","parms":{"Last":"object","Stmts":"object"}}
+	42 {"aatypeclaimed":"","afield":"Cond","afrom":"btIfClause->block","aname":"cmd","atype":"IMyBlock","parms":{"Last":"object","Stmts":"object"}}
+	42 {"aatypeclaimed":"","afield":"Else","afrom":"btIfClause->block","aname":"cmd","atype":"IMyBlock","parms":{"Last":"object","Stmts":"object"}}
+	42 {"aatypeclaimed":"","afield":"Then","afrom":"btIfClause->block","aname":"cmd","atype":"IMyBlock","parms":{"Last":"object","Stmts":"object"}}
+{"":{"Op":"number","Word":"object"}}
+	14 {"aatypeclaimed":"","afield":"Exp","afrom":"btParamExp->exp","aname":"e","atype":"IMyExp","parms":{"Op":"number","Word":"object"}}
+{"":{}}
+	1 {"aatypeclaimed":"","afield":"Hdoc","afrom":"btBlock->statements->forEach->stmts.forEach->redirs->forEach->red.forEach->hdoc","aname":"doc","atype":"IMyHdoc","parms":{}}
+	13 {"aatypeclaimed":"","afield":"Hdoc","afrom":"btCaseClause->item->forEach->itm.forEach->statements->forEach->stmts.forEach->redirs->forEach->red.forEach->hdoc","aname":"doc","atype":"IMyHdoc","parms":{}}
+	16 {"aatypeclaimed":"","afield":"Value","afrom":"btCallExpr->assigns->forEach->ass.forEach->value","aname":"val","atype":"IXValue","parms":{}}
+	17 {"aatypeclaimed":"","afield":"Hdoc","afrom":"btIfClause->block->statements->forEach->stmts.forEach->redirs->forEach->red.forEach->hdoc","aname":"doc","atype":"IMyHdoc","parms":{}}
+	2 {"aatypeclaimed":"","afield":"Hdoc","afrom":"perFile->statements->forEach->stmts.forEach->redirs->forEach->red.forEach->hdoc","aname":"doc","atype":"IMyHdoc","parms":{}}
+	23 {"aatypeclaimed":"","afield":"Hdoc","afrom":"btCmdSubst->statements->forEach->stmts.forEach->redirs->forEach->red.forEach->hdoc","aname":"doc","atype":"IMyHdoc","parms":{}}
+	4 {"aatypeclaimed":"","afield":"Word","afrom":"btParamExp->exp->word","aname":"wrd","atype":"IXWord","parms":{}}
+	40 {"aatypeclaimed":"","afield":"Hdoc","afrom":"btBinaryCmd->statements->forEach->stmts.forEach->redirs->forEach->red.forEach->hdoc","aname":"doc","atype":"IMyHdoc","parms":{}}
+	487 {"aatypeclaimed":"","afield":"Exp","afrom":"btParamExp->exp","aname":"e","atype":"IMyExp","parms":{}}
+	5 {"aatypeclaimed":"","afield":"Hdoc","afrom":"btSubshell->statements->forEach->stmts.forEach->redirs->forEach->red.forEach->hdoc","aname":"doc","atype":"IMyHdoc","parms":{}}
+{"BinaryCmd":{"End":"object","Op":"number","Pos":"object","Type":"string","X":"object","Y":"object"}}
+	10 {"aatypeclaimed":"BinaryCmd","afield":"Cmd","afrom":"btSubshell->statements->forEach->stmts.forEach->command->byType->btBinaryCmd","aname":"cmd","atype":"IBinaryCmd","parms":{"End":"object","Op":"number","Pos":"object","Type":"string","X":"object","Y":"object"}}
+	19 {"aatypeclaimed":"BinaryCmd","afield":"Cmd","afrom":"btIfClause->block->statements->forEach->stmts.forEach->command->byType->btBinaryCmd","aname":"cmd","atype":"IBinaryCmd","parms":{"End":"object","Op":"number","Pos":"object","Type":"string","X":"object","Y":"object"}}
+	21 {"aatypeclaimed":"BinaryCmd","afield":"Cmd","afrom":"btCaseClause->item->forEach->itm.forEach->statements->forEach->stmts.forEach->command->byType->btBinaryCmd","aname":"cmd","atype":"IBinaryCmd","parms":{"End":"object","Op":"number","Pos":"object","Type":"string","X":"object","Y":"object"}}
+	36 {"aatypeclaimed":"BinaryCmd","afield":"Cmd","afrom":"btBinaryCmd->statements->forEach->stmts.forEach->command->byType->btBinaryCmd","aname":"cmd","atype":"IBinaryCmd","parms":{"End":"object","Op":"number","Pos":"object","Type":"string","X":"object","Y":"object"}}
+	4 {"aatypeclaimed":"BinaryCmd","afield":"Cmd","afrom":"btBlock->statements->forEach->stmts.forEach->command->byType->btBinaryCmd","aname":"cmd","atype":"IBinaryCmd","parms":{"End":"object","Op":"number","Pos":"object","Type":"string","X":"object","Y":"object"}}
+	4 {"aatypeclaimed":"BinaryCmd","afield":"Cmd","afrom":"perFile->statements->forEach->stmts.forEach->command->byType->btBinaryCmd","aname":"cmd","atype":"IBinaryCmd","parms":{"End":"object","Op":"number","Pos":"object","Type":"string","X":"object","Y":"object"}}
+	66 {"aatypeclaimed":"BinaryCmd","afield":"Cmd","afrom":"btCmdSubst->statements->forEach->stmts.forEach->command->byType->btBinaryCmd","aname":"cmd","atype":"IBinaryCmd","parms":{"End":"object","Op":"number","Pos":"object","Type":"string","X":"object","Y":"object"}}
+{"Block":{"End":"object","Last":"object","Pos":"object","Stmts":"object","Type":"string"}}
+	1 {"aatypeclaimed":"Block","afield":"Cmd","afrom":"btFuncDecl->statements->forEach->stmts.forEach->command->byType->btBlock","aname":"cmd","atype":"IBlock","parms":{"End":"object","Last":"object","Pos":"object","Stmts":"object","Type":"string"}}
+	14 {"aatypeclaimed":"Block","afield":"Cmd","afrom":"btBinaryCmd->statements->forEach->stmts.forEach->command->byType->btBlock","aname":"cmd","atype":"IBlock","parms":{"End":"object","Last":"object","Pos":"object","Stmts":"object","Type":"string"}}
+{"CallExpr":{"Args":"object","Assigns":"object","End":"object","Pos":"object","Type":"string"}}
+	1178 {"aatypeclaimed":"CallExpr","afield":"Cmd","afrom":"btCaseClause->item->forEach->itm.forEach->statements->forEach->stmts.forEach->command->byType->btCallExpr","aname":"cmd","atype":"ICallExpr","parms":{"Args":"object","Assigns":"object","End":"object","Pos":"object","Type":"string"}}
+	19 {"aatypeclaimed":"CallExpr","afield":"Cmd","afrom":"perFile->statements->forEach->stmts.forEach->command->byType->btCallExpr","aname":"cmd","atype":"ICallExpr","parms":{"Args":"object","Assigns":"object","End":"object","Pos":"object","Type":"string"}}
+	2 {"aatypeclaimed":"CallExpr","afield":"Cmd","afrom":"btWhileClause->block->statements->forEach->stmts.forEach->command->byType->btCallExpr","aname":"cmd","atype":"ICallExpr","parms":{"Args":"object","Assigns":"object","End":"object","Pos":"object","Type":"string"}}
+	20 {"aatypeclaimed":"CallExpr","afield":"Cmd","afrom":"btCmdSubst->statements->forEach->stmts.forEach->command->byType->btCallExpr","aname":"cmd","atype":"ICallExpr","parms":{"Args":"object","Assigns":"object","End":"object","Pos":"object","Type":"string"}}
+	24 {"aatypeclaimed":"CallExpr","afield":"Cmd","afrom":"btBlock->statements->forEach->stmts.forEach->command->byType->btCallExpr","aname":"cmd","atype":"ICallExpr","parms":{"Args":"object","Assigns":"object","End":"object","Pos":"object","Type":"string"}}
+	252 {"aatypeclaimed":"CallExpr","afield":"Cmd","afrom":"btBinaryCmd->statements->forEach->stmts.forEach->command->byType->btCallExpr","aname":"cmd","atype":"ICallExpr","parms":{"Args":"object","Assigns":"object","End":"object","Pos":"object","Type":"string"}}
+	34 {"aatypeclaimed":"CallExpr","afield":"Cmd","afrom":"btSubshell->statements->forEach->stmts.forEach->command->byType->btCallExpr","aname":"cmd","atype":"ICallExpr","parms":{"Args":"object","Assigns":"object","End":"object","Pos":"object","Type":"string"}}
+	94 {"aatypeclaimed":"CallExpr","afield":"Cmd","afrom":"btIfClause->block->statements->forEach->stmts.forEach->command->byType->btCallExpr","aname":"cmd","atype":"ICallExpr","parms":{"Args":"object","Assigns":"object","End":"object","Pos":"object","Type":"string"}}
+{"CaseClause":{"End":"object","Items":"object","Last":"object","Pos":"object","Type":"string","Word":"object"}}
+	1 {"aatypeclaimed":"CaseClause","afield":"Cmd","afrom":"btBlock->statements->forEach->stmts.forEach->command->byType->btCaseClause","aname":"cmd","atype":"ICaseClause","parms":{"End":"object","Items":"object","Last":"object","Pos":"object","Type":"string","Word":"object"}}
+	2 {"aatypeclaimed":"CaseClause","afield":"Cmd","afrom":"btWhileClause->block->statements->forEach->stmts.forEach->command->byType->btCaseClause","aname":"cmd","atype":"ICaseClause","parms":{"End":"object","Items":"object","Last":"object","Pos":"object","Type":"string","Word":"object"}}
+	27 {"aatypeclaimed":"CaseClause","afield":"Cmd","afrom":"btCaseClause->item->forEach->itm.forEach->statements->forEach->stmts.forEach->command->byType->btCaseClause","aname":"cmd","atype":"ICaseClause","parms":{"End":"object","Items":"object","Last":"object","Pos":"object","Type":"string","Word":"object"}}
+	4 {"aatypeclaimed":"CaseClause","afield":"Cmd","afrom":"btIfClause->block->statements->forEach->stmts.forEach->command->byType->btCaseClause","aname":"cmd","atype":"ICaseClause","parms":{"End":"object","Items":"object","Last":"object","Pos":"object","Type":"string","Word":"object"}}
+	9 {"aatypeclaimed":"CaseClause","afield":"Cmd","afrom":"perFile->statements->forEach->stmts.forEach->command->byType->btCaseClause","aname":"cmd","atype":"ICaseClause","parms":{"End":"object","Items":"object","Last":"object","Pos":"object","Type":"string","Word":"object"}}
+{"CmdSubst":{"End":"object","Last":"object","Pos":"object","ReplyVar":"boolean","Stmts":"object","TempFile":"boolean","Type":"string"}}
+	12 {"aatypeclaimed":"CmdSubst","afield":"Parts[]","afrom":"perFile->statements->forEach->stmts.forEach->redirs->forEach->red.forEach->hdoc->parts->forEach->prts.forEach->byType->btCmdSubst","aname":"prt","atype":"ICmdSubst","parms":{"End":"object","Last":"object","Pos":"object","ReplyVar":"boolean","Stmts":"object","TempFile":"boolean","Type":"string"}}
+	24 {"aatypeclaimed":"CmdSubst","afield":"Parts[]","afrom":"btDblQuoted->parts->forEach->prts.forEach->byType->btCmdSubst","aname":"prt","atype":"ICmdSubst","parms":{"End":"object","Last":"object","Pos":"object","ReplyVar":"boolean","Stmts":"object","TempFile":"boolean","Type":"string"}}
+	4 {"aatypeclaimed":"CmdSubst","afield":"Parts[]","afrom":"btCaseClause->word->parts->forEach->prts.forEach->byType->btCmdSubst","aname":"prt","atype":"ICmdSubst","parms":{"End":"object","Last":"object","Pos":"object","ReplyVar":"boolean","Stmts":"object","TempFile":"boolean","Type":"string"}}
+	65 {"aatypeclaimed":"CmdSubst","afield":"Parts[]","afrom":"btCallExpr->assigns->forEach->ass.forEach->value->parts->forEach->prts.forEach->byType->btCmdSubst","aname":"prt","atype":"ICmdSubst","parms":{"End":"object","Last":"object","Pos":"object","ReplyVar":"boolean","Stmts":"object","TempFile":"boolean","Type":"string"}}
+{"DblQuoted":{"Dollar":"boolean","End":"object","Parts":"object","Pos":"object","Type":"string"}}
+	15 {"aatypeclaimed":"DblQuoted","afield":"Parts[]","afrom":"btCaseClause->item->forEach->itm.forEach->patterns->forEach->pts.forEach->parts->forEach->prts.forEach->byType->btDblQuoted","aname":"prt","atype":"IDblQuoted","parms":{"Dollar":"boolean","End":"object","Parts":"object","Pos":"object","Type":"string"}}
+	16 {"aatypeclaimed":"DblQuoted","afield":"Parts[]","afrom":"btCaseClause->word->parts->forEach->prts.forEach->byType->btDblQuoted","aname":"prt","atype":"IDblQuoted","parms":{"Dollar":"boolean","End":"object","Parts":"object","Pos":"object","Type":"string"}}
+	2 {"aatypeclaimed":"DblQuoted","afield":"Parts[]","afrom":"btIfClause->block->statements->forEach->stmts.forEach->redirs->forEach->red.forEach->word->parts->forEach->prts.forEach->byType->btDblQuoted","aname":"prt","atype":"IDblQuoted","parms":{"Dollar":"boolean","End":"object","Parts":"object","Pos":"object","Type":"string"}}
+	21 {"aatypeclaimed":"DblQuoted","afield":"Parts[]","afrom":"btCallExpr->assigns->forEach->ass.forEach->value->parts->forEach->prts.forEach->byType->btDblQuoted","aname":"prt","atype":"IDblQuoted","parms":{"Dollar":"boolean","End":"object","Parts":"object","Pos":"object","Type":"string"}}
+	350 {"aatypeclaimed":"DblQuoted","afield":"Parts[]","afrom":"btCallExpr->arglist->forEach->args.forEach->parts->forEach->prts.forEach->byType->btDblQuoted","aname":"prt","atype":"IDblQuoted","parms":{"Dollar":"boolean","End":"object","Parts":"object","Pos":"object","Type":"string"}}
+	5 {"aatypeclaimed":"DblQuoted","afield":"Parts[]","afrom":"btCaseClause->item->forEach->itm.forEach->statements->forEach->stmts.forEach->redirs->forEach->red.forEach->word->parts->forEach->prts.forEach->byType->btDblQuoted","aname":"prt","atype":"IDblQuoted","parms":{"Dollar":"boolean","End":"object","Parts":"object","Pos":"object","Type":"string"}}
+{"ForClause":{"Do":"object","End":"object","Loop":"object","Pos":"object","Select":"boolean","Type":"string"}}
+	1 {"aatypeclaimed":"ForClause","afield":"Cmd","afrom":"btCaseClause->item->forEach->itm.forEach->statements->forEach->stmts.forEach->command->byType->btForClause","aname":"cmd","atype":"IForClause","parms":{"Do":"object","End":"object","Loop":"object","Pos":"object","Select":"boolean","Type":"string"}}
+{"FuncDecl":{"Body":"object","End":"object","Name":"object","Pos":"object","RsrvWord":"boolean","Type":"string"}}
+	1 {"aatypeclaimed":"FuncDecl","afield":"Cmd","afrom":"perFile->statements->forEach->stmts.forEach->command->byType->btFuncDecl","aname":"cmd","atype":"IFuncDecl","parms":{"Body":"object","End":"object","Name":"object","Pos":"object","RsrvWord":"boolean","Type":"string"}}
+{"IfClause":{"Cond":"object","Elif":"boolean","Else":"object","ElseComments":"object","End":"object","FiComments":"object","Pos":"object","Then":"object","Type":"string"}}
+	1 {"aatypeclaimed":"IfClause","afield":"Cmd","afrom":"btForClause->block->statements->forEach->stmts.forEach->command->byType->btIfClause","aname":"cmd","atype":"IIfClause","parms":{"Cond":"object","Elif":"boolean","Else":"object","ElseComments":"object","End":"object","FiComments":"object","Pos":"object","Then":"object","Type":"string"}}
+	11 {"aatypeclaimed":"IfClause","afield":"Cmd","afrom":"btIfClause->block->statements->forEach->stmts.forEach->command->byType->btIfClause","aname":"cmd","atype":"IIfClause","parms":{"Cond":"object","Elif":"boolean","Else":"object","ElseComments":"object","End":"object","FiComments":"object","Pos":"object","Then":"object","Type":"string"}}
+	27 {"aatypeclaimed":"IfClause","afield":"Cmd","afrom":"btCaseClause->item->forEach->itm.forEach->statements->forEach->stmts.forEach->command->byType->btIfClause","aname":"cmd","atype":"IIfClause","parms":{"Cond":"object","Elif":"boolean","Else":"object","ElseComments":"object","End":"object","FiComments":"object","Pos":"object","Then":"object","Type":"string"}}
+	3 {"aatypeclaimed":"IfClause","afield":"Cmd","afrom":"perFile->statements->forEach->stmts.forEach->command->byType->btIfClause","aname":"cmd","atype":"IIfClause","parms":{"Cond":"object","Elif":"boolean","Else":"object","ElseComments":"object","End":"object","FiComments":"object","Pos":"object","Then":"object","Type":"string"}}
+{"Lit":{"End":"object","Pos":"object","Type":"string","Value":"string"}}
+	1 {"aatypeclaimed":"Lit","afield":"Parts[]","afrom":"btBlock->statements->forEach->stmts.forEach->redirs->forEach->red.forEach->word->parts->forEach->prts.forEach->byType->btLit","aname":"prt","atype":"ILit","parms":{"End":"object","Pos":"object","Type":"string","Value":"string"}}
+	10 {"aatypeclaimed":"Lit","afield":"Parts[]","afrom":"btCaseClause->item->forEach->itm.forEach->statements->forEach->stmts.forEach->redirs->forEach->red.forEach->hdoc->parts->forEach->prts.forEach->byType->btLit","aname":"prt","atype":"ILit","parms":{"End":"object","Pos":"object","Type":"string","Value":"string"}}
+	10 {"aatypeclaimed":"Lit","afield":"Parts[]","afrom":"btParamExp->exp->word->parts->forEach->prts.forEach->byType->btLit","aname":"prt","atype":"ILit","parms":{"End":"object","Pos":"object","Type":"string","Value":"string"}}
+	1393 {"aatypeclaimed":"Lit","afield":"Parts[]","afrom":"btCaseClause->item->forEach->itm.forEach->patterns->forEach->pts.forEach->parts->forEach->prts.forEach->byType->btLit","aname":"prt","atype":"ILit","parms":{"End":"object","Pos":"object","Type":"string","Value":"string"}}
+	14 {"aatypeclaimed":"Lit","afield":"Parts[]","afrom":"btCaseClause->item->forEach->itm.forEach->statements->forEach->stmts.forEach->redirs->forEach->red.forEach->word->parts->forEach->prts.forEach->byType->btLit","aname":"prt","atype":"ILit","parms":{"End":"object","Pos":"object","Type":"string","Value":"string"}}
+	1466 {"aatypeclaimed":"Lit","afield":"Parts[]","afrom":"btCallExpr->arglist->forEach->args.forEach->parts->forEach->prts.forEach->byType->btLit","aname":"prt","atype":"ILit","parms":{"End":"object","Pos":"object","Type":"string","Value":"string"}}
+	17 {"aatypeclaimed":"Lit","afield":"Parts[]","afrom":"btIfClause->block->statements->forEach->stmts.forEach->redirs->forEach->red.forEach->word->parts->forEach->prts.forEach->byType->btLit","aname":"prt","atype":"ILit","parms":{"End":"object","Pos":"object","Type":"string","Value":"string"}}
+	2 {"aatypeclaimed":"Lit","afield":"Parts[]","afrom":"btIfClause->block->statements->forEach->stmts.forEach->redirs->forEach->red.forEach->hdoc->parts->forEach->prts.forEach->byType->btLit","aname":"prt","atype":"ILit","parms":{"End":"object","Pos":"object","Type":"string","Value":"string"}}
+	21 {"aatypeclaimed":"Lit","afield":"Parts[]","afrom":"perFile->statements->forEach->stmts.forEach->redirs->forEach->red.forEach->hdoc->parts->forEach->prts.forEach->byType->btLit","aname":"prt","atype":"ILit","parms":{"End":"object","Pos":"object","Type":"string","Value":"string"}}
+	23 {"aatypeclaimed":"Lit","afield":"Parts[]","afrom":"btCmdSubst->statements->forEach->stmts.forEach->redirs->forEach->red.forEach->word->parts->forEach->prts.forEach->byType->btLit","aname":"prt","atype":"ILit","parms":{"End":"object","Pos":"object","Type":"string","Value":"string"}}
+	4 {"aatypeclaimed":"Lit","afield":"Parts[]","afrom":"btWordIter->forEach->Items.forEach->word->parts->forEach->prts.forEach->byType->btLit","aname":"prt","atype":"ILit","parms":{"End":"object","Pos":"object","Type":"string","Value":"string"}}
+	4 {"aatypeclaimed":"Lit","afield":"Parts[]","afrom":"perFile->statements->forEach->stmts.forEach->redirs->forEach->red.forEach->word->parts->forEach->prts.forEach->byType->btLit","aname":"prt","atype":"ILit","parms":{"End":"object","Pos":"object","Type":"string","Value":"string"}}
+	40 {"aatypeclaimed":"Lit","afield":"Parts[]","afrom":"btBinaryCmd->statements->forEach->stmts.forEach->redirs->forEach->red.forEach->word->parts->forEach->prts.forEach->byType->btLit","aname":"prt","atype":"ILit","parms":{"End":"object","Pos":"object","Type":"string","Value":"string"}}
+	5 {"aatypeclaimed":"Lit","afield":"Parts[]","afrom":"btCaseClause->word->parts->forEach->prts.forEach->byType->btLit","aname":"prt","atype":"ILit","parms":{"End":"object","Pos":"object","Type":"string","Value":"string"}}
+	5 {"aatypeclaimed":"Lit","afield":"Parts[]","afrom":"btSubshell->statements->forEach->stmts.forEach->redirs->forEach->red.forEach->word->parts->forEach->prts.forEach->byType->btLit","aname":"prt","atype":"ILit","parms":{"End":"object","Pos":"object","Type":"string","Value":"string"}}
+	625 {"aatypeclaimed":"Lit","afield":"Parts[]","afrom":"btCallExpr->assigns->forEach->ass.forEach->value->parts->forEach->prts.forEach->byType->btLit","aname":"prt","atype":"ILit","parms":{"End":"object","Pos":"object","Type":"string","Value":"string"}}
+	81 {"aatypeclaimed":"Lit","afield":"Parts[]","afrom":"btDblQuoted->parts->forEach->prts.forEach->byType->btLit","aname":"prt","atype":"ILit","parms":{"End":"object","Pos":"object","Type":"string","Value":"string"}}
+{"ParamExp":{"End":"object","Excl":"boolean","Exp":"object","Index":"object","Length":"boolean","Names":"number","Param":"object","Pos":"object","Repl":"object","Short":"boolean","Slice":"object","Type":"string","Width":"boolean"}}
+	28 {"aatypeclaimed":"ParamExp","afield":"Parts[]","afrom":"btCallExpr->arglist->forEach->args.forEach->parts->forEach->prts.forEach->byType->btParamExp","aname":"prt","atype":"IParamExp","parms":{"End":"object","Excl":"boolean","Exp":"object","Index":"object","Length":"boolean","Names":"number","Param":"object","Pos":"object","Repl":"object","Short":"boolean","Slice":"object","Type":"string","Width":"boolean"}}
+	28 {"aatypeclaimed":"ParamExp","afield":"Parts[]","afrom":"btCaseClause->word->parts->forEach->prts.forEach->byType->btParamExp","aname":"prt","atype":"IParamExp","parms":{"End":"object","Excl":"boolean","Exp":"object","Index":"object","Length":"boolean","Names":"number","Param":"object","Pos":"object","Repl":"object","Short":"boolean","Slice":"object","Type":"string","Width":"boolean"}}
+	389 {"aatypeclaimed":"ParamExp","afield":"Parts[]","afrom":"btDblQuoted->parts->forEach->prts.forEach->byType->btParamExp","aname":"prt","atype":"IParamExp","parms":{"End":"object","Excl":"boolean","Exp":"object","Index":"object","Length":"boolean","Names":"number","Param":"object","Pos":"object","Repl":"object","Short":"boolean","Slice":"object","Type":"string","Width":"boolean"}}
+	43 {"aatypeclaimed":"ParamExp","afield":"Parts[]","afrom":"btCallExpr->assigns->forEach->ass.forEach->value->parts->forEach->prts.forEach->byType->btParamExp","aname":"prt","atype":"IParamExp","parms":{"End":"object","Excl":"boolean","Exp":"object","Index":"object","Length":"boolean","Names":"number","Param":"object","Pos":"object","Repl":"object","Short":"boolean","Slice":"object","Type":"string","Width":"boolean"}}
+	5 {"aatypeclaimed":"ParamExp","afield":"Parts[]","afrom":"btCaseClause->item->forEach->itm.forEach->statements->forEach->stmts.forEach->redirs->forEach->red.forEach->hdoc->parts->forEach->prts.forEach->byType->btParamExp","aname":"prt","atype":"IParamExp","parms":{"End":"object","Excl":"boolean","Exp":"object","Index":"object","Length":"boolean","Names":"number","Param":"object","Pos":"object","Repl":"object","Short":"boolean","Slice":"object","Type":"string","Width":"boolean"}}
+	8 {"aatypeclaimed":"ParamExp","afield":"Parts[]","afrom":"perFile->statements->forEach->stmts.forEach->redirs->forEach->red.forEach->hdoc->parts->forEach->prts.forEach->byType->btParamExp","aname":"prt","atype":"IParamExp","parms":{"End":"object","Excl":"boolean","Exp":"object","Index":"object","Length":"boolean","Names":"number","Param":"object","Pos":"object","Repl":"object","Short":"boolean","Slice":"object","Type":"string","Width":"boolean"}}
+{"SglQuoted":{"Dollar":"boolean","End":"object","Pos":"object","Type":"string","Value":"string"}}
+	1 {"aatypeclaimed":"SglQuoted","afield":"Parts[]","afrom":"btCaseClause->item->forEach->itm.forEach->patterns->forEach->pts.forEach->parts->forEach->prts.forEach->byType->btSglQuoted","aname":"prt","atype":"ISglQuoted","parms":{"Dollar":"boolean","End":"object","Pos":"object","Type":"string","Value":"string"}}
+	6 {"aatypeclaimed":"SglQuoted","afield":"Parts[]","afrom":"btCallExpr->assigns->forEach->ass.forEach->value->parts->forEach->prts.forEach->byType->btSglQuoted","aname":"prt","atype":"ISglQuoted","parms":{"Dollar":"boolean","End":"object","Pos":"object","Type":"string","Value":"string"}}
+	92 {"aatypeclaimed":"SglQuoted","afield":"Parts[]","afrom":"btCallExpr->arglist->forEach->args.forEach->parts->forEach->prts.forEach->byType->btSglQuoted","aname":"prt","atype":"ISglQuoted","parms":{"Dollar":"boolean","End":"object","Pos":"object","Type":"string","Value":"string"}}
+{"Subshell":{"End":"object","Last":"object","Pos":"object","Stmts":"object","Type":"string"}}
+	1 {"aatypeclaimed":"Subshell","afield":"Cmd","afrom":"btIfClause->block->statements->forEach->stmts.forEach->command->byType->btSubshell","aname":"cmd","atype":"ISubshell","parms":{"End":"object","Last":"object","Pos":"object","Stmts":"object","Type":"string"}}
+	18 {"aatypeclaimed":"Subshell","afield":"Cmd","afrom":"btBinaryCmd->statements->forEach->stmts.forEach->command->byType->btSubshell","aname":"cmd","atype":"ISubshell","parms":{"End":"object","Last":"object","Pos":"object","Stmts":"object","Type":"string"}}
+	19 {"aatypeclaimed":"Subshell","afield":"Cmd","afrom":"btCmdSubst->statements->forEach->stmts.forEach->command->byType->btSubshell","aname":"cmd","atype":"ISubshell","parms":{"End":"object","Last":"object","Pos":"object","Stmts":"object","Type":"string"}}
+{"WhileClause":{"Cond":"object","Do":"object","End":"object","Pos":"object","Type":"string","Until":"boolean"}}
+	2 {"aatypeclaimed":"WhileClause","afield":"Cmd","afrom":"perFile->statements->forEach->stmts.forEach->command->byType->btWhileClause","aname":"cmd","atype":"IWhileClause","parms":{"Cond":"object","Do":"object","End":"object","Pos":"object","Type":"string","Until":"boolean"}}
+{"WordIter":{"End":"object","Items":"object","Name":"object","Pos":"object","Type":"string"}}
+	1 {"aatypeclaimed":"WordIter","afield":"Loop","afrom":"btForClause->command->byType->btWordIter","aname":"cmd","atype":"IWordIter","parms":{"End":"object","Items":"object","Name":"object","Pos":"object","Type":"string"}}

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>IStatement | Mechanic</title>
+	<title>IXWord | Mechanic</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -59,10 +59,10 @@
 					<a href="../modules/_gnuconfigconverter_index_.html">&quot;GnuConfigConverter/index&quot;</a>
 				</li>
 				<li>
-					<a href="_gnuconfigconverter_index_.istatement.html">IStatement</a>
+					<a href="_gnuconfigconverter_index_.ixword.html">IXWord</a>
 				</li>
 			</ul>
-			<h1>Interface IStatement</h1>
+			<h1>Interface IXWord</h1>
 		</div>
 	</div>
 </header>
@@ -73,7 +73,12 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">IStatement</span>
+						<a href="_gnuconfigconverter_index_.izposition.html" class="tsd-signature-type">IZPosition</a>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">IXWord</span>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</section>
@@ -84,14 +89,9 @@
 						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_gnuconfigconverter_index_.istatement.html#background" class="tsd-kind-icon">Background</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_gnuconfigconverter_index_.istatement.html#cmd" class="tsd-kind-icon">Cmd</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_gnuconfigconverter_index_.istatement.html#comments" class="tsd-kind-icon">Comments</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_gnuconfigconverter_index_.istatement.html#coprocess" class="tsd-kind-icon">Coprocess</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_gnuconfigconverter_index_.istatement.html#end" class="tsd-kind-icon">End</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_gnuconfigconverter_index_.istatement.html#negated" class="tsd-kind-icon">Negated</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_gnuconfigconverter_index_.istatement.html#pos" class="tsd-kind-icon">Pos</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_gnuconfigconverter_index_.istatement.html#redirs" class="tsd-kind-icon">Redirs</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite tsd-is-not-exported"><a href="_gnuconfigconverter_index_.ixword.html#end" class="tsd-kind-icon">End</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_gnuconfigconverter_index_.ixword.html#parts" class="tsd-kind-icon">Parts</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite tsd-is-not-exported"><a href="_gnuconfigconverter_index_.ixword.html#pos" class="tsd-kind-icon">Pos</a></li>
 							</ul>
 						</section>
 					</div>
@@ -99,83 +99,35 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="background" class="tsd-anchor"></a>
-					<h3>Background</h3>
-					<div class="tsd-signature tsd-kind-icon">Background<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in GnuConfigConverter/index.ts:449</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="cmd" class="tsd-anchor"></a>
-					<h3>Cmd</h3>
-					<div class="tsd-signature tsd-kind-icon">Cmd<span class="tsd-signature-symbol">:</span> <a href="_gnuconfigconverter_index_.icmd.html" class="tsd-signature-type">ICmd</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in GnuConfigConverter/index.ts:450</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="comments" class="tsd-anchor"></a>
-					<h3>Comments</h3>
-					<div class="tsd-signature tsd-kind-icon">Comments<span class="tsd-signature-symbol">:</span> <a href="_gnuconfigconverter_index_.icommentline.html" class="tsd-signature-type">ICommentLine</a><span class="tsd-signature-symbol">[]</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in GnuConfigConverter/index.ts:451</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="coprocess" class="tsd-anchor"></a>
-					<h3>Coprocess</h3>
-					<div class="tsd-signature tsd-kind-icon">Coprocess<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in GnuConfigConverter/index.ts:452</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite tsd-is-not-exported">
 					<a name="end" class="tsd-anchor"></a>
 					<h3>End</h3>
-					<div class="tsd-signature tsd-kind-icon">End<span class="tsd-signature-symbol">:</span> <a href="_gnuconfigconverter_index_.ipos.html" class="tsd-signature-type">IPos</a></div>
+					<div class="tsd-signature tsd-kind-icon">End<span class="tsd-signature-symbol">:</span> <a href="_gnuconfigconverter_index_.izpos.html" class="tsd-signature-type">IZPos</a></div>
 					<aside class="tsd-sources">
+						<p>Overrides <a href="_gnuconfigconverter_index_.izposition.html">IZPosition</a>.<a href="_gnuconfigconverter_index_.izposition.html#end">End</a></p>
 						<ul>
-							<li>Defined in GnuConfigConverter/index.ts:446</li>
+							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/cc213ea/src/GnuConfigConverter/index.ts#L636">GnuConfigConverter/index.ts:636</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="negated" class="tsd-anchor"></a>
-					<h3>Negated</h3>
-					<div class="tsd-signature tsd-kind-icon">Negated<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<a name="parts" class="tsd-anchor"></a>
+					<h3>Parts</h3>
+					<div class="tsd-signature tsd-kind-icon">Parts<span class="tsd-signature-symbol">:</span> <a href="_gnuconfigconverter_index_.ibytype.html" class="tsd-signature-type">IByType</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in GnuConfigConverter/index.ts:453</li>
+							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/cc213ea/src/GnuConfigConverter/index.ts#L639">GnuConfigConverter/index.ts:639</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite tsd-is-not-exported">
 					<a name="pos" class="tsd-anchor"></a>
 					<h3>Pos</h3>
-					<div class="tsd-signature tsd-kind-icon">Pos<span class="tsd-signature-symbol">:</span> <a href="_gnuconfigconverter_index_.ipos.html" class="tsd-signature-type">IPos</a></div>
+					<div class="tsd-signature tsd-kind-icon">Pos<span class="tsd-signature-symbol">:</span> <a href="_gnuconfigconverter_index_.izpos.html" class="tsd-signature-type">IZPos</a></div>
 					<aside class="tsd-sources">
+						<p>Overrides <a href="_gnuconfigconverter_index_.izposition.html">IZPosition</a>.<a href="_gnuconfigconverter_index_.izposition.html#pos">Pos</a></p>
 						<ul>
-							<li>Defined in GnuConfigConverter/index.ts:447</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="redirs" class="tsd-anchor"></a>
-					<h3>Redirs</h3>
-					<div class="tsd-signature tsd-kind-icon">Redirs<span class="tsd-signature-symbol">:</span> <a href="_gnuconfigconverter_index_.iredir.html" class="tsd-signature-type">IRedir</a><span class="tsd-signature-symbol">[]</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in GnuConfigConverter/index.ts:454</li>
+							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/cc213ea/src/GnuConfigConverter/index.ts#L637">GnuConfigConverter/index.ts:637</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -197,31 +149,16 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_gnuconfigconverter_index_.istatement.html" class="tsd-kind-icon">IStatement</a>
+						<a href="_gnuconfigconverter_index_.ixword.html" class="tsd-kind-icon">IXWord</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="_gnuconfigconverter_index_.istatement.html#background" class="tsd-kind-icon">Background</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite tsd-is-not-exported">
+								<a href="_gnuconfigconverter_index_.ixword.html#end" class="tsd-kind-icon">End</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="_gnuconfigconverter_index_.istatement.html#cmd" class="tsd-kind-icon">Cmd</a>
+								<a href="_gnuconfigconverter_index_.ixword.html#parts" class="tsd-kind-icon">Parts</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="_gnuconfigconverter_index_.istatement.html#comments" class="tsd-kind-icon">Comments</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="_gnuconfigconverter_index_.istatement.html#coprocess" class="tsd-kind-icon">Coprocess</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="_gnuconfigconverter_index_.istatement.html#end" class="tsd-kind-icon">End</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="_gnuconfigconverter_index_.istatement.html#negated" class="tsd-kind-icon">Negated</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="_gnuconfigconverter_index_.istatement.html#pos" class="tsd-kind-icon">Pos</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="_gnuconfigconverter_index_.istatement.html#redirs" class="tsd-kind-icon">Redirs</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite tsd-is-not-exported">
+								<a href="_gnuconfigconverter_index_.ixword.html#pos" class="tsd-kind-icon">Pos</a>
 							</li>
 						</ul>
 					</li>
