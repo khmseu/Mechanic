@@ -17,27 +17,31 @@ const verstr = `Mechanic 0.1.19-0
 Copyright © 2018 Kai Henningsen
 License: MIT`;
 
-const opts = options.parse({
-  help: {
-    flag: true,
-    short: "h",
-    showHelp: {
-      banner: "Mechanic [options] [settings] [targets]",
-      callback: () => {
-        // tslint:disable-next-line:no-console
-        console.log(footer);
+const opts = options.parse(
+  {
+    help: {
+      flag: true,
+      short: "h",
+      showHelp: {
+        banner: "Mechanic [options] [settings] [targets]",
+        callback: () => {
+          // tslint:disable-next-line:no-console
+          console.log(footer);
+        },
       },
+      version: { short: "v", flag: true },
     },
-    version: { short: "v", flag: true },
+    //   user: { required: true },
+    //   all: { short: 'a', flag: true },
+    //   host: { short: 'h', default: 'localhost' },
+    //   input: { short: 'i', multi: true },
+    //   r: { flag: true },
+    //   db: { default: 'test' },
+    //   out: { short: 'o', type: options.type.file.open.write() }
   },
-  //   user: { required: true },
-  //   all: { short: 'a', flag: true },
-  //   host: { short: 'h', default: 'localhost' },
-  //   input: { short: 'i', multi: true },
-  //   r: { flag: true },
-  //   db: { default: 'test' },
-  //   out: { short: 'o', type: options.type.file.open.write() }
-});
+  undefined,
+  undefined,
+);
 
 // tslint:disable-next-line:no-console
 console.log(opts);

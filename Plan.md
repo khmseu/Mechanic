@@ -3,7 +3,7 @@
 Copyright (c) 2018 Kai Henningsen <kai.extern+mechanic@gmail.com>
 
 This software is released under the MIT License.
-https://opensource.org/licenses/MIT
+<https://opensource.org/licenses/MIT>
 
 1. Complete simple dependencies.
 1. Actually reading rule files (recursively).
