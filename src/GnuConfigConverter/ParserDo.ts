@@ -7,153 +7,157 @@
 
 import { joiner } from ".";
 import { comm } from "./comm";
+import { ISyntaxTreeNode } from "./ISyntaxTreeNode";
 import { logg } from "./logg";
 import { prepWord } from "./ParserPrep";
 // tslint:disable-next-line:max-line-length
 import { BinAritOperator, BinCmdOperator, BinTestOperator, CaseOperator, GlobOperator, I_Expansion, I_Pos, I_Replace, I_Slice, ParNamesOperator, ProcOperator, RedirOperator, UnAritOperator, UnTestOperator } from "./ParserTypes";
+import { RestComment } from "./RestComment";
 import { op, Token } from "./Token";
+import { Assignment } from "./Assignment";
+import { toJS } from "./toJS";
 
 // tslint:disable-next-line:max-line-length
-export function doArithmCmd(Left: I_Pos | null, Right: I_Pos | null, Unsigned: boolean | null, X: string[]): string[] {
+export function doArithmCmd(Left: I_Pos | null, Right: I_Pos | null, Unsigned: boolean | null, X: ISyntaxTreeNode): ISyntaxTreeNode {
   logg("doArithmCmd");
-  return [comm({ Left, Right, Unsigned, X })];
+  return [new RestComment({ Left, Right, Unsigned, X })];
 }
 // tslint:disable-next-line:max-line-length
-export function doArithmExp(Left: I_Pos | null, Right: I_Pos | null, Bracket: boolean | null, Unsigned: boolean | null, X: string[]): string[] {
+export function doArithmExp(Left: I_Pos | null, Right: I_Pos | null, Bracket: boolean | null, Unsigned: boolean | null, X: ISyntaxTreeNode): ISyntaxTreeNode {
   logg("doArithmExp");
-  return [comm({ Left, Right, Bracket, Unsigned, X })];
+  return [new RestComment({ Left, Right, Bracket, Unsigned, X })];
 }
-export function doArrayElem(Index: string[], Value: string[], Comments: string[]): string[] {
+export function doArrayElem(Index: ISyntaxTreeNode, Value: ISyntaxTreeNode, Comments: ISyntaxTreeNode): ISyntaxTreeNode {
   logg("doArrayElem");
   return [...Index, ...Value, ...Comments];
 }
 // tslint:disable-next-line:max-line-length
-export function doArrayExpr(Lparen: I_Pos | null, Rparen: I_Pos | null, Elems: string[], Last: string[]): string[] {
+export function doArrayExpr(Lparen: I_Pos | null, Rparen: I_Pos | null, Elems: ISyntaxTreeNode, Last: ISyntaxTreeNode): ISyntaxTreeNode {
   logg("doArrayExpr");
-  return [...Elems, ...Last, comm({ Lparen, Rparen })];
+  return [...Elems, ...Last, new RestComment({ Lparen, Rparen })];
 }
 // tslint:disable-next-line:max-line-length
-export function doAssign(Append: boolean | null, Naked: boolean | null, Name: string[], Index: string[], Value: string[], Array: string[]): string[] {
+export function doAssign(Append: boolean | null, Naked: boolean | null, Name: ISyntaxTreeNode, Index: ISyntaxTreeNode, Value: ISyntaxTreeNode, Array: ISyntaxTreeNode): ISyntaxTreeNode {
   logg("doAssign");
   // tslint:disable-next-line:max-line-length
-  return ["let ", ...Name, " = ", ...Value, " ; /*4*/", comm({ Append, Naked, Index, Array }, '{"Append":false,"Naked":false,"Index":[""],"Array":[""]}')];
+  return [new Assignment(toJS(Name), toJS(Value)), new RestComment({ Append, Naked, Index, Array }, '{"Append":false,"Naked":false,"Index":[""],"Array":[""]}')];
 }
 // tslint:disable-next-line:max-line-length
-export function doBinaryArithm(OpPos: I_Pos | null, Op: BinAritOperator | null, X: string[], Y: string[]): string[] {
+export function doBinaryArithm(OpPos: I_Pos | null, Op: BinAritOperator | null, X: ISyntaxTreeNode, Y: ISyntaxTreeNode): ISyntaxTreeNode {
   logg("doBinaryArithm");
-  return [...X, op((Op as unknown) as Token), ...Y, comm({ OpPos })];
+  return [...X, op((Op as unknown) as Token), ...Y, new RestComment({ OpPos })];
 }
 // tslint:disable-next-line:max-line-length
-export function doBinaryCmd(OpPos: I_Pos | null, Op: BinCmdOperator | null, X: string[], Y: string[]): string[] {
+export function doBinaryCmd(OpPos: I_Pos | null, Op: BinCmdOperator | null, X: ISyntaxTreeNode, Y: ISyntaxTreeNode): ISyntaxTreeNode {
   logg("doBinaryCmd");
-  return ["{\n", ...X, op((Op as unknown) as Token), ...Y, comm({ OpPos }, '{"OpPos":{}}'), "\n}"];
+  return ["{\n", ...X, op((Op as unknown) as Token), ...Y, new RestComment({ OpPos }, '{"OpPos":{}}'), "\n}"];
 }
 // tslint:disable-next-line:max-line-length
-export function doBinaryTest(OpPos: I_Pos | null, Op: BinTestOperator | null, X: string[], Y: string[]): string[] {
+export function doBinaryTest(OpPos: I_Pos | null, Op: BinTestOperator | null, X: ISyntaxTreeNode, Y: ISyntaxTreeNode): ISyntaxTreeNode {
   logg("doBinaryTest");
-  return [...X, op((Op as unknown) as Token), ...Y, comm({ OpPos })];
+  return [...X, op((Op as unknown) as Token), ...Y, new RestComment({ OpPos })];
 }
 // tslint:disable-next-line:max-line-length
-export function doBlock(Lbrace: I_Pos | null, Rbrace: I_Pos | null, StmtList: string[], Last: string[]): string[] {
+export function doBlock(Lbrace: I_Pos | null, Rbrace: I_Pos | null, StmtList: ISyntaxTreeNode, Last: ISyntaxTreeNode): ISyntaxTreeNode {
   logg("doBlock");
-  return [...StmtList, ...Last, comm({ Lbrace, Rbrace }, '{"Lbrace":{},"Rbrace":{}}'), " ;//3\n"];
+  return [...StmtList, ...Last, new RestComment({ Lbrace, Rbrace }, '{"Lbrace":{},"Rbrace":{}}'), " ;//3\n"];
 }
-export function doBraceExp(Sequence: boolean | null, Chars: boolean | null, Elems: string[]): string[] {
+export function doBraceExp(Sequence: boolean | null, Chars: boolean | null, Elems: ISyntaxTreeNode): ISyntaxTreeNode {
   logg("doBraceExp");
-  return [...Elems, comm({ Sequence, Chars })];
+  return [...Elems, new RestComment({ Sequence, Chars })];
 }
-export function doCallExpr(Assigns: string[], Args: string[]): string[] {
+export function doCallExpr(Assigns: ISyntaxTreeNode, Args: ISyntaxTreeNode): ISyntaxTreeNode {
   logg("doCallExpr");
   return [...Assigns, ...Args];
 }
 // tslint:disable-next-line:max-line-length
-export function doCaseClause(Case: I_Pos | null, Esac: I_Pos | null, Word: string[], Items: string[], Last: string[]): string[] {
+export function doCaseClause(Case: I_Pos | null, Esac: I_Pos | null, Word: ISyntaxTreeNode, Items: ISyntaxTreeNode, Last: ISyntaxTreeNode): ISyntaxTreeNode {
   logg("doCaseClause");
   // tslint:disable-next-line:max-line-length
-  return ["switch ( ", ...Word, " + /*5*/", " ) {\n", ...Items, "\n}", ...Last, comm({ Case, Esac }, '{"Case":{},"Esac":{}}')];
+  return ["switch ( ", ...Word, " + /*5*/", " ) {\n", ...Items, "\n}", ...Last, new RestComment({ Case, Esac }, '{"Case":{},"Esac":{}}')];
 }
 // tslint:disable-next-line:max-line-length
-export function doCaseItem(Op: CaseOperator | null, OpPos: I_Pos | null, Comments: string[], Patterns: string[], StmtList: string[], Last: string[]): string[] {
+export function doCaseItem(Op: CaseOperator | null, OpPos: I_Pos | null, Comments: ISyntaxTreeNode, Patterns: ISyntaxTreeNode, StmtList: ISyntaxTreeNode, Last: ISyntaxTreeNode): ISyntaxTreeNode {
   logg("doCaseItem");
   // tslint:disable-next-line:max-line-length
-  return [...Comments, ...Patterns, ...StmtList, op((Op as unknown) as Token), ...Last, comm({ OpPos }, '{"OpPos":{}}')];
+  return [...Comments, ...Patterns, ...StmtList, op((Op as unknown) as Token), ...Last, new RestComment({ OpPos }, '{"OpPos":{}}')];
 }
 // tslint:disable-next-line:max-line-length
-export function doCmdSubst(Left: I_Pos | null, Right: I_Pos | null, StmtList: string[], Last: string[], TempFile: boolean | null, ReplyVar: boolean | null): string[] {
+export function doCmdSubst(Left: I_Pos | null, Right: I_Pos | null, StmtList: ISyntaxTreeNode, Last: ISyntaxTreeNode, TempFile: boolean | null, ReplyVar: boolean | null): ISyntaxTreeNode {
   logg("doCmdSubst");
   // tslint:disable-next-line:max-line-length
-  return ["$( " + joiner([...StmtList, ...Last, comm({ Left, Right, TempFile, ReplyVar }, '{"Left":{},"Right":{},"TempFile":false,"ReplyVar":false}')], " + /*2*/") + " )"];
+  return ["$( " + joiner([...StmtList, ...Last, new RestComment({ Left, Right, TempFile, ReplyVar }, '{"Left":{},"Right":{},"TempFile":false,"ReplyVar":false}')], " + /*2*/") + " )"];
 }
-export function doComment(Hash: I_Pos | null, Text: string | null): string[] {
+export function doComment(Hash: I_Pos | null, Text: string | null): ISyntaxTreeNode {
   logg("doComment");
   if (Hash && Hash.Offset() === 0 && Text && Text[0] === "!") {
     return [];
   }
   return ["// " + Text];
 }
-export function doCoprocClause(Coproc: I_Pos | null, Name: string[], Stmt: string[]): string[] {
+export function doCoprocClause(Coproc: I_Pos | null, Name: ISyntaxTreeNode, Stmt: ISyntaxTreeNode): ISyntaxTreeNode {
   logg("doCoprocClause");
-  return [...Name, ...Stmt, comm({ Coproc })];
+  return [...Name, ...Stmt, new RestComment({ Coproc })];
 }
 // tslint:disable-next-line:max-line-length
-export function doCStyleLoop(Lparen: I_Pos | null, Rparen: I_Pos | null, Init: string[], Cond: string[], Post: string[]): string[] {
+export function doCStyleLoop(Lparen: I_Pos | null, Rparen: I_Pos | null, Init: ISyntaxTreeNode, Cond: ISyntaxTreeNode, Post: ISyntaxTreeNode): ISyntaxTreeNode {
   logg("doCStyleLoop");
-  return [...Init, ...Cond, ...Post, comm({ Lparen, Rparen })];
+  return [...Init, ...Cond, ...Post, new RestComment({ Lparen, Rparen })];
 }
-export function doDblQuoted(Position: I_Pos | null, Dollar: boolean | null, Parts: string[]): string[] {
+export function doDblQuoted(Position: I_Pos | null, Dollar: boolean | null, Parts: ISyntaxTreeNode): ISyntaxTreeNode {
   logg("doDblQuoted");
-  return [...Parts, comm({ Position, Dollar }, '{"Position":{},"Dollar":false}')];
+  return [...Parts, new RestComment({ Position, Dollar }, '{"Position":{},"Dollar":false}')];
 }
-export function doDeclClause(Variant: string[], Opts: string[], Assigns: string[]): string[] {
+export function doDeclClause(Variant: ISyntaxTreeNode, Opts: ISyntaxTreeNode, Assigns: ISyntaxTreeNode): ISyntaxTreeNode {
   logg("doDeclClause");
   return [...Variant, ...Opts, ...Assigns];
 }
-export function doExtGlob(OpPos: I_Pos | null, Op: GlobOperator | null, Pattern: string[]): string[] {
+export function doExtGlob(OpPos: I_Pos | null, Op: GlobOperator | null, Pattern: ISyntaxTreeNode): ISyntaxTreeNode {
   logg("doExtGlob");
-  return [...Pattern, op((Op as unknown) as Token), comm({ OpPos })];
+  return [...Pattern, op((Op as unknown) as Token), new RestComment({ OpPos })];
 }
-export function doFile(Name: string | null, StmtList: string[], Last: string[]): string[] {
+export function doFile(Name: string | null, StmtList: ISyntaxTreeNode, Last: ISyntaxTreeNode): ISyntaxTreeNode {
   logg("doFile");
-  return [comm({ Name }), ...StmtList, ...Last];
+  return [new RestComment({ Name }), ...StmtList, ...Last];
 }
 // tslint:disable-next-line:max-line-length
-export function doForClause(ForPos: I_Pos | null, DoPos: I_Pos | null, DonePos: I_Pos | null, Select: boolean | null, Loop: string[], Do: string[], DoLast: string[]): string[] {
+export function doForClause(ForPos: I_Pos | null, DoPos: I_Pos | null, DonePos: I_Pos | null, Select: boolean | null, Loop: ISyntaxTreeNode, Do: ISyntaxTreeNode, DoLast: ISyntaxTreeNode): ISyntaxTreeNode {
   logg("doForClause");
   // tslint:disable-next-line:max-line-length
-  return ["for", ...Loop, "{\n", ...Do, ...DoLast, "\n}", comm({ ForPos, DoPos, DonePos, Select }, '{"ForPos":{},"DoPos":{},"DonePos":{},"Select":false}')];
+  return ["for", ...Loop, "{\n", ...Do, ...DoLast, "\n}", new RestComment({ ForPos, DoPos, DonePos, Select }, '{"ForPos":{},"DoPos":{},"DonePos":{},"Select":false}')];
 }
 // tslint:disable-next-line:max-line-length
-export function doFuncDecl(Position: I_Pos | null, RsrvWord: boolean | null, Name: string[], Body: string[]): string[] {
+export function doFuncDecl(Position: I_Pos | null, RsrvWord: boolean | null, Name: ISyntaxTreeNode, Body: ISyntaxTreeNode): ISyntaxTreeNode {
   logg("doFuncDecl");
   // tslint:disable-next-line:max-line-length
-  return ["function ", ...Name, " () {\n", ...Body, "\n}", comm({ Position, RsrvWord }, '{"Position":{},"RsrvWord":false}')];
+  return ["function ", ...Name, " () {\n", ...Body, "\n}", new RestComment({ Position, RsrvWord }, '{"Position":{},"RsrvWord":false}')];
 }
 // tslint:disable-next-line:max-line-length
-export function doIfClause(Position: I_Pos | null, ThenPos: I_Pos | null, FiPos: I_Pos | null, Cond: string[], CondLast: string[], Then: string[], ThenLast: string[], Else: string[], Last: string[]): string[] {
+export function doIfClause(Position: I_Pos | null, ThenPos: I_Pos | null, FiPos: I_Pos | null, Cond: ISyntaxTreeNode, CondLast: ISyntaxTreeNode, Then: ISyntaxTreeNode, ThenLast: ISyntaxTreeNode, Else: ISyntaxTreeNode, Last: ISyntaxTreeNode): ISyntaxTreeNode {
   logg("doIfClause");
   // tslint:disable-next-line:max-line-length
-  return ["if ( ", ...Cond, ...CondLast, " ) ", "{\n", ...Then, ...ThenLast, "\n} ", " else {\n", ...Else, "\n} ", ...Last, comm({ Position, ThenPos, FiPos }, '{"Position":{},"ThenPos":{},"FiPos":{}}')];
+  return ["if ( ", ...Cond, ...CondLast, " ) ", "{\n", ...Then, ...ThenLast, "\n} ", " else {\n", ...Else, "\n} ", ...Last, new RestComment({ Position, ThenPos, FiPos }, '{"Position":{},"ThenPos":{},"FiPos":{}}')];
 }
-export function doLetClause(Let: I_Pos | null, Exprs: string[]): string[] {
+export function doLetClause(Let: I_Pos | null, Exprs: ISyntaxTreeNode): ISyntaxTreeNode {
   logg("doLetClause");
-  return [...Exprs, comm({ Let })];
+  return [...Exprs, new RestComment({ Let })];
 }
-export function doLit(ValuePos: I_Pos | null, ValueEnd: I_Pos | null, Value: string | null): string[] {
+export function doLit(ValuePos: I_Pos | null, ValueEnd: I_Pos | null, Value: string | null): ISyntaxTreeNode {
   logg("doLit");
-  return [JSON.stringify(Value), comm({ ValuePos, ValueEnd }, '{"ValuePos":{},"ValueEnd":{}}')];
+  return [JSON.stringify(Value), new RestComment({ ValuePos, ValueEnd }, '{"ValuePos":{},"ValueEnd":{}}')];
 }
 function exp(e: I_Expansion | null): string {
   logg("exp");
   if (!e) {
-    return comm({ e }, '{"e":null}');
+    return new RestComment({ e }, '{"e":null}');
   }
   const { Op, Word, ...rest_exp } = e;
-  return joiner([op((Op as unknown) as Token), ...prepWord(Word), comm({ rest_exp }, '{"rest_exp":{}}')], " ");
+  return joiner([op((Op as unknown) as Token), ...prepWord(Word), new RestComment({ rest_exp }, '{"rest_exp":{}}')], " ");
 }
-function param(prm: string): string[] {
+function param(prm: string): ISyntaxTreeNode {
   logg("param");
   if (!prm) {
-    return [comm({ prm }, '{"e":null}')];
+    return [new RestComment({ prm }, '{"e":null}')];
   }
   const prmr = JSON.parse(prm);
   return [
@@ -162,101 +166,101 @@ function param(prm: string): string[] {
       : prmr === "0"
       ? "process.argv0"
       : /^\d+$/.test(prmr)
-      ? "process.argv[" + prmr + "]"
+      ? "process.argv[" + prmr + "-1]"
       : prmr === "#"
       ? "process.argv.length"
       : prmr === "$"
       ? "process.pid"
       : prmr === "?"
       ? "process.exitCode"
-      : comm({ prmr }),
+      : new RestComment({ prmr }),
   ];
 }
 // tslint:disable-next-line:max-line-length
-export function doParamExp(Dollar: I_Pos | null, Rbrace: I_Pos | null, Short: boolean | null, Excl: boolean | null, Length: boolean | null, Width: boolean | null, Param: string[], Index: string[], Slice: I_Slice | null, Repl: I_Replace | null, Names: ParNamesOperator | null, Exp: I_Expansion | null): string[] {
+export function doParamExp(Dollar: I_Pos | null, Rbrace: I_Pos | null, Short: boolean | null, Excl: boolean | null, Length: boolean | null, Width: boolean | null, Param: ISyntaxTreeNode, Index: ISyntaxTreeNode, Slice: I_Slice | null, Repl: I_Replace | null, Names: ParNamesOperator | null, Exp: I_Expansion | null): ISyntaxTreeNode {
   logg("doParamExp");
   const parm = param(joiner(Param, ""));
   if (Short) {
     // tslint:disable-next-line:max-line-length
-    return [...parm, exp(Exp), comm({ Dollar, Rbrace, Excl, Length, Width, Index, Slice, Repl, Names }, '{"Dollar":{},"Rbrace":{},"Excl":false,"Length":false,"Width":false,"Index":[""],"Slice":null,"Repl":null,"Names":0}'), " "];
+    return [...parm, exp(Exp), new RestComment({ Dollar, Rbrace, Excl, Length, Width, Index, Slice, Repl, Names }, '{"Dollar":{},"Rbrace":{},"Excl":false,"Length":false,"Width":false,"Index":[""],"Slice":null,"Repl":null,"Names":0}'), " "];
   } else {
     // tslint:disable-next-line:max-line-length
-    return ["(", ...parm, exp(Exp), comm({ Dollar, Rbrace, Excl, Length, Width, Index, Slice, Repl, Names }, '{"Dollar":{},"Rbrace":{},"Excl":false,"Length":false,"Width":false,"Index":[""],"Slice":null,"Repl":null,"Names":0}'), ")", " "];
+    return ["(", ...parm, exp(Exp), new RestComment({ Dollar, Rbrace, Excl, Length, Width, Index, Slice, Repl, Names }, '{"Dollar":{},"Rbrace":{},"Excl":false,"Length":false,"Width":false,"Index":[""],"Slice":null,"Repl":null,"Names":0}'), ")", " "];
   }
 }
-export function doParenArithm(Lparen: I_Pos | null, Rparen: I_Pos | null, X: string[]): string[] {
+export function doParenArithm(Lparen: I_Pos | null, Rparen: I_Pos | null, X: ISyntaxTreeNode): ISyntaxTreeNode {
   logg("doParenArithm");
-  return [...X, comm({ Lparen, Rparen })];
+  return [...X, new RestComment({ Lparen, Rparen })];
 }
-export function doParenTest(Lparen: I_Pos | null, Rparen: I_Pos | null, X: string[]): string[] {
+export function doParenTest(Lparen: I_Pos | null, Rparen: I_Pos | null, X: ISyntaxTreeNode): ISyntaxTreeNode {
   logg("doParenTest");
-  return [...X, comm({ Lparen, Rparen })];
+  return [...X, new RestComment({ Lparen, Rparen })];
 }
 // tslint:disable-next-line:max-line-length
-export function doProcSubst(OpPos: I_Pos | null, Rparen: I_Pos | null, Op: ProcOperator | null, Stmts: string[], Last: string[]): string[] {
+export function doProcSubst(OpPos: I_Pos | null, Rparen: I_Pos | null, Op: ProcOperator | null, Stmts: ISyntaxTreeNode, Last: ISyntaxTreeNode): ISyntaxTreeNode {
   logg("doProcSubst");
-  return [op((Op as unknown) as Token), ...Stmts, ...Last, comm({ OpPos, Rparen })];
+  return [op((Op as unknown) as Token), ...Stmts, ...Last, new RestComment({ OpPos, Rparen })];
 }
 // tslint:disable-next-line:max-line-length
-export function doRedirect(OpPos: I_Pos | null, Op: RedirOperator | null, N: string[], Word: string[], Hdoc: string[]): string[] {
+export function doRedirect(OpPos: I_Pos | null, Op: RedirOperator | null, N: ISyntaxTreeNode, Word: ISyntaxTreeNode, Hdoc: ISyntaxTreeNode): ISyntaxTreeNode {
   logg("doRedirect");
-  const res: string[] = [];
+  const res: ISyntaxTreeNode = [];
   if (N) {
     res.push(...N);
   }
   res.push(op((Op as unknown) as Token), ...Word);
   res.push(...Hdoc);
-  res.push(comm({ OpPos }, '{"OpPos":{}}'));
+  res.push(new RestComment({ OpPos }, '{"OpPos":{}}'));
   return res;
 }
 // tslint:disable-next-line:max-line-length
-export function doSglQuoted(Left: I_Pos | null, Right: I_Pos | null, Dollar: boolean | null, Value: string | null): string[] {
+export function doSglQuoted(Left: I_Pos | null, Right: I_Pos | null, Dollar: boolean | null, Value: string | null): ISyntaxTreeNode {
   logg("doSglQuoted");
-  return [JSON.stringify(Value), comm({ Left, Right, Dollar }, '{"Left":{},"Right":{},"Dollar":false}')];
+  return [JSON.stringify(Value), new RestComment({ Left, Right, Dollar }, '{"Left":{},"Right":{},"Dollar":false}')];
 }
 // tslint:disable-next-line:max-line-length
-export function doStmt(Comments: string[], Cmd: string[], Position: I_Pos | null, Semicolon: I_Pos | null, Negated: boolean | null, Background: boolean | null, Coprocess: boolean | null, Redirs: string[]): string[] {
+export function doStmt(Comments: ISyntaxTreeNode, Cmd: ISyntaxTreeNode, Position: I_Pos | null, Semicolon: I_Pos | null, Negated: boolean | null, Background: boolean | null, Coprocess: boolean | null, Redirs: ISyntaxTreeNode): ISyntaxTreeNode {
   logg("doStmt");
   // tslint:disable-next-line:max-line-length
-  return [...Comments, ...Cmd, ...Redirs, comm({ Position, Semicolon, Negated, Background, Coprocess }, '{"Position":{},"Semicolon":{},"Negated":false,"Background":false,"Coprocess":false}')];
+  return [...Comments, ...Cmd, ...Redirs, new RestComment({ Position, Semicolon, Negated, Background, Coprocess }, '{"Position":{},"Semicolon":{},"Negated":false,"Background":false,"Coprocess":false}')];
 }
-export function doStmtList(Stmts: string[], Last: string[]): string[] {
+export function doStmtList(Stmts: ISyntaxTreeNode, Last: ISyntaxTreeNode): ISyntaxTreeNode {
   logg("doStmtList");
   return [...Stmts, ...Last];
 }
 // tslint:disable-next-line:max-line-length
-export function doSubshell(Lparen: I_Pos | null, Rparen: I_Pos | null, StmtList: string[], Last: string[]): string[] {
+export function doSubshell(Lparen: I_Pos | null, Rparen: I_Pos | null, StmtList: ISyntaxTreeNode, Last: ISyntaxTreeNode): ISyntaxTreeNode {
   logg("doSubshell");
-  return [" ( ", ...StmtList, ...Last, comm({ Lparen, Rparen }, '{"Lparen":{},"Rparen":{}}'), " ", " ) "];
+  return [" ( ", ...StmtList, ...Last, new RestComment({ Lparen, Rparen }, '{"Lparen":{},"Rparen":{}}'), " ", " ) "];
 }
-export function doTestClause(Left: I_Pos | null, Right: I_Pos | null, X: string[]): string[] {
+export function doTestClause(Left: I_Pos | null, Right: I_Pos | null, X: ISyntaxTreeNode): ISyntaxTreeNode {
   logg("doTestClause");
-  return [...X, comm({ Left, Right })];
+  return [...X, new RestComment({ Left, Right })];
 }
-export function doTimeClause(Time: I_Pos | null, PosixFormat: boolean | null, Stmt: string[]): string[] {
+export function doTimeClause(Time: I_Pos | null, PosixFormat: boolean | null, Stmt: ISyntaxTreeNode): ISyntaxTreeNode {
   logg("doTimeClause");
-  return [...Stmt, comm({ Time, PosixFormat })];
+  return [...Stmt, new RestComment({ Time, PosixFormat })];
 }
 // tslint:disable-next-line:max-line-length
-export function doUnaryArithm(OpPos: I_Pos | null, Op: UnAritOperator | null, Post: boolean | null, X: string[]): string[] {
+export function doUnaryArithm(OpPos: I_Pos | null, Op: UnAritOperator | null, Post: boolean | null, X: ISyntaxTreeNode): ISyntaxTreeNode {
   logg("doUnaryArithm");
-  return [...X, op((Op as unknown) as Token), comm({ OpPos, Post })];
+  return [...X, op((Op as unknown) as Token), new RestComment({ OpPos, Post })];
 }
-export function doUnaryTest(OpPos: I_Pos | null, Op: UnTestOperator | null, X: string[]): string[] {
+export function doUnaryTest(OpPos: I_Pos | null, Op: UnTestOperator | null, X: ISyntaxTreeNode): ISyntaxTreeNode {
   logg("doUnaryTest");
-  return [...X, op((Op as unknown) as Token), comm({ OpPos })];
+  return [...X, op((Op as unknown) as Token), new RestComment({ OpPos })];
 }
 // tslint:disable-next-line:max-line-length
-export function doWhileClause(WhilePos: I_Pos | null, DoPos: I_Pos | null, DonePos: I_Pos | null, Until: boolean | null, Cond: string[], CondLast: string[], Do: string[], DoLast: string[]): string[] {
+export function doWhileClause(WhilePos: I_Pos | null, DoPos: I_Pos | null, DonePos: I_Pos | null, Until: boolean | null, Cond: ISyntaxTreeNode, CondLast: ISyntaxTreeNode, Do: ISyntaxTreeNode, DoLast: ISyntaxTreeNode): ISyntaxTreeNode {
   logg("doWhileClause");
   // tslint:disable-next-line:max-line-length
-  return ["while (", ...Cond, ") {\n", ...Do, ...DoLast, "\n}", ...CondLast, comm({ WhilePos, DoPos, DonePos, Until }, '{"WhilePos":{},"DoPos":{},"DonePos":{},"Until":false}')];
+  return ["while (", ...Cond, ") {\n", ...Do, ...DoLast, "\n}", ...CondLast, new RestComment({ WhilePos, DoPos, DonePos, Until }, '{"WhilePos":{},"DoPos":{},"DonePos":{},"Until":false}')];
 }
-export function doWord(Parts: string[]): string[] {
+export function doWord(Parts: ISyntaxTreeNode): ISyntaxTreeNode {
   logg("doWord");
   return [...Parts];
 }
-export function doWordIter(Name: string[], InPos: I_Pos | null, Items: string[]): string[] {
+export function doWordIter(Name: ISyntaxTreeNode, InPos: I_Pos | null, Items: ISyntaxTreeNode): ISyntaxTreeNode {
   logg("doWordIter");
-  return ["(const ", ...Name, " of [ ", ...Items, " , ", " ])", comm({ InPos }, '{"InPos":{}}')];
+  return ["(const ", ...Name, " of [ ", ...Items, " , ", " ])", new RestComment({ InPos }, '{"InPos":{}}')];
 }

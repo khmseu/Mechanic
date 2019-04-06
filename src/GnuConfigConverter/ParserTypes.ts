@@ -35,8 +35,9 @@ export interface IArithmExp extends INode {
 // ArithmExpr represents all nodes that form arithmetic expressions.
 export type IArithmExpr = IBinaryArithm | IUnaryArithm | IParenArithm | IWord;
 // ArrayElem represents a Bash array element.
-// tslint:disable-next-line:max-line-length
-// Index can be nil; for example, declare -a x=(value). Value can be nil; for example, declare -A x=([index]=). Finally, neither can be nil; for example, declare -A x=([index]=value)
+// Index can be nil; for example, declare -a x=(value). Value can be nil; for
+// example, declare -A x=([index]=). Finally, neither can be nil; for example,
+// declare -A x=([index]=value)
 export interface IArrayElem extends INode {
   Index: IArithmExpr;
   Value: IWord | null;
@@ -52,11 +53,12 @@ export interface IArrayExpr extends INode {
   Last: IComment[];
 }
 // Assign represents an assignment to a variable.
-// tslint:disable-next-line:max-line-length
-// Here and elsewhere, Index can mean either an index expression into an indexed array, or a string key into an associative array.
+// Here and elsewhere, Index can mean either an index expression into an
+// indexed array, or a string key into an associative array.
 // If Index is non-nil, the value will be a word and not an array as nested arrays are not allowed.
-// tslint:disable-next-line:max-line-length
-// If Naked is true and Name is nil, the assignment is part of a DeclClause and the assignment expression (in the Value field) will be evaluated at run-time.
+// If Naked is true and Name is nil, the assignment is part of a DeclClause and
+// the assignment expression (in the Value field) will be evaluated at
+// run-time.
 export interface IAssign extends INode {
   Append: boolean; // +=
   Naked: boolean; // without '='
@@ -67,8 +69,9 @@ export interface IAssign extends INode {
 }
 // BinaryArithm represents a binary arithmetic expression.
 // If Op is any assign operator, X will be a word with a single *Lit whose value is a valid name.
-// tslint:disable-next-line:max-line-length
-// Ternary operators like "a ? b : c" are fit into this structure. Thus, if Op==TernQuest, Y will be a *BinaryArithm with Op==TernColon. Op can only be TernColon in that scenario.
+// Ternary operators like "a ? b : c" are fit into this structure. Thus, if
+// Op==TernQuest, Y will be a *BinaryArithm with Op==TernColon. Op can only be
+// TernColon in that scenario.
 export interface IBinaryArithm extends INode {
   OpPos: I_Pos;
   Op: BinAritOperator;
@@ -89,8 +92,8 @@ export interface IBinaryTest extends INode {
   X: ITestExpr;
   Y: ITestExpr;
 }
-// tslint:disable-next-line:max-line-length
-// Block represents a series of commands that should be executed in a nested scope. It is essentially a list of statements within curly braces.
+// Block represents a series of commands that should be executed in a nested
+// scope. It is essentially a list of statements within curly braces.
 export interface IBlock extends INode {
   Lbrace: I_Pos;
   Rbrace: I_Pos;
@@ -115,8 +118,8 @@ export interface ICStyleLoop extends INode {
   Post: IArithmExpr;
 }
 // CallExpr represents a command execution or function call, otherwise known as a "simple command".
-// tslint:disable-next-line:max-line-length
-// If Args is empty, Assigns apply to the shell environment. Otherwise, they are variables that cannot be arrays and which only apply to the call.
+// If Args is empty, Assigns apply to the shell environment. Otherwise, they
+// are variables that cannot be arrays and which only apply to the call.
 export interface ICallExpr extends INode {
   Assigns: IAssign[] | null; // a=x b=y args
   Args: IWord[] | null;
@@ -187,8 +190,8 @@ export interface I_Expansion extends Istruct {
   Op: ParExpOperator;
   Word: IWord | null;
 }
-// tslint:disable-next-line:max-line-length
-// ExtGlob represents a Bash extended globbing expression. Note that these are parsed independently of whether shopt has been called or not.
+// ExtGlob represents a Bash extended globbing expression. Note that these are
+// parsed independently of whether shopt has been called or not.
 // This node will only appear in LangBash and LangMirBSDKorn.
 export interface IExtGlob extends INode {
   OpPos: I_Pos;
@@ -242,8 +245,9 @@ export interface ILetClause extends INode {
   Exprs: IArithmExpr[];
 }
 // Lit represents a string literal.
-// tslint:disable-next-line:max-line-length
-// Note that a parsed string literal may not appear as-is in the original source code, as it is possible to split literals by escaping newlines. The splitting is lost, but the end position is not.
+// Note that a parsed string literal may not appear as-is in the original
+// source code, as it is possible to split literals by escaping newlines. The
+// splitting is lost, but the end position is not.
 export interface ILit extends INode {
   ValuePos: I_Pos;
   ValueEnd: I_Pos;
@@ -343,8 +347,9 @@ export interface I_Slice extends Istruct {
   Offset: IArithmExpr;
   Length: IArithmExpr;
 }
-// tslint:disable-next-line:max-line-length
-// Stmt represents a statement, also known as a "complete command". It is compromised of a command and other components that may come before or after it.
+// Stmt represents a statement, also known as a "complete command". It is
+// compromised of a command and other components that may come before or after
+// it.
 export interface IStmt extends INode {
   Comments: IComment[];
   Cmd: ICommand;
@@ -384,8 +389,8 @@ export interface ITimeClause extends INode {
   PosixFormat: boolean;
   Stmt: IStmt | null;
 }
-// tslint:disable-next-line:max-line-length
-// UnaryArithm represents an unary arithmetic expression. The unary opearator may come before or after the sub-expression.
+// UnaryArithm represents an unary arithmetic expression. The unary opearator
+// may come before or after the sub-expression.
 // If Op is Inc or Dec, X will be a word with a single *Lit whose value is a valid name.
 export interface IUnaryArithm extends INode {
   OpPos: I_Pos;
@@ -411,17 +416,18 @@ export interface IWhileClause extends INode {
   Do: IStmtList | null;
   DoLast: IComment[];
 }
-// tslint:disable-next-line:max-line-length
-// Word represents a shell word, containing one or more word parts contiguous to each other. The word is delimeted by word boundaries, such as spaces, newlines, semicolons, or parentheses.
+// Word represents a shell word, containing one or more word parts contiguous
+// to each other. The word is delimeted by word boundaries, such as spaces,
+// newlines, semicolons, or parentheses.
 export interface IWord extends INode {
-  // tslint:disable-next-line:max-line-length
   Parts: IWordPart[];
 
   SplitBraces: () => IWord | null;
   Lit: () => string;
 }
-// tslint:disable-next-line:max-line-length
-// WordIter represents the iteration of a variable over a series of words in a for clause. If InPos is an invalid position, the "in" token was missing, so the iteration is over the shell's positional parameters.
+// WordIter represents the iteration of a variable over a series of words in a
+// for clause. If InPos is an invalid position, the "in" token was missing, so
+// the iteration is over the shell's positional parameters.
 export interface IWordIter extends INode {
   Name: ILit | null;
   InPos: I_Pos; // position of "in"
