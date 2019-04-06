@@ -69,3 +69,7 @@ typings/
 murks
 x.js
 typescript
+*.swp
+config.guess.js
+config.sub.js
+perltidy.LOG
