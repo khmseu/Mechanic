@@ -19,6 +19,7 @@ import { ICaseClause } from "./ParserTypes";
 
 export class ASTNodeCaseClause extends ASTNode {
   public kind: ASTnodeKind.ASTNodeCaseClause = ASTnodeKind.ASTNodeCaseClause;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeCaseClause];
   public Case: ASTPos; //     Case: I_Pos;
   public Esac: ASTPos; //     Esac: I_Pos;
   public Word: ASTNodeWord | null; //     Word: IWord | null;
@@ -28,12 +29,10 @@ export class ASTNodeCaseClause extends ASTNode {
   constructor(caseclause: ICaseClause) {
     super(caseclause);
     logg("ASTNodeCaseClause");
-    const { Case, Esac, Word, Items, Last, ...rest_caseclause } = caseclause;
-    this.Case = ASTSimpleSingle(ASTPos, Case)!;
-    this.Esac = ASTSimpleSingle(ASTPos, Esac)!;
-    this.Word = ASTSingle(ASTNodeWord, Word);
-    this.Items = ASTArray(ASTNodeCaseItem, Items);
-    this.Last = ASTArray(ASTNodeComment, Last)!;
-    this.rest = rest_caseclause;
+    this.Case = ASTSimpleSingle(ASTPos, caseclause.Case)!;
+    this.Esac = ASTSimpleSingle(ASTPos, caseclause.Esac)!;
+    this.Word = ASTSingle(ASTNodeWord, caseclause.Word);
+    this.Items = ASTArray(ASTNodeCaseItem, caseclause.Items);
+    this.Last = ASTArray(ASTNodeComment, caseclause.Last)!;
   }
 }

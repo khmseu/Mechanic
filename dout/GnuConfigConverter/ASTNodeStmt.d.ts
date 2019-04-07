@@ -13,6 +13,7 @@ import { ASTPos } from "./ASTPos";
 import { IStmt } from "./ParserTypes";
 export declare class ASTNodeStmt extends ASTNode {
     kind: ASTnodeKind.ASTNodeStmt;
+    kindString: string;
     Comments: ASTNodeComment[];
     Cmd: ASTNodeCommand;
     Position: ASTPos;

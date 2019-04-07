@@ -10,10 +10,12 @@ import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmtList } from "./ASTNodeStmtList";
 import { ASTNodeWord } from "./ASTNodeWord";
 import { ASTPos } from "./ASTPos";
-import { CaseOperator, ICaseItem } from "./ParserTypes";
+import { ICaseItem } from "./ParserTypes";
 export declare class ASTNodeCaseItem extends ASTNode {
     kind: ASTnodeKind.ASTNodeCaseItem;
-    Op: CaseOperator;
+    kindString: string;
+    Op: string;
+    OpString: string;
     OpPos: ASTPos;
     Comments: ASTNodeComment[];
     Patterns: ASTNodeWord[];

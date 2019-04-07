@@ -9,6 +9,7 @@ import { ASTnodeKind } from "./ASTnodeKind";
 import { IArithmExpr } from "./ParserTypes";
 export declare class ASTNodeArithmExpr extends ASTNode {
     kind: ASTnodeKind.bad | ASTnodeKind.ASTNodeBinaryArithm | ASTnodeKind.ASTNodeUnaryArithm | ASTnodeKind.ASTNodeParenArithm | ASTnodeKind.ASTNodeWord;
+    kindString: string;
     constructor(arithmexpr: IArithmExpr);
 }
 //# sourceMappingURL=ASTNodeArithmExpr.d.ts.map

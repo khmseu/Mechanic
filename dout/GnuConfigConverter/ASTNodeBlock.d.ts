@@ -12,6 +12,7 @@ import { ASTPos } from "./ASTPos";
 import { IBlock } from "./ParserTypes";
 export declare class ASTNodeBlock extends ASTNode {
     kind: ASTnodeKind.ASTNodeBlock;
+    kindString: string;
     Lbrace: ASTPos;
     Rbrace: ASTPos;
     StmtList: ASTNodeStmtList | null;

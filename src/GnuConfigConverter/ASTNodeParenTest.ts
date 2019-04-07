@@ -16,6 +16,7 @@ import { IParenTest } from "./ParserTypes";
 
 export class ASTNodeParenTest extends ASTNode {
   public kind: ASTnodeKind.ASTNodeParenTest = ASTnodeKind.ASTNodeParenTest;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeParenTest];
   public Lparen: ASTPos; //     Lparen: I_Pos;
   public Rparen: ASTPos; //     Rparen: I_Pos;
   public X: ASTNodeTestExpr; //     X: ITestExpr;
@@ -23,10 +24,8 @@ export class ASTNodeParenTest extends ASTNode {
   constructor(parentest: IParenTest) {
     super(parentest);
     logg("ASTNodeParenTest");
-    const { Lparen, Rparen, X, ...rest_parentest } = parentest;
-    this.Lparen = ASTSimpleSingle(ASTPos, Lparen)!;
-    this.Rparen = ASTSimpleSingle(ASTPos, Rparen)!;
-    this.X = ASTSingle(ASTNodeTestExpr, X)!;
-    this.rest = rest_parentest;
+    this.Lparen = ASTSimpleSingle(ASTPos, parentest.Lparen)!;
+    this.Rparen = ASTSimpleSingle(ASTPos, parentest.Rparen)!;
+    this.X = ASTSingle(ASTNodeTestExpr, parentest.X)!;
   }
 }

@@ -11,6 +11,7 @@ import { ASTPos } from "./ASTPos";
 import { ITimeClause } from "./ParserTypes";
 export declare class ASTNodeTimeClause extends ASTNode {
     kind: ASTnodeKind.ASTNodeTimeClause;
+    kindString: string;
     Time: ASTPos;
     PosixFormat: boolean;
     Stmt: ASTNodeStmt | null;

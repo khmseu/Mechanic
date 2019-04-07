@@ -12,6 +12,7 @@ import { ASTPos } from "./ASTPos";
 import { ICoprocClause } from "./ParserTypes";
 export declare class ASTNodeCoprocClause extends ASTNode {
     kind: ASTnodeKind.ASTNodeCoprocClause;
+    kindString: string;
     Coproc: ASTPos;
     Name: ASTNodeWord | null;
     Stmt: ASTNodeStmt | null;

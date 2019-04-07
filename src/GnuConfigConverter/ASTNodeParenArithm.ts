@@ -16,6 +16,7 @@ import { IParenArithm } from "./ParserTypes";
 
 export class ASTNodeParenArithm extends ASTNode {
   public kind: ASTnodeKind.ASTNodeParenArithm = ASTnodeKind.ASTNodeParenArithm;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeParenArithm];
   public Lparen: ASTPos; //     Lparen: I_Pos;
   public Rparen: ASTPos; //     Rparen: I_Pos;
   public X: ASTNodeArithmExpr; //     X: IArithmExpr;
@@ -23,10 +24,8 @@ export class ASTNodeParenArithm extends ASTNode {
   constructor(parenarithm: IParenArithm) {
     super(parenarithm);
     logg("ASTNodeParenArithm");
-    const { Lparen, Rparen, X, ...rest_parenarithm } = parenarithm;
-    this.Lparen = ASTSimpleSingle(ASTPos, Lparen)!;
-    this.Rparen = ASTSimpleSingle(ASTPos, Rparen)!;
-    this.X = ASTSingle(ASTNodeArithmExpr, X)!;
-    this.rest = rest_parenarithm;
+    this.Lparen = ASTSimpleSingle(ASTPos, parenarithm.Lparen)!;
+    this.Rparen = ASTSimpleSingle(ASTPos, parenarithm.Rparen)!;
+    this.X = ASTSingle(ASTNodeArithmExpr, parenarithm.X)!;
   }
 }

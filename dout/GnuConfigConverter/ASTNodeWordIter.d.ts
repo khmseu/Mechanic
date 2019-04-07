@@ -12,6 +12,7 @@ import { ASTPos } from "./ASTPos";
 import { IWordIter } from "./ParserTypes";
 export declare class ASTNodeWordIter extends ASTNode {
     kind: ASTnodeKind.ASTNodeWordIter;
+    kindString: string;
     Name: ASTNodeLit | null;
     InPos: ASTPos;
     Items: ASTNodeWord[];

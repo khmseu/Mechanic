@@ -9,12 +9,14 @@ import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmt } from "./ASTNodeStmt";
 import { ASTPos } from "./ASTPos";
-import { IProcSubst, ProcOperator } from "./ParserTypes";
+import { IProcSubst } from "./ParserTypes";
 export declare class ASTNodeProcSubst extends ASTNode {
     kind: ASTnodeKind.ASTNodeProcSubst;
+    kindString: string;
     OpPos: ASTPos;
     Rparen: ASTPos;
-    Op: ProcOperator;
+    Op: string;
+    OpString: string;
     Stmts: ASTNodeStmt[];
     Last: ASTNodeComment[];
     constructor(procsubst: IProcSubst);

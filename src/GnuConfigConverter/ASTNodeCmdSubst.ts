@@ -18,6 +18,7 @@ import { ICmdSubst } from "./ParserTypes";
 
 export class ASTNodeCmdSubst extends ASTNode {
   public kind: ASTnodeKind.ASTNodeCmdSubst = ASTnodeKind.ASTNodeCmdSubst;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeCmdSubst];
   public Left: ASTPos; //     Left: I_Pos;
   public Right: ASTPos; //     Right: I_Pos;
   public StmtList: ASTNodeStmtList | null; //     StmtList: IStmtList | null;
@@ -28,13 +29,11 @@ export class ASTNodeCmdSubst extends ASTNode {
   constructor(cmdsubst: ICmdSubst) {
     super(cmdsubst);
     logg("ASTNodeCmdSubst");
-    const { Left, Right, StmtList, Last, TempFile, ReplyVar, ...rest_cmdsubst } = cmdsubst;
-    this.Left = ASTSimpleSingle(ASTPos, Left)!;
-    this.Right = ASTSimpleSingle(ASTPos, Right)!;
-    this.StmtList = ASTSingle(ASTNodeStmtList, StmtList);
-    this.Last = ASTArray(ASTNodeComment, Last)!;
-    this.TempFile = TempFile;
-    this.ReplyVar = ReplyVar;
-    this.rest = rest_cmdsubst;
+    this.Left = ASTSimpleSingle(ASTPos, cmdsubst.Left)!;
+    this.Right = ASTSimpleSingle(ASTPos, cmdsubst.Right)!;
+    this.StmtList = ASTSingle(ASTNodeStmtList, cmdsubst.StmtList);
+    this.Last = ASTArray(ASTNodeComment, cmdsubst.Last)!;
+    this.TempFile = cmdsubst.TempFile;
+    this.ReplyVar = cmdsubst.ReplyVar;
   }
 }

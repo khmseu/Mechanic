@@ -6,12 +6,11 @@
  */
 import { I_Pos } from "./ParserTypes";
 export declare class ASTPos {
-    rest: object | null;
-    Col: number;
-    IsValid: boolean;
-    Line: number;
-    Offset: number;
-    String: string;
+    Col: number | null;
+    IsValid: boolean | null;
+    Line: number | null;
+    Offset: number | null;
+    String: string | null;
     constructor(pos: I_Pos);
 }
 //# sourceMappingURL=ASTPos.d.ts.map

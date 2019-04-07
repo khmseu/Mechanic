@@ -18,6 +18,7 @@ import { IWordIter } from "./ParserTypes";
 
 export class ASTNodeWordIter extends ASTNode {
   public kind: ASTnodeKind.ASTNodeWordIter = ASTnodeKind.ASTNodeWordIter;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeWordIter];
   public Name: ASTNodeLit | null; //     Name: ILit | null;
   public InPos: ASTPos; //     InPos: I_Pos;
   public Items: ASTNodeWord[]; //     Items: IWord[] | null;
@@ -25,10 +26,8 @@ export class ASTNodeWordIter extends ASTNode {
   constructor(worditer: IWordIter) {
     super(worditer);
     logg("ASTNodeWordIter");
-    const { Name, InPos, Items, ...rest_worditer } = worditer;
-    this.Name = ASTSingle(ASTNodeLit, Name);
-    this.InPos = ASTSimpleSingle(ASTPos, InPos)!;
-    this.Items = ASTArray(ASTNodeWord, Items);
-    this.rest = rest_worditer;
+    this.Name = ASTSingle(ASTNodeLit, worditer.Name);
+    this.InPos = ASTSimpleSingle(ASTPos, worditer.InPos)!;
+    this.Items = ASTArray(ASTNodeWord, worditer.Items);
   }
 }

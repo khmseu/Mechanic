@@ -11,6 +11,7 @@ import { ASTNodeStmt } from "./ASTNodeStmt";
 import { IStmtList } from "./ParserTypes";
 export declare class ASTNodeStmtList extends ASTNode {
     kind: ASTnodeKind.ASTNodeStmtList;
+    kindString: string;
     Stmts: ASTNodeStmt[];
     Last: ASTNodeComment[];
     constructor(stmtlist: IStmtList);

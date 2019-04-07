@@ -14,15 +14,14 @@ import { IComment } from "./ParserTypes";
 
 export class ASTNodeComment extends ASTNode {
   public kind: ASTnodeKind.ASTNodeComment = ASTnodeKind.ASTNodeComment;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeComment];
   public Hash: ASTPos; //     Hash: I_Pos;
   public Text: string; //     Text: string;
 
   constructor(comment: IComment) {
     super(comment);
     logg("ASTNodeComment");
-    const { Hash, Text, ...rest_comment } = comment;
-    this.Hash = ASTSimpleSingle(ASTPos, Hash)!;
-    this.Text = Text;
-    this.rest = rest_comment;
+    this.Hash = ASTSimpleSingle(ASTPos, comment.Hash)!;
+    this.Text = comment.Text;
   }
 }

@@ -12,6 +12,7 @@ import { ASTNodeWord } from "./ASTNodeWord";
 import { IArrayElem } from "./ParserTypes";
 export declare class ASTNodeArrayElem extends ASTNode {
     kind: ASTnodeKind.ASTNodeArrayElem;
+    kindString: string;
     Index: ASTNodeArithmExpr;
     Value: ASTNodeWord | null;
     Comments: ASTNodeComment[];

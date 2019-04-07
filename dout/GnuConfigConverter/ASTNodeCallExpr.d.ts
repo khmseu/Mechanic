@@ -11,6 +11,7 @@ import { ASTNodeWord } from "./ASTNodeWord";
 import { ICallExpr } from "./ParserTypes";
 export declare class ASTNodeCallExpr extends ASTNode {
     kind: ASTnodeKind.ASTNodeCallExpr;
+    kindString: string;
     Assigns: ASTNodeAssign[];
     Args: ASTNodeWord[];
     constructor(callexpr: ICallExpr);

@@ -12,6 +12,7 @@ import { ASTPos } from "./ASTPos";
 import { IWhileClause } from "./ParserTypes";
 export declare class ASTNodeWhileClause extends ASTNode {
     kind: ASTnodeKind.ASTNodeWhileClause;
+    kindString: string;
     WhilePos: ASTPos;
     DoPos: ASTPos;
     DonePos: ASTPos;

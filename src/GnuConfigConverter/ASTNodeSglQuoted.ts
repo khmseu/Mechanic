@@ -14,6 +14,7 @@ import { ISglQuoted } from "./ParserTypes";
 
 export class ASTNodeSglQuoted extends ASTNode {
   public kind: ASTnodeKind.ASTNodeSglQuoted = ASTnodeKind.ASTNodeSglQuoted;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeSglQuoted];
   public Left: ASTPos; //     Left: I_Pos;
   public Right: ASTPos; //     Right: I_Pos;
   public Dollar: boolean; //     Dollar: boolean;
@@ -22,11 +23,9 @@ export class ASTNodeSglQuoted extends ASTNode {
   constructor(sglquoted: ISglQuoted) {
     super(sglquoted);
     logg("ASTNodeSglQuoted");
-    const { Left, Right, Dollar, Value, ...rest_sglquoted } = sglquoted;
-    this.Left = ASTSimpleSingle(ASTPos, Left)!;
-    this.Right = ASTSimpleSingle(ASTPos, Right)!;
-    this.Dollar = Dollar;
-    this.Value = Value;
-    this.rest = rest_sglquoted;
+    this.Left = ASTSimpleSingle(ASTPos, sglquoted.Left)!;
+    this.Right = ASTSimpleSingle(ASTPos, sglquoted.Right)!;
+    this.Dollar = sglquoted.Dollar;
+    this.Value = sglquoted.Value;
   }
 }

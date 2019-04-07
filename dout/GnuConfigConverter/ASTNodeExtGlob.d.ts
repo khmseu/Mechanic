@@ -8,11 +8,13 @@ import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeLit } from "./ASTNodeLit";
 import { ASTPos } from "./ASTPos";
-import { GlobOperator, IExtGlob } from "./ParserTypes";
+import { IExtGlob } from "./ParserTypes";
 export declare class ASTNodeExtGlob extends ASTNode {
     kind: ASTnodeKind.ASTNodeExtGlob;
+    kindString: string;
     OpPos: ASTPos;
-    Op: GlobOperator;
+    Op: string;
+    OpString: string;
     Pattern: ASTNodeLit | null;
     constructor(extglob: IExtGlob);
 }

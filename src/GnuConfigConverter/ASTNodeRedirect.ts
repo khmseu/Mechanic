@@ -14,11 +14,14 @@ import { ASTSimpleSingle } from "./ASTSimpleSingle";
 import { ASTSingle } from "./ASTSingle";
 import { logg } from "./logg";
 import { IRedirect, RedirOperator } from "./ParserTypes";
+import { op, Token } from "./Token";
 
 export class ASTNodeRedirect extends ASTNode {
   public kind: ASTnodeKind.ASTNodeRedirect = ASTnodeKind.ASTNodeRedirect;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeRedirect];
   public OpPos: ASTPos; //     OpPos: I_Pos;
-  public Op: RedirOperator; //     Op: RedirOperator;
+  public Op: string; //     Op: RedirOperator;
+  public OpString: string;
   public N: ASTNodeLit | null; //     N: ILit | null;
   public Word: ASTNodeWord | null; //     Word: IWord | null;
   public Hdoc: ASTNodeWord | null; //     Hdoc: IWord | null;
@@ -26,12 +29,11 @@ export class ASTNodeRedirect extends ASTNode {
   constructor(redirect: IRedirect) {
     super(redirect);
     logg("ASTNodeRedirect");
-    const { OpPos, Op, N, Word, Hdoc, ...rest_redirect } = redirect;
-    this.OpPos = ASTSimpleSingle(ASTPos, OpPos)!;
-    this.Op = Op;
-    this.N = ASTSingle(ASTNodeLit, N);
-    this.Word = ASTSingle(ASTNodeWord, Word);
-    this.Hdoc = ASTSingle(ASTNodeWord, Hdoc);
-    this.rest = rest_redirect;
+    this.OpPos = ASTSimpleSingle(ASTPos, redirect.OpPos)!;
+    this.Op = RedirOperator[redirect.Op];
+    this.OpString = op((redirect.Op as unknown) as Token);
+    this.N = ASTSingle(ASTNodeLit, redirect.N);
+    this.Word = ASTSingle(ASTNodeWord, redirect.Word);
+    this.Hdoc = ASTSingle(ASTNodeWord, redirect.Hdoc);
   }
 }

@@ -8,8 +8,8 @@
 import { readFileSync, writeFileSync } from "fs";
 import { syntax } from "mvdan-sh";
 import { format, resolve } from "path";
+import { ASTNodeFile } from "./ASTNodeFile";
 import { logg } from "./logg";
-import { prepFile } from "./ParserPrep";
 import { IFile } from "./ParserTypes";
 
 export function joiner(list: string[], dlm: string): string {
@@ -38,7 +38,9 @@ function perFile(f: string): void {
   const parser = syntax.NewParser(syntax.Variant(syntax.LangPOSIX), syntax.KeepComments);
   const j: IFile = parser.Parse(t, f);
   logg(j);
-  const js = joiner(prepFile(j), "\n");
+  const k: ASTNodeFile = new ASTNodeFile(j);
+  // const js = joiner(prepFile(j), "\n");
+  const js = JSON.stringify(k, null, 2);
   writeFileSync(resolve(format({ ext: ".js", name: f })), js, { encoding: "ascii" });
 }
 

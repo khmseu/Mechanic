@@ -18,6 +18,7 @@ import { IArithmExpr, IBinaryArithm, IParenArithm, IUnaryArithm, IWord } from ".
 export class ASTNodeArithmExpr extends ASTNode {
   // tslint:disable-next-line:max-line-length
   public kind: ASTnodeKind.bad | ASTnodeKind.ASTNodeBinaryArithm | ASTnodeKind.ASTNodeUnaryArithm | ASTnodeKind.ASTNodeParenArithm | ASTnodeKind.ASTNodeWord = ASTnodeKind.bad;
+  public kindString: string = ASTnodeKind[ASTnodeKind.bad];
   constructor(arithmexpr: IArithmExpr) {
     super(arithmexpr);
     logg("ASTNodeArithmExpr");
@@ -31,7 +32,7 @@ export class ASTNodeArithmExpr extends ASTNode {
       case "Word":
         return new ASTNodeWord(arithmexpr as IWord);
       default:
-        this.rest = { NodeType: syntax.NodeType(arithmexpr) };
+        throw { NodeType: syntax.NodeType(arithmexpr) };
     }
   }
 }

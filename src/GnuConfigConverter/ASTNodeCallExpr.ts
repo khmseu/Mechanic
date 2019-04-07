@@ -15,15 +15,14 @@ import { ICallExpr } from "./ParserTypes";
 
 export class ASTNodeCallExpr extends ASTNode {
   public kind: ASTnodeKind.ASTNodeCallExpr = ASTnodeKind.ASTNodeCallExpr;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeCallExpr];
   public Assigns: ASTNodeAssign[]; //     Assigns: IAssign[] | null;
   public Args: ASTNodeWord[]; //     Args: IWord[] | null;
 
   constructor(callexpr: ICallExpr) {
     super(callexpr);
     logg("ASTNodeCallExpr");
-    const { Assigns, Args, ...rest_callexpr } = callexpr;
-    this.Assigns = ASTArray(ASTNodeAssign, Assigns);
-    this.Args = ASTArray(ASTNodeWord, Args);
-    this.rest = rest_callexpr;
+    this.Assigns = ASTArray(ASTNodeAssign, callexpr.Assigns);
+    this.Args = ASTArray(ASTNodeWord, callexpr.Args);
   }
 }

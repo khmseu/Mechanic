@@ -10,6 +10,7 @@ import { ASTPos } from "./ASTPos";
 import { IComment } from "./ParserTypes";
 export declare class ASTNodeComment extends ASTNode {
     kind: ASTnodeKind.ASTNodeComment;
+    kindString: string;
     Hash: ASTPos;
     Text: string;
     constructor(comment: IComment);

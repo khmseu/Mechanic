@@ -9,17 +9,17 @@ import { ASTNodeWord } from "./ASTNodeWord";
 import { ASTSingle } from "./ASTSingle";
 import { logg } from "./logg";
 import { I_Expansion, ParExpOperator } from "./ParserTypes";
+import { op, Token } from "./Token";
 
 export class ASTExpansion {
-  public rest: object | null;
-  public Op: ParExpOperator; //     Op: ParExpOperator;
+  public Op: string; //     Op: ParExpOperator;
+  public OpString: string;
   public Word: ASTNodeWord | null; //     Word: IWord | null;
 
   constructor(expansion: I_Expansion) {
     logg("ASTExpansion");
-    const { Op, Word, ...rest_expansion } = expansion;
-    this.Op = Op;
-    this.Word = ASTSingle(ASTNodeWord, Word);
-    this.rest = rest_expansion;
+    this.Op = ParExpOperator[expansion.Op];
+    this.OpString = op((expansion.Op as unknown) as Token);
+    this.Word = ASTSingle(ASTNodeWord, expansion.Word);
   }
 }

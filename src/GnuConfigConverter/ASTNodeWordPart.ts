@@ -24,6 +24,7 @@ import { IArithmExp, IBraceExp, ICmdSubst, IDblQuoted, IExtGlob, ILit, IParamExp
 export class ASTNodeWordPart extends ASTNode {
   // tslint:disable-next-line:max-line-length
   public kind: ASTnodeKind.bad | ASTnodeKind.ASTNodeLit | ASTnodeKind.ASTNodeSglQuoted | ASTnodeKind.ASTNodeDblQuoted | ASTnodeKind.ASTNodeParamExp | ASTnodeKind.ASTNodeCmdSubst | ASTnodeKind.ASTNodeArithmExp | ASTnodeKind.ASTNodeProcSubst | ASTnodeKind.ASTNodeExtGlob | ASTnodeKind.ASTNodeBraceExp = ASTnodeKind.bad;
+  public kindString: string = ASTnodeKind[ASTnodeKind.bad];
   constructor(wordpart: IWordPart) {
     super(wordpart);
     logg("ASTNodeWordPart");
@@ -47,7 +48,7 @@ export class ASTNodeWordPart extends ASTNode {
       case "BraceExp":
         return new ASTNodeBraceExp(wordpart as IBraceExp);
       default:
-        this.rest = { NodeType: syntax.NodeType(wordpart) };
+        throw { NodeType: syntax.NodeType(wordpart) };
     }
   }
 }

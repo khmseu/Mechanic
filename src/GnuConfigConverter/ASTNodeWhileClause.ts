@@ -18,6 +18,7 @@ import { IWhileClause } from "./ParserTypes";
 
 export class ASTNodeWhileClause extends ASTNode {
   public kind: ASTnodeKind.ASTNodeWhileClause = ASTnodeKind.ASTNodeWhileClause;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeWhileClause];
   public WhilePos: ASTPos; //     WhilePos: I_Pos;
   public DoPos: ASTPos; //     DoPos: I_Pos;
   public DonePos: ASTPos; //     DonePos: I_Pos;
@@ -30,15 +31,13 @@ export class ASTNodeWhileClause extends ASTNode {
   constructor(whileclause: IWhileClause) {
     super(whileclause);
     logg("ASTNodeWhileClause");
-    const { WhilePos, DoPos, DonePos, Until, Cond, CondLast, Do, DoLast, ...rest_whileclause } = whileclause;
-    this.WhilePos = ASTSimpleSingle(ASTPos, WhilePos)!;
-    this.DoPos = ASTSimpleSingle(ASTPos, DoPos)!;
-    this.DonePos = ASTSimpleSingle(ASTPos, DonePos)!;
-    this.Until = Until;
-    this.Cond = ASTSingle(ASTNodeStmtList, Cond);
-    this.CondLast = ASTArray(ASTNodeComment, CondLast)!;
-    this.Do = ASTSingle(ASTNodeStmtList, Do);
-    this.DoLast = ASTArray(ASTNodeComment, DoLast)!;
-    this.rest = rest_whileclause;
+    this.WhilePos = ASTSimpleSingle(ASTPos, whileclause.WhilePos)!;
+    this.DoPos = ASTSimpleSingle(ASTPos, whileclause.DoPos)!;
+    this.DonePos = ASTSimpleSingle(ASTPos, whileclause.DonePos)!;
+    this.Until = whileclause.Until;
+    this.Cond = ASTSingle(ASTNodeStmtList, whileclause.Cond);
+    this.CondLast = ASTArray(ASTNodeComment, whileclause.CondLast)!;
+    this.Do = ASTSingle(ASTNodeStmtList, whileclause.Do);
+    this.DoLast = ASTArray(ASTNodeComment, whileclause.DoLast)!;
   }
 }

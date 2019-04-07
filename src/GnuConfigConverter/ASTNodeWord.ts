@@ -15,17 +15,16 @@ import { IWord } from "./ParserTypes";
 
 export class ASTNodeWord extends ASTNode {
   public kind: ASTnodeKind.ASTNodeWord = ASTnodeKind.ASTNodeWord;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeWord];
   public Parts: ASTNodeWordPart[]; //     Parts: IWordPart[];
-  public SplitBraces: ASTNodeWord | null; //     SplitBraces: () => IWord | null;
-  public Lit: string; //     Lit: () => string;
+  public SplitBraces: ASTNodeWord | null; //     SplitBraces: (() => IWord) | null;
+  public Lit: string | null; //     Lit: (() => string) | null;
 
   constructor(word: IWord) {
     super(word);
     logg("ASTNodeWord");
-    const { Parts, SplitBraces, Lit, ...rest_word } = word;
-    this.Parts = ASTArray(ASTNodeWordPart, Parts)!;
-    this.SplitBraces = ASTSingle(ASTNodeWord, SplitBraces());
-    this.Lit = Lit();
-    this.rest = rest_word;
+    this.Parts = ASTArray(ASTNodeWordPart, word.Parts)!;
+    this.SplitBraces = word.SplitBraces ? ASTSingle(ASTNodeWord, word.SplitBraces()) : null;
+    this.Lit = word.Lit ? word.Lit() : null;
   }
 }

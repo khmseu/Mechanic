@@ -18,6 +18,7 @@ import { ISubshell } from "./ParserTypes";
 
 export class ASTNodeSubshell extends ASTNode {
   public kind: ASTnodeKind.ASTNodeSubshell = ASTnodeKind.ASTNodeSubshell;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeSubshell];
   public Lparen: ASTPos; //     Lparen: I_Pos;
   public Rparen: ASTPos; //     Rparen: I_Pos;
   public StmtList: ASTNodeStmtList | null; //     StmtList: IStmtList | null;
@@ -26,11 +27,9 @@ export class ASTNodeSubshell extends ASTNode {
   constructor(subshell: ISubshell) {
     super(subshell);
     logg("ASTNodeSubshell");
-    const { Lparen, Rparen, StmtList, Last, ...rest_subshell } = subshell;
-    this.Lparen = ASTSimpleSingle(ASTPos, Lparen)!;
-    this.Rparen = ASTSimpleSingle(ASTPos, Rparen)!;
-    this.StmtList = ASTSingle(ASTNodeStmtList, StmtList);
-    this.Last = ASTArray(ASTNodeComment, Last)!;
-    this.rest = rest_subshell;
+    this.Lparen = ASTSimpleSingle(ASTPos, subshell.Lparen)!;
+    this.Rparen = ASTSimpleSingle(ASTPos, subshell.Rparen)!;
+    this.StmtList = ASTSingle(ASTNodeStmtList, subshell.StmtList);
+    this.Last = ASTArray(ASTNodeComment, subshell.Last)!;
   }
 }

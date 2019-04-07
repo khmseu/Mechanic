@@ -8,11 +8,13 @@ import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmt } from "./ASTNodeStmt";
 import { ASTPos } from "./ASTPos";
-import { BinCmdOperator, IBinaryCmd } from "./ParserTypes";
+import { IBinaryCmd } from "./ParserTypes";
 export declare class ASTNodeBinaryCmd extends ASTNode {
     kind: ASTnodeKind.ASTNodeBinaryCmd;
+    kindString: string;
     OpPos: ASTPos;
-    Op: BinCmdOperator;
+    Op: string;
+    OpString: string;
     X: ASTNodeStmt;
     Y: ASTNodeStmt;
     constructor(binarycmd: IBinaryCmd);

@@ -15,15 +15,14 @@ import { IStmtList } from "./ParserTypes";
 
 export class ASTNodeStmtList extends ASTNode {
   public kind: ASTnodeKind.ASTNodeStmtList = ASTnodeKind.ASTNodeStmtList;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeStmtList];
   public Stmts: ASTNodeStmt[]; //     Stmts: IStmt[];
   public Last: ASTNodeComment[]; //     Last: IComment[];
 
   constructor(stmtlist: IStmtList) {
     super(stmtlist);
     logg("ASTNodeStmtList");
-    const { Stmts, Last, ...rest_stmtlist } = stmtlist;
-    this.Stmts = ASTArray(ASTNodeStmt, Stmts)!;
-    this.Last = ASTArray(ASTNodeComment, Last)!;
-    this.rest = rest_stmtlist;
+    this.Stmts = ASTArray(ASTNodeStmt, stmtlist.Stmts)!;
+    this.Last = ASTArray(ASTNodeComment, stmtlist.Last)!;
   }
 }

@@ -177,8 +177,8 @@ export interface ILit extends INode {
 }
 export declare type ILoop = IWordIter | ICStyleLoop;
 export interface INode extends Istruct {
-    Pos: () => I_Pos;
-    End: () => I_Pos;
+    Pos: (() => I_Pos) | null;
+    End: (() => I_Pos) | null;
 }
 export interface IParamExp extends INode {
     Dollar: I_Pos;
@@ -205,12 +205,12 @@ export interface IParenTest extends INode {
     X: ITestExpr;
 }
 export interface I_Pos extends Istruct {
-    After: (p2: I_Pos) => boolean;
-    Col: () => number;
-    IsValid: () => boolean;
-    Line: () => number;
-    Offset: () => number;
-    String: () => string;
+    After: ((p2: I_Pos) => boolean) | null;
+    Col: (() => number) | null;
+    IsValid: (() => boolean) | null;
+    Line: (() => number) | null;
+    Offset: (() => number) | null;
+    String: (() => string) | null;
 }
 export interface IProcSubst extends INode {
     OpPos: I_Pos;
@@ -295,8 +295,8 @@ export interface IWhileClause extends INode {
 }
 export interface IWord extends INode {
     Parts: IWordPart[];
-    SplitBraces: () => IWord | null;
-    Lit: () => string;
+    SplitBraces: (() => IWord) | null;
+    Lit: (() => string) | null;
 }
 export interface IWordIter extends INode {
     Name: ILit | null;

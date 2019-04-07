@@ -259,11 +259,11 @@ export type ILoop = IWordIter | ICStyleLoop;
 export interface INode extends Istruct {
   // Pos returns the position of the first character of the node. Comments
   // are ignored, except if the node is a *File.
-  Pos: () => I_Pos;
+  Pos: (() => I_Pos) | null;
   // End returns the position of the character immediately after the node.
   // If the character is a newline, the line number won't cross into the
   // next line. Comments are ignored, except if the node is a *File.
-  End: () => I_Pos;
+  End: (() => I_Pos) | null;
 }
 // ParamExp represents a parameter expansion.
 export interface IParamExp extends INode {
@@ -299,14 +299,14 @@ export interface IParenTest extends INode {
 // tslint:disable-next-line:class-name
 export interface I_Pos extends Istruct {
   // tslint:disable-next-line:max-line-length
-  After: (p2: I_Pos) => boolean; // After reports whether the position p is after p2. It is a more expressive version of p.Offset() > p2.Offset().
-  Col: () => number; // Col returns the column number of the position, starting at 1. It counts in bytes.
+  After: ((p2: I_Pos) => boolean) | null; // After reports whether the position p is after p2. It is a more expressive version of p.Offset() > p2.Offset().
+  Col: (() => number) | null; // Col returns the column number of the position, starting at 1. It counts in bytes.
   // tslint:disable-next-line:max-line-length
-  IsValid: () => boolean; // IsValid reports whether the position is valid. All positions in nodes returned by Parse are valid.
-  Line: () => number; // Line returns the line number of the position, starting at 1.
+  IsValid: (() => boolean) | null; // IsValid reports whether the position is valid. All positions in nodes returned by Parse are valid.
+  Line: (() => number) | null; // Line returns the line number of the position, starting at 1.
   // tslint:disable-next-line:max-line-length
-  Offset: () => number; // Offset returns the byte offset of the position in the original source file. Byte offsets start at 0.
-  String: () => string;
+  Offset: (() => number) | null; // Offset returns the byte offset of the position in the original source file. Byte offsets start at 0.
+  String: (() => string) | null;
 }
 // ProcSubst represents a Bash process substitution.
 // This node will only appear with LangBash.
@@ -422,8 +422,8 @@ export interface IWhileClause extends INode {
 export interface IWord extends INode {
   Parts: IWordPart[];
 
-  SplitBraces: () => IWord | null;
-  Lit: () => string;
+  SplitBraces: (() => IWord) | null;
+  Lit: (() => string) | null;
 }
 // WordIter represents the iteration of a variable over a series of words in a
 // for clause. If InPos is an invalid position, the "in" token was missing, so

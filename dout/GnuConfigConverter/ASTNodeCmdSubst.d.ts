@@ -12,6 +12,7 @@ import { ASTPos } from "./ASTPos";
 import { ICmdSubst } from "./ParserTypes";
 export declare class ASTNodeCmdSubst extends ASTNode {
     kind: ASTnodeKind.ASTNodeCmdSubst;
+    kindString: string;
     Left: ASTPos;
     Right: ASTPos;
     StmtList: ASTNodeStmtList | null;

@@ -19,6 +19,7 @@ import { IForClause } from "./ParserTypes";
 
 export class ASTNodeForClause extends ASTNode {
   public kind: ASTnodeKind.ASTNodeForClause = ASTnodeKind.ASTNodeForClause;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeForClause];
   public ForPos: ASTPos; //     ForPos: I_Pos;
   public DoPos: ASTPos; //     DoPos: I_Pos;
   public DonePos: ASTPos; //     DonePos: I_Pos;
@@ -30,14 +31,12 @@ export class ASTNodeForClause extends ASTNode {
   constructor(forclause: IForClause) {
     super(forclause);
     logg("ASTNodeForClause");
-    const { ForPos, DoPos, DonePos, Select, Loop, Do, DoLast, ...rest_forclause } = forclause;
-    this.ForPos = ASTSimpleSingle(ASTPos, ForPos)!;
-    this.DoPos = ASTSimpleSingle(ASTPos, DoPos)!;
-    this.DonePos = ASTSimpleSingle(ASTPos, DonePos)!;
-    this.Select = Select;
-    this.Loop = ASTSingle(ASTNodeLoop, Loop)!;
-    this.Do = ASTSingle(ASTNodeStmtList, Do);
-    this.DoLast = ASTArray(ASTNodeComment, DoLast)!;
-    this.rest = rest_forclause;
+    this.ForPos = ASTSimpleSingle(ASTPos, forclause.ForPos)!;
+    this.DoPos = ASTSimpleSingle(ASTPos, forclause.DoPos)!;
+    this.DonePos = ASTSimpleSingle(ASTPos, forclause.DonePos)!;
+    this.Select = forclause.Select;
+    this.Loop = ASTSingle(ASTNodeLoop, forclause.Loop)!;
+    this.Do = ASTSingle(ASTNodeStmtList, forclause.Do);
+    this.DoLast = ASTArray(ASTNodeComment, forclause.DoLast)!;
   }
 }

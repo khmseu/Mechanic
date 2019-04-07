@@ -16,6 +16,7 @@ import { IArithmExp } from "./ParserTypes";
 
 export class ASTNodeArithmExp extends ASTNode {
   public kind: ASTnodeKind.ASTNodeArithmExp = ASTnodeKind.ASTNodeArithmExp;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeArithmExp];
   public Left: ASTPos; //     Left: I_Pos;
   public Right: ASTPos; //     Right: I_Pos;
   public Bracket: boolean; //     Bracket: boolean;
@@ -25,12 +26,10 @@ export class ASTNodeArithmExp extends ASTNode {
   constructor(arithmexp: IArithmExp) {
     super(arithmexp);
     logg("ASTNodeArithmExp");
-    const { Left, Right, Bracket, Unsigned, X, ...rest_arithmexp } = arithmexp;
-    this.Left = ASTSimpleSingle(ASTPos, Left)!;
-    this.Right = ASTSimpleSingle(ASTPos, Right)!;
-    this.Bracket = Bracket;
-    this.Unsigned = Unsigned;
-    this.X = ASTSingle(ASTNodeArithmExpr, X)!;
-    this.rest = rest_arithmexp;
+    this.Left = ASTSimpleSingle(ASTPos, arithmexp.Left)!;
+    this.Right = ASTSimpleSingle(ASTPos, arithmexp.Right)!;
+    this.Bracket = arithmexp.Bracket;
+    this.Unsigned = arithmexp.Unsigned;
+    this.X = ASTSingle(ASTNodeArithmExpr, arithmexp.X)!;
   }
 }

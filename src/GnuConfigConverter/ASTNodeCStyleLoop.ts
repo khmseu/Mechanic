@@ -16,6 +16,7 @@ import { ICStyleLoop } from "./ParserTypes";
 
 export class ASTNodeCStyleLoop extends ASTNode {
   public kind: ASTnodeKind.ASTNodeCStyleLoop = ASTnodeKind.ASTNodeCStyleLoop;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeCStyleLoop];
   public Lparen: ASTPos; //     Lparen: I_Pos;
   public Rparen: ASTPos; //     Rparen: I_Pos;
   public Init: ASTNodeArithmExpr; //     Init: IArithmExpr;
@@ -25,12 +26,10 @@ export class ASTNodeCStyleLoop extends ASTNode {
   constructor(cstyleloop: ICStyleLoop) {
     super(cstyleloop);
     logg("ASTNodeCStyleLoop");
-    const { Lparen, Rparen, Init, Cond, Post, ...rest_cstyleloop } = cstyleloop;
-    this.Lparen = ASTSimpleSingle(ASTPos, Lparen)!;
-    this.Rparen = ASTSimpleSingle(ASTPos, Rparen)!;
-    this.Init = ASTSingle(ASTNodeArithmExpr, Init)!;
-    this.Cond = ASTSingle(ASTNodeArithmExpr, Cond)!;
-    this.Post = ASTSingle(ASTNodeArithmExpr, Post)!;
-    this.rest = rest_cstyleloop;
+    this.Lparen = ASTSimpleSingle(ASTPos, cstyleloop.Lparen)!;
+    this.Rparen = ASTSimpleSingle(ASTPos, cstyleloop.Rparen)!;
+    this.Init = ASTSingle(ASTNodeArithmExpr, cstyleloop.Init)!;
+    this.Cond = ASTSingle(ASTNodeArithmExpr, cstyleloop.Cond)!;
+    this.Post = ASTSingle(ASTNodeArithmExpr, cstyleloop.Post)!;
   }
 }

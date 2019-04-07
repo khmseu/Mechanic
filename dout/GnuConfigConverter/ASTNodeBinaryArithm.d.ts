@@ -8,11 +8,13 @@ import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTPos } from "./ASTPos";
-import { BinAritOperator, IBinaryArithm } from "./ParserTypes";
+import { IBinaryArithm } from "./ParserTypes";
 export declare class ASTNodeBinaryArithm extends ASTNode {
     kind: ASTnodeKind.ASTNodeBinaryArithm;
+    kindString: string;
     OpPos: ASTPos;
-    Op: BinAritOperator;
+    Op: string;
+    OpString: string;
     X: ASTNodeArithmExpr;
     Y: ASTNodeArithmExpr;
     constructor(binaryarithm: IBinaryArithm);

@@ -5,10 +5,10 @@
  * https://opensource.org/licenses/MIT
  */
 import { ASTNodeWord } from "./ASTNodeWord";
-import { I_Expansion, ParExpOperator } from "./ParserTypes";
+import { I_Expansion } from "./ParserTypes";
 export declare class ASTExpansion {
-    rest: object | null;
-    Op: ParExpOperator;
+    Op: string;
+    OpString: string;
     Word: ASTNodeWord | null;
     constructor(expansion: I_Expansion);
 }

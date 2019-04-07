@@ -13,22 +13,24 @@ import { ASTSimpleSingle } from "./ASTSimpleSingle";
 import { ASTSingle } from "./ASTSingle";
 import { logg } from "./logg";
 import { IUnaryArithm, UnAritOperator } from "./ParserTypes";
+import { op, Token } from "./Token";
 
 export class ASTNodeUnaryArithm extends ASTNode {
   public kind: ASTnodeKind.ASTNodeUnaryArithm = ASTnodeKind.ASTNodeUnaryArithm;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeUnaryArithm];
   public OpPos: ASTPos; //     OpPos: I_Pos;
-  public Op: UnAritOperator; //     Op: UnAritOperator;
+  public Op: string; //     Op: UnAritOperator;
+  public OpString: string;
   public Post: boolean; //     Post: boolean;
   public X: ASTNodeArithmExpr; //     X: IArithmExpr;
 
   constructor(unaryarithm: IUnaryArithm) {
     super(unaryarithm);
     logg("ASTNodeUnaryArithm");
-    const { OpPos, Op, Post, X, ...rest_unaryarithm } = unaryarithm;
-    this.OpPos = ASTSimpleSingle(ASTPos, OpPos)!;
-    this.Op = Op;
-    this.Post = Post;
-    this.X = ASTSingle(ASTNodeArithmExpr, X)!;
-    this.rest = rest_unaryarithm;
+    this.OpPos = ASTSimpleSingle(ASTPos, unaryarithm.OpPos)!;
+    this.Op = UnAritOperator[unaryarithm.Op];
+    this.OpString = op((unaryarithm.Op as unknown) as Token);
+    this.Post = unaryarithm.Post;
+    this.X = ASTSingle(ASTNodeArithmExpr, unaryarithm.X)!;
   }
 }

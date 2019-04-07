@@ -14,6 +14,7 @@ import { IBraceExp } from "./ParserTypes";
 
 export class ASTNodeBraceExp extends ASTNode {
   public kind: ASTnodeKind.ASTNodeBraceExp = ASTnodeKind.ASTNodeBraceExp;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeBraceExp];
   public Sequence: boolean; //     Sequence: boolean;
   public Chars: boolean; //     Chars: boolean;
   public Elems: ASTNodeWord[]; //     Elems: IWord[] | null;
@@ -21,10 +22,8 @@ export class ASTNodeBraceExp extends ASTNode {
   constructor(braceexp: IBraceExp) {
     super(braceexp);
     logg("ASTNodeBraceExp");
-    const { Sequence, Chars, Elems, ...rest_braceexp } = braceexp;
-    this.Sequence = Sequence;
-    this.Chars = Chars;
-    this.Elems = ASTArray(ASTNodeWord, Elems);
-    this.rest = rest_braceexp;
+    this.Sequence = braceexp.Sequence;
+    this.Chars = braceexp.Chars;
+    this.Elems = ASTArray(ASTNodeWord, braceexp.Elems);
   }
 }

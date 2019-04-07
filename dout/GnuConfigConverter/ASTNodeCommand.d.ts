@@ -9,6 +9,7 @@ import { ASTnodeKind } from "./ASTnodeKind";
 import { ICommand } from "./ParserTypes";
 export declare class ASTNodeCommand extends ASTNode {
     kind: ASTnodeKind.bad | ASTnodeKind.ASTNodeCallExpr | ASTnodeKind.ASTNodeIfClause | ASTnodeKind.ASTNodeWhileClause | ASTnodeKind.ASTNodeForClause | ASTnodeKind.ASTNodeCaseClause | ASTnodeKind.ASTNodeBlock | ASTnodeKind.ASTNodeSubshell | ASTnodeKind.ASTNodeBinaryCmd | ASTnodeKind.ASTNodeFuncDecl | ASTnodeKind.ASTNodeArithmCmd | ASTnodeKind.ASTNodeTestClause | ASTnodeKind.ASTNodeDeclClause | ASTnodeKind.ASTNodeLetClause | ASTnodeKind.ASTNodeTimeClause | ASTnodeKind.ASTNodeCoprocClause;
+    kindString: string;
     constructor(command: ICommand);
 }
 //# sourceMappingURL=ASTNodeCommand.d.ts.map

@@ -13,20 +13,22 @@ import { ASTSimpleSingle } from "./ASTSimpleSingle";
 import { ASTSingle } from "./ASTSingle";
 import { logg } from "./logg";
 import { GlobOperator, IExtGlob } from "./ParserTypes";
+import { op, Token } from "./Token";
 
 export class ASTNodeExtGlob extends ASTNode {
   public kind: ASTnodeKind.ASTNodeExtGlob = ASTnodeKind.ASTNodeExtGlob;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeExtGlob];
   public OpPos: ASTPos; //     OpPos: I_Pos;
-  public Op: GlobOperator; //     Op: GlobOperator;
+  public Op: string; //     Op: GlobOperator;
+  public OpString: string;
   public Pattern: ASTNodeLit | null; //     Pattern: ILit | null;
 
   constructor(extglob: IExtGlob) {
     super(extglob);
     logg("ASTNodeExtGlob");
-    const { OpPos, Op, Pattern, ...rest_extglob } = extglob;
-    this.OpPos = ASTSimpleSingle(ASTPos, OpPos)!;
-    this.Op = Op;
-    this.Pattern = ASTSingle(ASTNodeLit, Pattern);
-    this.rest = rest_extglob;
+    this.OpPos = ASTSimpleSingle(ASTPos, extglob.OpPos)!;
+    this.Op = GlobOperator[extglob.Op];
+    this.OpString = op((extglob.Op as unknown) as Token);
+    this.Pattern = ASTSingle(ASTNodeLit, extglob.Pattern);
   }
 }

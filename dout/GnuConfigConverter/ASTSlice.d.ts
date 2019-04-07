@@ -7,7 +7,6 @@
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { I_Slice } from "./ParserTypes";
 export declare class ASTSlice {
-    rest: object | null;
     Offset: ASTNodeArithmExpr;
     Length: ASTNodeArithmExpr;
     constructor(slice: I_Slice);

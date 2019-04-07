@@ -13,20 +13,22 @@ import { ASTSimpleSingle } from "./ASTSimpleSingle";
 import { ASTSingle } from "./ASTSingle";
 import { logg } from "./logg";
 import { IUnaryTest, UnTestOperator } from "./ParserTypes";
+import { op, Token } from "./Token";
 
 export class ASTNodeUnaryTest extends ASTNode {
   public kind: ASTnodeKind.ASTNodeUnaryTest = ASTnodeKind.ASTNodeUnaryTest;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeUnaryTest];
   public OpPos: ASTPos; //     OpPos: I_Pos;
-  public Op: UnTestOperator; //     Op: UnTestOperator;
+  public Op: string; //     Op: UnTestOperator;
+  public OpString: string;
   public X: ASTNodeTestExpr; //     X: ITestExpr;
 
   constructor(unarytest: IUnaryTest) {
     super(unarytest);
     logg("ASTNodeUnaryTest");
-    const { OpPos, Op, X, ...rest_unarytest } = unarytest;
-    this.OpPos = ASTSimpleSingle(ASTPos, OpPos)!;
-    this.Op = Op;
-    this.X = ASTSingle(ASTNodeTestExpr, X)!;
-    this.rest = rest_unarytest;
+    this.OpPos = ASTSimpleSingle(ASTPos, unarytest.OpPos)!;
+    this.Op = UnTestOperator[unarytest.Op];
+    this.OpString = op((unarytest.Op as unknown) as Token);
+    this.X = ASTSingle(ASTNodeTestExpr, unarytest.X)!;
   }
 }

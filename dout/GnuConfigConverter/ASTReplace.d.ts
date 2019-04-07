@@ -7,7 +7,6 @@
 import { ASTNodeWord } from "./ASTNodeWord";
 import { I_Replace } from "./ParserTypes";
 export declare class ASTReplace {
-    rest: object | null;
     All: boolean;
     Orig: ASTNodeWord | null;
     With: ASTNodeWord | null;

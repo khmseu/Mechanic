@@ -11,6 +11,7 @@ import { ASTPos } from "./ASTPos";
 import { ITestClause } from "./ParserTypes";
 export declare class ASTNodeTestClause extends ASTNode {
     kind: ASTnodeKind.ASTNodeTestClause;
+    kindString: string;
     Left: ASTPos;
     Right: ASTPos;
     X: ASTNodeTestExpr;

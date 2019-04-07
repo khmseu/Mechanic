@@ -17,6 +17,7 @@ import { IArrayElem } from "./ParserTypes";
 
 export class ASTNodeArrayElem extends ASTNode {
   public kind: ASTnodeKind.ASTNodeArrayElem = ASTnodeKind.ASTNodeArrayElem;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeArrayElem];
   public Index: ASTNodeArithmExpr; //     Index: IArithmExpr;
   public Value: ASTNodeWord | null; //     Value: IWord | null;
   public Comments: ASTNodeComment[]; //     Comments: IComment[];
@@ -24,10 +25,8 @@ export class ASTNodeArrayElem extends ASTNode {
   constructor(arrayelem: IArrayElem) {
     super(arrayelem);
     logg("ASTNodeArrayElem");
-    const { Index, Value, Comments, ...rest_arrayelem } = arrayelem;
-    this.Index = ASTSingle(ASTNodeArithmExpr, Index)!;
-    this.Value = ASTSingle(ASTNodeWord, Value);
-    this.Comments = ASTArray(ASTNodeComment, Comments)!;
-    this.rest = rest_arrayelem;
+    this.Index = ASTSingle(ASTNodeArithmExpr, arrayelem.Index)!;
+    this.Value = ASTSingle(ASTNodeWord, arrayelem.Value);
+    this.Comments = ASTArray(ASTNodeComment, arrayelem.Comments)!;
   }
 }

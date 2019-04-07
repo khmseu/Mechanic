@@ -11,17 +11,14 @@ import { logg } from "./logg";
 import { I_Replace } from "./ParserTypes";
 
 export class ASTReplace {
-  public rest: object | null;
   public All: boolean; //     All: boolean;
   public Orig: ASTNodeWord | null; //     Orig: IWord | null;
   public With: ASTNodeWord | null; //     With: IWord | null;
 
   constructor(replace: I_Replace) {
     logg("ASTReplace");
-    const { All, Orig, With, ...rest_replace } = replace;
-    this.All = All;
-    this.Orig = ASTSingle(ASTNodeWord, Orig);
-    this.With = ASTSingle(ASTNodeWord, With);
-    this.rest = rest_replace;
+    this.All = replace.All;
+    this.Orig = ASTSingle(ASTNodeWord, replace.Orig);
+    this.With = ASTSingle(ASTNodeWord, replace.With);
   }
 }

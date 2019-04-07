@@ -13,22 +13,24 @@ import { ASTSimpleSingle } from "./ASTSimpleSingle";
 import { ASTSingle } from "./ASTSingle";
 import { logg } from "./logg";
 import { BinTestOperator, IBinaryTest } from "./ParserTypes";
+import { op, Token } from "./Token";
 
 export class ASTNodeBinaryTest extends ASTNode {
   public kind: ASTnodeKind.ASTNodeBinaryTest = ASTnodeKind.ASTNodeBinaryTest;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeBinaryTest];
   public OpPos: ASTPos; //     OpPos: I_Pos;
-  public Op: BinTestOperator; //     Op: BinTestOperator;
+  public Op: string; //     Op: BinTestOperator;
+  public OpString: string;
   public X: ASTNodeTestExpr; //     X: ITestExpr;
   public Y: ASTNodeTestExpr; //     Y: ITestExpr;
 
   constructor(binarytest: IBinaryTest) {
     super(binarytest);
     logg("ASTNodeBinaryTest");
-    const { OpPos, Op, X, Y, ...rest_binarytest } = binarytest;
-    this.OpPos = ASTSimpleSingle(ASTPos, OpPos)!;
-    this.Op = Op;
-    this.X = ASTSingle(ASTNodeTestExpr, X)!;
-    this.Y = ASTSingle(ASTNodeTestExpr, Y)!;
-    this.rest = rest_binarytest;
+    this.OpPos = ASTSimpleSingle(ASTPos, binarytest.OpPos)!;
+    this.Op = BinTestOperator[binarytest.Op];
+    this.OpString = op((binarytest.Op as unknown) as Token);
+    this.X = ASTSingle(ASTNodeTestExpr, binarytest.X)!;
+    this.Y = ASTSingle(ASTNodeTestExpr, binarytest.Y)!;
   }
 }

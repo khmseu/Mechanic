@@ -11,6 +11,7 @@ import { ASTPos } from "./ASTPos";
 import { IParenTest } from "./ParserTypes";
 export declare class ASTNodeParenTest extends ASTNode {
     kind: ASTnodeKind.ASTNodeParenTest;
+    kindString: string;
     Lparen: ASTPos;
     Rparen: ASTPos;
     X: ASTNodeTestExpr;

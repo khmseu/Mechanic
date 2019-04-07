@@ -17,6 +17,7 @@ import { IArrayExpr } from "./ParserTypes";
 
 export class ASTNodeArrayExpr extends ASTNode {
   public kind: ASTnodeKind.ASTNodeArrayExpr = ASTnodeKind.ASTNodeArrayExpr;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeArrayExpr];
   public Lparen: ASTPos; //     Lparen: I_Pos;
   public Rparen: ASTPos; //     Rparen: I_Pos;
   public Elems: ASTNodeArrayElem[]; //     Elems: IArrayElem[] | null;
@@ -25,11 +26,9 @@ export class ASTNodeArrayExpr extends ASTNode {
   constructor(arrayexpr: IArrayExpr) {
     super(arrayexpr);
     logg("ASTNodeArrayExpr");
-    const { Lparen, Rparen, Elems, Last, ...rest_arrayexpr } = arrayexpr;
-    this.Lparen = ASTSimpleSingle(ASTPos, Lparen)!;
-    this.Rparen = ASTSimpleSingle(ASTPos, Rparen)!;
-    this.Elems = ASTArray(ASTNodeArrayElem, Elems);
-    this.Last = ASTArray(ASTNodeComment, Last)!;
-    this.rest = rest_arrayexpr;
+    this.Lparen = ASTSimpleSingle(ASTPos, arrayexpr.Lparen)!;
+    this.Rparen = ASTSimpleSingle(ASTPos, arrayexpr.Rparen)!;
+    this.Elems = ASTArray(ASTNodeArrayElem, arrayexpr.Elems);
+    this.Last = ASTArray(ASTNodeComment, arrayexpr.Last)!;
   }
 }

@@ -30,6 +30,7 @@ import { IArithmCmd, IBinaryCmd, IBlock, ICallExpr, ICaseClause, ICommand, ICopr
 export class ASTNodeCommand extends ASTNode {
   // tslint:disable-next-line:max-line-length
   public kind: ASTnodeKind.bad | ASTnodeKind.ASTNodeCallExpr | ASTnodeKind.ASTNodeIfClause | ASTnodeKind.ASTNodeWhileClause | ASTnodeKind.ASTNodeForClause | ASTnodeKind.ASTNodeCaseClause | ASTnodeKind.ASTNodeBlock | ASTnodeKind.ASTNodeSubshell | ASTnodeKind.ASTNodeBinaryCmd | ASTnodeKind.ASTNodeFuncDecl | ASTnodeKind.ASTNodeArithmCmd | ASTnodeKind.ASTNodeTestClause | ASTnodeKind.ASTNodeDeclClause | ASTnodeKind.ASTNodeLetClause | ASTnodeKind.ASTNodeTimeClause | ASTnodeKind.ASTNodeCoprocClause = ASTnodeKind.bad;
+  public kindString: string = ASTnodeKind[ASTnodeKind.bad];
   constructor(command: ICommand) {
     super(command);
     logg("ASTNodeCommand");
@@ -65,7 +66,7 @@ export class ASTNodeCommand extends ASTNode {
       case "CoprocClause":
         return new ASTNodeCoprocClause(command as ICoprocClause);
       default:
-        this.rest = { NodeType: syntax.NodeType(command) };
+        throw { NodeType: syntax.NodeType(command) };
     }
   }
 }

@@ -16,6 +16,7 @@ import { IDblQuoted } from "./ParserTypes";
 
 export class ASTNodeDblQuoted extends ASTNode {
   public kind: ASTnodeKind.ASTNodeDblQuoted = ASTnodeKind.ASTNodeDblQuoted;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeDblQuoted];
   public Position: ASTPos; //     Position: I_Pos;
   public Dollar: boolean; //     Dollar: boolean;
   public Parts: ASTNodeWordPart[]; //     Parts: IWordPart[];
@@ -23,10 +24,8 @@ export class ASTNodeDblQuoted extends ASTNode {
   constructor(dblquoted: IDblQuoted) {
     super(dblquoted);
     logg("ASTNodeDblQuoted");
-    const { Position, Dollar, Parts, ...rest_dblquoted } = dblquoted;
-    this.Position = ASTSimpleSingle(ASTPos, Position)!;
-    this.Dollar = Dollar;
-    this.Parts = ASTArray(ASTNodeWordPart, Parts)!;
-    this.rest = rest_dblquoted;
+    this.Position = ASTSimpleSingle(ASTPos, dblquoted.Position)!;
+    this.Dollar = dblquoted.Dollar;
+    this.Parts = ASTArray(ASTNodeWordPart, dblquoted.Parts)!;
   }
 }

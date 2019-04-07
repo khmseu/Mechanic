@@ -16,6 +16,7 @@ import { IFile } from "./ParserTypes";
 
 export class ASTNodeFile extends ASTNode {
   public kind: ASTnodeKind.ASTNodeFile = ASTnodeKind.ASTNodeFile;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeFile];
   public Name: string; //     Name: string;
   public StmtList: ASTNodeStmtList | null; //     StmtList: IStmtList | null;
   public Last: ASTNodeComment[]; //     Last: IComment[];
@@ -23,10 +24,8 @@ export class ASTNodeFile extends ASTNode {
   constructor(file: IFile) {
     super(file);
     logg("ASTNodeFile");
-    const { Name, StmtList, Last, ...rest_file } = file;
-    this.Name = Name;
-    this.StmtList = ASTSingle(ASTNodeStmtList, StmtList);
-    this.Last = ASTArray(ASTNodeComment, Last)!;
-    this.rest = rest_file;
+    this.Name = file.Name;
+    this.StmtList = ASTSingle(ASTNodeStmtList, file.StmtList);
+    this.Last = ASTArray(ASTNodeComment, file.Last)!;
   }
 }

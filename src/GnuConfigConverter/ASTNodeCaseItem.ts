@@ -16,10 +16,13 @@ import { ASTSimpleSingle } from "./ASTSimpleSingle";
 import { ASTSingle } from "./ASTSingle";
 import { logg } from "./logg";
 import { CaseOperator, ICaseItem } from "./ParserTypes";
+import { op, Token } from "./Token";
 
 export class ASTNodeCaseItem extends ASTNode {
   public kind: ASTnodeKind.ASTNodeCaseItem = ASTnodeKind.ASTNodeCaseItem;
-  public Op: CaseOperator; //     Op: CaseOperator;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeCaseItem];
+  public Op: string; //     Op: CaseOperator;
+  public OpString: string;
   public OpPos: ASTPos; //     OpPos: I_Pos;
   public Comments: ASTNodeComment[]; //     Comments: IComment[];
   public Patterns: ASTNodeWord[]; //     Patterns: IWord[] | null;
@@ -29,13 +32,12 @@ export class ASTNodeCaseItem extends ASTNode {
   constructor(caseitem: ICaseItem) {
     super(caseitem);
     logg("ASTNodeCaseItem");
-    const { Op, OpPos, Comments, Patterns, StmtList, Last, ...rest_caseitem } = caseitem;
-    this.Op = Op;
-    this.OpPos = ASTSimpleSingle(ASTPos, OpPos)!;
-    this.Comments = ASTArray(ASTNodeComment, Comments)!;
-    this.Patterns = ASTArray(ASTNodeWord, Patterns);
-    this.StmtList = ASTSingle(ASTNodeStmtList, StmtList);
-    this.Last = ASTArray(ASTNodeComment, Last)!;
-    this.rest = rest_caseitem;
+    this.Op = CaseOperator[caseitem.Op];
+    this.OpString = op((caseitem.Op as unknown) as Token);
+    this.OpPos = ASTSimpleSingle(ASTPos, caseitem.OpPos)!;
+    this.Comments = ASTArray(ASTNodeComment, caseitem.Comments)!;
+    this.Patterns = ASTArray(ASTNodeWord, caseitem.Patterns);
+    this.StmtList = ASTSingle(ASTNodeStmtList, caseitem.StmtList);
+    this.Last = ASTArray(ASTNodeComment, caseitem.Last)!;
   }
 }

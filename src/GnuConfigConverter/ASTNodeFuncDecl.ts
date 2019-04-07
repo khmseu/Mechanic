@@ -17,6 +17,7 @@ import { IFuncDecl } from "./ParserTypes";
 
 export class ASTNodeFuncDecl extends ASTNode {
   public kind: ASTnodeKind.ASTNodeFuncDecl = ASTnodeKind.ASTNodeFuncDecl;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeFuncDecl];
   public Position: ASTPos; //     Position: I_Pos;
   public RsrvWord: boolean; //     RsrvWord: boolean;
   public Name: ASTNodeLit | null; //     Name: ILit | null;
@@ -25,11 +26,9 @@ export class ASTNodeFuncDecl extends ASTNode {
   constructor(funcdecl: IFuncDecl) {
     super(funcdecl);
     logg("ASTNodeFuncDecl");
-    const { Position, RsrvWord, Name, Body, ...rest_funcdecl } = funcdecl;
-    this.Position = ASTSimpleSingle(ASTPos, Position)!;
-    this.RsrvWord = RsrvWord;
-    this.Name = ASTSingle(ASTNodeLit, Name);
-    this.Body = ASTSingle(ASTNodeStmt, Body);
-    this.rest = rest_funcdecl;
+    this.Position = ASTSimpleSingle(ASTPos, funcdecl.Position)!;
+    this.RsrvWord = funcdecl.RsrvWord;
+    this.Name = ASTSingle(ASTNodeLit, funcdecl.Name);
+    this.Body = ASTSingle(ASTNodeStmt, funcdecl.Body);
   }
 }

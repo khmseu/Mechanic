@@ -12,6 +12,7 @@ import { ASTPos } from "./ASTPos";
 import { IFuncDecl } from "./ParserTypes";
 export declare class ASTNodeFuncDecl extends ASTNode {
     kind: ASTnodeKind.ASTNodeFuncDecl;
+    kindString: string;
     Position: ASTPos;
     RsrvWord: boolean;
     Name: ASTNodeLit | null;

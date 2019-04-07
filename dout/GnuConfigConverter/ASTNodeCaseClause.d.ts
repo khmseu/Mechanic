@@ -13,6 +13,7 @@ import { ASTPos } from "./ASTPos";
 import { ICaseClause } from "./ParserTypes";
 export declare class ASTNodeCaseClause extends ASTNode {
     kind: ASTnodeKind.ASTNodeCaseClause;
+    kindString: string;
     Case: ASTPos;
     Esac: ASTPos;
     Word: ASTNodeWord | null;

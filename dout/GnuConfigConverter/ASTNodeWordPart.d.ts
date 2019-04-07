@@ -9,6 +9,7 @@ import { ASTnodeKind } from "./ASTnodeKind";
 import { IWordPart } from "./ParserTypes";
 export declare class ASTNodeWordPart extends ASTNode {
     kind: ASTnodeKind.bad | ASTnodeKind.ASTNodeLit | ASTnodeKind.ASTNodeSglQuoted | ASTnodeKind.ASTNodeDblQuoted | ASTnodeKind.ASTNodeParamExp | ASTnodeKind.ASTNodeCmdSubst | ASTnodeKind.ASTNodeArithmExp | ASTnodeKind.ASTNodeProcSubst | ASTnodeKind.ASTNodeExtGlob | ASTnodeKind.ASTNodeBraceExp;
+    kindString: string;
     constructor(wordpart: IWordPart);
 }
 //# sourceMappingURL=ASTNodeWordPart.d.ts.map

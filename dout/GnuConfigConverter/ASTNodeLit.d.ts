@@ -10,6 +10,7 @@ import { ASTPos } from "./ASTPos";
 import { ILit } from "./ParserTypes";
 export declare class ASTNodeLit extends ASTNode {
     kind: ASTnodeKind.ASTNodeLit;
+    kindString: string;
     ValuePos: ASTPos;
     ValueEnd: ASTPos;
     Value: string;

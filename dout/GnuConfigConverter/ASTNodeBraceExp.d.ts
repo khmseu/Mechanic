@@ -10,6 +10,7 @@ import { ASTNodeWord } from "./ASTNodeWord";
 import { IBraceExp } from "./ParserTypes";
 export declare class ASTNodeBraceExp extends ASTNode {
     kind: ASTnodeKind.ASTNodeBraceExp;
+    kindString: string;
     Sequence: boolean;
     Chars: boolean;
     Elems: ASTNodeWord[];

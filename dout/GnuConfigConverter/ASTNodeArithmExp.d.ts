@@ -11,6 +11,7 @@ import { ASTPos } from "./ASTPos";
 import { IArithmExp } from "./ParserTypes";
 export declare class ASTNodeArithmExp extends ASTNode {
     kind: ASTnodeKind.ASTNodeArithmExp;
+    kindString: string;
     Left: ASTPos;
     Right: ASTPos;
     Bracket: boolean;

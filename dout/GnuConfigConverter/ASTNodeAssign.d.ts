@@ -13,6 +13,7 @@ import { ASTNodeWord } from "./ASTNodeWord";
 import { IAssign } from "./ParserTypes";
 export declare class ASTNodeAssign extends ASTNode {
     kind: ASTnodeKind.ASTNodeAssign;
+    kindString: string;
     Append: boolean;
     Naked: boolean;
     Name: ASTNodeLit | null;

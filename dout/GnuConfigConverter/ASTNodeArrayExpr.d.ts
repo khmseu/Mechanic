@@ -12,6 +12,7 @@ import { ASTPos } from "./ASTPos";
 import { IArrayExpr } from "./ParserTypes";
 export declare class ASTNodeArrayExpr extends ASTNode {
     kind: ASTnodeKind.ASTNodeArrayExpr;
+    kindString: string;
     Lparen: ASTPos;
     Rparen: ASTPos;
     Elems: ASTNodeArrayElem[];

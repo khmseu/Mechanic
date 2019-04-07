@@ -17,6 +17,7 @@ import { ICoprocClause } from "./ParserTypes";
 
 export class ASTNodeCoprocClause extends ASTNode {
   public kind: ASTnodeKind.ASTNodeCoprocClause = ASTnodeKind.ASTNodeCoprocClause;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeCoprocClause];
   public Coproc: ASTPos; //     Coproc: I_Pos;
   public Name: ASTNodeWord | null; //     Name: IWord | null;
   public Stmt: ASTNodeStmt | null; //     Stmt: IStmt | null;
@@ -24,10 +25,8 @@ export class ASTNodeCoprocClause extends ASTNode {
   constructor(coprocclause: ICoprocClause) {
     super(coprocclause);
     logg("ASTNodeCoprocClause");
-    const { Coproc, Name, Stmt, ...rest_coprocclause } = coprocclause;
-    this.Coproc = ASTSimpleSingle(ASTPos, Coproc)!;
-    this.Name = ASTSingle(ASTNodeWord, Name);
-    this.Stmt = ASTSingle(ASTNodeStmt, Stmt);
-    this.rest = rest_coprocclause;
+    this.Coproc = ASTSimpleSingle(ASTPos, coprocclause.Coproc)!;
+    this.Name = ASTSingle(ASTNodeWord, coprocclause.Name);
+    this.Stmt = ASTSingle(ASTNodeStmt, coprocclause.Stmt);
   }
 }

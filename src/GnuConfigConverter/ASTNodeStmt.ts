@@ -19,6 +19,7 @@ import { IStmt } from "./ParserTypes";
 
 export class ASTNodeStmt extends ASTNode {
   public kind: ASTnodeKind.ASTNodeStmt = ASTnodeKind.ASTNodeStmt;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeStmt];
   public Comments: ASTNodeComment[]; //     Comments: IComment[];
   public Cmd: ASTNodeCommand; //     Cmd: ICommand;
   public Position: ASTPos; //     Position: I_Pos;
@@ -31,15 +32,13 @@ export class ASTNodeStmt extends ASTNode {
   constructor(stmt: IStmt) {
     super(stmt);
     logg("ASTNodeStmt");
-    const { Comments, Cmd, Position, Semicolon, Negated, Background, Coprocess, Redirs, ...rest_stmt } = stmt;
-    this.Comments = ASTArray(ASTNodeComment, Comments)!;
-    this.Cmd = ASTSingle(ASTNodeCommand, Cmd)!;
-    this.Position = ASTSimpleSingle(ASTPos, Position)!;
-    this.Semicolon = ASTSimpleSingle(ASTPos, Semicolon)!;
-    this.Negated = Negated;
-    this.Background = Background;
-    this.Coprocess = Coprocess;
-    this.Redirs = ASTArray(ASTNodeRedirect, Redirs);
-    this.rest = rest_stmt;
+    this.Comments = ASTArray(ASTNodeComment, stmt.Comments)!;
+    this.Cmd = ASTSingle(ASTNodeCommand, stmt.Cmd)!;
+    this.Position = ASTSimpleSingle(ASTPos, stmt.Position)!;
+    this.Semicolon = ASTSimpleSingle(ASTPos, stmt.Semicolon)!;
+    this.Negated = stmt.Negated;
+    this.Background = stmt.Background;
+    this.Coprocess = stmt.Coprocess;
+    this.Redirs = ASTArray(ASTNodeRedirect, stmt.Redirs);
   }
 }

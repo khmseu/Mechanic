@@ -16,6 +16,7 @@ import { IArithmCmd } from "./ParserTypes";
 
 export class ASTNodeArithmCmd extends ASTNode {
   public kind: ASTnodeKind.ASTNodeArithmCmd = ASTnodeKind.ASTNodeArithmCmd;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeArithmCmd];
   public Left: ASTPos; //     Left: I_Pos;
   public Right: ASTPos; //     Right: I_Pos;
   public Unsigned: boolean; //     Unsigned: boolean;
@@ -24,11 +25,9 @@ export class ASTNodeArithmCmd extends ASTNode {
   constructor(arithmcmd: IArithmCmd) {
     super(arithmcmd);
     logg("ASTNodeArithmCmd");
-    const { Left, Right, Unsigned, X, ...rest_arithmcmd } = arithmcmd;
-    this.Left = ASTSimpleSingle(ASTPos, Left)!;
-    this.Right = ASTSimpleSingle(ASTPos, Right)!;
-    this.Unsigned = Unsigned;
-    this.X = ASTSingle(ASTNodeArithmExpr, X)!;
-    this.rest = rest_arithmcmd;
+    this.Left = ASTSimpleSingle(ASTPos, arithmcmd.Left)!;
+    this.Right = ASTSimpleSingle(ASTPos, arithmcmd.Right)!;
+    this.Unsigned = arithmcmd.Unsigned;
+    this.X = ASTSingle(ASTNodeArithmExpr, arithmcmd.X)!;
   }
 }

@@ -14,24 +14,26 @@ import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
 import { logg } from "./logg";
 import { IProcSubst, ProcOperator } from "./ParserTypes";
+import { op, Token } from "./Token";
 
 export class ASTNodeProcSubst extends ASTNode {
   public kind: ASTnodeKind.ASTNodeProcSubst = ASTnodeKind.ASTNodeProcSubst;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeProcSubst];
   public OpPos: ASTPos; //     OpPos: I_Pos;
   public Rparen: ASTPos; //     Rparen: I_Pos;
-  public Op: ProcOperator; //     Op: ProcOperator;
+  public Op: string; //     Op: ProcOperator;
+  public OpString: string;
   public Stmts: ASTNodeStmt[]; //     Stmts: IStmt[] | null;
   public Last: ASTNodeComment[]; //     Last: IComment[];
 
   constructor(procsubst: IProcSubst) {
     super(procsubst);
     logg("ASTNodeProcSubst");
-    const { OpPos, Rparen, Op, Stmts, Last, ...rest_procsubst } = procsubst;
-    this.OpPos = ASTSimpleSingle(ASTPos, OpPos)!;
-    this.Rparen = ASTSimpleSingle(ASTPos, Rparen)!;
-    this.Op = Op;
-    this.Stmts = ASTArray(ASTNodeStmt, Stmts);
-    this.Last = ASTArray(ASTNodeComment, Last)!;
-    this.rest = rest_procsubst;
+    this.OpPos = ASTSimpleSingle(ASTPos, procsubst.OpPos)!;
+    this.Rparen = ASTSimpleSingle(ASTPos, procsubst.Rparen)!;
+    this.Op = ProcOperator[procsubst.Op];
+    this.OpString = op((procsubst.Op as unknown) as Token);
+    this.Stmts = ASTArray(ASTNodeStmt, procsubst.Stmts);
+    this.Last = ASTArray(ASTNodeComment, procsubst.Last)!;
   }
 }

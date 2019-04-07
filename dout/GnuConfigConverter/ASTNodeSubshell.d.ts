@@ -12,6 +12,7 @@ import { ASTPos } from "./ASTPos";
 import { ISubshell } from "./ParserTypes";
 export declare class ASTNodeSubshell extends ASTNode {
     kind: ASTnodeKind.ASTNodeSubshell;
+    kindString: string;
     Lparen: ASTPos;
     Rparen: ASTPos;
     StmtList: ASTNodeStmtList | null;

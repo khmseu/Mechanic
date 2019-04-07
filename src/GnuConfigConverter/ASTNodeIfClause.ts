@@ -18,6 +18,7 @@ import { IIfClause } from "./ParserTypes";
 
 export class ASTNodeIfClause extends ASTNode {
   public kind: ASTnodeKind.ASTNodeIfClause = ASTnodeKind.ASTNodeIfClause;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeIfClause];
   public Position: ASTPos; //     Position: I_Pos;
   public ThenPos: ASTPos; //     ThenPos: I_Pos;
   public FiPos: ASTPos; //     FiPos: I_Pos;
@@ -31,16 +32,14 @@ export class ASTNodeIfClause extends ASTNode {
   constructor(ifclause: IIfClause) {
     super(ifclause);
     logg("ASTNodeIfClause");
-    const { Position, ThenPos, FiPos, Cond, CondLast, Then, ThenLast, Else, Last, ...rest_ifclause } = ifclause;
-    this.Position = ASTSimpleSingle(ASTPos, Position)!;
-    this.ThenPos = ASTSimpleSingle(ASTPos, ThenPos)!;
-    this.FiPos = ASTSimpleSingle(ASTPos, FiPos)!;
-    this.Cond = ASTSingle(ASTNodeStmtList, Cond);
-    this.CondLast = ASTArray(ASTNodeComment, CondLast)!;
-    this.Then = ASTSingle(ASTNodeStmtList, Then);
-    this.ThenLast = ASTArray(ASTNodeComment, ThenLast)!;
-    this.Else = ASTSingle(ASTNodeIfClause, Else);
-    this.Last = ASTArray(ASTNodeComment, Last)!;
-    this.rest = rest_ifclause;
+    this.Position = ASTSimpleSingle(ASTPos, ifclause.Position)!;
+    this.ThenPos = ASTSimpleSingle(ASTPos, ifclause.ThenPos)!;
+    this.FiPos = ASTSimpleSingle(ASTPos, ifclause.FiPos)!;
+    this.Cond = ASTSingle(ASTNodeStmtList, ifclause.Cond);
+    this.CondLast = ASTArray(ASTNodeComment, ifclause.CondLast)!;
+    this.Then = ASTSingle(ASTNodeStmtList, ifclause.Then);
+    this.ThenLast = ASTArray(ASTNodeComment, ifclause.ThenLast)!;
+    this.Else = ASTSingle(ASTNodeIfClause, ifclause.Else);
+    this.Last = ASTArray(ASTNodeComment, ifclause.Last)!;
   }
 }

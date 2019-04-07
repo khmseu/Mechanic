@@ -11,6 +11,7 @@ import { ASTPos } from "./ASTPos";
 import { ICStyleLoop } from "./ParserTypes";
 export declare class ASTNodeCStyleLoop extends ASTNode {
     kind: ASTnodeKind.ASTNodeCStyleLoop;
+    kindString: string;
     Lparen: ASTPos;
     Rparen: ASTPos;
     Init: ASTNodeArithmExpr;

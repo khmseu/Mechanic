@@ -11,6 +11,7 @@ import { ASTPos } from "./ASTPos";
 import { IDblQuoted } from "./ParserTypes";
 export declare class ASTNodeDblQuoted extends ASTNode {
     kind: ASTnodeKind.ASTNodeDblQuoted;
+    kindString: string;
     Position: ASTPos;
     Dollar: boolean;
     Parts: ASTNodeWordPart[];

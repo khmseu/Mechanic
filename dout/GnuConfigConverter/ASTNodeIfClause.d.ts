@@ -12,6 +12,7 @@ import { ASTPos } from "./ASTPos";
 import { IIfClause } from "./ParserTypes";
 export declare class ASTNodeIfClause extends ASTNode {
     kind: ASTnodeKind.ASTNodeIfClause;
+    kindString: string;
     Position: ASTPos;
     ThenPos: ASTPos;
     FiPos: ASTPos;

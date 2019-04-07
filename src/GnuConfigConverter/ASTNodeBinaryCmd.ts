@@ -13,22 +13,24 @@ import { ASTSimpleSingle } from "./ASTSimpleSingle";
 import { ASTSingle } from "./ASTSingle";
 import { logg } from "./logg";
 import { BinCmdOperator, IBinaryCmd } from "./ParserTypes";
+import { op, Token } from "./Token";
 
 export class ASTNodeBinaryCmd extends ASTNode {
   public kind: ASTnodeKind.ASTNodeBinaryCmd = ASTnodeKind.ASTNodeBinaryCmd;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeBinaryCmd];
   public OpPos: ASTPos; //     OpPos: I_Pos;
-  public Op: BinCmdOperator; //     Op: BinCmdOperator;
+  public Op: string; //     Op: BinCmdOperator;
+  public OpString: string;
   public X: ASTNodeStmt; //     X: IStmt;
   public Y: ASTNodeStmt; //     Y: IStmt;
 
   constructor(binarycmd: IBinaryCmd) {
     super(binarycmd);
     logg("ASTNodeBinaryCmd");
-    const { OpPos, Op, X, Y, ...rest_binarycmd } = binarycmd;
-    this.OpPos = ASTSimpleSingle(ASTPos, OpPos)!;
-    this.Op = Op;
-    this.X = ASTSingle(ASTNodeStmt, X)!;
-    this.Y = ASTSingle(ASTNodeStmt, Y)!;
-    this.rest = rest_binarycmd;
+    this.OpPos = ASTSimpleSingle(ASTPos, binarycmd.OpPos)!;
+    this.Op = BinCmdOperator[binarycmd.Op];
+    this.OpString = op((binarycmd.Op as unknown) as Token);
+    this.X = ASTSingle(ASTNodeStmt, binarycmd.X)!;
+    this.Y = ASTSingle(ASTNodeStmt, binarycmd.Y)!;
   }
 }

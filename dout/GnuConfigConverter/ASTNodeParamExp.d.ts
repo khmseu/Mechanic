@@ -12,9 +12,10 @@ import { ASTNodeLit } from "./ASTNodeLit";
 import { ASTPos } from "./ASTPos";
 import { ASTReplace } from "./ASTReplace";
 import { ASTSlice } from "./ASTSlice";
-import { IParamExp, ParNamesOperator } from "./ParserTypes";
+import { IParamExp } from "./ParserTypes";
 export declare class ASTNodeParamExp extends ASTNode {
     kind: ASTnodeKind.ASTNodeParamExp;
+    kindString: string;
     Dollar: ASTPos;
     Rbrace: ASTPos;
     Short: boolean;
@@ -25,7 +26,8 @@ export declare class ASTNodeParamExp extends ASTNode {
     Index: ASTNodeArithmExpr;
     Slice: ASTSlice | null;
     Repl: ASTReplace | null;
-    Names: ParNamesOperator;
+    Names: string;
+    NamesString: string;
     Exp: ASTExpansion | null;
     constructor(paramexp: IParamExp);
 }

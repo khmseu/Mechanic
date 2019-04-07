@@ -13,6 +13,7 @@ import { ASTPos } from "./ASTPos";
 import { IForClause } from "./ParserTypes";
 export declare class ASTNodeForClause extends ASTNode {
     kind: ASTnodeKind.ASTNodeForClause;
+    kindString: string;
     ForPos: ASTPos;
     DoPos: ASTPos;
     DonePos: ASTPos;

@@ -9,11 +9,13 @@ import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeLit } from "./ASTNodeLit";
 import { ASTNodeWord } from "./ASTNodeWord";
 import { ASTPos } from "./ASTPos";
-import { IRedirect, RedirOperator } from "./ParserTypes";
+import { IRedirect } from "./ParserTypes";
 export declare class ASTNodeRedirect extends ASTNode {
     kind: ASTnodeKind.ASTNodeRedirect;
+    kindString: string;
     OpPos: ASTPos;
-    Op: RedirOperator;
+    Op: string;
+    OpString: string;
     N: ASTNodeLit | null;
     Word: ASTNodeWord | null;
     Hdoc: ASTNodeWord | null;

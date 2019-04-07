@@ -16,6 +16,7 @@ import { ITimeClause } from "./ParserTypes";
 
 export class ASTNodeTimeClause extends ASTNode {
   public kind: ASTnodeKind.ASTNodeTimeClause = ASTnodeKind.ASTNodeTimeClause;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeTimeClause];
   public Time: ASTPos; //     Time: I_Pos;
   public PosixFormat: boolean; //     PosixFormat: boolean;
   public Stmt: ASTNodeStmt | null; //     Stmt: IStmt | null;
@@ -23,10 +24,8 @@ export class ASTNodeTimeClause extends ASTNode {
   constructor(timeclause: ITimeClause) {
     super(timeclause);
     logg("ASTNodeTimeClause");
-    const { Time, PosixFormat, Stmt, ...rest_timeclause } = timeclause;
-    this.Time = ASTSimpleSingle(ASTPos, Time)!;
-    this.PosixFormat = PosixFormat;
-    this.Stmt = ASTSingle(ASTNodeStmt, Stmt);
-    this.rest = rest_timeclause;
+    this.Time = ASTSimpleSingle(ASTPos, timeclause.Time)!;
+    this.PosixFormat = timeclause.PosixFormat;
+    this.Stmt = ASTSingle(ASTNodeStmt, timeclause.Stmt);
   }
 }

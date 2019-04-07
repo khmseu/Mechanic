@@ -10,6 +10,7 @@ import { ASTPos } from "./ASTPos";
 import { ISglQuoted } from "./ParserTypes";
 export declare class ASTNodeSglQuoted extends ASTNode {
     kind: ASTnodeKind.ASTNodeSglQuoted;
+    kindString: string;
     Left: ASTPos;
     Right: ASTPos;
     Dollar: boolean;

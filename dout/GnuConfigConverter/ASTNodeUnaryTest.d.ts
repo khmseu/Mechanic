@@ -8,11 +8,13 @@ import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeTestExpr } from "./ASTNodeTestExpr";
 import { ASTPos } from "./ASTPos";
-import { IUnaryTest, UnTestOperator } from "./ParserTypes";
+import { IUnaryTest } from "./ParserTypes";
 export declare class ASTNodeUnaryTest extends ASTNode {
     kind: ASTnodeKind.ASTNodeUnaryTest;
+    kindString: string;
     OpPos: ASTPos;
-    Op: UnTestOperator;
+    Op: string;
+    OpString: string;
     X: ASTNodeTestExpr;
     constructor(unarytest: IUnaryTest);
 }

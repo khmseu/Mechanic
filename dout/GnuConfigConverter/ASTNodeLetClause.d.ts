@@ -11,6 +11,7 @@ import { ASTPos } from "./ASTPos";
 import { ILetClause } from "./ParserTypes";
 export declare class ASTNodeLetClause extends ASTNode {
     kind: ASTnodeKind.ASTNodeLetClause;
+    kindString: string;
     Let: ASTPos;
     Exprs: ASTNodeArithmExpr[];
     constructor(letclause: ILetClause);

@@ -17,6 +17,7 @@ import { IAssign } from "./ParserTypes";
 
 export class ASTNodeAssign extends ASTNode {
   public kind: ASTnodeKind.ASTNodeAssign = ASTnodeKind.ASTNodeAssign;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeAssign];
   public Append: boolean; //     Append: boolean;
   public Naked: boolean; //     Naked: boolean;
   public Name: ASTNodeLit | null; //     Name: ILit | null;
@@ -27,13 +28,11 @@ export class ASTNodeAssign extends ASTNode {
   constructor(assign: IAssign) {
     super(assign);
     logg("ASTNodeAssign");
-    const { Append, Naked, Name, Index, Value, Array, ...rest_assign } = assign;
-    this.Append = Append;
-    this.Naked = Naked;
-    this.Name = ASTSingle(ASTNodeLit, Name);
-    this.Index = ASTSingle(ASTNodeArithmExpr, Index)!;
-    this.Value = ASTSingle(ASTNodeWord, Value);
-    this.Array = ASTSingle(ASTNodeArrayExpr, Array);
-    this.rest = rest_assign;
+    this.Append = assign.Append;
+    this.Naked = assign.Naked;
+    this.Name = ASTSingle(ASTNodeLit, assign.Name);
+    this.Index = ASTSingle(ASTNodeArithmExpr, assign.Index)!;
+    this.Value = ASTSingle(ASTNodeWord, assign.Value);
+    this.Array = ASTSingle(ASTNodeArrayExpr, assign.Array);
   }
 }

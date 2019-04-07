@@ -57,10 +57,12 @@ sub p2aname($) {
 
 sub export($$$) {
     my ( $name, $text, $needType ) = @_;
+    return unless @$text;
     my %to = map {
-            $_ ~~ ['Istruct', $name] ? ()
-          : $_ eq 'syntax'      ? ( $_, "mvdan-sh" )
-          : $_ =~ /^AST|^logg$/ ? ( $_, "./$_" )
+            $_ ~~ [ 'Istruct', $name ] ? ()
+          : $_ eq 'syntax'              ? ( $_, "mvdan-sh" )
+          : $_ eq 'op'                  ? ( $_, "./Token" )
+          : $_ =~ /^AST|^(logg|Token)$/ ? ( $_, "./$_" )
           : ( $_, "./ParserTypes" )
     } sort { lc $a cmp lc $b } keys %$needType;
     my %from;
@@ -145,6 +147,7 @@ for my $typ (@fi) {
                     save <<EOFN1a;
 export class $an extends ASTNode {
   public kind: ASTnodeKind.$an = ASTnodeKind.$an;
+  public kindString: string = ASTnodeKind[ASTnodeKind.$an];
 EOFN1a
                     $needType{ASTNode}++;
                     $needType{ASTnodeKind}++;
@@ -154,14 +157,13 @@ EOFN1a
                     save <<EOFN1b;
 export class $an {
   public kind: ASTnodeKind = ASTnodeKind.bad;
-  public rest: object | null;
+  public kindString: string = ASTnodeKind[ASTnodeKind.bad];
 EOFN1b
                     $needType{ASTnodeKind}++;
                 }
                 else {
                     save <<EOFN1c;
 export class $an {
-  public rest: object | null;
 EOFN1c
                 }
                 my @fields = grep /\w/, split /\n/, $body1;
@@ -172,8 +174,10 @@ EOFN1c
                 for my $field (@fields) {
                     my ( $name1, $func, $def, $kind ) =
                       ( $field =~
-/^\s*(\w*)\s*:\s*((?:\([^()]*\)\s*=>\s*)?)(\w*)\s*(.*);$/
+/^\s*(\w*)\s*:\s*((?:\(?(?:\([^()]*\)\s*=>\s*))?)(\w*)\)?\s*(.*);$/
                       );
+
+                   #print( Dumper( $field, $name1, $def, $func, $kind ), "\n" );
 
                     #note Dumper( $name1, $def, $func, $kind );
                     my ( $a, $n, $f ) = ( 0, 0, 0 );
@@ -213,9 +217,19 @@ EOFN1c
                         my $tail = '';
                         $tail .= '[]' if $a;
                         $tail .= ' | null' if $n and not $a;
-                        save <<EOFN2;
+                        if ( $aft eq $def and $aft =~ /^[A-Z]/ ) {
+                            save <<EOFN2a;
+  public $name1: string$tail; // $field
+  public ${name1}String: string$tail;
+EOFN2a
+                            $needType{op}++;
+                            $needType{Token}++;
+                        }
+                        else {
+                            save <<EOFN2b;
   public $name1: $aft$tail; // $field
-EOFN2
+EOFN2b
+                        }
                         if ( $aft ne $def ) {
                             if ($a) {
                                 $needType{ASTArray}++;
@@ -243,28 +257,47 @@ EOFN2
                 #note Dumper( $name, %fdef, @fdef );
                 my $list1 =
                   join( ', ', grep { $fdef{$_}{f} < 2 } @fdef );
+                my $ln = lc $name;
+                $ln =~ s/^i_*//;
                 my @recur = map {
                     my $sin = $fdef{$_}{aft};
+                    my ( $f, $n ) = ( $fdef{$_}{f}, $fdef{$_}{n} );
 
                     #note Dumper( $_, $fdef{$_} );
                     if ( $fdef{$_}{t} eq $sin ) {
-                        "    this.$_ = $_" . ( $fdef{$_}{f} ? '()' : '' ) . ";";
+                        (
+                            "    this.$_ = "
+                              . ( $f && $n ? "$ln.$_ ? " : "" )
+                              . (
+                                $sin =~ /^[A-Z]/ ? "$sin\[$ln.$_]" : "$ln.$_" )
+                              . ( $fdef{$_}{f} ? '()' : '' )
+                              . ( $f && $n ? " : null" : "" ) . ";",
+                            (
+                                $sin =~ /^[A-Z]/
+                                ? "    this.${_}String = "
+                                  . ( $f && $n ? "$ln.$_ ? " : "" )
+                                  . "op(($ln.$_ as unknown) as Token)"
+                                  . ( $fdef{$_}{f} ? '()' : '' )
+                                  . ( $f && $n ? " : null" : "" ) . ";"
+                                : ()
+                            )
+                          )
                     }
                     else {
                         "    this.$_ = "
+                          . ( $f && $n ? "$ln.$_ ? " : "" )
                           . (
                               $fdef{$_}{a}          ? 'ASTArray'
                             : $fdef{$_}{t} =~ /^I_/ ? 'ASTSimpleSingle'
                             :                         'ASTSingle'
                           )
-                          . "($sin, $_"
-                          . ( $fdef{$_}{f}  ? '()' : '' ) . ")"
-                          . ( !$fdef{$_}{n} ? '!'  : '' ) . ";";
+                          . "($sin, $ln.$_"
+                          . ( $f ? '()' : '' ) . ")"
+                          . ( $f && $n ? " : null" : "" )
+                          . ( !$n ? '!' : '' ) . ";";
                     }
                 } grep { $fdef{$_}{f} < 2 } @fdef;
                 my $recur = join( "\n", @recur );
-                my $ln = lc $name;
-                $ln =~ s/^i_*//;
                 save <<EOFN3;
 
   constructor($ln: $name) {
@@ -276,9 +309,7 @@ EOFN4
                 }
                 save <<EOFN5;
     logg("$an");
-    const { $list1, ...rest_$ln } = $ln;
 $recur
-    this.rest = rest_$ln;
   }
 }
 EOFN5
@@ -297,6 +328,7 @@ EOFN5
             save <<EOFT1;
 export class $an extends ASTNode {
   public kind: ASTnodeKind.bad | $list1 = ASTnodeKind.bad;
+  public kindString: string = ASTnodeKind[ASTnodeKind.bad];
 EOFT1
             $needType{ASTNode}++;
             $needType{ASTnodeKind}++;
@@ -320,7 +352,7 @@ EOFT1
     switch (syntax.NodeType($ln)) {
 $recur
       default:
-        this.rest = { NodeType: syntax.NodeType($ln) };
+        throw { NodeType: syntax.NodeType($ln) };
     }
   }
 }

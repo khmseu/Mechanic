@@ -16,6 +16,7 @@ import { ITestClause } from "./ParserTypes";
 
 export class ASTNodeTestClause extends ASTNode {
   public kind: ASTnodeKind.ASTNodeTestClause = ASTnodeKind.ASTNodeTestClause;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeTestClause];
   public Left: ASTPos; //     Left: I_Pos;
   public Right: ASTPos; //     Right: I_Pos;
   public X: ASTNodeTestExpr; //     X: ITestExpr;
@@ -23,10 +24,8 @@ export class ASTNodeTestClause extends ASTNode {
   constructor(testclause: ITestClause) {
     super(testclause);
     logg("ASTNodeTestClause");
-    const { Left, Right, X, ...rest_testclause } = testclause;
-    this.Left = ASTSimpleSingle(ASTPos, Left)!;
-    this.Right = ASTSimpleSingle(ASTPos, Right)!;
-    this.X = ASTSingle(ASTNodeTestExpr, X)!;
-    this.rest = rest_testclause;
+    this.Left = ASTSimpleSingle(ASTPos, testclause.Left)!;
+    this.Right = ASTSimpleSingle(ASTPos, testclause.Right)!;
+    this.X = ASTSingle(ASTNodeTestExpr, testclause.X)!;
   }
 }

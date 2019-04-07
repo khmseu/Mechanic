@@ -11,6 +11,7 @@ import { ASTNodeStmtList } from "./ASTNodeStmtList";
 import { IFile } from "./ParserTypes";
 export declare class ASTNodeFile extends ASTNode {
     kind: ASTnodeKind.ASTNodeFile;
+    kindString: string;
     Name: string;
     StmtList: ASTNodeStmtList | null;
     Last: ASTNodeComment[];

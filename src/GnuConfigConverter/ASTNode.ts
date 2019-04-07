@@ -13,15 +13,13 @@ import { INode } from "./ParserTypes";
 
 export class ASTNode {
   public kind: ASTnodeKind = ASTnodeKind.bad;
-  public rest: object | null;
-  public Pos: ASTPos; //     Pos: () => I_Pos;
-  public End: ASTPos; //     End: () => I_Pos;
+  public kindString: string = ASTnodeKind[ASTnodeKind.bad];
+  public Pos: ASTPos | null; //     Pos: (() => I_Pos) | null;
+  public End: ASTPos | null; //     End: (() => I_Pos) | null;
 
   constructor(node: INode) {
     logg("ASTNode");
-    const { Pos, End, ...rest_node } = node;
-    this.Pos = ASTSimpleSingle(ASTPos, Pos())!;
-    this.End = ASTSimpleSingle(ASTPos, End())!;
-    this.rest = rest_node;
+    this.Pos = node.Pos ? ASTSimpleSingle(ASTPos, node.Pos()) : null;
+    this.End = node.End ? ASTSimpleSingle(ASTPos, node.End()) : null;
   }
 }

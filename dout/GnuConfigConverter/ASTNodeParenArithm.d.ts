@@ -11,6 +11,7 @@ import { ASTPos } from "./ASTPos";
 import { IParenArithm } from "./ParserTypes";
 export declare class ASTNodeParenArithm extends ASTNode {
     kind: ASTnodeKind.ASTNodeParenArithm;
+    kindString: string;
     Lparen: ASTPos;
     Rparen: ASTPos;
     X: ASTNodeArithmExpr;

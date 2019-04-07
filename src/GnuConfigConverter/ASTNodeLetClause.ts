@@ -16,15 +16,14 @@ import { ILetClause } from "./ParserTypes";
 
 export class ASTNodeLetClause extends ASTNode {
   public kind: ASTnodeKind.ASTNodeLetClause = ASTnodeKind.ASTNodeLetClause;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeLetClause];
   public Let: ASTPos; //     Let: I_Pos;
   public Exprs: ASTNodeArithmExpr[]; //     Exprs: IArithmExpr[];
 
   constructor(letclause: ILetClause) {
     super(letclause);
     logg("ASTNodeLetClause");
-    const { Let, Exprs, ...rest_letclause } = letclause;
-    this.Let = ASTSimpleSingle(ASTPos, Let)!;
-    this.Exprs = ASTArray(ASTNodeArithmExpr, Exprs)!;
-    this.rest = rest_letclause;
+    this.Let = ASTSimpleSingle(ASTPos, letclause.Let)!;
+    this.Exprs = ASTArray(ASTNodeArithmExpr, letclause.Exprs)!;
   }
 }

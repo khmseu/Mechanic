@@ -9,22 +9,19 @@ import { logg } from "./logg";
 import { I_Pos } from "./ParserTypes";
 
 export class ASTPos {
-  public rest: object | null;
-  // ignored:     After: (p2: I_Pos) => boolean;
-  public Col: number; //     Col: () => number;
-  public IsValid: boolean; //     IsValid: () => boolean;
-  public Line: number; //     Line: () => number;
-  public Offset: number; //     Offset: () => number;
-  public String: string; //     String: () => string;
+  // ignored:     After: ((p2: I_Pos) => boolean) | null;
+  public Col: number | null; //     Col: (() => number) | null;
+  public IsValid: boolean | null; //     IsValid: (() => boolean) | null;
+  public Line: number | null; //     Line: (() => number) | null;
+  public Offset: number | null; //     Offset: (() => number) | null;
+  public String: string | null; //     String: (() => string) | null;
 
   constructor(pos: I_Pos) {
     logg("ASTPos");
-    const { Col, IsValid, Line, Offset, String, ...rest_pos } = pos;
-    this.Col = Col();
-    this.IsValid = IsValid();
-    this.Line = Line();
-    this.Offset = Offset();
-    this.String = String();
-    this.rest = rest_pos;
+    this.Col = pos.Col ? pos.Col() : null;
+    this.IsValid = pos.IsValid ? pos.IsValid() : null;
+    this.Line = pos.Line ? pos.Line() : null;
+    this.Offset = pos.Offset ? pos.Offset() : null;
+    this.String = pos.String ? pos.String() : null;
   }
 }

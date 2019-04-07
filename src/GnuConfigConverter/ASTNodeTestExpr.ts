@@ -18,6 +18,7 @@ import { IBinaryTest, IParenTest, ITestExpr, IUnaryTest, IWord } from "./ParserT
 export class ASTNodeTestExpr extends ASTNode {
   // tslint:disable-next-line:max-line-length
   public kind: ASTnodeKind.bad | ASTnodeKind.ASTNodeBinaryTest | ASTnodeKind.ASTNodeUnaryTest | ASTnodeKind.ASTNodeParenTest | ASTnodeKind.ASTNodeWord = ASTnodeKind.bad;
+  public kindString: string = ASTnodeKind[ASTnodeKind.bad];
   constructor(testexpr: ITestExpr) {
     super(testexpr);
     logg("ASTNodeTestExpr");
@@ -31,7 +32,7 @@ export class ASTNodeTestExpr extends ASTNode {
       case "Word":
         return new ASTNodeWord(testexpr as IWord);
       default:
-        this.rest = { NodeType: syntax.NodeType(testexpr) };
+        throw { NodeType: syntax.NodeType(testexpr) };
     }
   }
 }

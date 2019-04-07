@@ -10,9 +10,10 @@ import { ASTNodeWordPart } from "./ASTNodeWordPart";
 import { IWord } from "./ParserTypes";
 export declare class ASTNodeWord extends ASTNode {
     kind: ASTnodeKind.ASTNodeWord;
+    kindString: string;
     Parts: ASTNodeWordPart[];
     SplitBraces: ASTNodeWord | null;
-    Lit: string;
+    Lit: string | null;
     constructor(word: IWord);
 }
 //# sourceMappingURL=ASTNodeWord.d.ts.map

@@ -9,6 +9,7 @@ import { ASTnodeKind } from "./ASTnodeKind";
 import { ILoop } from "./ParserTypes";
 export declare class ASTNodeLoop extends ASTNode {
     kind: ASTnodeKind.bad | ASTnodeKind.ASTNodeWordIter | ASTnodeKind.ASTNodeCStyleLoop;
+    kindString: string;
     constructor(loop: ILoop);
 }
 //# sourceMappingURL=ASTNodeLoop.d.ts.map

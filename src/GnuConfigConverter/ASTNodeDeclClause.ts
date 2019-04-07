@@ -17,6 +17,7 @@ import { IDeclClause } from "./ParserTypes";
 
 export class ASTNodeDeclClause extends ASTNode {
   public kind: ASTnodeKind.ASTNodeDeclClause = ASTnodeKind.ASTNodeDeclClause;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeDeclClause];
   public Variant: ASTNodeLit | null; //     Variant: ILit | null;
   public Opts: ASTNodeWord[]; //     Opts: IWord[] | null;
   public Assigns: ASTNodeAssign[]; //     Assigns: IAssign[] | null;
@@ -24,10 +25,8 @@ export class ASTNodeDeclClause extends ASTNode {
   constructor(declclause: IDeclClause) {
     super(declclause);
     logg("ASTNodeDeclClause");
-    const { Variant, Opts, Assigns, ...rest_declclause } = declclause;
-    this.Variant = ASTSingle(ASTNodeLit, Variant);
-    this.Opts = ASTArray(ASTNodeWord, Opts);
-    this.Assigns = ASTArray(ASTNodeAssign, Assigns);
-    this.rest = rest_declclause;
+    this.Variant = ASTSingle(ASTNodeLit, declclause.Variant);
+    this.Opts = ASTArray(ASTNodeWord, declclause.Opts);
+    this.Assigns = ASTArray(ASTNodeAssign, declclause.Assigns);
   }
 }

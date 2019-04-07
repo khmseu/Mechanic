@@ -8,11 +8,13 @@ import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeTestExpr } from "./ASTNodeTestExpr";
 import { ASTPos } from "./ASTPos";
-import { BinTestOperator, IBinaryTest } from "./ParserTypes";
+import { IBinaryTest } from "./ParserTypes";
 export declare class ASTNodeBinaryTest extends ASTNode {
     kind: ASTnodeKind.ASTNodeBinaryTest;
+    kindString: string;
     OpPos: ASTPos;
-    Op: BinTestOperator;
+    Op: string;
+    OpString: string;
     X: ASTNodeTestExpr;
     Y: ASTNodeTestExpr;
     constructor(binarytest: IBinaryTest);

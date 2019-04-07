@@ -9,6 +9,7 @@ import { ASTnodeKind } from "./ASTnodeKind";
 import { ITestExpr } from "./ParserTypes";
 export declare class ASTNodeTestExpr extends ASTNode {
     kind: ASTnodeKind.bad | ASTnodeKind.ASTNodeBinaryTest | ASTnodeKind.ASTNodeUnaryTest | ASTnodeKind.ASTNodeParenTest | ASTnodeKind.ASTNodeWord;
+    kindString: string;
     constructor(testexpr: ITestExpr);
 }
 //# sourceMappingURL=ASTNodeTestExpr.d.ts.map

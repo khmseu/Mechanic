@@ -8,11 +8,13 @@ import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTPos } from "./ASTPos";
-import { IUnaryArithm, UnAritOperator } from "./ParserTypes";
+import { IUnaryArithm } from "./ParserTypes";
 export declare class ASTNodeUnaryArithm extends ASTNode {
     kind: ASTnodeKind.ASTNodeUnaryArithm;
+    kindString: string;
     OpPos: ASTPos;
-    Op: UnAritOperator;
+    Op: string;
+    OpString: string;
     Post: boolean;
     X: ASTNodeArithmExpr;
     constructor(unaryarithm: IUnaryArithm);

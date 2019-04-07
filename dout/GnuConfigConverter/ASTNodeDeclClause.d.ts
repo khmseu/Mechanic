@@ -12,6 +12,7 @@ import { ASTNodeWord } from "./ASTNodeWord";
 import { IDeclClause } from "./ParserTypes";
 export declare class ASTNodeDeclClause extends ASTNode {
     kind: ASTnodeKind.ASTNodeDeclClause;
+    kindString: string;
     Variant: ASTNodeLit | null;
     Opts: ASTNodeWord[];
     Assigns: ASTNodeAssign[];

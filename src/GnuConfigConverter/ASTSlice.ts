@@ -11,15 +11,12 @@ import { logg } from "./logg";
 import { I_Slice } from "./ParserTypes";
 
 export class ASTSlice {
-  public rest: object | null;
   public Offset: ASTNodeArithmExpr; //     Offset: IArithmExpr;
   public Length: ASTNodeArithmExpr; //     Length: IArithmExpr;
 
   constructor(slice: I_Slice) {
     logg("ASTSlice");
-    const { Offset, Length, ...rest_slice } = slice;
-    this.Offset = ASTSingle(ASTNodeArithmExpr, Offset)!;
-    this.Length = ASTSingle(ASTNodeArithmExpr, Length)!;
-    this.rest = rest_slice;
+    this.Offset = ASTSingle(ASTNodeArithmExpr, slice.Offset)!;
+    this.Length = ASTSingle(ASTNodeArithmExpr, slice.Length)!;
   }
 }

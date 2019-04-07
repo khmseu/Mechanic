@@ -14,6 +14,7 @@ import { ILit } from "./ParserTypes";
 
 export class ASTNodeLit extends ASTNode {
   public kind: ASTnodeKind.ASTNodeLit = ASTnodeKind.ASTNodeLit;
+  public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeLit];
   public ValuePos: ASTPos; //     ValuePos: I_Pos;
   public ValueEnd: ASTPos; //     ValueEnd: I_Pos;
   public Value: string; //     Value: string;
@@ -21,10 +22,8 @@ export class ASTNodeLit extends ASTNode {
   constructor(lit: ILit) {
     super(lit);
     logg("ASTNodeLit");
-    const { ValuePos, ValueEnd, Value, ...rest_lit } = lit;
-    this.ValuePos = ASTSimpleSingle(ASTPos, ValuePos)!;
-    this.ValueEnd = ASTSimpleSingle(ASTPos, ValueEnd)!;
-    this.Value = Value;
-    this.rest = rest_lit;
+    this.ValuePos = ASTSimpleSingle(ASTPos, lit.ValuePos)!;
+    this.ValueEnd = ASTSimpleSingle(ASTPos, lit.ValueEnd)!;
+    this.Value = lit.Value;
   }
 }

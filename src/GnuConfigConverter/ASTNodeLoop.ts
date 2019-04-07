@@ -15,6 +15,7 @@ import { ICStyleLoop, ILoop, IWordIter } from "./ParserTypes";
 
 export class ASTNodeLoop extends ASTNode {
   public kind: ASTnodeKind.bad | ASTnodeKind.ASTNodeWordIter | ASTnodeKind.ASTNodeCStyleLoop = ASTnodeKind.bad;
+  public kindString: string = ASTnodeKind[ASTnodeKind.bad];
   constructor(loop: ILoop) {
     super(loop);
     logg("ASTNodeLoop");
@@ -24,7 +25,7 @@ export class ASTNodeLoop extends ASTNode {
       case "CStyleLoop":
         return new ASTNodeCStyleLoop(loop as ICStyleLoop);
       default:
-        this.rest = { NodeType: syntax.NodeType(loop) };
+        throw { NodeType: syntax.NodeType(loop) };
     }
   }
 }
