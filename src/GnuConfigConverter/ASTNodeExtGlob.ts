@@ -5,9 +5,11 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { ASTMoreExtGlob } from "./ASTMoreExtGlob";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeLit } from "./ASTNodeLit";
+import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
 import { ASTSingle } from "./ASTSingle";
@@ -18,6 +20,7 @@ import { op, Token } from "./Token";
 export class ASTNodeExtGlob extends ASTNode {
   public kind: ASTnodeKind.ASTNodeExtGlob = ASTnodeKind.ASTNodeExtGlob;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeExtGlob];
+  public more: ASTMoreExtGlob = new ASTMoreExtGlob();
   public OpPos: ASTPos; //     OpPos: I_Pos;
   public Op: string; //     Op: GlobOperator;
   public OpString: string;
@@ -30,5 +33,17 @@ export class ASTNodeExtGlob extends ASTNode {
     this.Op = GlobOperator[extglob.Op];
     this.OpString = op((extglob.Op as unknown) as Token);
     this.Pattern = ASTSingle(ASTNodeLit, extglob.Pattern);
+    ["OpPos"].forEach((f) => {
+      const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
+      desc.enumerable = false;
+      Object.defineProperty(this, f, desc);
+    });
+  }
+  public accept(visitor: ASTnodeVisitor) {
+    visitor.visitASTNodeExtGlobPre(this);
+    if (this.Pattern) {
+      this.Pattern.accept(visitor);
+    }
+    visitor.visitASTNodeExtGlobPost(this);
   }
 }

@@ -5,9 +5,11 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { ASTMoreRedirect } from "./ASTMoreRedirect";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeLit } from "./ASTNodeLit";
+import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTNodeWord } from "./ASTNodeWord";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
@@ -19,6 +21,7 @@ import { op, Token } from "./Token";
 export class ASTNodeRedirect extends ASTNode {
   public kind: ASTnodeKind.ASTNodeRedirect = ASTnodeKind.ASTNodeRedirect;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeRedirect];
+  public more: ASTMoreRedirect = new ASTMoreRedirect();
   public OpPos: ASTPos; //     OpPos: I_Pos;
   public Op: string; //     Op: RedirOperator;
   public OpString: string;
@@ -35,5 +38,23 @@ export class ASTNodeRedirect extends ASTNode {
     this.N = ASTSingle(ASTNodeLit, redirect.N);
     this.Word = ASTSingle(ASTNodeWord, redirect.Word);
     this.Hdoc = ASTSingle(ASTNodeWord, redirect.Hdoc);
+    ["OpPos"].forEach((f) => {
+      const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
+      desc.enumerable = false;
+      Object.defineProperty(this, f, desc);
+    });
+  }
+  public accept(visitor: ASTnodeVisitor) {
+    visitor.visitASTNodeRedirectPre(this);
+    if (this.N) {
+      this.N.accept(visitor);
+    }
+    if (this.Word) {
+      this.Word.accept(visitor);
+    }
+    if (this.Hdoc) {
+      this.Hdoc.accept(visitor);
+    }
+    visitor.visitASTNodeRedirectPost(this);
   }
 }

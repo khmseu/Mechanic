@@ -6,16 +6,19 @@
  */
 
 import { ASTArray } from "./ASTArray";
+import { ASTMoreStmtList } from "./ASTMoreStmtList";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmt } from "./ASTNodeStmt";
+import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { logg } from "./logg";
 import { IStmtList } from "./ParserTypes";
 
 export class ASTNodeStmtList extends ASTNode {
   public kind: ASTnodeKind.ASTNodeStmtList = ASTnodeKind.ASTNodeStmtList;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeStmtList];
+  public more: ASTMoreStmtList = new ASTMoreStmtList();
   public Stmts: ASTNodeStmt[]; //     Stmts: IStmt[];
   public Last: ASTNodeComment[]; //     Last: IComment[];
 
@@ -24,5 +27,16 @@ export class ASTNodeStmtList extends ASTNode {
     logg("ASTNodeStmtList");
     this.Stmts = ASTArray(ASTNodeStmt, stmtlist.Stmts)!;
     this.Last = ASTArray(ASTNodeComment, stmtlist.Last)!;
+    [].forEach((f) => {
+      const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
+      desc.enumerable = false;
+      Object.defineProperty(this, f, desc);
+    });
+  }
+  public accept(visitor: ASTnodeVisitor) {
+    visitor.visitASTNodeStmtListPre(this);
+    this.Stmts.forEach((e) => e.accept(visitor));
+    this.Last.forEach((e) => e.accept(visitor));
+    visitor.visitASTNodeStmtListPost(this);
   }
 }

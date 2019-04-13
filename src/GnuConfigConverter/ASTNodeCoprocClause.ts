@@ -5,9 +5,11 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { ASTMoreCoprocClause } from "./ASTMoreCoprocClause";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmt } from "./ASTNodeStmt";
+import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTNodeWord } from "./ASTNodeWord";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
@@ -18,6 +20,7 @@ import { ICoprocClause } from "./ParserTypes";
 export class ASTNodeCoprocClause extends ASTNode {
   public kind: ASTnodeKind.ASTNodeCoprocClause = ASTnodeKind.ASTNodeCoprocClause;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeCoprocClause];
+  public more: ASTMoreCoprocClause = new ASTMoreCoprocClause();
   public Coproc: ASTPos; //     Coproc: I_Pos;
   public Name: ASTNodeWord | null; //     Name: IWord | null;
   public Stmt: ASTNodeStmt | null; //     Stmt: IStmt | null;
@@ -28,5 +31,20 @@ export class ASTNodeCoprocClause extends ASTNode {
     this.Coproc = ASTSimpleSingle(ASTPos, coprocclause.Coproc)!;
     this.Name = ASTSingle(ASTNodeWord, coprocclause.Name);
     this.Stmt = ASTSingle(ASTNodeStmt, coprocclause.Stmt);
+    ["Coproc"].forEach((f) => {
+      const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
+      desc.enumerable = false;
+      Object.defineProperty(this, f, desc);
+    });
+  }
+  public accept(visitor: ASTnodeVisitor) {
+    visitor.visitASTNodeCoprocClausePre(this);
+    if (this.Name) {
+      this.Name.accept(visitor);
+    }
+    if (this.Stmt) {
+      this.Stmt.accept(visitor);
+    }
+    visitor.visitASTNodeCoprocClausePost(this);
   }
 }

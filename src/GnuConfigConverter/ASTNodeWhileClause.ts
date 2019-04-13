@@ -6,10 +6,12 @@
  */
 
 import { ASTArray } from "./ASTArray";
+import { ASTMoreWhileClause } from "./ASTMoreWhileClause";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmtList } from "./ASTNodeStmtList";
+import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
 import { ASTSingle } from "./ASTSingle";
@@ -19,6 +21,7 @@ import { IWhileClause } from "./ParserTypes";
 export class ASTNodeWhileClause extends ASTNode {
   public kind: ASTnodeKind.ASTNodeWhileClause = ASTnodeKind.ASTNodeWhileClause;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeWhileClause];
+  public more: ASTMoreWhileClause = new ASTMoreWhileClause();
   public WhilePos: ASTPos; //     WhilePos: I_Pos;
   public DoPos: ASTPos; //     DoPos: I_Pos;
   public DonePos: ASTPos; //     DonePos: I_Pos;
@@ -39,5 +42,22 @@ export class ASTNodeWhileClause extends ASTNode {
     this.CondLast = ASTArray(ASTNodeComment, whileclause.CondLast)!;
     this.Do = ASTSingle(ASTNodeStmtList, whileclause.Do);
     this.DoLast = ASTArray(ASTNodeComment, whileclause.DoLast)!;
+    ["WhilePos", "DoPos", "DonePos"].forEach((f) => {
+      const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
+      desc.enumerable = false;
+      Object.defineProperty(this, f, desc);
+    });
+  }
+  public accept(visitor: ASTnodeVisitor) {
+    visitor.visitASTNodeWhileClausePre(this);
+    if (this.Cond) {
+      this.Cond.accept(visitor);
+    }
+    this.CondLast.forEach((e) => e.accept(visitor));
+    if (this.Do) {
+      this.Do.accept(visitor);
+    }
+    this.DoLast.forEach((e) => e.accept(visitor));
+    visitor.visitASTNodeWhileClausePost(this);
   }
 }

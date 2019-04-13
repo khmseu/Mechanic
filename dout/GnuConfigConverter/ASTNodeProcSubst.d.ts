@@ -4,15 +4,18 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
+import { ASTMoreProcSubst } from "./ASTMoreProcSubst";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmt } from "./ASTNodeStmt";
+import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
 import { IProcSubst } from "./ParserTypes";
 export declare class ASTNodeProcSubst extends ASTNode {
     kind: ASTnodeKind.ASTNodeProcSubst;
     kindString: string;
+    more: ASTMoreProcSubst;
     OpPos: ASTPos;
     Rparen: ASTPos;
     Op: string;
@@ -20,5 +23,6 @@ export declare class ASTNodeProcSubst extends ASTNode {
     Stmts: ASTNodeStmt[];
     Last: ASTNodeComment[];
     constructor(procsubst: IProcSubst);
+    accept(visitor: ASTnodeVisitor): void;
 }
 //# sourceMappingURL=ASTNodeProcSubst.d.ts.map

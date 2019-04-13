@@ -5,9 +5,11 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { ASTMoreBinaryTest } from "./ASTMoreBinaryTest";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeTestExpr } from "./ASTNodeTestExpr";
+import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
 import { ASTSingle } from "./ASTSingle";
@@ -18,6 +20,7 @@ import { op, Token } from "./Token";
 export class ASTNodeBinaryTest extends ASTNode {
   public kind: ASTnodeKind.ASTNodeBinaryTest = ASTnodeKind.ASTNodeBinaryTest;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeBinaryTest];
+  public more: ASTMoreBinaryTest = new ASTMoreBinaryTest();
   public OpPos: ASTPos; //     OpPos: I_Pos;
   public Op: string; //     Op: BinTestOperator;
   public OpString: string;
@@ -32,5 +35,16 @@ export class ASTNodeBinaryTest extends ASTNode {
     this.OpString = op((binarytest.Op as unknown) as Token);
     this.X = ASTSingle(ASTNodeTestExpr, binarytest.X)!;
     this.Y = ASTSingle(ASTNodeTestExpr, binarytest.Y)!;
+    ["OpPos"].forEach((f) => {
+      const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
+      desc.enumerable = false;
+      Object.defineProperty(this, f, desc);
+    });
+  }
+  public accept(visitor: ASTnodeVisitor) {
+    visitor.visitASTNodeBinaryTestPre(this);
+    this.X.accept(visitor);
+    this.Y.accept(visitor);
+    visitor.visitASTNodeBinaryTestPost(this);
   }
 }

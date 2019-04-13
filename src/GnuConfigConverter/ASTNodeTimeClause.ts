@@ -5,9 +5,11 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { ASTMoreTimeClause } from "./ASTMoreTimeClause";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmt } from "./ASTNodeStmt";
+import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
 import { ASTSingle } from "./ASTSingle";
@@ -17,6 +19,7 @@ import { ITimeClause } from "./ParserTypes";
 export class ASTNodeTimeClause extends ASTNode {
   public kind: ASTnodeKind.ASTNodeTimeClause = ASTnodeKind.ASTNodeTimeClause;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeTimeClause];
+  public more: ASTMoreTimeClause = new ASTMoreTimeClause();
   public Time: ASTPos; //     Time: I_Pos;
   public PosixFormat: boolean; //     PosixFormat: boolean;
   public Stmt: ASTNodeStmt | null; //     Stmt: IStmt | null;
@@ -27,5 +30,17 @@ export class ASTNodeTimeClause extends ASTNode {
     this.Time = ASTSimpleSingle(ASTPos, timeclause.Time)!;
     this.PosixFormat = timeclause.PosixFormat;
     this.Stmt = ASTSingle(ASTNodeStmt, timeclause.Stmt);
+    ["Time"].forEach((f) => {
+      const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
+      desc.enumerable = false;
+      Object.defineProperty(this, f, desc);
+    });
+  }
+  public accept(visitor: ASTnodeVisitor) {
+    visitor.visitASTNodeTimeClausePre(this);
+    if (this.Stmt) {
+      this.Stmt.accept(visitor);
+    }
+    visitor.visitASTNodeTimeClausePost(this);
   }
 }

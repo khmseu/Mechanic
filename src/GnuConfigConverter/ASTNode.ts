@@ -6,6 +6,7 @@
  */
 
 import { ASTnodeKind } from "./ASTnodeKind";
+import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
 import { logg } from "./logg";
@@ -21,5 +22,13 @@ export class ASTNode {
     logg("ASTNode");
     this.Pos = node.Pos ? ASTSimpleSingle(ASTPos, node.Pos()) : null;
     this.End = node.End ? ASTSimpleSingle(ASTPos, node.End()) : null;
+    ["Pos", "End"].forEach((f) => {
+      const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
+      desc.enumerable = false;
+      Object.defineProperty(this, f, desc);
+    });
+  }
+  public accept(visitor: ASTnodeVisitor) {
+    visitor = visitor;
   }
 }

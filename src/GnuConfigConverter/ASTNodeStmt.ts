@@ -6,11 +6,13 @@
  */
 
 import { ASTArray } from "./ASTArray";
+import { ASTMoreStmt } from "./ASTMoreStmt";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeCommand } from "./ASTNodeCommand";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeRedirect } from "./ASTNodeRedirect";
+import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
 import { ASTSingle } from "./ASTSingle";
@@ -20,6 +22,7 @@ import { IStmt } from "./ParserTypes";
 export class ASTNodeStmt extends ASTNode {
   public kind: ASTnodeKind.ASTNodeStmt = ASTnodeKind.ASTNodeStmt;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeStmt];
+  public more: ASTMoreStmt = new ASTMoreStmt();
   public Comments: ASTNodeComment[]; //     Comments: IComment[];
   public Cmd: ASTNodeCommand; //     Cmd: ICommand;
   public Position: ASTPos; //     Position: I_Pos;
@@ -40,5 +43,17 @@ export class ASTNodeStmt extends ASTNode {
     this.Background = stmt.Background;
     this.Coprocess = stmt.Coprocess;
     this.Redirs = ASTArray(ASTNodeRedirect, stmt.Redirs);
+    ["Position", "Semicolon"].forEach((f) => {
+      const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
+      desc.enumerable = false;
+      Object.defineProperty(this, f, desc);
+    });
+  }
+  public accept(visitor: ASTnodeVisitor) {
+    visitor.visitASTNodeStmtPre(this);
+    this.Comments.forEach((e) => e.accept(visitor));
+    this.Cmd.accept(visitor);
+    this.Redirs.forEach((e) => e.accept(visitor));
+    visitor.visitASTNodeStmtPost(this);
   }
 }

@@ -5,9 +5,11 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { ASTMoreBinaryCmd } from "./ASTMoreBinaryCmd";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmt } from "./ASTNodeStmt";
+import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
 import { ASTSingle } from "./ASTSingle";
@@ -18,6 +20,7 @@ import { op, Token } from "./Token";
 export class ASTNodeBinaryCmd extends ASTNode {
   public kind: ASTnodeKind.ASTNodeBinaryCmd = ASTnodeKind.ASTNodeBinaryCmd;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeBinaryCmd];
+  public more: ASTMoreBinaryCmd = new ASTMoreBinaryCmd();
   public OpPos: ASTPos; //     OpPos: I_Pos;
   public Op: string; //     Op: BinCmdOperator;
   public OpString: string;
@@ -32,5 +35,16 @@ export class ASTNodeBinaryCmd extends ASTNode {
     this.OpString = op((binarycmd.Op as unknown) as Token);
     this.X = ASTSingle(ASTNodeStmt, binarycmd.X)!;
     this.Y = ASTSingle(ASTNodeStmt, binarycmd.Y)!;
+    ["OpPos"].forEach((f) => {
+      const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
+      desc.enumerable = false;
+      Object.defineProperty(this, f, desc);
+    });
+  }
+  public accept(visitor: ASTnodeVisitor) {
+    visitor.visitASTNodeBinaryCmdPre(this);
+    this.X.accept(visitor);
+    this.Y.accept(visitor);
+    visitor.visitASTNodeBinaryCmdPost(this);
   }
 }

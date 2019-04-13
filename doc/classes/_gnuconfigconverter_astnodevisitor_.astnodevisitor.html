@@ -1,0 +1,2457 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>ASTnodeVisitor | Mechanic</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">Mechanic</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="../modules/_gnuconfigconverter_astnodevisitor_.html">&quot;GnuConfigConverter/ASTnodeVisitor&quot;</a>
+				</li>
+				<li>
+					<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html">ASTnodeVisitor</a>
+				</li>
+			</ul>
+			<h1>Class ASTnodeVisitor</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">ASTnodeVisitor</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodearithmcmdpost" class="tsd-kind-icon">visitASTNode<wbr>Arithm<wbr>Cmd<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodearithmcmdpre" class="tsd-kind-icon">visitASTNode<wbr>Arithm<wbr>Cmd<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodearithmexppost" class="tsd-kind-icon">visitASTNode<wbr>Arithm<wbr>Exp<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodearithmexppre" class="tsd-kind-icon">visitASTNode<wbr>Arithm<wbr>Exp<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodearrayelempost" class="tsd-kind-icon">visitASTNode<wbr>Array<wbr>Elem<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodearrayelempre" class="tsd-kind-icon">visitASTNode<wbr>Array<wbr>Elem<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodearrayexprpost" class="tsd-kind-icon">visitASTNode<wbr>Array<wbr>Expr<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodearrayexprpre" class="tsd-kind-icon">visitASTNode<wbr>Array<wbr>Expr<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeassignpost" class="tsd-kind-icon">visitASTNode<wbr>Assign<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeassignpre" class="tsd-kind-icon">visitASTNode<wbr>Assign<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodebinaryarithmpost" class="tsd-kind-icon">visitASTNode<wbr>Binary<wbr>Arithm<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodebinaryarithmpre" class="tsd-kind-icon">visitASTNode<wbr>Binary<wbr>Arithm<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodebinarycmdpost" class="tsd-kind-icon">visitASTNode<wbr>Binary<wbr>Cmd<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodebinarycmdpre" class="tsd-kind-icon">visitASTNode<wbr>Binary<wbr>Cmd<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodebinarytestpost" class="tsd-kind-icon">visitASTNode<wbr>Binary<wbr>Test<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodebinarytestpre" class="tsd-kind-icon">visitASTNode<wbr>Binary<wbr>Test<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeblockpost" class="tsd-kind-icon">visitASTNode<wbr>Block<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeblockpre" class="tsd-kind-icon">visitASTNode<wbr>Block<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodebraceexppost" class="tsd-kind-icon">visitASTNode<wbr>Brace<wbr>Exp<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodebraceexppre" class="tsd-kind-icon">visitASTNode<wbr>Brace<wbr>Exp<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodecstylelooppost" class="tsd-kind-icon">visitASTNodeCStyle<wbr>Loop<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodecstylelooppre" class="tsd-kind-icon">visitASTNodeCStyle<wbr>Loop<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodecallexprpost" class="tsd-kind-icon">visitASTNode<wbr>Call<wbr>Expr<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodecallexprpre" class="tsd-kind-icon">visitASTNode<wbr>Call<wbr>Expr<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodecaseclausepost" class="tsd-kind-icon">visitASTNode<wbr>Case<wbr>Clause<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodecaseclausepre" class="tsd-kind-icon">visitASTNode<wbr>Case<wbr>Clause<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodecaseitempost" class="tsd-kind-icon">visitASTNode<wbr>Case<wbr>Item<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodecaseitempre" class="tsd-kind-icon">visitASTNode<wbr>Case<wbr>Item<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodecmdsubstpost" class="tsd-kind-icon">visitASTNode<wbr>Cmd<wbr>Subst<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodecmdsubstpre" class="tsd-kind-icon">visitASTNode<wbr>Cmd<wbr>Subst<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodecommentpost" class="tsd-kind-icon">visitASTNode<wbr>Comment<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodecommentpre" class="tsd-kind-icon">visitASTNode<wbr>Comment<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodecoprocclausepost" class="tsd-kind-icon">visitASTNode<wbr>Coproc<wbr>Clause<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodecoprocclausepre" class="tsd-kind-icon">visitASTNode<wbr>Coproc<wbr>Clause<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodedblquotedpost" class="tsd-kind-icon">visitASTNode<wbr>Dbl<wbr>Quoted<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodedblquotedpre" class="tsd-kind-icon">visitASTNode<wbr>Dbl<wbr>Quoted<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodedeclclausepost" class="tsd-kind-icon">visitASTNode<wbr>Decl<wbr>Clause<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodedeclclausepre" class="tsd-kind-icon">visitASTNode<wbr>Decl<wbr>Clause<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeextglobpost" class="tsd-kind-icon">visitASTNode<wbr>Ext<wbr>Glob<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeextglobpre" class="tsd-kind-icon">visitASTNode<wbr>Ext<wbr>Glob<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodefilepost" class="tsd-kind-icon">visitASTNode<wbr>File<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodefilepre" class="tsd-kind-icon">visitASTNode<wbr>File<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeforclausepost" class="tsd-kind-icon">visitASTNode<wbr>For<wbr>Clause<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeforclausepre" class="tsd-kind-icon">visitASTNode<wbr>For<wbr>Clause<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodefuncdeclpost" class="tsd-kind-icon">visitASTNode<wbr>Func<wbr>Decl<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodefuncdeclpre" class="tsd-kind-icon">visitASTNode<wbr>Func<wbr>Decl<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeifclausepost" class="tsd-kind-icon">visitASTNode<wbr>IfClause<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeifclausepre" class="tsd-kind-icon">visitASTNode<wbr>IfClause<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeletclausepost" class="tsd-kind-icon">visitASTNode<wbr>Let<wbr>Clause<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeletclausepre" class="tsd-kind-icon">visitASTNode<wbr>Let<wbr>Clause<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodelitpost" class="tsd-kind-icon">visitASTNode<wbr>Lit<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodelitpre" class="tsd-kind-icon">visitASTNode<wbr>Lit<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeparamexppost" class="tsd-kind-icon">visitASTNode<wbr>Param<wbr>Exp<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeparamexppre" class="tsd-kind-icon">visitASTNode<wbr>Param<wbr>Exp<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeparenarithmpost" class="tsd-kind-icon">visitASTNode<wbr>Paren<wbr>Arithm<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeparenarithmpre" class="tsd-kind-icon">visitASTNode<wbr>Paren<wbr>Arithm<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeparentestpost" class="tsd-kind-icon">visitASTNode<wbr>Paren<wbr>Test<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeparentestpre" class="tsd-kind-icon">visitASTNode<wbr>Paren<wbr>Test<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeprocsubstpost" class="tsd-kind-icon">visitASTNode<wbr>Proc<wbr>Subst<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeprocsubstpre" class="tsd-kind-icon">visitASTNode<wbr>Proc<wbr>Subst<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnoderedirectpost" class="tsd-kind-icon">visitASTNode<wbr>Redirect<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnoderedirectpre" class="tsd-kind-icon">visitASTNode<wbr>Redirect<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodesglquotedpost" class="tsd-kind-icon">visitASTNode<wbr>Sgl<wbr>Quoted<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodesglquotedpre" class="tsd-kind-icon">visitASTNode<wbr>Sgl<wbr>Quoted<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodestmtlistpost" class="tsd-kind-icon">visitASTNode<wbr>Stmt<wbr>List<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodestmtlistpre" class="tsd-kind-icon">visitASTNode<wbr>Stmt<wbr>List<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodestmtpost" class="tsd-kind-icon">visitASTNode<wbr>Stmt<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodestmtpre" class="tsd-kind-icon">visitASTNode<wbr>Stmt<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodesubshellpost" class="tsd-kind-icon">visitASTNode<wbr>Subshell<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodesubshellpre" class="tsd-kind-icon">visitASTNode<wbr>Subshell<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodetestclausepost" class="tsd-kind-icon">visitASTNode<wbr>Test<wbr>Clause<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodetestclausepre" class="tsd-kind-icon">visitASTNode<wbr>Test<wbr>Clause<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodetimeclausepost" class="tsd-kind-icon">visitASTNode<wbr>Time<wbr>Clause<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodetimeclausepre" class="tsd-kind-icon">visitASTNode<wbr>Time<wbr>Clause<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeunaryarithmpost" class="tsd-kind-icon">visitASTNode<wbr>Unary<wbr>Arithm<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeunaryarithmpre" class="tsd-kind-icon">visitASTNode<wbr>Unary<wbr>Arithm<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeunarytestpost" class="tsd-kind-icon">visitASTNode<wbr>Unary<wbr>Test<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeunarytestpre" class="tsd-kind-icon">visitASTNode<wbr>Unary<wbr>Test<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodewhileclausepost" class="tsd-kind-icon">visitASTNode<wbr>While<wbr>Clause<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodewhileclausepre" class="tsd-kind-icon">visitASTNode<wbr>While<wbr>Clause<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeworditerpost" class="tsd-kind-icon">visitASTNode<wbr>Word<wbr>Iter<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeworditerpre" class="tsd-kind-icon">visitASTNode<wbr>Word<wbr>Iter<wbr>Pre</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodewordpost" class="tsd-kind-icon">visitASTNode<wbr>Word<wbr>Post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodewordpre" class="tsd-kind-icon">visitASTNode<wbr>Word<wbr>Pre</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodearithmcmdpost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Arithm<wbr>Cmd<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Arithm<wbr>Cmd<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodearithmcmd_.astnodearithmcmd.html" class="tsd-signature-type">ASTNodeArithmCmd</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:55</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodearithmcmd_.astnodearithmcmd.html" class="tsd-signature-type">ASTNodeArithmCmd</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodearithmcmdpre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Arithm<wbr>Cmd<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Arithm<wbr>Cmd<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodearithmcmd_.astnodearithmcmd.html" class="tsd-signature-type">ASTNodeArithmCmd</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:52</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodearithmcmd_.astnodearithmcmd.html" class="tsd-signature-type">ASTNodeArithmCmd</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodearithmexppost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Arithm<wbr>Exp<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Arithm<wbr>Exp<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodearithmexp_.astnodearithmexp.html" class="tsd-signature-type">ASTNodeArithmExp</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:61</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodearithmexp_.astnodearithmexp.html" class="tsd-signature-type">ASTNodeArithmExp</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodearithmexppre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Arithm<wbr>Exp<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Arithm<wbr>Exp<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodearithmexp_.astnodearithmexp.html" class="tsd-signature-type">ASTNodeArithmExp</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:58</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodearithmexp_.astnodearithmexp.html" class="tsd-signature-type">ASTNodeArithmExp</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodearrayelempost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Array<wbr>Elem<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Array<wbr>Elem<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodearrayelem_.astnodearrayelem.html" class="tsd-signature-type">ASTNodeArrayElem</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:67</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodearrayelem_.astnodearrayelem.html" class="tsd-signature-type">ASTNodeArrayElem</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodearrayelempre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Array<wbr>Elem<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Array<wbr>Elem<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodearrayelem_.astnodearrayelem.html" class="tsd-signature-type">ASTNodeArrayElem</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:64</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodearrayelem_.astnodearrayelem.html" class="tsd-signature-type">ASTNodeArrayElem</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodearrayexprpost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Array<wbr>Expr<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Array<wbr>Expr<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodearrayexpr_.astnodearrayexpr.html" class="tsd-signature-type">ASTNodeArrayExpr</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:73</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodearrayexpr_.astnodearrayexpr.html" class="tsd-signature-type">ASTNodeArrayExpr</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodearrayexprpre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Array<wbr>Expr<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Array<wbr>Expr<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodearrayexpr_.astnodearrayexpr.html" class="tsd-signature-type">ASTNodeArrayExpr</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:70</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodearrayexpr_.astnodearrayexpr.html" class="tsd-signature-type">ASTNodeArrayExpr</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodeassignpost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Assign<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Assign<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodeassign_.astnodeassign.html" class="tsd-signature-type">ASTNodeAssign</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:79</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodeassign_.astnodeassign.html" class="tsd-signature-type">ASTNodeAssign</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodeassignpre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Assign<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Assign<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodeassign_.astnodeassign.html" class="tsd-signature-type">ASTNodeAssign</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:76</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodeassign_.astnodeassign.html" class="tsd-signature-type">ASTNodeAssign</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodebinaryarithmpost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Binary<wbr>Arithm<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Binary<wbr>Arithm<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodebinaryarithm_.astnodebinaryarithm.html" class="tsd-signature-type">ASTNodeBinaryArithm</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:85</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodebinaryarithm_.astnodebinaryarithm.html" class="tsd-signature-type">ASTNodeBinaryArithm</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodebinaryarithmpre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Binary<wbr>Arithm<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Binary<wbr>Arithm<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodebinaryarithm_.astnodebinaryarithm.html" class="tsd-signature-type">ASTNodeBinaryArithm</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:82</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodebinaryarithm_.astnodebinaryarithm.html" class="tsd-signature-type">ASTNodeBinaryArithm</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodebinarycmdpost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Binary<wbr>Cmd<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Binary<wbr>Cmd<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodebinarycmd_.astnodebinarycmd.html" class="tsd-signature-type">ASTNodeBinaryCmd</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:91</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodebinarycmd_.astnodebinarycmd.html" class="tsd-signature-type">ASTNodeBinaryCmd</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodebinarycmdpre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Binary<wbr>Cmd<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Binary<wbr>Cmd<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodebinarycmd_.astnodebinarycmd.html" class="tsd-signature-type">ASTNodeBinaryCmd</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:88</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodebinarycmd_.astnodebinarycmd.html" class="tsd-signature-type">ASTNodeBinaryCmd</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodebinarytestpost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Binary<wbr>Test<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Binary<wbr>Test<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodebinarytest_.astnodebinarytest.html" class="tsd-signature-type">ASTNodeBinaryTest</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:97</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodebinarytest_.astnodebinarytest.html" class="tsd-signature-type">ASTNodeBinaryTest</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodebinarytestpre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Binary<wbr>Test<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Binary<wbr>Test<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodebinarytest_.astnodebinarytest.html" class="tsd-signature-type">ASTNodeBinaryTest</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:94</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodebinarytest_.astnodebinarytest.html" class="tsd-signature-type">ASTNodeBinaryTest</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodeblockpost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Block<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Block<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodeblock_.astnodeblock.html" class="tsd-signature-type">ASTNodeBlock</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:103</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodeblock_.astnodeblock.html" class="tsd-signature-type">ASTNodeBlock</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodeblockpre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Block<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Block<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodeblock_.astnodeblock.html" class="tsd-signature-type">ASTNodeBlock</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:100</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodeblock_.astnodeblock.html" class="tsd-signature-type">ASTNodeBlock</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodebraceexppost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Brace<wbr>Exp<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Brace<wbr>Exp<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodebraceexp_.astnodebraceexp.html" class="tsd-signature-type">ASTNodeBraceExp</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:109</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodebraceexp_.astnodebraceexp.html" class="tsd-signature-type">ASTNodeBraceExp</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodebraceexppre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Brace<wbr>Exp<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Brace<wbr>Exp<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodebraceexp_.astnodebraceexp.html" class="tsd-signature-type">ASTNodeBraceExp</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:106</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodebraceexp_.astnodebraceexp.html" class="tsd-signature-type">ASTNodeBraceExp</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodecstylelooppost" class="tsd-anchor"></a>
+					<h3>visitASTNodeCStyle<wbr>Loop<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNodeCStyle<wbr>Loop<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodecstyleloop_.astnodecstyleloop.html" class="tsd-signature-type">ASTNodeCStyleLoop</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:151</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodecstyleloop_.astnodecstyleloop.html" class="tsd-signature-type">ASTNodeCStyleLoop</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodecstylelooppre" class="tsd-anchor"></a>
+					<h3>visitASTNodeCStyle<wbr>Loop<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNodeCStyle<wbr>Loop<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodecstyleloop_.astnodecstyleloop.html" class="tsd-signature-type">ASTNodeCStyleLoop</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:148</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodecstyleloop_.astnodecstyleloop.html" class="tsd-signature-type">ASTNodeCStyleLoop</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodecallexprpost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Call<wbr>Expr<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Call<wbr>Expr<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodecallexpr_.astnodecallexpr.html" class="tsd-signature-type">ASTNodeCallExpr</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:115</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodecallexpr_.astnodecallexpr.html" class="tsd-signature-type">ASTNodeCallExpr</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodecallexprpre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Call<wbr>Expr<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Call<wbr>Expr<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodecallexpr_.astnodecallexpr.html" class="tsd-signature-type">ASTNodeCallExpr</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:112</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodecallexpr_.astnodecallexpr.html" class="tsd-signature-type">ASTNodeCallExpr</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodecaseclausepost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Case<wbr>Clause<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Case<wbr>Clause<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodecaseclause_.astnodecaseclause.html" class="tsd-signature-type">ASTNodeCaseClause</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:121</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodecaseclause_.astnodecaseclause.html" class="tsd-signature-type">ASTNodeCaseClause</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodecaseclausepre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Case<wbr>Clause<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Case<wbr>Clause<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodecaseclause_.astnodecaseclause.html" class="tsd-signature-type">ASTNodeCaseClause</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:118</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodecaseclause_.astnodecaseclause.html" class="tsd-signature-type">ASTNodeCaseClause</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodecaseitempost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Case<wbr>Item<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Case<wbr>Item<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodecaseitem_.astnodecaseitem.html" class="tsd-signature-type">ASTNodeCaseItem</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:127</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodecaseitem_.astnodecaseitem.html" class="tsd-signature-type">ASTNodeCaseItem</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodecaseitempre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Case<wbr>Item<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Case<wbr>Item<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodecaseitem_.astnodecaseitem.html" class="tsd-signature-type">ASTNodeCaseItem</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:124</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodecaseitem_.astnodecaseitem.html" class="tsd-signature-type">ASTNodeCaseItem</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodecmdsubstpost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Cmd<wbr>Subst<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Cmd<wbr>Subst<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodecmdsubst_.astnodecmdsubst.html" class="tsd-signature-type">ASTNodeCmdSubst</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:133</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodecmdsubst_.astnodecmdsubst.html" class="tsd-signature-type">ASTNodeCmdSubst</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodecmdsubstpre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Cmd<wbr>Subst<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Cmd<wbr>Subst<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodecmdsubst_.astnodecmdsubst.html" class="tsd-signature-type">ASTNodeCmdSubst</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:130</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodecmdsubst_.astnodecmdsubst.html" class="tsd-signature-type">ASTNodeCmdSubst</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodecommentpost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Comment<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Comment<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodecomment_.astnodecomment.html" class="tsd-signature-type">ASTNodeComment</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:139</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodecomment_.astnodecomment.html" class="tsd-signature-type">ASTNodeComment</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodecommentpre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Comment<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Comment<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodecomment_.astnodecomment.html" class="tsd-signature-type">ASTNodeComment</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:136</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodecomment_.astnodecomment.html" class="tsd-signature-type">ASTNodeComment</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodecoprocclausepost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Coproc<wbr>Clause<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Coproc<wbr>Clause<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodecoprocclause_.astnodecoprocclause.html" class="tsd-signature-type">ASTNodeCoprocClause</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:145</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodecoprocclause_.astnodecoprocclause.html" class="tsd-signature-type">ASTNodeCoprocClause</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodecoprocclausepre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Coproc<wbr>Clause<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Coproc<wbr>Clause<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodecoprocclause_.astnodecoprocclause.html" class="tsd-signature-type">ASTNodeCoprocClause</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:142</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodecoprocclause_.astnodecoprocclause.html" class="tsd-signature-type">ASTNodeCoprocClause</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodedblquotedpost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Dbl<wbr>Quoted<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Dbl<wbr>Quoted<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodedblquoted_.astnodedblquoted.html" class="tsd-signature-type">ASTNodeDblQuoted</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:157</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodedblquoted_.astnodedblquoted.html" class="tsd-signature-type">ASTNodeDblQuoted</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodedblquotedpre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Dbl<wbr>Quoted<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Dbl<wbr>Quoted<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodedblquoted_.astnodedblquoted.html" class="tsd-signature-type">ASTNodeDblQuoted</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:154</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodedblquoted_.astnodedblquoted.html" class="tsd-signature-type">ASTNodeDblQuoted</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodedeclclausepost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Decl<wbr>Clause<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Decl<wbr>Clause<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodedeclclause_.astnodedeclclause.html" class="tsd-signature-type">ASTNodeDeclClause</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:163</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodedeclclause_.astnodedeclclause.html" class="tsd-signature-type">ASTNodeDeclClause</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodedeclclausepre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Decl<wbr>Clause<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Decl<wbr>Clause<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodedeclclause_.astnodedeclclause.html" class="tsd-signature-type">ASTNodeDeclClause</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:160</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodedeclclause_.astnodedeclclause.html" class="tsd-signature-type">ASTNodeDeclClause</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodeextglobpost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Ext<wbr>Glob<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Ext<wbr>Glob<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodeextglob_.astnodeextglob.html" class="tsd-signature-type">ASTNodeExtGlob</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:169</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodeextglob_.astnodeextglob.html" class="tsd-signature-type">ASTNodeExtGlob</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodeextglobpre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Ext<wbr>Glob<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Ext<wbr>Glob<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodeextglob_.astnodeextglob.html" class="tsd-signature-type">ASTNodeExtGlob</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:166</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodeextglob_.astnodeextglob.html" class="tsd-signature-type">ASTNodeExtGlob</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodefilepost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>File<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>File<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodefile_.astnodefile.html" class="tsd-signature-type">ASTNodeFile</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:175</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodefile_.astnodefile.html" class="tsd-signature-type">ASTNodeFile</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodefilepre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>File<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>File<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodefile_.astnodefile.html" class="tsd-signature-type">ASTNodeFile</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:172</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodefile_.astnodefile.html" class="tsd-signature-type">ASTNodeFile</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodeforclausepost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>For<wbr>Clause<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>For<wbr>Clause<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodeforclause_.astnodeforclause.html" class="tsd-signature-type">ASTNodeForClause</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:181</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodeforclause_.astnodeforclause.html" class="tsd-signature-type">ASTNodeForClause</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodeforclausepre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>For<wbr>Clause<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>For<wbr>Clause<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodeforclause_.astnodeforclause.html" class="tsd-signature-type">ASTNodeForClause</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:178</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodeforclause_.astnodeforclause.html" class="tsd-signature-type">ASTNodeForClause</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodefuncdeclpost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Func<wbr>Decl<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Func<wbr>Decl<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodefuncdecl_.astnodefuncdecl.html" class="tsd-signature-type">ASTNodeFuncDecl</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:187</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodefuncdecl_.astnodefuncdecl.html" class="tsd-signature-type">ASTNodeFuncDecl</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodefuncdeclpre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Func<wbr>Decl<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Func<wbr>Decl<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodefuncdecl_.astnodefuncdecl.html" class="tsd-signature-type">ASTNodeFuncDecl</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:184</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodefuncdecl_.astnodefuncdecl.html" class="tsd-signature-type">ASTNodeFuncDecl</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodeifclausepost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>IfClause<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>IfClause<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodeifclause_.astnodeifclause.html" class="tsd-signature-type">ASTNodeIfClause</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:193</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodeifclause_.astnodeifclause.html" class="tsd-signature-type">ASTNodeIfClause</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodeifclausepre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>IfClause<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>IfClause<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodeifclause_.astnodeifclause.html" class="tsd-signature-type">ASTNodeIfClause</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:190</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodeifclause_.astnodeifclause.html" class="tsd-signature-type">ASTNodeIfClause</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodeletclausepost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Let<wbr>Clause<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Let<wbr>Clause<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodeletclause_.astnodeletclause.html" class="tsd-signature-type">ASTNodeLetClause</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:199</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodeletclause_.astnodeletclause.html" class="tsd-signature-type">ASTNodeLetClause</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodeletclausepre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Let<wbr>Clause<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Let<wbr>Clause<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodeletclause_.astnodeletclause.html" class="tsd-signature-type">ASTNodeLetClause</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:196</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodeletclause_.astnodeletclause.html" class="tsd-signature-type">ASTNodeLetClause</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodelitpost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Lit<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Lit<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodelit_.astnodelit.html" class="tsd-signature-type">ASTNodeLit</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:205</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodelit_.astnodelit.html" class="tsd-signature-type">ASTNodeLit</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodelitpre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Lit<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Lit<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodelit_.astnodelit.html" class="tsd-signature-type">ASTNodeLit</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:202</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodelit_.astnodelit.html" class="tsd-signature-type">ASTNodeLit</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodeparamexppost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Param<wbr>Exp<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Param<wbr>Exp<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodeparamexp_.astnodeparamexp.html" class="tsd-signature-type">ASTNodeParamExp</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:211</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodeparamexp_.astnodeparamexp.html" class="tsd-signature-type">ASTNodeParamExp</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodeparamexppre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Param<wbr>Exp<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Param<wbr>Exp<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodeparamexp_.astnodeparamexp.html" class="tsd-signature-type">ASTNodeParamExp</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:208</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodeparamexp_.astnodeparamexp.html" class="tsd-signature-type">ASTNodeParamExp</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodeparenarithmpost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Paren<wbr>Arithm<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Paren<wbr>Arithm<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodeparenarithm_.astnodeparenarithm.html" class="tsd-signature-type">ASTNodeParenArithm</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:217</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodeparenarithm_.astnodeparenarithm.html" class="tsd-signature-type">ASTNodeParenArithm</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodeparenarithmpre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Paren<wbr>Arithm<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Paren<wbr>Arithm<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodeparenarithm_.astnodeparenarithm.html" class="tsd-signature-type">ASTNodeParenArithm</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:214</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodeparenarithm_.astnodeparenarithm.html" class="tsd-signature-type">ASTNodeParenArithm</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodeparentestpost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Paren<wbr>Test<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Paren<wbr>Test<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodeparentest_.astnodeparentest.html" class="tsd-signature-type">ASTNodeParenTest</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:223</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodeparentest_.astnodeparentest.html" class="tsd-signature-type">ASTNodeParenTest</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodeparentestpre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Paren<wbr>Test<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Paren<wbr>Test<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodeparentest_.astnodeparentest.html" class="tsd-signature-type">ASTNodeParenTest</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:220</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodeparentest_.astnodeparentest.html" class="tsd-signature-type">ASTNodeParenTest</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodeprocsubstpost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Proc<wbr>Subst<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Proc<wbr>Subst<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodeprocsubst_.astnodeprocsubst.html" class="tsd-signature-type">ASTNodeProcSubst</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:229</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodeprocsubst_.astnodeprocsubst.html" class="tsd-signature-type">ASTNodeProcSubst</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodeprocsubstpre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Proc<wbr>Subst<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Proc<wbr>Subst<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodeprocsubst_.astnodeprocsubst.html" class="tsd-signature-type">ASTNodeProcSubst</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:226</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodeprocsubst_.astnodeprocsubst.html" class="tsd-signature-type">ASTNodeProcSubst</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnoderedirectpost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Redirect<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Redirect<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnoderedirect_.astnoderedirect.html" class="tsd-signature-type">ASTNodeRedirect</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:235</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnoderedirect_.astnoderedirect.html" class="tsd-signature-type">ASTNodeRedirect</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnoderedirectpre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Redirect<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Redirect<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnoderedirect_.astnoderedirect.html" class="tsd-signature-type">ASTNodeRedirect</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:232</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnoderedirect_.astnoderedirect.html" class="tsd-signature-type">ASTNodeRedirect</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodesglquotedpost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Sgl<wbr>Quoted<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Sgl<wbr>Quoted<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodesglquoted_.astnodesglquoted.html" class="tsd-signature-type">ASTNodeSglQuoted</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:241</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodesglquoted_.astnodesglquoted.html" class="tsd-signature-type">ASTNodeSglQuoted</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodesglquotedpre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Sgl<wbr>Quoted<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Sgl<wbr>Quoted<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodesglquoted_.astnodesglquoted.html" class="tsd-signature-type">ASTNodeSglQuoted</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:238</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodesglquoted_.astnodesglquoted.html" class="tsd-signature-type">ASTNodeSglQuoted</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodestmtlistpost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Stmt<wbr>List<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Stmt<wbr>List<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodestmtlist_.astnodestmtlist.html" class="tsd-signature-type">ASTNodeStmtList</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:253</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodestmtlist_.astnodestmtlist.html" class="tsd-signature-type">ASTNodeStmtList</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodestmtlistpre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Stmt<wbr>List<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Stmt<wbr>List<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodestmtlist_.astnodestmtlist.html" class="tsd-signature-type">ASTNodeStmtList</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:250</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodestmtlist_.astnodestmtlist.html" class="tsd-signature-type">ASTNodeStmtList</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodestmtpost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Stmt<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Stmt<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodestmt_.astnodestmt.html" class="tsd-signature-type">ASTNodeStmt</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:247</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodestmt_.astnodestmt.html" class="tsd-signature-type">ASTNodeStmt</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodestmtpre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Stmt<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Stmt<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodestmt_.astnodestmt.html" class="tsd-signature-type">ASTNodeStmt</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:244</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodestmt_.astnodestmt.html" class="tsd-signature-type">ASTNodeStmt</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodesubshellpost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Subshell<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Subshell<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodesubshell_.astnodesubshell.html" class="tsd-signature-type">ASTNodeSubshell</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:259</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodesubshell_.astnodesubshell.html" class="tsd-signature-type">ASTNodeSubshell</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodesubshellpre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Subshell<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Subshell<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodesubshell_.astnodesubshell.html" class="tsd-signature-type">ASTNodeSubshell</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:256</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodesubshell_.astnodesubshell.html" class="tsd-signature-type">ASTNodeSubshell</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodetestclausepost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Test<wbr>Clause<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Test<wbr>Clause<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodetestclause_.astnodetestclause.html" class="tsd-signature-type">ASTNodeTestClause</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:265</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodetestclause_.astnodetestclause.html" class="tsd-signature-type">ASTNodeTestClause</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodetestclausepre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Test<wbr>Clause<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Test<wbr>Clause<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodetestclause_.astnodetestclause.html" class="tsd-signature-type">ASTNodeTestClause</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:262</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodetestclause_.astnodetestclause.html" class="tsd-signature-type">ASTNodeTestClause</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodetimeclausepost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Time<wbr>Clause<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Time<wbr>Clause<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodetimeclause_.astnodetimeclause.html" class="tsd-signature-type">ASTNodeTimeClause</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:271</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodetimeclause_.astnodetimeclause.html" class="tsd-signature-type">ASTNodeTimeClause</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodetimeclausepre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Time<wbr>Clause<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Time<wbr>Clause<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodetimeclause_.astnodetimeclause.html" class="tsd-signature-type">ASTNodeTimeClause</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:268</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodetimeclause_.astnodetimeclause.html" class="tsd-signature-type">ASTNodeTimeClause</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodeunaryarithmpost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Unary<wbr>Arithm<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Unary<wbr>Arithm<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodeunaryarithm_.astnodeunaryarithm.html" class="tsd-signature-type">ASTNodeUnaryArithm</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:277</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodeunaryarithm_.astnodeunaryarithm.html" class="tsd-signature-type">ASTNodeUnaryArithm</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodeunaryarithmpre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Unary<wbr>Arithm<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Unary<wbr>Arithm<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodeunaryarithm_.astnodeunaryarithm.html" class="tsd-signature-type">ASTNodeUnaryArithm</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:274</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodeunaryarithm_.astnodeunaryarithm.html" class="tsd-signature-type">ASTNodeUnaryArithm</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodeunarytestpost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Unary<wbr>Test<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Unary<wbr>Test<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodeunarytest_.astnodeunarytest.html" class="tsd-signature-type">ASTNodeUnaryTest</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:283</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodeunarytest_.astnodeunarytest.html" class="tsd-signature-type">ASTNodeUnaryTest</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodeunarytestpre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Unary<wbr>Test<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Unary<wbr>Test<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodeunarytest_.astnodeunarytest.html" class="tsd-signature-type">ASTNodeUnaryTest</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:280</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodeunarytest_.astnodeunarytest.html" class="tsd-signature-type">ASTNodeUnaryTest</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodewhileclausepost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>While<wbr>Clause<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>While<wbr>Clause<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodewhileclause_.astnodewhileclause.html" class="tsd-signature-type">ASTNodeWhileClause</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:289</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodewhileclause_.astnodewhileclause.html" class="tsd-signature-type">ASTNodeWhileClause</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodewhileclausepre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>While<wbr>Clause<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>While<wbr>Clause<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodewhileclause_.astnodewhileclause.html" class="tsd-signature-type">ASTNodeWhileClause</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:286</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodewhileclause_.astnodewhileclause.html" class="tsd-signature-type">ASTNodeWhileClause</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodeworditerpost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Word<wbr>Iter<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Word<wbr>Iter<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodeworditer_.astnodeworditer.html" class="tsd-signature-type">ASTNodeWordIter</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:301</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodeworditer_.astnodeworditer.html" class="tsd-signature-type">ASTNodeWordIter</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodeworditerpre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Word<wbr>Iter<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Word<wbr>Iter<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodeworditer_.astnodeworditer.html" class="tsd-signature-type">ASTNodeWordIter</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:298</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodeworditer_.astnodeworditer.html" class="tsd-signature-type">ASTNodeWordIter</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodewordpost" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Word<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Word<wbr>Post<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodeword_.astnodeword.html" class="tsd-signature-type">ASTNodeWord</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:295</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodeword_.astnodeword.html" class="tsd-signature-type">ASTNodeWord</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="visitastnodewordpre" class="tsd-anchor"></a>
+					<h3>visitASTNode<wbr>Word<wbr>Pre</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">visitASTNode<wbr>Word<wbr>Pre<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodeword_.astnodeword.html" class="tsd-signature-type">ASTNodeWord</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in GnuConfigConverter/ASTnodeVisitor.ts:292</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="_gnuconfigconverter_astnodeword_.astnodeword.html" class="tsd-signature-type">ASTNodeWord</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class="current tsd-kind-external-module">
+						<a href="../modules/_gnuconfigconverter_astnodevisitor_.html">"<wbr>Gnu<wbr>Config<wbr>Converter/ASTnode<wbr>Visitor"</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-external-module">
+						<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html" class="tsd-kind-icon">ASTnode<wbr>Visitor</a>
+						<ul>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodearithmcmdpost" class="tsd-kind-icon">visitASTNode<wbr>Arithm<wbr>Cmd<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodearithmcmdpre" class="tsd-kind-icon">visitASTNode<wbr>Arithm<wbr>Cmd<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodearithmexppost" class="tsd-kind-icon">visitASTNode<wbr>Arithm<wbr>Exp<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodearithmexppre" class="tsd-kind-icon">visitASTNode<wbr>Arithm<wbr>Exp<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodearrayelempost" class="tsd-kind-icon">visitASTNode<wbr>Array<wbr>Elem<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodearrayelempre" class="tsd-kind-icon">visitASTNode<wbr>Array<wbr>Elem<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodearrayexprpost" class="tsd-kind-icon">visitASTNode<wbr>Array<wbr>Expr<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodearrayexprpre" class="tsd-kind-icon">visitASTNode<wbr>Array<wbr>Expr<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeassignpost" class="tsd-kind-icon">visitASTNode<wbr>Assign<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeassignpre" class="tsd-kind-icon">visitASTNode<wbr>Assign<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodebinaryarithmpost" class="tsd-kind-icon">visitASTNode<wbr>Binary<wbr>Arithm<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodebinaryarithmpre" class="tsd-kind-icon">visitASTNode<wbr>Binary<wbr>Arithm<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodebinarycmdpost" class="tsd-kind-icon">visitASTNode<wbr>Binary<wbr>Cmd<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodebinarycmdpre" class="tsd-kind-icon">visitASTNode<wbr>Binary<wbr>Cmd<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodebinarytestpost" class="tsd-kind-icon">visitASTNode<wbr>Binary<wbr>Test<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodebinarytestpre" class="tsd-kind-icon">visitASTNode<wbr>Binary<wbr>Test<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeblockpost" class="tsd-kind-icon">visitASTNode<wbr>Block<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeblockpre" class="tsd-kind-icon">visitASTNode<wbr>Block<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodebraceexppost" class="tsd-kind-icon">visitASTNode<wbr>Brace<wbr>Exp<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodebraceexppre" class="tsd-kind-icon">visitASTNode<wbr>Brace<wbr>Exp<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodecstylelooppost" class="tsd-kind-icon">visitASTNodeCStyle<wbr>Loop<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodecstylelooppre" class="tsd-kind-icon">visitASTNodeCStyle<wbr>Loop<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodecallexprpost" class="tsd-kind-icon">visitASTNode<wbr>Call<wbr>Expr<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodecallexprpre" class="tsd-kind-icon">visitASTNode<wbr>Call<wbr>Expr<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodecaseclausepost" class="tsd-kind-icon">visitASTNode<wbr>Case<wbr>Clause<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodecaseclausepre" class="tsd-kind-icon">visitASTNode<wbr>Case<wbr>Clause<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodecaseitempost" class="tsd-kind-icon">visitASTNode<wbr>Case<wbr>Item<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodecaseitempre" class="tsd-kind-icon">visitASTNode<wbr>Case<wbr>Item<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodecmdsubstpost" class="tsd-kind-icon">visitASTNode<wbr>Cmd<wbr>Subst<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodecmdsubstpre" class="tsd-kind-icon">visitASTNode<wbr>Cmd<wbr>Subst<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodecommentpost" class="tsd-kind-icon">visitASTNode<wbr>Comment<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodecommentpre" class="tsd-kind-icon">visitASTNode<wbr>Comment<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodecoprocclausepost" class="tsd-kind-icon">visitASTNode<wbr>Coproc<wbr>Clause<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodecoprocclausepre" class="tsd-kind-icon">visitASTNode<wbr>Coproc<wbr>Clause<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodedblquotedpost" class="tsd-kind-icon">visitASTNode<wbr>Dbl<wbr>Quoted<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodedblquotedpre" class="tsd-kind-icon">visitASTNode<wbr>Dbl<wbr>Quoted<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodedeclclausepost" class="tsd-kind-icon">visitASTNode<wbr>Decl<wbr>Clause<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodedeclclausepre" class="tsd-kind-icon">visitASTNode<wbr>Decl<wbr>Clause<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeextglobpost" class="tsd-kind-icon">visitASTNode<wbr>Ext<wbr>Glob<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeextglobpre" class="tsd-kind-icon">visitASTNode<wbr>Ext<wbr>Glob<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodefilepost" class="tsd-kind-icon">visitASTNode<wbr>File<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodefilepre" class="tsd-kind-icon">visitASTNode<wbr>File<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeforclausepost" class="tsd-kind-icon">visitASTNode<wbr>For<wbr>Clause<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeforclausepre" class="tsd-kind-icon">visitASTNode<wbr>For<wbr>Clause<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodefuncdeclpost" class="tsd-kind-icon">visitASTNode<wbr>Func<wbr>Decl<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodefuncdeclpre" class="tsd-kind-icon">visitASTNode<wbr>Func<wbr>Decl<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeifclausepost" class="tsd-kind-icon">visitASTNode<wbr>IfClause<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeifclausepre" class="tsd-kind-icon">visitASTNode<wbr>IfClause<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeletclausepost" class="tsd-kind-icon">visitASTNode<wbr>Let<wbr>Clause<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeletclausepre" class="tsd-kind-icon">visitASTNode<wbr>Let<wbr>Clause<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodelitpost" class="tsd-kind-icon">visitASTNode<wbr>Lit<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodelitpre" class="tsd-kind-icon">visitASTNode<wbr>Lit<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeparamexppost" class="tsd-kind-icon">visitASTNode<wbr>Param<wbr>Exp<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeparamexppre" class="tsd-kind-icon">visitASTNode<wbr>Param<wbr>Exp<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeparenarithmpost" class="tsd-kind-icon">visitASTNode<wbr>Paren<wbr>Arithm<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeparenarithmpre" class="tsd-kind-icon">visitASTNode<wbr>Paren<wbr>Arithm<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeparentestpost" class="tsd-kind-icon">visitASTNode<wbr>Paren<wbr>Test<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeparentestpre" class="tsd-kind-icon">visitASTNode<wbr>Paren<wbr>Test<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeprocsubstpost" class="tsd-kind-icon">visitASTNode<wbr>Proc<wbr>Subst<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeprocsubstpre" class="tsd-kind-icon">visitASTNode<wbr>Proc<wbr>Subst<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnoderedirectpost" class="tsd-kind-icon">visitASTNode<wbr>Redirect<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnoderedirectpre" class="tsd-kind-icon">visitASTNode<wbr>Redirect<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodesglquotedpost" class="tsd-kind-icon">visitASTNode<wbr>Sgl<wbr>Quoted<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodesglquotedpre" class="tsd-kind-icon">visitASTNode<wbr>Sgl<wbr>Quoted<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodestmtlistpost" class="tsd-kind-icon">visitASTNode<wbr>Stmt<wbr>List<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodestmtlistpre" class="tsd-kind-icon">visitASTNode<wbr>Stmt<wbr>List<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodestmtpost" class="tsd-kind-icon">visitASTNode<wbr>Stmt<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodestmtpre" class="tsd-kind-icon">visitASTNode<wbr>Stmt<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodesubshellpost" class="tsd-kind-icon">visitASTNode<wbr>Subshell<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodesubshellpre" class="tsd-kind-icon">visitASTNode<wbr>Subshell<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodetestclausepost" class="tsd-kind-icon">visitASTNode<wbr>Test<wbr>Clause<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodetestclausepre" class="tsd-kind-icon">visitASTNode<wbr>Test<wbr>Clause<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodetimeclausepost" class="tsd-kind-icon">visitASTNode<wbr>Time<wbr>Clause<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodetimeclausepre" class="tsd-kind-icon">visitASTNode<wbr>Time<wbr>Clause<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeunaryarithmpost" class="tsd-kind-icon">visitASTNode<wbr>Unary<wbr>Arithm<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeunaryarithmpre" class="tsd-kind-icon">visitASTNode<wbr>Unary<wbr>Arithm<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeunarytestpost" class="tsd-kind-icon">visitASTNode<wbr>Unary<wbr>Test<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeunarytestpre" class="tsd-kind-icon">visitASTNode<wbr>Unary<wbr>Test<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodewhileclausepost" class="tsd-kind-icon">visitASTNode<wbr>While<wbr>Clause<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodewhileclausepre" class="tsd-kind-icon">visitASTNode<wbr>While<wbr>Clause<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeworditerpost" class="tsd-kind-icon">visitASTNode<wbr>Word<wbr>Iter<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodeworditerpre" class="tsd-kind-icon">visitASTNode<wbr>Word<wbr>Iter<wbr>Pre</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodewordpost" class="tsd-kind-icon">visitASTNode<wbr>Word<wbr>Post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html#visitastnodewordpre" class="tsd-kind-icon">visitASTNode<wbr>Word<wbr>Pre</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>

@@ -92,6 +92,12 @@ sub export($$$) {
     %$needType = ();
 }
 
+sub export_maybe($$$) {
+    my ( $name, $text, $needType ) = @_;
+    export $name, $text, $needType
+      unless -f "src/GnuConfigConverter/$name.ts";
+}
+
 my %needType;
 my %kind;
 
@@ -144,10 +150,14 @@ for my $typ (@fi) {
             if ( defined $ext and $ext ~~ [qw( INode Istruct )] ) {
                 $needType{$name}++;
                 if ( $ext eq 'INode' ) {
+                    my $more = $an;
+                    $more =~ s/^ASTNode/ASTMore/;
+                    $needType{$more}++;
                     save <<EOFN1a;
 export class $an extends ASTNode {
   public kind: ASTnodeKind.$an = ASTnodeKind.$an;
   public kindString: string = ASTnodeKind[ASTnodeKind.$an];
+  public more: $more = new $more();
 EOFN1a
                     $needType{ASTNode}++;
                     $needType{ASTnodeKind}++;
@@ -298,6 +308,31 @@ EOFN2
                     }
                 } grep { $fdef{$_}{f} < 2 } @fdef;
                 my $recur = join( "\n", @recur );
+                my @recur2 = map {
+                    if ( $fdef{$_}{a} ) {
+                        <<EOFN5a;
+    this.$_.forEach((e) => e.accept(visitor));
+EOFN5a
+                    }
+                    elsif ( $fdef{$_}{n} ) {
+                        <<EOFN5b;
+    if (this.$_) {
+      this.$_.accept(visitor);
+    }
+EOFN5b
+                    }
+                    else {
+                        <<EOFN5b;
+    this.$_.accept(visitor);
+EOFN5b
+                    }
+                  }
+                  grep { $fdef{$_}{aft} =~ /^ASTNode/ } @fdef;
+                my $recur2 = join( '', @recur2 );
+                chop $recur2;
+                $needType{ASTnodeVisitor}++;
+                my $list2 = join ', ',
+                  map { "\"$_\"" } grep { $fdef{$_}{t} eq 'I_Pos' } @fdef;
                 save <<EOFN3;
 
   constructor($ln: $name) {
@@ -307,13 +342,36 @@ EOFN3
     super($ln);
 EOFN4
                 }
-                save <<EOFN5;
+                save <<EOFN5a;
     logg("$an");
 $recur
+    [$list2].forEach((f) => {
+      const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
+      desc.enumerable = false;
+      Object.defineProperty(this, f, desc);
+    });
   }
-}
-EOFN5
+EOFN5a
                 $needType{logg}++;
+                if ( $ext eq 'INode' ) {
+                    save <<EOFN5b;
+  public accept(visitor: ASTnodeVisitor) {
+    visitor.visit${an}Pre(this);
+$recur2
+    visitor.visit${an}Post(this);
+  }
+EOFN5b
+                }
+                elsif ( $name eq 'INode' ) {
+                    save <<EOFN5c;
+  public accept(visitor: ASTnodeVisitor) {
+    visitor = visitor;
+  }
+EOFN5c
+                }
+                save <<EOFN5d;
+}
+EOFN5d
             }
             else {
                 die "interface $name/$an extends " . Dumper($ext) . " ";
@@ -380,3 +438,32 @@ export enum ASTnodeKind {
 EOFK
 export 'ASTnodeKind', \@text, \%needType;
 
+save <<EOFV1;
+export class ASTnodeVisitor {
+EOFV1
+for my $c ( sort { lc $a cmp lc $b } keys %kind ) {
+    $needType{$c}++;
+    save <<EOFV2;
+  public visit${c}Pre(node: $c): void {
+    node = node;
+  }
+  public visit${c}Post(node: $c): void {
+    node = node;
+  }
+EOFV2
+}
+save <<EOFV3;
+}
+EOFV3
+export 'ASTnodeVisitor', \@text, \%needType;
+
+for my $c ( sort { lc $a cmp lc $b } keys %kind ) {
+    my $k = $c;
+    $k =~ s/^ASTNode/ASTMore/;
+    $needType{$k}++;
+    save <<EOFU;
+export class $k {
+}
+EOFU
+    export_maybe $k, \@text, \%needType;
+}

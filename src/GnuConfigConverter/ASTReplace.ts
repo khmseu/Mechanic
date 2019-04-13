@@ -5,6 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTNodeWord } from "./ASTNodeWord";
 import { ASTSingle } from "./ASTSingle";
 import { logg } from "./logg";
@@ -20,5 +21,10 @@ export class ASTReplace {
     this.All = replace.All;
     this.Orig = ASTSingle(ASTNodeWord, replace.Orig);
     this.With = ASTSingle(ASTNodeWord, replace.With);
+    [].forEach((f) => {
+      const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
+      desc.enumerable = false;
+      Object.defineProperty(this, f, desc);
+    });
   }
 }

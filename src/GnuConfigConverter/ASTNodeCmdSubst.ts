@@ -6,10 +6,12 @@
  */
 
 import { ASTArray } from "./ASTArray";
+import { ASTMoreCmdSubst } from "./ASTMoreCmdSubst";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmtList } from "./ASTNodeStmtList";
+import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
 import { ASTSingle } from "./ASTSingle";
@@ -19,6 +21,7 @@ import { ICmdSubst } from "./ParserTypes";
 export class ASTNodeCmdSubst extends ASTNode {
   public kind: ASTnodeKind.ASTNodeCmdSubst = ASTnodeKind.ASTNodeCmdSubst;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeCmdSubst];
+  public more: ASTMoreCmdSubst = new ASTMoreCmdSubst();
   public Left: ASTPos; //     Left: I_Pos;
   public Right: ASTPos; //     Right: I_Pos;
   public StmtList: ASTNodeStmtList | null; //     StmtList: IStmtList | null;
@@ -35,5 +38,18 @@ export class ASTNodeCmdSubst extends ASTNode {
     this.Last = ASTArray(ASTNodeComment, cmdsubst.Last)!;
     this.TempFile = cmdsubst.TempFile;
     this.ReplyVar = cmdsubst.ReplyVar;
+    ["Left", "Right"].forEach((f) => {
+      const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
+      desc.enumerable = false;
+      Object.defineProperty(this, f, desc);
+    });
+  }
+  public accept(visitor: ASTnodeVisitor) {
+    visitor.visitASTNodeCmdSubstPre(this);
+    if (this.StmtList) {
+      this.StmtList.accept(visitor);
+    }
+    this.Last.forEach((e) => e.accept(visitor));
+    visitor.visitASTNodeCmdSubstPost(this);
   }
 }

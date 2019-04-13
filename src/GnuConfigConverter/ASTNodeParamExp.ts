@@ -6,10 +6,12 @@
  */
 
 import { ASTExpansion } from "./ASTExpansion";
+import { ASTMoreParamExp } from "./ASTMoreParamExp";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeLit } from "./ASTNodeLit";
+import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
 import { ASTReplace } from "./ASTReplace";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
@@ -22,6 +24,7 @@ import { op, Token } from "./Token";
 export class ASTNodeParamExp extends ASTNode {
   public kind: ASTnodeKind.ASTNodeParamExp = ASTnodeKind.ASTNodeParamExp;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeParamExp];
+  public more: ASTMoreParamExp = new ASTMoreParamExp();
   public Dollar: ASTPos; //     Dollar: I_Pos;
   public Rbrace: ASTPos; //     Rbrace: I_Pos;
   public Short: boolean; //     Short: boolean;
@@ -52,5 +55,18 @@ export class ASTNodeParamExp extends ASTNode {
     this.Names = ParNamesOperator[paramexp.Names];
     this.NamesString = op((paramexp.Names as unknown) as Token);
     this.Exp = ASTSimpleSingle(ASTExpansion, paramexp.Exp);
+    ["Dollar", "Rbrace"].forEach((f) => {
+      const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
+      desc.enumerable = false;
+      Object.defineProperty(this, f, desc);
+    });
+  }
+  public accept(visitor: ASTnodeVisitor) {
+    visitor.visitASTNodeParamExpPre(this);
+    if (this.Param) {
+      this.Param.accept(visitor);
+    }
+    this.Index.accept(visitor);
+    visitor.visitASTNodeParamExpPost(this);
   }
 }

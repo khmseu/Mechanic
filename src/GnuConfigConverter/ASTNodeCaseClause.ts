@@ -6,10 +6,12 @@
  */
 
 import { ASTArray } from "./ASTArray";
+import { ASTMoreCaseClause } from "./ASTMoreCaseClause";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeCaseItem } from "./ASTNodeCaseItem";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
+import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTNodeWord } from "./ASTNodeWord";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
@@ -20,6 +22,7 @@ import { ICaseClause } from "./ParserTypes";
 export class ASTNodeCaseClause extends ASTNode {
   public kind: ASTnodeKind.ASTNodeCaseClause = ASTnodeKind.ASTNodeCaseClause;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeCaseClause];
+  public more: ASTMoreCaseClause = new ASTMoreCaseClause();
   public Case: ASTPos; //     Case: I_Pos;
   public Esac: ASTPos; //     Esac: I_Pos;
   public Word: ASTNodeWord | null; //     Word: IWord | null;
@@ -34,5 +37,19 @@ export class ASTNodeCaseClause extends ASTNode {
     this.Word = ASTSingle(ASTNodeWord, caseclause.Word);
     this.Items = ASTArray(ASTNodeCaseItem, caseclause.Items);
     this.Last = ASTArray(ASTNodeComment, caseclause.Last)!;
+    ["Case", "Esac"].forEach((f) => {
+      const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
+      desc.enumerable = false;
+      Object.defineProperty(this, f, desc);
+    });
+  }
+  public accept(visitor: ASTnodeVisitor) {
+    visitor.visitASTNodeCaseClausePre(this);
+    if (this.Word) {
+      this.Word.accept(visitor);
+    }
+    this.Items.forEach((e) => e.accept(visitor));
+    this.Last.forEach((e) => e.accept(visitor));
+    visitor.visitASTNodeCaseClausePost(this);
   }
 }

@@ -5,9 +5,11 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { ASTMoreUnaryTest } from "./ASTMoreUnaryTest";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeTestExpr } from "./ASTNodeTestExpr";
+import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
 import { ASTSingle } from "./ASTSingle";
@@ -18,6 +20,7 @@ import { op, Token } from "./Token";
 export class ASTNodeUnaryTest extends ASTNode {
   public kind: ASTnodeKind.ASTNodeUnaryTest = ASTnodeKind.ASTNodeUnaryTest;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeUnaryTest];
+  public more: ASTMoreUnaryTest = new ASTMoreUnaryTest();
   public OpPos: ASTPos; //     OpPos: I_Pos;
   public Op: string; //     Op: UnTestOperator;
   public OpString: string;
@@ -30,5 +33,15 @@ export class ASTNodeUnaryTest extends ASTNode {
     this.Op = UnTestOperator[unarytest.Op];
     this.OpString = op((unarytest.Op as unknown) as Token);
     this.X = ASTSingle(ASTNodeTestExpr, unarytest.X)!;
+    ["OpPos"].forEach((f) => {
+      const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
+      desc.enumerable = false;
+      Object.defineProperty(this, f, desc);
+    });
+  }
+  public accept(visitor: ASTnodeVisitor) {
+    visitor.visitASTNodeUnaryTestPre(this);
+    this.X.accept(visitor);
+    visitor.visitASTNodeUnaryTestPost(this);
   }
 }

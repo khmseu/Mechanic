@@ -5,6 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { logg } from "./logg";
 import { I_Pos } from "./ParserTypes";
 
@@ -23,5 +24,10 @@ export class ASTPos {
     this.Line = pos.Line ? pos.Line() : null;
     this.Offset = pos.Offset ? pos.Offset() : null;
     this.String = pos.String ? pos.String() : null;
+    [].forEach((f) => {
+      const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
+      desc.enumerable = false;
+      Object.defineProperty(this, f, desc);
+    });
   }
 }

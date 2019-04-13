@@ -6,10 +6,12 @@
  */
 
 import { ASTArray } from "./ASTArray";
+import { ASTMoreProcSubst } from "./ASTMoreProcSubst";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmt } from "./ASTNodeStmt";
+import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
 import { logg } from "./logg";
@@ -19,6 +21,7 @@ import { op, Token } from "./Token";
 export class ASTNodeProcSubst extends ASTNode {
   public kind: ASTnodeKind.ASTNodeProcSubst = ASTnodeKind.ASTNodeProcSubst;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeProcSubst];
+  public more: ASTMoreProcSubst = new ASTMoreProcSubst();
   public OpPos: ASTPos; //     OpPos: I_Pos;
   public Rparen: ASTPos; //     Rparen: I_Pos;
   public Op: string; //     Op: ProcOperator;
@@ -35,5 +38,16 @@ export class ASTNodeProcSubst extends ASTNode {
     this.OpString = op((procsubst.Op as unknown) as Token);
     this.Stmts = ASTArray(ASTNodeStmt, procsubst.Stmts);
     this.Last = ASTArray(ASTNodeComment, procsubst.Last)!;
+    ["OpPos", "Rparen"].forEach((f) => {
+      const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
+      desc.enumerable = false;
+      Object.defineProperty(this, f, desc);
+    });
+  }
+  public accept(visitor: ASTnodeVisitor) {
+    visitor.visitASTNodeProcSubstPre(this);
+    this.Stmts.forEach((e) => e.accept(visitor));
+    this.Last.forEach((e) => e.accept(visitor));
+    visitor.visitASTNodeProcSubstPost(this);
   }
 }

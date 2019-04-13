@@ -5,9 +5,11 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { ASTMoreUnaryArithm } from "./ASTMoreUnaryArithm";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTnodeKind } from "./ASTnodeKind";
+import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
 import { ASTSingle } from "./ASTSingle";
@@ -18,6 +20,7 @@ import { op, Token } from "./Token";
 export class ASTNodeUnaryArithm extends ASTNode {
   public kind: ASTnodeKind.ASTNodeUnaryArithm = ASTnodeKind.ASTNodeUnaryArithm;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeUnaryArithm];
+  public more: ASTMoreUnaryArithm = new ASTMoreUnaryArithm();
   public OpPos: ASTPos; //     OpPos: I_Pos;
   public Op: string; //     Op: UnAritOperator;
   public OpString: string;
@@ -32,5 +35,15 @@ export class ASTNodeUnaryArithm extends ASTNode {
     this.OpString = op((unaryarithm.Op as unknown) as Token);
     this.Post = unaryarithm.Post;
     this.X = ASTSingle(ASTNodeArithmExpr, unaryarithm.X)!;
+    ["OpPos"].forEach((f) => {
+      const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
+      desc.enumerable = false;
+      Object.defineProperty(this, f, desc);
+    });
+  }
+  public accept(visitor: ASTnodeVisitor) {
+    visitor.visitASTNodeUnaryArithmPre(this);
+    this.X.accept(visitor);
+    visitor.visitASTNodeUnaryArithmPost(this);
   }
 }

@@ -6,10 +6,12 @@
  */
 
 import { ASTArray } from "./ASTArray";
+import { ASTMoreSubshell } from "./ASTMoreSubshell";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmtList } from "./ASTNodeStmtList";
+import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
 import { ASTSingle } from "./ASTSingle";
@@ -19,6 +21,7 @@ import { ISubshell } from "./ParserTypes";
 export class ASTNodeSubshell extends ASTNode {
   public kind: ASTnodeKind.ASTNodeSubshell = ASTnodeKind.ASTNodeSubshell;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeSubshell];
+  public more: ASTMoreSubshell = new ASTMoreSubshell();
   public Lparen: ASTPos; //     Lparen: I_Pos;
   public Rparen: ASTPos; //     Rparen: I_Pos;
   public StmtList: ASTNodeStmtList | null; //     StmtList: IStmtList | null;
@@ -31,5 +34,18 @@ export class ASTNodeSubshell extends ASTNode {
     this.Rparen = ASTSimpleSingle(ASTPos, subshell.Rparen)!;
     this.StmtList = ASTSingle(ASTNodeStmtList, subshell.StmtList);
     this.Last = ASTArray(ASTNodeComment, subshell.Last)!;
+    ["Lparen", "Rparen"].forEach((f) => {
+      const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
+      desc.enumerable = false;
+      Object.defineProperty(this, f, desc);
+    });
+  }
+  public accept(visitor: ASTnodeVisitor) {
+    visitor.visitASTNodeSubshellPre(this);
+    if (this.StmtList) {
+      this.StmtList.accept(visitor);
+    }
+    this.Last.forEach((e) => e.accept(visitor));
+    visitor.visitASTNodeSubshellPost(this);
   }
 }

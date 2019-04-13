@@ -6,10 +6,12 @@
  */
 
 import { ASTArray } from "./ASTArray";
+import { ASTMoreIfClause } from "./ASTMoreIfClause";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmtList } from "./ASTNodeStmtList";
+import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
 import { ASTSingle } from "./ASTSingle";
@@ -19,6 +21,7 @@ import { IIfClause } from "./ParserTypes";
 export class ASTNodeIfClause extends ASTNode {
   public kind: ASTnodeKind.ASTNodeIfClause = ASTnodeKind.ASTNodeIfClause;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeIfClause];
+  public more: ASTMoreIfClause = new ASTMoreIfClause();
   public Position: ASTPos; //     Position: I_Pos;
   public ThenPos: ASTPos; //     ThenPos: I_Pos;
   public FiPos: ASTPos; //     FiPos: I_Pos;
@@ -41,5 +44,26 @@ export class ASTNodeIfClause extends ASTNode {
     this.ThenLast = ASTArray(ASTNodeComment, ifclause.ThenLast)!;
     this.Else = ASTSingle(ASTNodeIfClause, ifclause.Else);
     this.Last = ASTArray(ASTNodeComment, ifclause.Last)!;
+    ["Position", "ThenPos", "FiPos"].forEach((f) => {
+      const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
+      desc.enumerable = false;
+      Object.defineProperty(this, f, desc);
+    });
+  }
+  public accept(visitor: ASTnodeVisitor) {
+    visitor.visitASTNodeIfClausePre(this);
+    if (this.Cond) {
+      this.Cond.accept(visitor);
+    }
+    this.CondLast.forEach((e) => e.accept(visitor));
+    if (this.Then) {
+      this.Then.accept(visitor);
+    }
+    this.ThenLast.forEach((e) => e.accept(visitor));
+    if (this.Else) {
+      this.Else.accept(visitor);
+    }
+    this.Last.forEach((e) => e.accept(visitor));
+    visitor.visitASTNodeIfClausePost(this);
   }
 }

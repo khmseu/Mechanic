@@ -5,8 +5,10 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { ASTMoreComment } from "./ASTMoreComment";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
+import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
 import { logg } from "./logg";
@@ -15,6 +17,7 @@ import { IComment } from "./ParserTypes";
 export class ASTNodeComment extends ASTNode {
   public kind: ASTnodeKind.ASTNodeComment = ASTnodeKind.ASTNodeComment;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeComment];
+  public more: ASTMoreComment = new ASTMoreComment();
   public Hash: ASTPos; //     Hash: I_Pos;
   public Text: string; //     Text: string;
 
@@ -23,5 +26,15 @@ export class ASTNodeComment extends ASTNode {
     logg("ASTNodeComment");
     this.Hash = ASTSimpleSingle(ASTPos, comment.Hash)!;
     this.Text = comment.Text;
+    ["Hash"].forEach((f) => {
+      const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
+      desc.enumerable = false;
+      Object.defineProperty(this, f, desc);
+    });
+  }
+  public accept(visitor: ASTnodeVisitor) {
+    visitor.visitASTNodeCommentPre(this);
+
+    visitor.visitASTNodeCommentPost(this);
   }
 }

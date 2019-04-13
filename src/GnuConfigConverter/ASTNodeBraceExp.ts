@@ -6,8 +6,10 @@
  */
 
 import { ASTArray } from "./ASTArray";
+import { ASTMoreBraceExp } from "./ASTMoreBraceExp";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
+import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTNodeWord } from "./ASTNodeWord";
 import { logg } from "./logg";
 import { IBraceExp } from "./ParserTypes";
@@ -15,6 +17,7 @@ import { IBraceExp } from "./ParserTypes";
 export class ASTNodeBraceExp extends ASTNode {
   public kind: ASTnodeKind.ASTNodeBraceExp = ASTnodeKind.ASTNodeBraceExp;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeBraceExp];
+  public more: ASTMoreBraceExp = new ASTMoreBraceExp();
   public Sequence: boolean; //     Sequence: boolean;
   public Chars: boolean; //     Chars: boolean;
   public Elems: ASTNodeWord[]; //     Elems: IWord[] | null;
@@ -25,5 +28,15 @@ export class ASTNodeBraceExp extends ASTNode {
     this.Sequence = braceexp.Sequence;
     this.Chars = braceexp.Chars;
     this.Elems = ASTArray(ASTNodeWord, braceexp.Elems);
+    [].forEach((f) => {
+      const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
+      desc.enumerable = false;
+      Object.defineProperty(this, f, desc);
+    });
+  }
+  public accept(visitor: ASTnodeVisitor) {
+    visitor.visitASTNodeBraceExpPre(this);
+    this.Elems.forEach((e) => e.accept(visitor));
+    visitor.visitASTNodeBraceExpPost(this);
   }
 }
