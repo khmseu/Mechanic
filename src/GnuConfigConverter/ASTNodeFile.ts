@@ -24,12 +24,12 @@ export class ASTNodeFile extends ASTNode {
   public StmtList: ASTNodeStmtList | null; //     StmtList: IStmtList | null;
   public Last: ASTNodeComment[]; //     Last: IComment[];
 
-  constructor(file: IFile) {
-    super(file);
+  constructor(file: IFile, public parent: ASTNode | null) {
+    super(file, parent);
     logg("ASTNodeFile");
     this.Name = file.Name;
-    this.StmtList = ASTSingle(ASTNodeStmtList, file.StmtList);
-    this.Last = ASTArray(ASTNodeComment, file.Last)!;
+    this.StmtList = ASTSingle(ASTNodeStmtList, file.StmtList, this);
+    this.Last = ASTArray(ASTNodeComment, file.Last, this)!;
     [].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

@@ -29,14 +29,14 @@ export class ASTNodeCaseClause extends ASTNode {
   public Items: ASTNodeCaseItem[]; //     Items: ICaseItem[] | null;
   public Last: ASTNodeComment[]; //     Last: IComment[];
 
-  constructor(caseclause: ICaseClause) {
-    super(caseclause);
+  constructor(caseclause: ICaseClause, public parent: ASTNode | null) {
+    super(caseclause, parent);
     logg("ASTNodeCaseClause");
     this.Case = ASTSimpleSingle(ASTPos, caseclause.Case)!;
     this.Esac = ASTSimpleSingle(ASTPos, caseclause.Esac)!;
-    this.Word = ASTSingle(ASTNodeWord, caseclause.Word);
-    this.Items = ASTArray(ASTNodeCaseItem, caseclause.Items);
-    this.Last = ASTArray(ASTNodeComment, caseclause.Last)!;
+    this.Word = ASTSingle(ASTNodeWord, caseclause.Word, this);
+    this.Items = ASTArray(ASTNodeCaseItem, caseclause.Items, this);
+    this.Last = ASTArray(ASTNodeComment, caseclause.Last, this)!;
     ["Case", "Esac"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

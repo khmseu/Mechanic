@@ -27,14 +27,14 @@ export class ASTNodeBinaryArithm extends ASTNode {
   public X: ASTNodeArithmExpr; //     X: IArithmExpr;
   public Y: ASTNodeArithmExpr; //     Y: IArithmExpr;
 
-  constructor(binaryarithm: IBinaryArithm) {
-    super(binaryarithm);
+  constructor(binaryarithm: IBinaryArithm, public parent: ASTNode | null) {
+    super(binaryarithm, parent);
     logg("ASTNodeBinaryArithm");
     this.OpPos = ASTSimpleSingle(ASTPos, binaryarithm.OpPos)!;
     this.Op = BinAritOperator[binaryarithm.Op];
     this.OpString = op((binaryarithm.Op as unknown) as Token);
-    this.X = ASTSingle(ASTNodeArithmExpr, binaryarithm.X)!;
-    this.Y = ASTSingle(ASTNodeArithmExpr, binaryarithm.Y)!;
+    this.X = ASTSingle(ASTNodeArithmExpr, binaryarithm.X, this)!;
+    this.Y = ASTSingle(ASTNodeArithmExpr, binaryarithm.Y, this)!;
     ["OpPos"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

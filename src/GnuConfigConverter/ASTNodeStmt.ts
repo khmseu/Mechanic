@@ -32,17 +32,17 @@ export class ASTNodeStmt extends ASTNode {
   public Coprocess: boolean; //     Coprocess: boolean;
   public Redirs: ASTNodeRedirect[]; //     Redirs: IRedirect[] | null;
 
-  constructor(stmt: IStmt) {
-    super(stmt);
+  constructor(stmt: IStmt, public parent: ASTNode | null) {
+    super(stmt, parent);
     logg("ASTNodeStmt");
-    this.Comments = ASTArray(ASTNodeComment, stmt.Comments)!;
-    this.Cmd = ASTSingle(ASTNodeCommand, stmt.Cmd)!;
+    this.Comments = ASTArray(ASTNodeComment, stmt.Comments, this)!;
+    this.Cmd = ASTSingle(ASTNodeCommand, stmt.Cmd, this)!;
     this.Position = ASTSimpleSingle(ASTPos, stmt.Position)!;
     this.Semicolon = ASTSimpleSingle(ASTPos, stmt.Semicolon)!;
     this.Negated = stmt.Negated;
     this.Background = stmt.Background;
     this.Coprocess = stmt.Coprocess;
-    this.Redirs = ASTArray(ASTNodeRedirect, stmt.Redirs);
+    this.Redirs = ASTArray(ASTNodeRedirect, stmt.Redirs, this);
     ["Position", "Semicolon"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

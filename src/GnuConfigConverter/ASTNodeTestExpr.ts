@@ -19,18 +19,18 @@ export class ASTNodeTestExpr extends ASTNode {
   // tslint:disable-next-line:max-line-length
   public kind: ASTnodeKind.bad | ASTnodeKind.ASTNodeBinaryTest | ASTnodeKind.ASTNodeUnaryTest | ASTnodeKind.ASTNodeParenTest | ASTnodeKind.ASTNodeWord = ASTnodeKind.bad;
   public kindString: string = ASTnodeKind[ASTnodeKind.bad];
-  constructor(testexpr: ITestExpr) {
-    super(testexpr);
+  constructor(testexpr: ITestExpr, public parent: ASTNode | null) {
+    super(testexpr, parent);
     logg("ASTNodeTestExpr");
     switch (syntax.NodeType(testexpr)) {
       case "BinaryTest":
-        return new ASTNodeBinaryTest(testexpr as IBinaryTest);
+        return new ASTNodeBinaryTest(testexpr as IBinaryTest, parent);
       case "UnaryTest":
-        return new ASTNodeUnaryTest(testexpr as IUnaryTest);
+        return new ASTNodeUnaryTest(testexpr as IUnaryTest, parent);
       case "ParenTest":
-        return new ASTNodeParenTest(testexpr as IParenTest);
+        return new ASTNodeParenTest(testexpr as IParenTest, parent);
       case "Word":
-        return new ASTNodeWord(testexpr as IWord);
+        return new ASTNodeWord(testexpr as IWord, parent);
       default:
         throw { NodeType: syntax.NodeType(testexpr) };
     }

@@ -26,13 +26,13 @@ export class ASTNodeArrayExpr extends ASTNode {
   public Elems: ASTNodeArrayElem[]; //     Elems: IArrayElem[] | null;
   public Last: ASTNodeComment[]; //     Last: IComment[];
 
-  constructor(arrayexpr: IArrayExpr) {
-    super(arrayexpr);
+  constructor(arrayexpr: IArrayExpr, public parent: ASTNode | null) {
+    super(arrayexpr, parent);
     logg("ASTNodeArrayExpr");
     this.Lparen = ASTSimpleSingle(ASTPos, arrayexpr.Lparen)!;
     this.Rparen = ASTSimpleSingle(ASTPos, arrayexpr.Rparen)!;
-    this.Elems = ASTArray(ASTNodeArrayElem, arrayexpr.Elems);
-    this.Last = ASTArray(ASTNodeComment, arrayexpr.Last)!;
+    this.Elems = ASTArray(ASTNodeArrayElem, arrayexpr.Elems, this);
+    this.Last = ASTArray(ASTNodeComment, arrayexpr.Last, this)!;
     ["Lparen", "Rparen"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

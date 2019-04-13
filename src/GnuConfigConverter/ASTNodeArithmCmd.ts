@@ -25,13 +25,13 @@ export class ASTNodeArithmCmd extends ASTNode {
   public Unsigned: boolean; //     Unsigned: boolean;
   public X: ASTNodeArithmExpr; //     X: IArithmExpr;
 
-  constructor(arithmcmd: IArithmCmd) {
-    super(arithmcmd);
+  constructor(arithmcmd: IArithmCmd, public parent: ASTNode | null) {
+    super(arithmcmd, parent);
     logg("ASTNodeArithmCmd");
     this.Left = ASTSimpleSingle(ASTPos, arithmcmd.Left)!;
     this.Right = ASTSimpleSingle(ASTPos, arithmcmd.Right)!;
     this.Unsigned = arithmcmd.Unsigned;
-    this.X = ASTSingle(ASTNodeArithmExpr, arithmcmd.X)!;
+    this.X = ASTSingle(ASTNodeArithmExpr, arithmcmd.X, this)!;
     ["Left", "Right"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

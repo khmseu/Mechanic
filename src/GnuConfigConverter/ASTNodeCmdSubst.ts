@@ -29,13 +29,13 @@ export class ASTNodeCmdSubst extends ASTNode {
   public TempFile: boolean; //     TempFile: boolean;
   public ReplyVar: boolean; //     ReplyVar: boolean;
 
-  constructor(cmdsubst: ICmdSubst) {
-    super(cmdsubst);
+  constructor(cmdsubst: ICmdSubst, public parent: ASTNode | null) {
+    super(cmdsubst, parent);
     logg("ASTNodeCmdSubst");
     this.Left = ASTSimpleSingle(ASTPos, cmdsubst.Left)!;
     this.Right = ASTSimpleSingle(ASTPos, cmdsubst.Right)!;
-    this.StmtList = ASTSingle(ASTNodeStmtList, cmdsubst.StmtList);
-    this.Last = ASTArray(ASTNodeComment, cmdsubst.Last)!;
+    this.StmtList = ASTSingle(ASTNodeStmtList, cmdsubst.StmtList, this);
+    this.Last = ASTArray(ASTNodeComment, cmdsubst.Last, this)!;
     this.TempFile = cmdsubst.TempFile;
     this.ReplyVar = cmdsubst.ReplyVar;
     ["Left", "Right"].forEach((f) => {

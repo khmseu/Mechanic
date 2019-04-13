@@ -26,13 +26,13 @@ export class ASTNodeUnaryTest extends ASTNode {
   public OpString: string;
   public X: ASTNodeTestExpr; //     X: ITestExpr;
 
-  constructor(unarytest: IUnaryTest) {
-    super(unarytest);
+  constructor(unarytest: IUnaryTest, public parent: ASTNode | null) {
+    super(unarytest, parent);
     logg("ASTNodeUnaryTest");
     this.OpPos = ASTSimpleSingle(ASTPos, unarytest.OpPos)!;
     this.Op = UnTestOperator[unarytest.Op];
     this.OpString = op((unarytest.Op as unknown) as Token);
-    this.X = ASTSingle(ASTNodeTestExpr, unarytest.X)!;
+    this.X = ASTSingle(ASTNodeTestExpr, unarytest.X, this)!;
     ["OpPos"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

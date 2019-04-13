@@ -28,15 +28,15 @@ export class ASTNodeAssign extends ASTNode {
   public Value: ASTNodeWord | null; //     Value: IWord | null;
   public Array: ASTNodeArrayExpr | null; //     Array: IArrayExpr | null;
 
-  constructor(assign: IAssign) {
-    super(assign);
+  constructor(assign: IAssign, public parent: ASTNode | null) {
+    super(assign, parent);
     logg("ASTNodeAssign");
     this.Append = assign.Append;
     this.Naked = assign.Naked;
-    this.Name = ASTSingle(ASTNodeLit, assign.Name);
-    this.Index = ASTSingle(ASTNodeArithmExpr, assign.Index)!;
-    this.Value = ASTSingle(ASTNodeWord, assign.Value);
-    this.Array = ASTSingle(ASTNodeArrayExpr, assign.Array);
+    this.Name = ASTSingle(ASTNodeLit, assign.Name, this);
+    this.Index = ASTSingle(ASTNodeArithmExpr, assign.Index, this)!;
+    this.Value = ASTSingle(ASTNodeWord, assign.Value, this);
+    this.Array = ASTSingle(ASTNodeArrayExpr, assign.Array, this);
     [].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

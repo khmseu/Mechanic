@@ -22,8 +22,8 @@ export class ASTNodeLit extends ASTNode {
   public ValueEnd: ASTPos; //     ValueEnd: I_Pos;
   public Value: string; //     Value: string;
 
-  constructor(lit: ILit) {
-    super(lit);
+  constructor(lit: ILit, public parent: ASTNode | null) {
+    super(lit, parent);
     logg("ASTNodeLit");
     this.ValuePos = ASTSimpleSingle(ASTPos, lit.ValuePos)!;
     this.ValueEnd = ASTSimpleSingle(ASTPos, lit.ValueEnd)!;

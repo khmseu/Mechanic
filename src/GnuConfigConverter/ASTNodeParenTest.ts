@@ -24,12 +24,12 @@ export class ASTNodeParenTest extends ASTNode {
   public Rparen: ASTPos; //     Rparen: I_Pos;
   public X: ASTNodeTestExpr; //     X: ITestExpr;
 
-  constructor(parentest: IParenTest) {
-    super(parentest);
+  constructor(parentest: IParenTest, public parent: ASTNode | null) {
+    super(parentest, parent);
     logg("ASTNodeParenTest");
     this.Lparen = ASTSimpleSingle(ASTPos, parentest.Lparen)!;
     this.Rparen = ASTSimpleSingle(ASTPos, parentest.Rparen)!;
-    this.X = ASTSingle(ASTNodeTestExpr, parentest.X)!;
+    this.X = ASTSingle(ASTNodeTestExpr, parentest.X, this)!;
     ["Lparen", "Rparen"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

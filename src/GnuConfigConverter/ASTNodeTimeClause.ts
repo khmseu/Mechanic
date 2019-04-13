@@ -24,12 +24,12 @@ export class ASTNodeTimeClause extends ASTNode {
   public PosixFormat: boolean; //     PosixFormat: boolean;
   public Stmt: ASTNodeStmt | null; //     Stmt: IStmt | null;
 
-  constructor(timeclause: ITimeClause) {
-    super(timeclause);
+  constructor(timeclause: ITimeClause, public parent: ASTNode | null) {
+    super(timeclause, parent);
     logg("ASTNodeTimeClause");
     this.Time = ASTSimpleSingle(ASTPos, timeclause.Time)!;
     this.PosixFormat = timeclause.PosixFormat;
-    this.Stmt = ASTSingle(ASTNodeStmt, timeclause.Stmt);
+    this.Stmt = ASTSingle(ASTNodeStmt, timeclause.Stmt, this);
     ["Time"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

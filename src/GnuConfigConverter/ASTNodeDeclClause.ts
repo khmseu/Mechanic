@@ -25,12 +25,12 @@ export class ASTNodeDeclClause extends ASTNode {
   public Opts: ASTNodeWord[]; //     Opts: IWord[] | null;
   public Assigns: ASTNodeAssign[]; //     Assigns: IAssign[] | null;
 
-  constructor(declclause: IDeclClause) {
-    super(declclause);
+  constructor(declclause: IDeclClause, public parent: ASTNode | null) {
+    super(declclause, parent);
     logg("ASTNodeDeclClause");
-    this.Variant = ASTSingle(ASTNodeLit, declclause.Variant);
-    this.Opts = ASTArray(ASTNodeWord, declclause.Opts);
-    this.Assigns = ASTArray(ASTNodeAssign, declclause.Assigns);
+    this.Variant = ASTSingle(ASTNodeLit, declclause.Variant, this);
+    this.Opts = ASTArray(ASTNodeWord, declclause.Opts, this);
+    this.Assigns = ASTArray(ASTNodeAssign, declclause.Assigns, this);
     [].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

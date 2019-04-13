@@ -29,15 +29,15 @@ export class ASTNodeRedirect extends ASTNode {
   public Word: ASTNodeWord | null; //     Word: IWord | null;
   public Hdoc: ASTNodeWord | null; //     Hdoc: IWord | null;
 
-  constructor(redirect: IRedirect) {
-    super(redirect);
+  constructor(redirect: IRedirect, public parent: ASTNode | null) {
+    super(redirect, parent);
     logg("ASTNodeRedirect");
     this.OpPos = ASTSimpleSingle(ASTPos, redirect.OpPos)!;
     this.Op = RedirOperator[redirect.Op];
     this.OpString = op((redirect.Op as unknown) as Token);
-    this.N = ASTSingle(ASTNodeLit, redirect.N);
-    this.Word = ASTSingle(ASTNodeWord, redirect.Word);
-    this.Hdoc = ASTSingle(ASTNodeWord, redirect.Hdoc);
+    this.N = ASTSingle(ASTNodeLit, redirect.N, this);
+    this.Word = ASTSingle(ASTNodeWord, redirect.Word, this);
+    this.Hdoc = ASTSingle(ASTNodeWord, redirect.Hdoc, this);
     ["OpPos"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

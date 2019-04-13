@@ -18,7 +18,7 @@ export class ASTNode {
   public Pos: ASTPos | null; //     Pos: (() => I_Pos) | null;
   public End: ASTPos | null; //     End: (() => I_Pos) | null;
 
-  constructor(node: INode) {
+  constructor(node: INode, public parent: ASTNode | null) {
     logg("ASTNode");
     this.Pos = node.Pos ? ASTSimpleSingle(ASTPos, node.Pos()) : null;
     this.End = node.End ? ASTSimpleSingle(ASTPos, node.End()) : null;

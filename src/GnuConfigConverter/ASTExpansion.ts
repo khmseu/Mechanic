@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTNodeWord } from "./ASTNodeWord";
 import { ASTSingle } from "./ASTSingle";
 import { logg } from "./logg";
@@ -21,7 +20,7 @@ export class ASTExpansion {
     logg("ASTExpansion");
     this.Op = ParExpOperator[expansion.Op];
     this.OpString = op((expansion.Op as unknown) as Token);
-    this.Word = ASTSingle(ASTNodeWord, expansion.Word);
+    this.Word = ASTSingle(ASTNodeWord, expansion.Word, null);
     [].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

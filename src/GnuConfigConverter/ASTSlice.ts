@@ -6,7 +6,6 @@
  */
 
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTSingle } from "./ASTSingle";
 import { logg } from "./logg";
 import { I_Slice } from "./ParserTypes";
@@ -17,8 +16,8 @@ export class ASTSlice {
 
   constructor(slice: I_Slice) {
     logg("ASTSlice");
-    this.Offset = ASTSingle(ASTNodeArithmExpr, slice.Offset)!;
-    this.Length = ASTSingle(ASTNodeArithmExpr, slice.Length)!;
+    this.Offset = ASTSingle(ASTNodeArithmExpr, slice.Offset, null)!;
+    this.Length = ASTSingle(ASTNodeArithmExpr, slice.Length, null)!;
     [].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

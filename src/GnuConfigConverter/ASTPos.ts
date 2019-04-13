@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { logg } from "./logg";
 import { I_Pos } from "./ParserTypes";
 

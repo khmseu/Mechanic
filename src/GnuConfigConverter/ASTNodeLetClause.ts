@@ -23,11 +23,11 @@ export class ASTNodeLetClause extends ASTNode {
   public Let: ASTPos; //     Let: I_Pos;
   public Exprs: ASTNodeArithmExpr[]; //     Exprs: IArithmExpr[];
 
-  constructor(letclause: ILetClause) {
-    super(letclause);
+  constructor(letclause: ILetClause, public parent: ASTNode | null) {
+    super(letclause, parent);
     logg("ASTNodeLetClause");
     this.Let = ASTSimpleSingle(ASTPos, letclause.Let)!;
-    this.Exprs = ASTArray(ASTNodeArithmExpr, letclause.Exprs)!;
+    this.Exprs = ASTArray(ASTNodeArithmExpr, letclause.Exprs, this)!;
     ["Let"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

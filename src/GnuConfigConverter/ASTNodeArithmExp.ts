@@ -26,14 +26,14 @@ export class ASTNodeArithmExp extends ASTNode {
   public Unsigned: boolean; //     Unsigned: boolean;
   public X: ASTNodeArithmExpr; //     X: IArithmExpr;
 
-  constructor(arithmexp: IArithmExp) {
-    super(arithmexp);
+  constructor(arithmexp: IArithmExp, public parent: ASTNode | null) {
+    super(arithmexp, parent);
     logg("ASTNodeArithmExp");
     this.Left = ASTSimpleSingle(ASTPos, arithmexp.Left)!;
     this.Right = ASTSimpleSingle(ASTPos, arithmexp.Right)!;
     this.Bracket = arithmexp.Bracket;
     this.Unsigned = arithmexp.Unsigned;
-    this.X = ASTSingle(ASTNodeArithmExpr, arithmexp.X)!;
+    this.X = ASTSingle(ASTNodeArithmExpr, arithmexp.X, this)!;
     ["Left", "Right"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

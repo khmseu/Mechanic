@@ -26,12 +26,12 @@ export class ASTNodeWordIter extends ASTNode {
   public InPos: ASTPos; //     InPos: I_Pos;
   public Items: ASTNodeWord[]; //     Items: IWord[] | null;
 
-  constructor(worditer: IWordIter) {
-    super(worditer);
+  constructor(worditer: IWordIter, public parent: ASTNode | null) {
+    super(worditer, parent);
     logg("ASTNodeWordIter");
-    this.Name = ASTSingle(ASTNodeLit, worditer.Name);
+    this.Name = ASTSingle(ASTNodeLit, worditer.Name, this);
     this.InPos = ASTSimpleSingle(ASTPos, worditer.InPos)!;
-    this.Items = ASTArray(ASTNodeWord, worditer.Items);
+    this.Items = ASTArray(ASTNodeWord, worditer.Items, this);
     ["InPos"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

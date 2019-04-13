@@ -25,12 +25,12 @@ export class ASTNodeArrayElem extends ASTNode {
   public Value: ASTNodeWord | null; //     Value: IWord | null;
   public Comments: ASTNodeComment[]; //     Comments: IComment[];
 
-  constructor(arrayelem: IArrayElem) {
-    super(arrayelem);
+  constructor(arrayelem: IArrayElem, public parent: ASTNode | null) {
+    super(arrayelem, parent);
     logg("ASTNodeArrayElem");
-    this.Index = ASTSingle(ASTNodeArithmExpr, arrayelem.Index)!;
-    this.Value = ASTSingle(ASTNodeWord, arrayelem.Value);
-    this.Comments = ASTArray(ASTNodeComment, arrayelem.Comments)!;
+    this.Index = ASTSingle(ASTNodeArithmExpr, arrayelem.Index, this)!;
+    this.Value = ASTSingle(ASTNodeWord, arrayelem.Value, this);
+    this.Comments = ASTArray(ASTNodeComment, arrayelem.Comments, this)!;
     [].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

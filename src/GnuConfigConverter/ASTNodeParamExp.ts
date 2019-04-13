@@ -39,8 +39,8 @@ export class ASTNodeParamExp extends ASTNode {
   public NamesString: string;
   public Exp: ASTExpansion | null; //     Exp: I_Expansion | null;
 
-  constructor(paramexp: IParamExp) {
-    super(paramexp);
+  constructor(paramexp: IParamExp, public parent: ASTNode | null) {
+    super(paramexp, parent);
     logg("ASTNodeParamExp");
     this.Dollar = ASTSimpleSingle(ASTPos, paramexp.Dollar)!;
     this.Rbrace = ASTSimpleSingle(ASTPos, paramexp.Rbrace)!;
@@ -48,8 +48,8 @@ export class ASTNodeParamExp extends ASTNode {
     this.Excl = paramexp.Excl;
     this.Length = paramexp.Length;
     this.Width = paramexp.Width;
-    this.Param = ASTSingle(ASTNodeLit, paramexp.Param);
-    this.Index = ASTSingle(ASTNodeArithmExpr, paramexp.Index)!;
+    this.Param = ASTSingle(ASTNodeLit, paramexp.Param, this);
+    this.Index = ASTSingle(ASTNodeArithmExpr, paramexp.Index, this)!;
     this.Slice = ASTSimpleSingle(ASTSlice, paramexp.Slice);
     this.Repl = ASTSimpleSingle(ASTReplace, paramexp.Repl);
     this.Names = ParNamesOperator[paramexp.Names];

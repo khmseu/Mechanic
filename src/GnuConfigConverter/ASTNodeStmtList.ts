@@ -22,11 +22,11 @@ export class ASTNodeStmtList extends ASTNode {
   public Stmts: ASTNodeStmt[]; //     Stmts: IStmt[];
   public Last: ASTNodeComment[]; //     Last: IComment[];
 
-  constructor(stmtlist: IStmtList) {
-    super(stmtlist);
+  constructor(stmtlist: IStmtList, public parent: ASTNode | null) {
+    super(stmtlist, parent);
     logg("ASTNodeStmtList");
-    this.Stmts = ASTArray(ASTNodeStmt, stmtlist.Stmts)!;
-    this.Last = ASTArray(ASTNodeComment, stmtlist.Last)!;
+    this.Stmts = ASTArray(ASTNodeStmt, stmtlist.Stmts, this)!;
+    this.Last = ASTArray(ASTNodeComment, stmtlist.Last, this)!;
     [].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

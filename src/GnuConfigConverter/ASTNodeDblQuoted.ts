@@ -24,12 +24,12 @@ export class ASTNodeDblQuoted extends ASTNode {
   public Dollar: boolean; //     Dollar: boolean;
   public Parts: ASTNodeWordPart[]; //     Parts: IWordPart[];
 
-  constructor(dblquoted: IDblQuoted) {
-    super(dblquoted);
+  constructor(dblquoted: IDblQuoted, public parent: ASTNode | null) {
+    super(dblquoted, parent);
     logg("ASTNodeDblQuoted");
     this.Position = ASTSimpleSingle(ASTPos, dblquoted.Position)!;
     this.Dollar = dblquoted.Dollar;
-    this.Parts = ASTArray(ASTNodeWordPart, dblquoted.Parts)!;
+    this.Parts = ASTArray(ASTNodeWordPart, dblquoted.Parts, this)!;
     ["Position"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

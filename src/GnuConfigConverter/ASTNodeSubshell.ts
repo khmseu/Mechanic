@@ -27,13 +27,13 @@ export class ASTNodeSubshell extends ASTNode {
   public StmtList: ASTNodeStmtList | null; //     StmtList: IStmtList | null;
   public Last: ASTNodeComment[]; //     Last: IComment[];
 
-  constructor(subshell: ISubshell) {
-    super(subshell);
+  constructor(subshell: ISubshell, public parent: ASTNode | null) {
+    super(subshell, parent);
     logg("ASTNodeSubshell");
     this.Lparen = ASTSimpleSingle(ASTPos, subshell.Lparen)!;
     this.Rparen = ASTSimpleSingle(ASTPos, subshell.Rparen)!;
-    this.StmtList = ASTSingle(ASTNodeStmtList, subshell.StmtList);
-    this.Last = ASTArray(ASTNodeComment, subshell.Last)!;
+    this.StmtList = ASTSingle(ASTNodeStmtList, subshell.StmtList, this);
+    this.Last = ASTArray(ASTNodeComment, subshell.Last, this)!;
     ["Lparen", "Rparen"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

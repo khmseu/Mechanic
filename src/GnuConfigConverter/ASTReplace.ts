@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTNodeWord } from "./ASTNodeWord";
 import { ASTSingle } from "./ASTSingle";
 import { logg } from "./logg";
@@ -19,8 +18,8 @@ export class ASTReplace {
   constructor(replace: I_Replace) {
     logg("ASTReplace");
     this.All = replace.All;
-    this.Orig = ASTSingle(ASTNodeWord, replace.Orig);
-    this.With = ASTSingle(ASTNodeWord, replace.With);
+    this.Orig = ASTSingle(ASTNodeWord, replace.Orig, null);
+    this.With = ASTSingle(ASTNodeWord, replace.With, null);
     [].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

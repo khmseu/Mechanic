@@ -26,13 +26,13 @@ export class ASTNodeFuncDecl extends ASTNode {
   public Name: ASTNodeLit | null; //     Name: ILit | null;
   public Body: ASTNodeStmt | null; //     Body: IStmt | null;
 
-  constructor(funcdecl: IFuncDecl) {
-    super(funcdecl);
+  constructor(funcdecl: IFuncDecl, public parent: ASTNode | null) {
+    super(funcdecl, parent);
     logg("ASTNodeFuncDecl");
     this.Position = ASTSimpleSingle(ASTPos, funcdecl.Position)!;
     this.RsrvWord = funcdecl.RsrvWord;
-    this.Name = ASTSingle(ASTNodeLit, funcdecl.Name);
-    this.Body = ASTSingle(ASTNodeStmt, funcdecl.Body);
+    this.Name = ASTSingle(ASTNodeLit, funcdecl.Name, this);
+    this.Body = ASTSingle(ASTNodeStmt, funcdecl.Body, this);
     ["Position"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

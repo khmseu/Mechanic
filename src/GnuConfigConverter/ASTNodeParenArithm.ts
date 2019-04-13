@@ -24,12 +24,12 @@ export class ASTNodeParenArithm extends ASTNode {
   public Rparen: ASTPos; //     Rparen: I_Pos;
   public X: ASTNodeArithmExpr; //     X: IArithmExpr;
 
-  constructor(parenarithm: IParenArithm) {
-    super(parenarithm);
+  constructor(parenarithm: IParenArithm, public parent: ASTNode | null) {
+    super(parenarithm, parent);
     logg("ASTNodeParenArithm");
     this.Lparen = ASTSimpleSingle(ASTPos, parenarithm.Lparen)!;
     this.Rparen = ASTSimpleSingle(ASTPos, parenarithm.Rparen)!;
-    this.X = ASTSingle(ASTNodeArithmExpr, parenarithm.X)!;
+    this.X = ASTSingle(ASTNodeArithmExpr, parenarithm.X, this)!;
     ["Lparen", "Rparen"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

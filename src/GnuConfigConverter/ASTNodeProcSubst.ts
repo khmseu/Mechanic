@@ -29,15 +29,15 @@ export class ASTNodeProcSubst extends ASTNode {
   public Stmts: ASTNodeStmt[]; //     Stmts: IStmt[] | null;
   public Last: ASTNodeComment[]; //     Last: IComment[];
 
-  constructor(procsubst: IProcSubst) {
-    super(procsubst);
+  constructor(procsubst: IProcSubst, public parent: ASTNode | null) {
+    super(procsubst, parent);
     logg("ASTNodeProcSubst");
     this.OpPos = ASTSimpleSingle(ASTPos, procsubst.OpPos)!;
     this.Rparen = ASTSimpleSingle(ASTPos, procsubst.Rparen)!;
     this.Op = ProcOperator[procsubst.Op];
     this.OpString = op((procsubst.Op as unknown) as Token);
-    this.Stmts = ASTArray(ASTNodeStmt, procsubst.Stmts);
-    this.Last = ASTArray(ASTNodeComment, procsubst.Last)!;
+    this.Stmts = ASTArray(ASTNodeStmt, procsubst.Stmts, this);
+    this.Last = ASTArray(ASTNodeComment, procsubst.Last, this)!;
     ["OpPos", "Rparen"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

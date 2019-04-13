@@ -23,11 +23,11 @@ export class ASTNodeWord extends ASTNode {
   public SplitBraces: ASTNodeWord | null; //     SplitBraces: (() => IWord) | null;
   public Lit: string | null; //     Lit: (() => string) | null;
 
-  constructor(word: IWord) {
-    super(word);
+  constructor(word: IWord, public parent: ASTNode | null) {
+    super(word, parent);
     logg("ASTNodeWord");
-    this.Parts = ASTArray(ASTNodeWordPart, word.Parts)!;
-    this.SplitBraces = word.SplitBraces ? ASTSingle(ASTNodeWord, word.SplitBraces()) : null;
+    this.Parts = ASTArray(ASTNodeWordPart, word.Parts, this)!;
+    this.SplitBraces = word.SplitBraces ? ASTSingle(ASTNodeWord, word.SplitBraces(), this) : null;
     this.Lit = word.Lit ? word.Lit() : null;
     [].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;

@@ -24,12 +24,12 @@ export class ASTNodeTestClause extends ASTNode {
   public Right: ASTPos; //     Right: I_Pos;
   public X: ASTNodeTestExpr; //     X: ITestExpr;
 
-  constructor(testclause: ITestClause) {
-    super(testclause);
+  constructor(testclause: ITestClause, public parent: ASTNode | null) {
+    super(testclause, parent);
     logg("ASTNodeTestClause");
     this.Left = ASTSimpleSingle(ASTPos, testclause.Left)!;
     this.Right = ASTSimpleSingle(ASTPos, testclause.Right)!;
-    this.X = ASTSingle(ASTNodeTestExpr, testclause.X)!;
+    this.X = ASTSingle(ASTNodeTestExpr, testclause.X, this)!;
     ["Left", "Right"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

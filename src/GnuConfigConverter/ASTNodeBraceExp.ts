@@ -22,12 +22,12 @@ export class ASTNodeBraceExp extends ASTNode {
   public Chars: boolean; //     Chars: boolean;
   public Elems: ASTNodeWord[]; //     Elems: IWord[] | null;
 
-  constructor(braceexp: IBraceExp) {
-    super(braceexp);
+  constructor(braceexp: IBraceExp, public parent: ASTNode | null) {
+    super(braceexp, parent);
     logg("ASTNodeBraceExp");
     this.Sequence = braceexp.Sequence;
     this.Chars = braceexp.Chars;
-    this.Elems = ASTArray(ASTNodeWord, braceexp.Elems);
+    this.Elems = ASTArray(ASTNodeWord, braceexp.Elems, this);
     [].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

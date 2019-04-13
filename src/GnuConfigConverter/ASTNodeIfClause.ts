@@ -32,18 +32,18 @@ export class ASTNodeIfClause extends ASTNode {
   public Else: ASTNodeIfClause | null; //     Else: IIfClause | null;
   public Last: ASTNodeComment[]; //     Last: IComment[];
 
-  constructor(ifclause: IIfClause) {
-    super(ifclause);
+  constructor(ifclause: IIfClause, public parent: ASTNode | null) {
+    super(ifclause, parent);
     logg("ASTNodeIfClause");
     this.Position = ASTSimpleSingle(ASTPos, ifclause.Position)!;
     this.ThenPos = ASTSimpleSingle(ASTPos, ifclause.ThenPos)!;
     this.FiPos = ASTSimpleSingle(ASTPos, ifclause.FiPos)!;
-    this.Cond = ASTSingle(ASTNodeStmtList, ifclause.Cond);
-    this.CondLast = ASTArray(ASTNodeComment, ifclause.CondLast)!;
-    this.Then = ASTSingle(ASTNodeStmtList, ifclause.Then);
-    this.ThenLast = ASTArray(ASTNodeComment, ifclause.ThenLast)!;
-    this.Else = ASTSingle(ASTNodeIfClause, ifclause.Else);
-    this.Last = ASTArray(ASTNodeComment, ifclause.Last)!;
+    this.Cond = ASTSingle(ASTNodeStmtList, ifclause.Cond, this);
+    this.CondLast = ASTArray(ASTNodeComment, ifclause.CondLast, this)!;
+    this.Then = ASTSingle(ASTNodeStmtList, ifclause.Then, this);
+    this.ThenLast = ASTArray(ASTNodeComment, ifclause.ThenLast, this)!;
+    this.Else = ASTSingle(ASTNodeIfClause, ifclause.Else, this);
+    this.Last = ASTArray(ASTNodeComment, ifclause.Last, this)!;
     ["Position", "ThenPos", "FiPos"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

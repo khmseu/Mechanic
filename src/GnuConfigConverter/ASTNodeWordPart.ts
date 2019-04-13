@@ -25,28 +25,28 @@ export class ASTNodeWordPart extends ASTNode {
   // tslint:disable-next-line:max-line-length
   public kind: ASTnodeKind.bad | ASTnodeKind.ASTNodeLit | ASTnodeKind.ASTNodeSglQuoted | ASTnodeKind.ASTNodeDblQuoted | ASTnodeKind.ASTNodeParamExp | ASTnodeKind.ASTNodeCmdSubst | ASTnodeKind.ASTNodeArithmExp | ASTnodeKind.ASTNodeProcSubst | ASTnodeKind.ASTNodeExtGlob | ASTnodeKind.ASTNodeBraceExp = ASTnodeKind.bad;
   public kindString: string = ASTnodeKind[ASTnodeKind.bad];
-  constructor(wordpart: IWordPart) {
-    super(wordpart);
+  constructor(wordpart: IWordPart, public parent: ASTNode | null) {
+    super(wordpart, parent);
     logg("ASTNodeWordPart");
     switch (syntax.NodeType(wordpart)) {
       case "Lit":
-        return new ASTNodeLit(wordpart as ILit);
+        return new ASTNodeLit(wordpart as ILit, parent);
       case "SglQuoted":
-        return new ASTNodeSglQuoted(wordpart as ISglQuoted);
+        return new ASTNodeSglQuoted(wordpart as ISglQuoted, parent);
       case "DblQuoted":
-        return new ASTNodeDblQuoted(wordpart as IDblQuoted);
+        return new ASTNodeDblQuoted(wordpart as IDblQuoted, parent);
       case "ParamExp":
-        return new ASTNodeParamExp(wordpart as IParamExp);
+        return new ASTNodeParamExp(wordpart as IParamExp, parent);
       case "CmdSubst":
-        return new ASTNodeCmdSubst(wordpart as ICmdSubst);
+        return new ASTNodeCmdSubst(wordpart as ICmdSubst, parent);
       case "ArithmExp":
-        return new ASTNodeArithmExp(wordpart as IArithmExp);
+        return new ASTNodeArithmExp(wordpart as IArithmExp, parent);
       case "ProcSubst":
-        return new ASTNodeProcSubst(wordpart as IProcSubst);
+        return new ASTNodeProcSubst(wordpart as IProcSubst, parent);
       case "ExtGlob":
-        return new ASTNodeExtGlob(wordpart as IExtGlob);
+        return new ASTNodeExtGlob(wordpart as IExtGlob, parent);
       case "BraceExp":
-        return new ASTNodeBraceExp(wordpart as IBraceExp);
+        return new ASTNodeBraceExp(wordpart as IBraceExp, parent);
       default:
         throw { NodeType: syntax.NodeType(wordpart) };
     }

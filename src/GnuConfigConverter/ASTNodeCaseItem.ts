@@ -32,16 +32,16 @@ export class ASTNodeCaseItem extends ASTNode {
   public StmtList: ASTNodeStmtList | null; //     StmtList: IStmtList | null;
   public Last: ASTNodeComment[]; //     Last: IComment[];
 
-  constructor(caseitem: ICaseItem) {
-    super(caseitem);
+  constructor(caseitem: ICaseItem, public parent: ASTNode | null) {
+    super(caseitem, parent);
     logg("ASTNodeCaseItem");
     this.Op = CaseOperator[caseitem.Op];
     this.OpString = op((caseitem.Op as unknown) as Token);
     this.OpPos = ASTSimpleSingle(ASTPos, caseitem.OpPos)!;
-    this.Comments = ASTArray(ASTNodeComment, caseitem.Comments)!;
-    this.Patterns = ASTArray(ASTNodeWord, caseitem.Patterns);
-    this.StmtList = ASTSingle(ASTNodeStmtList, caseitem.StmtList);
-    this.Last = ASTArray(ASTNodeComment, caseitem.Last)!;
+    this.Comments = ASTArray(ASTNodeComment, caseitem.Comments, this)!;
+    this.Patterns = ASTArray(ASTNodeWord, caseitem.Patterns, this);
+    this.StmtList = ASTSingle(ASTNodeStmtList, caseitem.StmtList, this);
+    this.Last = ASTArray(ASTNodeComment, caseitem.Last, this)!;
     ["OpPos"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

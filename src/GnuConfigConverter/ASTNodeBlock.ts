@@ -27,13 +27,13 @@ export class ASTNodeBlock extends ASTNode {
   public StmtList: ASTNodeStmtList | null; //     StmtList: IStmtList | null;
   public Last: ASTNodeComment[]; //     Last: IComment[];
 
-  constructor(block: IBlock) {
-    super(block);
+  constructor(block: IBlock, public parent: ASTNode | null) {
+    super(block, parent);
     logg("ASTNodeBlock");
     this.Lbrace = ASTSimpleSingle(ASTPos, block.Lbrace)!;
     this.Rbrace = ASTSimpleSingle(ASTPos, block.Rbrace)!;
-    this.StmtList = ASTSingle(ASTNodeStmtList, block.StmtList);
-    this.Last = ASTArray(ASTNodeComment, block.Last)!;
+    this.StmtList = ASTSingle(ASTNodeStmtList, block.StmtList, this);
+    this.Last = ASTArray(ASTNodeComment, block.Last, this)!;
     ["Lbrace", "Rbrace"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

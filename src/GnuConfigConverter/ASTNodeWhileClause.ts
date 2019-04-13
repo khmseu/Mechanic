@@ -31,17 +31,17 @@ export class ASTNodeWhileClause extends ASTNode {
   public Do: ASTNodeStmtList | null; //     Do: IStmtList | null;
   public DoLast: ASTNodeComment[]; //     DoLast: IComment[];
 
-  constructor(whileclause: IWhileClause) {
-    super(whileclause);
+  constructor(whileclause: IWhileClause, public parent: ASTNode | null) {
+    super(whileclause, parent);
     logg("ASTNodeWhileClause");
     this.WhilePos = ASTSimpleSingle(ASTPos, whileclause.WhilePos)!;
     this.DoPos = ASTSimpleSingle(ASTPos, whileclause.DoPos)!;
     this.DonePos = ASTSimpleSingle(ASTPos, whileclause.DonePos)!;
     this.Until = whileclause.Until;
-    this.Cond = ASTSingle(ASTNodeStmtList, whileclause.Cond);
-    this.CondLast = ASTArray(ASTNodeComment, whileclause.CondLast)!;
-    this.Do = ASTSingle(ASTNodeStmtList, whileclause.Do);
-    this.DoLast = ASTArray(ASTNodeComment, whileclause.DoLast)!;
+    this.Cond = ASTSingle(ASTNodeStmtList, whileclause.Cond, this);
+    this.CondLast = ASTArray(ASTNodeComment, whileclause.CondLast, this)!;
+    this.Do = ASTSingle(ASTNodeStmtList, whileclause.Do, this);
+    this.DoLast = ASTArray(ASTNodeComment, whileclause.DoLast, this)!;
     ["WhilePos", "DoPos", "DonePos"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

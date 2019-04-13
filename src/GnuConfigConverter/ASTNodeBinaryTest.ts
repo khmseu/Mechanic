@@ -27,14 +27,14 @@ export class ASTNodeBinaryTest extends ASTNode {
   public X: ASTNodeTestExpr; //     X: ITestExpr;
   public Y: ASTNodeTestExpr; //     Y: ITestExpr;
 
-  constructor(binarytest: IBinaryTest) {
-    super(binarytest);
+  constructor(binarytest: IBinaryTest, public parent: ASTNode | null) {
+    super(binarytest, parent);
     logg("ASTNodeBinaryTest");
     this.OpPos = ASTSimpleSingle(ASTPos, binarytest.OpPos)!;
     this.Op = BinTestOperator[binarytest.Op];
     this.OpString = op((binarytest.Op as unknown) as Token);
-    this.X = ASTSingle(ASTNodeTestExpr, binarytest.X)!;
-    this.Y = ASTSingle(ASTNodeTestExpr, binarytest.Y)!;
+    this.X = ASTSingle(ASTNodeTestExpr, binarytest.X, this)!;
+    this.Y = ASTSingle(ASTNodeTestExpr, binarytest.Y, this)!;
     ["OpPos"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

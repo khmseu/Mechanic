@@ -7,7 +7,8 @@
 
 import { ASTNode } from "./ASTNode";
 
-export function ASTSingle<AE extends ASTNode, PE>(at: new(pt: PE) => AE, pe: PE | null) {
-  const ae = pe ? new at(pe) : null;
+// tslint:disable-next-line:max-line-length
+export function ASTSingle<AE extends ASTNode, PE>(at: new (pt: PE, parent: ASTNode | null) => AE, pe: PE | null, parent: ASTNode | null) {
+  const ae = pe ? new at(pe, parent) : null;
   return ae;
 }

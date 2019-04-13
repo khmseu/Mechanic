@@ -16,14 +16,14 @@ import { ICStyleLoop, ILoop, IWordIter } from "./ParserTypes";
 export class ASTNodeLoop extends ASTNode {
   public kind: ASTnodeKind.bad | ASTnodeKind.ASTNodeWordIter | ASTnodeKind.ASTNodeCStyleLoop = ASTnodeKind.bad;
   public kindString: string = ASTnodeKind[ASTnodeKind.bad];
-  constructor(loop: ILoop) {
-    super(loop);
+  constructor(loop: ILoop, public parent: ASTNode | null) {
+    super(loop, parent);
     logg("ASTNodeLoop");
     switch (syntax.NodeType(loop)) {
       case "WordIter":
-        return new ASTNodeWordIter(loop as IWordIter);
+        return new ASTNodeWordIter(loop as IWordIter, parent);
       case "CStyleLoop":
-        return new ASTNodeCStyleLoop(loop as ICStyleLoop);
+        return new ASTNodeCStyleLoop(loop as ICStyleLoop, parent);
       default:
         throw { NodeType: syntax.NodeType(loop) };
     }

@@ -23,8 +23,8 @@ export class ASTNodeSglQuoted extends ASTNode {
   public Dollar: boolean; //     Dollar: boolean;
   public Value: string; //     Value: string;
 
-  constructor(sglquoted: ISglQuoted) {
-    super(sglquoted);
+  constructor(sglquoted: ISglQuoted, public parent: ASTNode | null) {
+    super(sglquoted, parent);
     logg("ASTNodeSglQuoted");
     this.Left = ASTSimpleSingle(ASTPos, sglquoted.Left)!;
     this.Right = ASTSimpleSingle(ASTPos, sglquoted.Right)!;

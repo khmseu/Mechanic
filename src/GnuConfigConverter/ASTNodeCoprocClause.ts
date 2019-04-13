@@ -25,12 +25,12 @@ export class ASTNodeCoprocClause extends ASTNode {
   public Name: ASTNodeWord | null; //     Name: IWord | null;
   public Stmt: ASTNodeStmt | null; //     Stmt: IStmt | null;
 
-  constructor(coprocclause: ICoprocClause) {
-    super(coprocclause);
+  constructor(coprocclause: ICoprocClause, public parent: ASTNode | null) {
+    super(coprocclause, parent);
     logg("ASTNodeCoprocClause");
     this.Coproc = ASTSimpleSingle(ASTPos, coprocclause.Coproc)!;
-    this.Name = ASTSingle(ASTNodeWord, coprocclause.Name);
-    this.Stmt = ASTSingle(ASTNodeStmt, coprocclause.Stmt);
+    this.Name = ASTSingle(ASTNodeWord, coprocclause.Name, this);
+    this.Stmt = ASTSingle(ASTNodeStmt, coprocclause.Stmt, this);
     ["Coproc"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

@@ -22,11 +22,11 @@ export class ASTNodeCallExpr extends ASTNode {
   public Assigns: ASTNodeAssign[]; //     Assigns: IAssign[] | null;
   public Args: ASTNodeWord[]; //     Args: IWord[] | null;
 
-  constructor(callexpr: ICallExpr) {
-    super(callexpr);
+  constructor(callexpr: ICallExpr, public parent: ASTNode | null) {
+    super(callexpr, parent);
     logg("ASTNodeCallExpr");
-    this.Assigns = ASTArray(ASTNodeAssign, callexpr.Assigns);
-    this.Args = ASTArray(ASTNodeWord, callexpr.Args);
+    this.Assigns = ASTArray(ASTNodeAssign, callexpr.Assigns, this);
+    this.Args = ASTArray(ASTNodeWord, callexpr.Args, this);
     [].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

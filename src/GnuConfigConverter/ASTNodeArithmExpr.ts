@@ -19,18 +19,18 @@ export class ASTNodeArithmExpr extends ASTNode {
   // tslint:disable-next-line:max-line-length
   public kind: ASTnodeKind.bad | ASTnodeKind.ASTNodeBinaryArithm | ASTnodeKind.ASTNodeUnaryArithm | ASTnodeKind.ASTNodeParenArithm | ASTnodeKind.ASTNodeWord = ASTnodeKind.bad;
   public kindString: string = ASTnodeKind[ASTnodeKind.bad];
-  constructor(arithmexpr: IArithmExpr) {
-    super(arithmexpr);
+  constructor(arithmexpr: IArithmExpr, public parent: ASTNode | null) {
+    super(arithmexpr, parent);
     logg("ASTNodeArithmExpr");
     switch (syntax.NodeType(arithmexpr)) {
       case "BinaryArithm":
-        return new ASTNodeBinaryArithm(arithmexpr as IBinaryArithm);
+        return new ASTNodeBinaryArithm(arithmexpr as IBinaryArithm, parent);
       case "UnaryArithm":
-        return new ASTNodeUnaryArithm(arithmexpr as IUnaryArithm);
+        return new ASTNodeUnaryArithm(arithmexpr as IUnaryArithm, parent);
       case "ParenArithm":
-        return new ASTNodeParenArithm(arithmexpr as IParenArithm);
+        return new ASTNodeParenArithm(arithmexpr as IParenArithm, parent);
       case "Word":
-        return new ASTNodeWord(arithmexpr as IWord);
+        return new ASTNodeWord(arithmexpr as IWord, parent);
       default:
         throw { NodeType: syntax.NodeType(arithmexpr) };
     }

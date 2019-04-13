@@ -26,13 +26,13 @@ export class ASTNodeExtGlob extends ASTNode {
   public OpString: string;
   public Pattern: ASTNodeLit | null; //     Pattern: ILit | null;
 
-  constructor(extglob: IExtGlob) {
-    super(extglob);
+  constructor(extglob: IExtGlob, public parent: ASTNode | null) {
+    super(extglob, parent);
     logg("ASTNodeExtGlob");
     this.OpPos = ASTSimpleSingle(ASTPos, extglob.OpPos)!;
     this.Op = GlobOperator[extglob.Op];
     this.OpString = op((extglob.Op as unknown) as Token);
-    this.Pattern = ASTSingle(ASTNodeLit, extglob.Pattern);
+    this.Pattern = ASTSingle(ASTNodeLit, extglob.Pattern, this);
     ["OpPos"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

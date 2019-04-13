@@ -8,11 +8,12 @@
 import { ASTNode } from "./ASTNode";
 import { ASTSingle } from "./ASTSingle";
 
-export function ASTArray<AE extends ASTNode, PE>(at: new(pt: PE) => AE, pa: PE[] | null) {
+// tslint:disable-next-line:max-line-length
+export function ASTArray<AE extends ASTNode, PE>(at: new(pt: PE, parent: ASTNode | null) => AE, pa: PE[] | null, parent: ASTNode | null) {
   const aa: AE[] = [];
   if (pa) {
     pa.forEach((pe) => {
-        const ae = ASTSingle<AE, PE>(at, pe);
+        const ae = ASTSingle<AE, PE>(at, pe, parent);
         if (ae) {
           aa.push(ae);
         }

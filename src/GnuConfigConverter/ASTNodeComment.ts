@@ -21,8 +21,8 @@ export class ASTNodeComment extends ASTNode {
   public Hash: ASTPos; //     Hash: I_Pos;
   public Text: string; //     Text: string;
 
-  constructor(comment: IComment) {
-    super(comment);
+  constructor(comment: IComment, public parent: ASTNode | null) {
+    super(comment, parent);
     logg("ASTNodeComment");
     this.Hash = ASTSimpleSingle(ASTPos, comment.Hash)!;
     this.Text = comment.Text;

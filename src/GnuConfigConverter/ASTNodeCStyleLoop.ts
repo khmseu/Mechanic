@@ -26,14 +26,14 @@ export class ASTNodeCStyleLoop extends ASTNode {
   public Cond: ASTNodeArithmExpr; //     Cond: IArithmExpr;
   public Post: ASTNodeArithmExpr; //     Post: IArithmExpr;
 
-  constructor(cstyleloop: ICStyleLoop) {
-    super(cstyleloop);
+  constructor(cstyleloop: ICStyleLoop, public parent: ASTNode | null) {
+    super(cstyleloop, parent);
     logg("ASTNodeCStyleLoop");
     this.Lparen = ASTSimpleSingle(ASTPos, cstyleloop.Lparen)!;
     this.Rparen = ASTSimpleSingle(ASTPos, cstyleloop.Rparen)!;
-    this.Init = ASTSingle(ASTNodeArithmExpr, cstyleloop.Init)!;
-    this.Cond = ASTSingle(ASTNodeArithmExpr, cstyleloop.Cond)!;
-    this.Post = ASTSingle(ASTNodeArithmExpr, cstyleloop.Post)!;
+    this.Init = ASTSingle(ASTNodeArithmExpr, cstyleloop.Init, this)!;
+    this.Cond = ASTSingle(ASTNodeArithmExpr, cstyleloop.Cond, this)!;
+    this.Post = ASTSingle(ASTNodeArithmExpr, cstyleloop.Post, this)!;
     ["Lparen", "Rparen"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

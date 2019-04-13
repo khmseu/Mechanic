@@ -27,14 +27,14 @@ export class ASTNodeBinaryCmd extends ASTNode {
   public X: ASTNodeStmt; //     X: IStmt;
   public Y: ASTNodeStmt; //     Y: IStmt;
 
-  constructor(binarycmd: IBinaryCmd) {
-    super(binarycmd);
+  constructor(binarycmd: IBinaryCmd, public parent: ASTNode | null) {
+    super(binarycmd, parent);
     logg("ASTNodeBinaryCmd");
     this.OpPos = ASTSimpleSingle(ASTPos, binarycmd.OpPos)!;
     this.Op = BinCmdOperator[binarycmd.Op];
     this.OpString = op((binarycmd.Op as unknown) as Token);
-    this.X = ASTSingle(ASTNodeStmt, binarycmd.X)!;
-    this.Y = ASTSingle(ASTNodeStmt, binarycmd.Y)!;
+    this.X = ASTSingle(ASTNodeStmt, binarycmd.X, this)!;
+    this.Y = ASTSingle(ASTNodeStmt, binarycmd.Y, this)!;
     ["OpPos"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;
