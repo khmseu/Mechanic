@@ -9,10 +9,10 @@ import { ASTMoreArithmCmd } from "./ASTMoreArithmCmd";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTnodeKind } from "./ASTnodeKind";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
-import { ASTSingle } from "./ASTSingle";
+import { ASTSingleNotNull } from "./ASTSingleNotNull";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
 import { IArithmCmd } from "./ParserTypes";
 
@@ -25,20 +25,20 @@ export class ASTNodeArithmCmd extends ASTNode {
   public Unsigned: boolean; //     Unsigned: boolean;
   public X: ASTNodeArithmExpr; //     X: IArithmExpr;
 
-  constructor(arithmcmd: IArithmCmd, public parent: ASTNode | null) {
-    super(arithmcmd, parent);
+  constructor(arithmcmd: IArithmCmd, public parent: ASTNode | null, public parentField: string) {
+    super(arithmcmd, parent, parentField);
     logg("ASTNodeArithmCmd");
     this.Left = ASTSimpleSingle(ASTPos, arithmcmd.Left)!;
     this.Right = ASTSimpleSingle(ASTPos, arithmcmd.Right)!;
     this.Unsigned = arithmcmd.Unsigned;
-    this.X = ASTSingle(ASTNodeArithmExpr, arithmcmd.X, this)!;
-    ["Left", "Right"].forEach((f) => {
+    this.X = ASTSingleNotNull(ASTNodeArithmExpr, arithmcmd.X, this, "X")!;
+    ["kind", "parent", "parentField", "Left", "Right"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;
       Object.defineProperty(this, f, desc);
     });
   }
-  public accept(visitor: ASTnodeVisitor) {
+  public accept(visitor: ASTVisitorBase) {
     visitor.visitASTNodeArithmCmdPre(this);
     this.X.accept(visitor);
     visitor.visitASTNodeArithmCmdPost(this);

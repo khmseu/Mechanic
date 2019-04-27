@@ -11,7 +11,7 @@ import { ASTNode } from "./ASTNode";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmt } from "./ASTNodeStmt";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
 import { IStmtList } from "./ParserTypes";
 
@@ -22,18 +22,18 @@ export class ASTNodeStmtList extends ASTNode {
   public Stmts: ASTNodeStmt[]; //     Stmts: IStmt[];
   public Last: ASTNodeComment[]; //     Last: IComment[];
 
-  constructor(stmtlist: IStmtList, public parent: ASTNode | null) {
-    super(stmtlist, parent);
+  constructor(stmtlist: IStmtList, public parent: ASTNode | null, public parentField: string) {
+    super(stmtlist, parent, parentField);
     logg("ASTNodeStmtList");
-    this.Stmts = ASTArray(ASTNodeStmt, stmtlist.Stmts, this)!;
-    this.Last = ASTArray(ASTNodeComment, stmtlist.Last, this)!;
-    [].forEach((f) => {
+    this.Stmts = ASTArray(ASTNodeStmt, stmtlist.Stmts, this, "Stmts")!;
+    this.Last = ASTArray(ASTNodeComment, stmtlist.Last, this, "Last")!;
+    ["kind", "parent", "parentField"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;
       Object.defineProperty(this, f, desc);
     });
   }
-  public accept(visitor: ASTnodeVisitor) {
+  public accept(visitor: ASTVisitorBase) {
     visitor.visitASTNodeStmtListPre(this);
     this.Stmts.forEach((e) => e.accept(visitor));
     this.Last.forEach((e) => e.accept(visitor));

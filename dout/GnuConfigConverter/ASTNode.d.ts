@@ -5,15 +5,20 @@
  * https://opensource.org/licenses/MIT
  */
 import { ASTnodeKind } from "./ASTnodeKind";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { INode } from "./ParserTypes";
 export declare class ASTNode {
+    parent: ASTNode | null;
+    parentField: string;
     kind: ASTnodeKind;
     kindString: string;
+    more: {
+        [key: string]: any;
+    };
     Pos: ASTPos | null;
     End: ASTPos | null;
-    constructor(node: INode);
-    accept(visitor: ASTnodeVisitor): void;
+    constructor(node: INode, parent: ASTNode | null, parentField: string);
+    accept(visitor: ASTVisitorBase): void;
 }
 //# sourceMappingURL=ASTNode.d.ts.map

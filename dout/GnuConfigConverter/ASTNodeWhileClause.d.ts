@@ -9,10 +9,12 @@ import { ASTNode } from "./ASTNode";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmtList } from "./ASTNodeStmtList";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { IWhileClause } from "./ParserTypes";
 export declare class ASTNodeWhileClause extends ASTNode {
+    parent: ASTNode | null;
+    parentField: string;
     kind: ASTnodeKind.ASTNodeWhileClause;
     kindString: string;
     more: ASTMoreWhileClause;
@@ -24,7 +26,7 @@ export declare class ASTNodeWhileClause extends ASTNode {
     CondLast: ASTNodeComment[];
     Do: ASTNodeStmtList | null;
     DoLast: ASTNodeComment[];
-    constructor(whileclause: IWhileClause);
-    accept(visitor: ASTnodeVisitor): void;
+    constructor(whileclause: IWhileClause, parent: ASTNode | null, parentField: string);
+    accept(visitor: ASTVisitorBase): void;
 }
 //# sourceMappingURL=ASTNodeWhileClause.d.ts.map

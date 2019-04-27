@@ -11,10 +11,10 @@ import { ASTNode } from "./ASTNode";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmtList } from "./ASTNodeStmtList";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
 import { ASTSingle } from "./ASTSingle";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
 import { ICmdSubst } from "./ParserTypes";
 
@@ -29,22 +29,22 @@ export class ASTNodeCmdSubst extends ASTNode {
   public TempFile: boolean; //     TempFile: boolean;
   public ReplyVar: boolean; //     ReplyVar: boolean;
 
-  constructor(cmdsubst: ICmdSubst, public parent: ASTNode | null) {
-    super(cmdsubst, parent);
+  constructor(cmdsubst: ICmdSubst, public parent: ASTNode | null, public parentField: string) {
+    super(cmdsubst, parent, parentField);
     logg("ASTNodeCmdSubst");
     this.Left = ASTSimpleSingle(ASTPos, cmdsubst.Left)!;
     this.Right = ASTSimpleSingle(ASTPos, cmdsubst.Right)!;
-    this.StmtList = ASTSingle(ASTNodeStmtList, cmdsubst.StmtList, this);
-    this.Last = ASTArray(ASTNodeComment, cmdsubst.Last, this)!;
+    this.StmtList = ASTSingle(ASTNodeStmtList, cmdsubst.StmtList, this, "StmtList");
+    this.Last = ASTArray(ASTNodeComment, cmdsubst.Last, this, "Last")!;
     this.TempFile = cmdsubst.TempFile;
     this.ReplyVar = cmdsubst.ReplyVar;
-    ["Left", "Right"].forEach((f) => {
+    ["kind", "parent", "parentField", "Left", "Right"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;
       Object.defineProperty(this, f, desc);
     });
   }
-  public accept(visitor: ASTnodeVisitor) {
+  public accept(visitor: ASTVisitorBase) {
     visitor.visitASTNodeCmdSubstPre(this);
     if (this.StmtList) {
       this.StmtList.accept(visitor);

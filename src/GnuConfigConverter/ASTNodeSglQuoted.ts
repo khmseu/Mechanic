@@ -8,9 +8,9 @@
 import { ASTMoreSglQuoted } from "./ASTMoreSglQuoted";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
 import { ISglQuoted } from "./ParserTypes";
 
@@ -23,20 +23,20 @@ export class ASTNodeSglQuoted extends ASTNode {
   public Dollar: boolean; //     Dollar: boolean;
   public Value: string; //     Value: string;
 
-  constructor(sglquoted: ISglQuoted, public parent: ASTNode | null) {
-    super(sglquoted, parent);
+  constructor(sglquoted: ISglQuoted, public parent: ASTNode | null, public parentField: string) {
+    super(sglquoted, parent, parentField);
     logg("ASTNodeSglQuoted");
     this.Left = ASTSimpleSingle(ASTPos, sglquoted.Left)!;
     this.Right = ASTSimpleSingle(ASTPos, sglquoted.Right)!;
     this.Dollar = sglquoted.Dollar;
     this.Value = sglquoted.Value;
-    ["Left", "Right"].forEach((f) => {
+    ["kind", "parent", "parentField", "Left", "Right"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;
       Object.defineProperty(this, f, desc);
     });
   }
-  public accept(visitor: ASTnodeVisitor) {
+  public accept(visitor: ASTVisitorBase) {
     visitor.visitASTNodeSglQuotedPre(this);
 
     visitor.visitASTNodeSglQuotedPost(this);

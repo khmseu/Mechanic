@@ -9,10 +9,12 @@ import { ASTNode } from "./ASTNode";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmtList } from "./ASTNodeStmtList";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { IBlock } from "./ParserTypes";
 export declare class ASTNodeBlock extends ASTNode {
+    parent: ASTNode | null;
+    parentField: string;
     kind: ASTnodeKind.ASTNodeBlock;
     kindString: string;
     more: ASTMoreBlock;
@@ -20,7 +22,7 @@ export declare class ASTNodeBlock extends ASTNode {
     Rbrace: ASTPos;
     StmtList: ASTNodeStmtList | null;
     Last: ASTNodeComment[];
-    constructor(block: IBlock);
-    accept(visitor: ASTnodeVisitor): void;
+    constructor(block: IBlock, parent: ASTNode | null, parentField: string);
+    accept(visitor: ASTVisitorBase): void;
 }
 //# sourceMappingURL=ASTNodeBlock.d.ts.map

@@ -10,10 +10,10 @@ import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeLit } from "./ASTNodeLit";
 import { ASTNodeStmt } from "./ASTNodeStmt";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
 import { ASTSingle } from "./ASTSingle";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
 import { IFuncDecl } from "./ParserTypes";
 
@@ -26,20 +26,20 @@ export class ASTNodeFuncDecl extends ASTNode {
   public Name: ASTNodeLit | null; //     Name: ILit | null;
   public Body: ASTNodeStmt | null; //     Body: IStmt | null;
 
-  constructor(funcdecl: IFuncDecl, public parent: ASTNode | null) {
-    super(funcdecl, parent);
+  constructor(funcdecl: IFuncDecl, public parent: ASTNode | null, public parentField: string) {
+    super(funcdecl, parent, parentField);
     logg("ASTNodeFuncDecl");
     this.Position = ASTSimpleSingle(ASTPos, funcdecl.Position)!;
     this.RsrvWord = funcdecl.RsrvWord;
-    this.Name = ASTSingle(ASTNodeLit, funcdecl.Name, this);
-    this.Body = ASTSingle(ASTNodeStmt, funcdecl.Body, this);
-    ["Position"].forEach((f) => {
+    this.Name = ASTSingle(ASTNodeLit, funcdecl.Name, this, "Name");
+    this.Body = ASTSingle(ASTNodeStmt, funcdecl.Body, this, "Body");
+    ["kind", "parent", "parentField", "Position"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;
       Object.defineProperty(this, f, desc);
     });
   }
-  public accept(visitor: ASTnodeVisitor) {
+  public accept(visitor: ASTVisitorBase) {
     visitor.visitASTNodeFuncDeclPre(this);
     if (this.Name) {
       this.Name.accept(visitor);

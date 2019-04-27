@@ -11,10 +11,10 @@ import { ASTNode } from "./ASTNode";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmtList } from "./ASTNodeStmtList";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
 import { ASTSingle } from "./ASTSingle";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
 import { IBlock } from "./ParserTypes";
 
@@ -27,20 +27,20 @@ export class ASTNodeBlock extends ASTNode {
   public StmtList: ASTNodeStmtList | null; //     StmtList: IStmtList | null;
   public Last: ASTNodeComment[]; //     Last: IComment[];
 
-  constructor(block: IBlock, public parent: ASTNode | null) {
-    super(block, parent);
+  constructor(block: IBlock, public parent: ASTNode | null, public parentField: string) {
+    super(block, parent, parentField);
     logg("ASTNodeBlock");
     this.Lbrace = ASTSimpleSingle(ASTPos, block.Lbrace)!;
     this.Rbrace = ASTSimpleSingle(ASTPos, block.Rbrace)!;
-    this.StmtList = ASTSingle(ASTNodeStmtList, block.StmtList, this);
-    this.Last = ASTArray(ASTNodeComment, block.Last, this)!;
-    ["Lbrace", "Rbrace"].forEach((f) => {
+    this.StmtList = ASTSingle(ASTNodeStmtList, block.StmtList, this, "StmtList");
+    this.Last = ASTArray(ASTNodeComment, block.Last, this, "Last")!;
+    ["kind", "parent", "parentField", "Lbrace", "Rbrace"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;
       Object.defineProperty(this, f, desc);
     });
   }
-  public accept(visitor: ASTnodeVisitor) {
+  public accept(visitor: ASTVisitorBase) {
     visitor.visitASTNodeBlockPre(this);
     if (this.StmtList) {
       this.StmtList.accept(visitor);

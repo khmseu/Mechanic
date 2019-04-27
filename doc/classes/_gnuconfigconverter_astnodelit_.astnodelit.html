@@ -102,7 +102,9 @@
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodelit_.astnodelit.html#valuepos" class="tsd-kind-icon">Value<wbr>Pos</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite"><a href="_gnuconfigconverter_astnodelit_.astnodelit.html#kind" class="tsd-kind-icon">kind</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite"><a href="_gnuconfigconverter_astnodelit_.astnodelit.html#kindstring" class="tsd-kind-icon">kind<wbr>String</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodelit_.astnodelit.html#more" class="tsd-kind-icon">more</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite"><a href="_gnuconfigconverter_astnodelit_.astnodelit.html#more" class="tsd-kind-icon">more</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite"><a href="_gnuconfigconverter_astnodelit_.astnodelit.html#parent" class="tsd-kind-icon">parent</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite"><a href="_gnuconfigconverter_astnodelit_.astnodelit.html#parentfield" class="tsd-kind-icon">parent<wbr>Field</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -120,20 +122,26 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">new ASTNode<wbr>Lit<span class="tsd-signature-symbol">(</span>lit<span class="tsd-signature-symbol">: </span><a href="../interfaces/_gnuconfigconverter_parsertypes_.ilit.html" class="tsd-signature-type">ILit</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodelit_.astnodelit.html" class="tsd-signature-type">ASTNodeLit</a></li>
+						<li class="tsd-signature tsd-kind-icon">new ASTNode<wbr>Lit<span class="tsd-signature-symbol">(</span>lit<span class="tsd-signature-symbol">: </span><a href="../interfaces/_gnuconfigconverter_parsertypes_.ilit.html" class="tsd-signature-type">ILit</a>, parent<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnode_.astnode.html" class="tsd-signature-type">ASTNode</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span>, parentField<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodelit_.astnodelit.html" class="tsd-signature-type">ASTNodeLit</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_gnuconfigconverter_astnode_.astnode.html">ASTNode</a>.<a href="_gnuconfigconverter_astnode_.astnode.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/c4ccb03/src/GnuConfigConverter/ASTNodeLit.ts#L23">GnuConfigConverter/ASTNodeLit.ts:23</a></li>
+									<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/23f3092/src/GnuConfigConverter/ASTNodeLit.ts#L23">GnuConfigConverter/ASTNodeLit.ts:23</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>lit: <a href="../interfaces/_gnuconfigconverter_parsertypes_.ilit.html" class="tsd-signature-type">ILit</a></h5>
+								</li>
+								<li>
+									<h5>parent: <a href="_gnuconfigconverter_astnode_.astnode.html" class="tsd-signature-type">ASTNode</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h5>
+								</li>
+								<li>
+									<h5>parentField: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="_gnuconfigconverter_astnodelit_.astnodelit.html" class="tsd-signature-type">ASTNodeLit</a></h4>
@@ -150,7 +158,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_gnuconfigconverter_astnode_.astnode.html">ASTNode</a>.<a href="_gnuconfigconverter_astnode_.astnode.html#end">End</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/c4ccb03/src/GnuConfigConverter/ASTNode.ts#L19">GnuConfigConverter/ASTNode.ts:19</a></li>
+							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/23f3092/src/GnuConfigConverter/ASTNode.ts#L20">GnuConfigConverter/ASTNode.ts:20</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -161,7 +169,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_gnuconfigconverter_astnode_.astnode.html">ASTNode</a>.<a href="_gnuconfigconverter_astnode_.astnode.html#pos">Pos</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/c4ccb03/src/GnuConfigConverter/ASTNode.ts#L18">GnuConfigConverter/ASTNode.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/23f3092/src/GnuConfigConverter/ASTNode.ts#L19">GnuConfigConverter/ASTNode.ts:19</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -171,7 +179,7 @@
 					<div class="tsd-signature tsd-kind-icon">Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/c4ccb03/src/GnuConfigConverter/ASTNodeLit.ts#L23">GnuConfigConverter/ASTNodeLit.ts:23</a></li>
+							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/23f3092/src/GnuConfigConverter/ASTNodeLit.ts#L23">GnuConfigConverter/ASTNodeLit.ts:23</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -181,7 +189,7 @@
 					<div class="tsd-signature tsd-kind-icon">Value<wbr>End<span class="tsd-signature-symbol">:</span> <a href="_gnuconfigconverter_astpos_.astpos.html" class="tsd-signature-type">ASTPos</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/c4ccb03/src/GnuConfigConverter/ASTNodeLit.ts#L22">GnuConfigConverter/ASTNodeLit.ts:22</a></li>
+							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/23f3092/src/GnuConfigConverter/ASTNodeLit.ts#L22">GnuConfigConverter/ASTNodeLit.ts:22</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -191,7 +199,7 @@
 					<div class="tsd-signature tsd-kind-icon">Value<wbr>Pos<span class="tsd-signature-symbol">:</span> <a href="_gnuconfigconverter_astpos_.astpos.html" class="tsd-signature-type">ASTPos</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/c4ccb03/src/GnuConfigConverter/ASTNodeLit.ts#L21">GnuConfigConverter/ASTNodeLit.ts:21</a></li>
+							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/23f3092/src/GnuConfigConverter/ASTNodeLit.ts#L21">GnuConfigConverter/ASTNodeLit.ts:21</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -202,7 +210,7 @@
 					<aside class="tsd-sources">
 						<p>Overrides <a href="_gnuconfigconverter_astnode_.astnode.html">ASTNode</a>.<a href="_gnuconfigconverter_astnode_.astnode.html#kind">kind</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/c4ccb03/src/GnuConfigConverter/ASTNodeLit.ts#L18">GnuConfigConverter/ASTNodeLit.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/23f3092/src/GnuConfigConverter/ASTNodeLit.ts#L18">GnuConfigConverter/ASTNodeLit.ts:18</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -213,17 +221,40 @@
 					<aside class="tsd-sources">
 						<p>Overrides <a href="_gnuconfigconverter_astnode_.astnode.html">ASTNode</a>.<a href="_gnuconfigconverter_astnode_.astnode.html#kindstring">kindString</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/c4ccb03/src/GnuConfigConverter/ASTNodeLit.ts#L19">GnuConfigConverter/ASTNodeLit.ts:19</a></li>
+							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/23f3092/src/GnuConfigConverter/ASTNodeLit.ts#L19">GnuConfigConverter/ASTNodeLit.ts:19</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
 					<a name="more" class="tsd-anchor"></a>
 					<h3>more</h3>
 					<div class="tsd-signature tsd-kind-icon">more<span class="tsd-signature-symbol">:</span> <a href="_gnuconfigconverter_astmorelit_.astmorelit.html" class="tsd-signature-type">ASTMoreLit</a><span class="tsd-signature-symbol"> =&nbsp;new ASTMoreLit()</span></div>
 					<aside class="tsd-sources">
+						<p>Overrides <a href="_gnuconfigconverter_astnode_.astnode.html">ASTNode</a>.<a href="_gnuconfigconverter_astnode_.astnode.html#more">more</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/c4ccb03/src/GnuConfigConverter/ASTNodeLit.ts#L20">GnuConfigConverter/ASTNodeLit.ts:20</a></li>
+							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/23f3092/src/GnuConfigConverter/ASTNodeLit.ts#L20">GnuConfigConverter/ASTNodeLit.ts:20</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
+					<a name="parent" class="tsd-anchor"></a>
+					<h3>parent</h3>
+					<div class="tsd-signature tsd-kind-icon">parent<span class="tsd-signature-symbol">:</span> <a href="_gnuconfigconverter_astnode_.astnode.html" class="tsd-signature-type">ASTNode</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
+					<aside class="tsd-sources">
+						<p>Overrides <a href="_gnuconfigconverter_astnode_.astnode.html">ASTNode</a>.<a href="_gnuconfigconverter_astnode_.astnode.html#parent">parent</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/23f3092/src/GnuConfigConverter/ASTNodeLit.ts#L25">GnuConfigConverter/ASTNodeLit.ts:25</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
+					<a name="parentfield" class="tsd-anchor"></a>
+					<h3>parent<wbr>Field</h3>
+					<div class="tsd-signature tsd-kind-icon">parent<wbr>Field<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Overrides <a href="_gnuconfigconverter_astnode_.astnode.html">ASTNode</a>.<a href="_gnuconfigconverter_astnode_.astnode.html#parentfield">parentField</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/23f3092/src/GnuConfigConverter/ASTNodeLit.ts#L25">GnuConfigConverter/ASTNodeLit.ts:25</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -234,20 +265,20 @@
 					<a name="accept" class="tsd-anchor"></a>
 					<h3>accept</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">accept<span class="tsd-signature-symbol">(</span>visitor<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html" class="tsd-signature-type">ASTnodeVisitor</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">accept<span class="tsd-signature-symbol">(</span>visitor<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astvisitorbase_.astvisitorbase.html" class="tsd-signature-type">ASTVisitorBase</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_gnuconfigconverter_astnode_.astnode.html">ASTNode</a>.<a href="_gnuconfigconverter_astnode_.astnode.html#accept">accept</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/c4ccb03/src/GnuConfigConverter/ASTNodeLit.ts#L37">GnuConfigConverter/ASTNodeLit.ts:37</a></li>
+									<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/23f3092/src/GnuConfigConverter/ASTNodeLit.ts#L37">GnuConfigConverter/ASTNodeLit.ts:37</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>visitor: <a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html" class="tsd-signature-type">ASTnodeVisitor</a></h5>
+									<h5>visitor: <a href="_gnuconfigconverter_astvisitorbase_.astvisitorbase.html" class="tsd-signature-type">ASTVisitorBase</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -298,8 +329,14 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
 								<a href="_gnuconfigconverter_astnodelit_.astnodelit.html#kindstring" class="tsd-kind-icon">kind<wbr>String</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
 								<a href="_gnuconfigconverter_astnodelit_.astnodelit.html#more" class="tsd-kind-icon">more</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
+								<a href="_gnuconfigconverter_astnodelit_.astnodelit.html#parent" class="tsd-kind-icon">parent</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
+								<a href="_gnuconfigconverter_astnodelit_.astnodelit.html#parentfield" class="tsd-kind-icon">parent<wbr>Field</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 								<a href="_gnuconfigconverter_astnodelit_.astnodelit.html#accept" class="tsd-kind-icon">accept</a>

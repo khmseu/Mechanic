@@ -31,40 +31,40 @@ export class ASTNodeCommand extends ASTNode {
   // tslint:disable-next-line:max-line-length
   public kind: ASTnodeKind.bad | ASTnodeKind.ASTNodeCallExpr | ASTnodeKind.ASTNodeIfClause | ASTnodeKind.ASTNodeWhileClause | ASTnodeKind.ASTNodeForClause | ASTnodeKind.ASTNodeCaseClause | ASTnodeKind.ASTNodeBlock | ASTnodeKind.ASTNodeSubshell | ASTnodeKind.ASTNodeBinaryCmd | ASTnodeKind.ASTNodeFuncDecl | ASTnodeKind.ASTNodeArithmCmd | ASTnodeKind.ASTNodeTestClause | ASTnodeKind.ASTNodeDeclClause | ASTnodeKind.ASTNodeLetClause | ASTnodeKind.ASTNodeTimeClause | ASTnodeKind.ASTNodeCoprocClause = ASTnodeKind.bad;
   public kindString: string = ASTnodeKind[ASTnodeKind.bad];
-  constructor(command: ICommand, public parent: ASTNode | null) {
-    super(command, parent);
+  constructor(command: ICommand, public parent: ASTNode | null, public parentField: string) {
+    super(command, parent, parentField);
     logg("ASTNodeCommand");
     switch (syntax.NodeType(command)) {
       case "CallExpr":
-        return new ASTNodeCallExpr(command as ICallExpr, parent);
+        return new ASTNodeCallExpr(command as ICallExpr, parent, parentField);
       case "IfClause":
-        return new ASTNodeIfClause(command as IIfClause, parent);
+        return new ASTNodeIfClause(command as IIfClause, parent, parentField);
       case "WhileClause":
-        return new ASTNodeWhileClause(command as IWhileClause, parent);
+        return new ASTNodeWhileClause(command as IWhileClause, parent, parentField);
       case "ForClause":
-        return new ASTNodeForClause(command as IForClause, parent);
+        return new ASTNodeForClause(command as IForClause, parent, parentField);
       case "CaseClause":
-        return new ASTNodeCaseClause(command as ICaseClause, parent);
+        return new ASTNodeCaseClause(command as ICaseClause, parent, parentField);
       case "Block":
-        return new ASTNodeBlock(command as IBlock, parent);
+        return new ASTNodeBlock(command as IBlock, parent, parentField);
       case "Subshell":
-        return new ASTNodeSubshell(command as ISubshell, parent);
+        return new ASTNodeSubshell(command as ISubshell, parent, parentField);
       case "BinaryCmd":
-        return new ASTNodeBinaryCmd(command as IBinaryCmd, parent);
+        return new ASTNodeBinaryCmd(command as IBinaryCmd, parent, parentField);
       case "FuncDecl":
-        return new ASTNodeFuncDecl(command as IFuncDecl, parent);
+        return new ASTNodeFuncDecl(command as IFuncDecl, parent, parentField);
       case "ArithmCmd":
-        return new ASTNodeArithmCmd(command as IArithmCmd, parent);
+        return new ASTNodeArithmCmd(command as IArithmCmd, parent, parentField);
       case "TestClause":
-        return new ASTNodeTestClause(command as ITestClause, parent);
+        return new ASTNodeTestClause(command as ITestClause, parent, parentField);
       case "DeclClause":
-        return new ASTNodeDeclClause(command as IDeclClause, parent);
+        return new ASTNodeDeclClause(command as IDeclClause, parent, parentField);
       case "LetClause":
-        return new ASTNodeLetClause(command as ILetClause, parent);
+        return new ASTNodeLetClause(command as ILetClause, parent, parentField);
       case "TimeClause":
-        return new ASTNodeTimeClause(command as ITimeClause, parent);
+        return new ASTNodeTimeClause(command as ITimeClause, parent, parentField);
       case "CoprocClause":
-        return new ASTNodeCoprocClause(command as ICoprocClause, parent);
+        return new ASTNodeCoprocClause(command as ICoprocClause, parent, parentField);
       default:
         throw { NodeType: syntax.NodeType(command) };
     }

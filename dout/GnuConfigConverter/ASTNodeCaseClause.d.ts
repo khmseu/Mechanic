@@ -9,11 +9,13 @@ import { ASTNode } from "./ASTNode";
 import { ASTNodeCaseItem } from "./ASTNodeCaseItem";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTNodeWord } from "./ASTNodeWord";
 import { ASTPos } from "./ASTPos";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { ICaseClause } from "./ParserTypes";
 export declare class ASTNodeCaseClause extends ASTNode {
+    parent: ASTNode | null;
+    parentField: string;
     kind: ASTnodeKind.ASTNodeCaseClause;
     kindString: string;
     more: ASTMoreCaseClause;
@@ -22,7 +24,7 @@ export declare class ASTNodeCaseClause extends ASTNode {
     Word: ASTNodeWord | null;
     Items: ASTNodeCaseItem[];
     Last: ASTNodeComment[];
-    constructor(caseclause: ICaseClause);
-    accept(visitor: ASTnodeVisitor): void;
+    constructor(caseclause: ICaseClause, parent: ASTNode | null, parentField: string);
+    accept(visitor: ASTVisitorBase): void;
 }
 //# sourceMappingURL=ASTNodeCaseClause.d.ts.map

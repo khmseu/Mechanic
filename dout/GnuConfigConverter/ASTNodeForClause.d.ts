@@ -10,10 +10,12 @@ import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeLoop } from "./ASTNodeLoop";
 import { ASTNodeStmtList } from "./ASTNodeStmtList";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { IForClause } from "./ParserTypes";
 export declare class ASTNodeForClause extends ASTNode {
+    parent: ASTNode | null;
+    parentField: string;
     kind: ASTnodeKind.ASTNodeForClause;
     kindString: string;
     more: ASTMoreForClause;
@@ -24,7 +26,7 @@ export declare class ASTNodeForClause extends ASTNode {
     Loop: ASTNodeLoop;
     Do: ASTNodeStmtList | null;
     DoLast: ASTNodeComment[];
-    constructor(forclause: IForClause);
-    accept(visitor: ASTnodeVisitor): void;
+    constructor(forclause: IForClause, parent: ASTNode | null, parentField: string);
+    accept(visitor: ASTVisitorBase): void;
 }
 //# sourceMappingURL=ASTNodeForClause.d.ts.map

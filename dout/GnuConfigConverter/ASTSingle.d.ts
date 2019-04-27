@@ -5,5 +5,5 @@
  * https://opensource.org/licenses/MIT
  */
 import { ASTNode } from "./ASTNode";
-export declare function ASTSingle<AE extends ASTNode, PE>(at: new (pt: PE) => AE, pe: PE | null): AE | null;
+export declare function ASTSingle<AE extends ASTNode, PE>(at: new (pt: PE, parent: ASTNode | null, parentField: string) => AE, pe: PE | null, parent: ASTNode | null, parentField: string): AE | null;
 //# sourceMappingURL=ASTSingle.d.ts.map

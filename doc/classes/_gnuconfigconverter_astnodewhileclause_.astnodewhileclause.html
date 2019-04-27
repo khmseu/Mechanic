@@ -107,7 +107,9 @@
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodewhileclause_.astnodewhileclause.html#whilepos" class="tsd-kind-icon">While<wbr>Pos</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite"><a href="_gnuconfigconverter_astnodewhileclause_.astnodewhileclause.html#kind" class="tsd-kind-icon">kind</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite"><a href="_gnuconfigconverter_astnodewhileclause_.astnodewhileclause.html#kindstring" class="tsd-kind-icon">kind<wbr>String</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_gnuconfigconverter_astnodewhileclause_.astnodewhileclause.html#more" class="tsd-kind-icon">more</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite"><a href="_gnuconfigconverter_astnodewhileclause_.astnodewhileclause.html#more" class="tsd-kind-icon">more</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite"><a href="_gnuconfigconverter_astnodewhileclause_.astnodewhileclause.html#parent" class="tsd-kind-icon">parent</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite"><a href="_gnuconfigconverter_astnodewhileclause_.astnodewhileclause.html#parentfield" class="tsd-kind-icon">parent<wbr>Field</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -125,20 +127,26 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">new ASTNode<wbr>While<wbr>Clause<span class="tsd-signature-symbol">(</span>whileclause<span class="tsd-signature-symbol">: </span><a href="../interfaces/_gnuconfigconverter_parsertypes_.iwhileclause.html" class="tsd-signature-type">IWhileClause</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodewhileclause_.astnodewhileclause.html" class="tsd-signature-type">ASTNodeWhileClause</a></li>
+						<li class="tsd-signature tsd-kind-icon">new ASTNode<wbr>While<wbr>Clause<span class="tsd-signature-symbol">(</span>whileclause<span class="tsd-signature-symbol">: </span><a href="../interfaces/_gnuconfigconverter_parsertypes_.iwhileclause.html" class="tsd-signature-type">IWhileClause</a>, parent<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnode_.astnode.html" class="tsd-signature-type">ASTNode</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span>, parentField<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodewhileclause_.astnodewhileclause.html" class="tsd-signature-type">ASTNodeWhileClause</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_gnuconfigconverter_astnode_.astnode.html">ASTNode</a>.<a href="_gnuconfigconverter_astnode_.astnode.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/c4ccb03/src/GnuConfigConverter/ASTNodeWhileClause.ts#L32">GnuConfigConverter/ASTNodeWhileClause.ts:32</a></li>
+									<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/23f3092/src/GnuConfigConverter/ASTNodeWhileClause.ts#L32">GnuConfigConverter/ASTNodeWhileClause.ts:32</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>whileclause: <a href="../interfaces/_gnuconfigconverter_parsertypes_.iwhileclause.html" class="tsd-signature-type">IWhileClause</a></h5>
+								</li>
+								<li>
+									<h5>parent: <a href="_gnuconfigconverter_astnode_.astnode.html" class="tsd-signature-type">ASTNode</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h5>
+								</li>
+								<li>
+									<h5>parentField: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="_gnuconfigconverter_astnodewhileclause_.astnodewhileclause.html" class="tsd-signature-type">ASTNodeWhileClause</a></h4>
@@ -154,7 +162,7 @@
 					<div class="tsd-signature tsd-kind-icon">Cond<span class="tsd-signature-symbol">:</span> <a href="_gnuconfigconverter_astnodestmtlist_.astnodestmtlist.html" class="tsd-signature-type">ASTNodeStmtList</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/c4ccb03/src/GnuConfigConverter/ASTNodeWhileClause.ts#L29">GnuConfigConverter/ASTNodeWhileClause.ts:29</a></li>
+							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/23f3092/src/GnuConfigConverter/ASTNodeWhileClause.ts#L29">GnuConfigConverter/ASTNodeWhileClause.ts:29</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -164,7 +172,7 @@
 					<div class="tsd-signature tsd-kind-icon">Cond<wbr>Last<span class="tsd-signature-symbol">:</span> <a href="_gnuconfigconverter_astnodecomment_.astnodecomment.html" class="tsd-signature-type">ASTNodeComment</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/c4ccb03/src/GnuConfigConverter/ASTNodeWhileClause.ts#L30">GnuConfigConverter/ASTNodeWhileClause.ts:30</a></li>
+							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/23f3092/src/GnuConfigConverter/ASTNodeWhileClause.ts#L30">GnuConfigConverter/ASTNodeWhileClause.ts:30</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -174,7 +182,7 @@
 					<div class="tsd-signature tsd-kind-icon">Do<span class="tsd-signature-symbol">:</span> <a href="_gnuconfigconverter_astnodestmtlist_.astnodestmtlist.html" class="tsd-signature-type">ASTNodeStmtList</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/c4ccb03/src/GnuConfigConverter/ASTNodeWhileClause.ts#L31">GnuConfigConverter/ASTNodeWhileClause.ts:31</a></li>
+							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/23f3092/src/GnuConfigConverter/ASTNodeWhileClause.ts#L31">GnuConfigConverter/ASTNodeWhileClause.ts:31</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -184,7 +192,7 @@
 					<div class="tsd-signature tsd-kind-icon">Do<wbr>Last<span class="tsd-signature-symbol">:</span> <a href="_gnuconfigconverter_astnodecomment_.astnodecomment.html" class="tsd-signature-type">ASTNodeComment</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/c4ccb03/src/GnuConfigConverter/ASTNodeWhileClause.ts#L32">GnuConfigConverter/ASTNodeWhileClause.ts:32</a></li>
+							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/23f3092/src/GnuConfigConverter/ASTNodeWhileClause.ts#L32">GnuConfigConverter/ASTNodeWhileClause.ts:32</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -194,7 +202,7 @@
 					<div class="tsd-signature tsd-kind-icon">Do<wbr>Pos<span class="tsd-signature-symbol">:</span> <a href="_gnuconfigconverter_astpos_.astpos.html" class="tsd-signature-type">ASTPos</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/c4ccb03/src/GnuConfigConverter/ASTNodeWhileClause.ts#L26">GnuConfigConverter/ASTNodeWhileClause.ts:26</a></li>
+							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/23f3092/src/GnuConfigConverter/ASTNodeWhileClause.ts#L26">GnuConfigConverter/ASTNodeWhileClause.ts:26</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -204,7 +212,7 @@
 					<div class="tsd-signature tsd-kind-icon">Done<wbr>Pos<span class="tsd-signature-symbol">:</span> <a href="_gnuconfigconverter_astpos_.astpos.html" class="tsd-signature-type">ASTPos</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/c4ccb03/src/GnuConfigConverter/ASTNodeWhileClause.ts#L27">GnuConfigConverter/ASTNodeWhileClause.ts:27</a></li>
+							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/23f3092/src/GnuConfigConverter/ASTNodeWhileClause.ts#L27">GnuConfigConverter/ASTNodeWhileClause.ts:27</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -215,7 +223,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_gnuconfigconverter_astnode_.astnode.html">ASTNode</a>.<a href="_gnuconfigconverter_astnode_.astnode.html#end">End</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/c4ccb03/src/GnuConfigConverter/ASTNode.ts#L19">GnuConfigConverter/ASTNode.ts:19</a></li>
+							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/23f3092/src/GnuConfigConverter/ASTNode.ts#L20">GnuConfigConverter/ASTNode.ts:20</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -226,7 +234,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_gnuconfigconverter_astnode_.astnode.html">ASTNode</a>.<a href="_gnuconfigconverter_astnode_.astnode.html#pos">Pos</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/c4ccb03/src/GnuConfigConverter/ASTNode.ts#L18">GnuConfigConverter/ASTNode.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/23f3092/src/GnuConfigConverter/ASTNode.ts#L19">GnuConfigConverter/ASTNode.ts:19</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -236,7 +244,7 @@
 					<div class="tsd-signature tsd-kind-icon">Until<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/c4ccb03/src/GnuConfigConverter/ASTNodeWhileClause.ts#L28">GnuConfigConverter/ASTNodeWhileClause.ts:28</a></li>
+							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/23f3092/src/GnuConfigConverter/ASTNodeWhileClause.ts#L28">GnuConfigConverter/ASTNodeWhileClause.ts:28</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -246,7 +254,7 @@
 					<div class="tsd-signature tsd-kind-icon">While<wbr>Pos<span class="tsd-signature-symbol">:</span> <a href="_gnuconfigconverter_astpos_.astpos.html" class="tsd-signature-type">ASTPos</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/c4ccb03/src/GnuConfigConverter/ASTNodeWhileClause.ts#L25">GnuConfigConverter/ASTNodeWhileClause.ts:25</a></li>
+							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/23f3092/src/GnuConfigConverter/ASTNodeWhileClause.ts#L25">GnuConfigConverter/ASTNodeWhileClause.ts:25</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -257,7 +265,7 @@
 					<aside class="tsd-sources">
 						<p>Overrides <a href="_gnuconfigconverter_astnode_.astnode.html">ASTNode</a>.<a href="_gnuconfigconverter_astnode_.astnode.html#kind">kind</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/c4ccb03/src/GnuConfigConverter/ASTNodeWhileClause.ts#L22">GnuConfigConverter/ASTNodeWhileClause.ts:22</a></li>
+							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/23f3092/src/GnuConfigConverter/ASTNodeWhileClause.ts#L22">GnuConfigConverter/ASTNodeWhileClause.ts:22</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -268,17 +276,40 @@
 					<aside class="tsd-sources">
 						<p>Overrides <a href="_gnuconfigconverter_astnode_.astnode.html">ASTNode</a>.<a href="_gnuconfigconverter_astnode_.astnode.html#kindstring">kindString</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/c4ccb03/src/GnuConfigConverter/ASTNodeWhileClause.ts#L23">GnuConfigConverter/ASTNodeWhileClause.ts:23</a></li>
+							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/23f3092/src/GnuConfigConverter/ASTNodeWhileClause.ts#L23">GnuConfigConverter/ASTNodeWhileClause.ts:23</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
 					<a name="more" class="tsd-anchor"></a>
 					<h3>more</h3>
 					<div class="tsd-signature tsd-kind-icon">more<span class="tsd-signature-symbol">:</span> <a href="_gnuconfigconverter_astmorewhileclause_.astmorewhileclause.html" class="tsd-signature-type">ASTMoreWhileClause</a><span class="tsd-signature-symbol"> =&nbsp;new ASTMoreWhileClause()</span></div>
 					<aside class="tsd-sources">
+						<p>Overrides <a href="_gnuconfigconverter_astnode_.astnode.html">ASTNode</a>.<a href="_gnuconfigconverter_astnode_.astnode.html#more">more</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/c4ccb03/src/GnuConfigConverter/ASTNodeWhileClause.ts#L24">GnuConfigConverter/ASTNodeWhileClause.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/23f3092/src/GnuConfigConverter/ASTNodeWhileClause.ts#L24">GnuConfigConverter/ASTNodeWhileClause.ts:24</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
+					<a name="parent" class="tsd-anchor"></a>
+					<h3>parent</h3>
+					<div class="tsd-signature tsd-kind-icon">parent<span class="tsd-signature-symbol">:</span> <a href="_gnuconfigconverter_astnode_.astnode.html" class="tsd-signature-type">ASTNode</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
+					<aside class="tsd-sources">
+						<p>Overrides <a href="_gnuconfigconverter_astnode_.astnode.html">ASTNode</a>.<a href="_gnuconfigconverter_astnode_.astnode.html#parent">parent</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/23f3092/src/GnuConfigConverter/ASTNodeWhileClause.ts#L34">GnuConfigConverter/ASTNodeWhileClause.ts:34</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
+					<a name="parentfield" class="tsd-anchor"></a>
+					<h3>parent<wbr>Field</h3>
+					<div class="tsd-signature tsd-kind-icon">parent<wbr>Field<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Overrides <a href="_gnuconfigconverter_astnode_.astnode.html">ASTNode</a>.<a href="_gnuconfigconverter_astnode_.astnode.html#parentfield">parentField</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/23f3092/src/GnuConfigConverter/ASTNodeWhileClause.ts#L34">GnuConfigConverter/ASTNodeWhileClause.ts:34</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -289,20 +320,20 @@
 					<a name="accept" class="tsd-anchor"></a>
 					<h3>accept</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">accept<span class="tsd-signature-symbol">(</span>visitor<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html" class="tsd-signature-type">ASTnodeVisitor</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">accept<span class="tsd-signature-symbol">(</span>visitor<span class="tsd-signature-symbol">: </span><a href="_gnuconfigconverter_astvisitorbase_.astvisitorbase.html" class="tsd-signature-type">ASTVisitorBase</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_gnuconfigconverter_astnode_.astnode.html">ASTNode</a>.<a href="_gnuconfigconverter_astnode_.astnode.html#accept">accept</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/c4ccb03/src/GnuConfigConverter/ASTNodeWhileClause.ts#L51">GnuConfigConverter/ASTNodeWhileClause.ts:51</a></li>
+									<li>Defined in <a href="https://github.com/khmseu/Mechanic/blob/23f3092/src/GnuConfigConverter/ASTNodeWhileClause.ts#L51">GnuConfigConverter/ASTNodeWhileClause.ts:51</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>visitor: <a href="_gnuconfigconverter_astnodevisitor_.astnodevisitor.html" class="tsd-signature-type">ASTnodeVisitor</a></h5>
+									<h5>visitor: <a href="_gnuconfigconverter_astvisitorbase_.astvisitorbase.html" class="tsd-signature-type">ASTVisitorBase</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -368,8 +399,14 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
 								<a href="_gnuconfigconverter_astnodewhileclause_.astnodewhileclause.html#kindstring" class="tsd-kind-icon">kind<wbr>String</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
 								<a href="_gnuconfigconverter_astnodewhileclause_.astnodewhileclause.html#more" class="tsd-kind-icon">more</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
+								<a href="_gnuconfigconverter_astnodewhileclause_.astnodewhileclause.html#parent" class="tsd-kind-icon">parent</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
+								<a href="_gnuconfigconverter_astnodewhileclause_.astnodewhileclause.html#parentfield" class="tsd-kind-icon">parent<wbr>Field</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 								<a href="_gnuconfigconverter_astnodewhileclause_.astnodewhileclause.html#accept" class="tsd-kind-icon">accept</a>

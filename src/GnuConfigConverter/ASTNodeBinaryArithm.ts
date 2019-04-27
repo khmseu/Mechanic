@@ -9,10 +9,10 @@ import { ASTMoreBinaryArithm } from "./ASTMoreBinaryArithm";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTnodeKind } from "./ASTnodeKind";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
-import { ASTSingle } from "./ASTSingle";
+import { ASTSingleNotNull } from "./ASTSingleNotNull";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
 import { BinAritOperator, IBinaryArithm } from "./ParserTypes";
 import { op, Token } from "./Token";
@@ -27,21 +27,21 @@ export class ASTNodeBinaryArithm extends ASTNode {
   public X: ASTNodeArithmExpr; //     X: IArithmExpr;
   public Y: ASTNodeArithmExpr; //     Y: IArithmExpr;
 
-  constructor(binaryarithm: IBinaryArithm, public parent: ASTNode | null) {
-    super(binaryarithm, parent);
+  constructor(binaryarithm: IBinaryArithm, public parent: ASTNode | null, public parentField: string) {
+    super(binaryarithm, parent, parentField);
     logg("ASTNodeBinaryArithm");
     this.OpPos = ASTSimpleSingle(ASTPos, binaryarithm.OpPos)!;
     this.Op = BinAritOperator[binaryarithm.Op];
     this.OpString = op((binaryarithm.Op as unknown) as Token);
-    this.X = ASTSingle(ASTNodeArithmExpr, binaryarithm.X, this)!;
-    this.Y = ASTSingle(ASTNodeArithmExpr, binaryarithm.Y, this)!;
-    ["OpPos"].forEach((f) => {
+    this.X = ASTSingleNotNull(ASTNodeArithmExpr, binaryarithm.X, this, "X")!;
+    this.Y = ASTSingleNotNull(ASTNodeArithmExpr, binaryarithm.Y, this, "Y")!;
+    ["kind", "parent", "parentField", "OpPos"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;
       Object.defineProperty(this, f, desc);
     });
   }
-  public accept(visitor: ASTnodeVisitor) {
+  public accept(visitor: ASTVisitorBase) {
     visitor.visitASTNodeBinaryArithmPre(this);
     this.X.accept(visitor);
     this.Y.accept(visitor);

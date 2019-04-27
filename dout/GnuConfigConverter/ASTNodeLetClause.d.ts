@@ -8,16 +8,18 @@ import { ASTMoreLetClause } from "./ASTMoreLetClause";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTnodeKind } from "./ASTnodeKind";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { ILetClause } from "./ParserTypes";
 export declare class ASTNodeLetClause extends ASTNode {
+    parent: ASTNode | null;
+    parentField: string;
     kind: ASTnodeKind.ASTNodeLetClause;
     kindString: string;
     more: ASTMoreLetClause;
     Let: ASTPos;
     Exprs: ASTNodeArithmExpr[];
-    constructor(letclause: ILetClause);
-    accept(visitor: ASTnodeVisitor): void;
+    constructor(letclause: ILetClause, parent: ASTNode | null, parentField: string);
+    accept(visitor: ASTVisitorBase): void;
 }
 //# sourceMappingURL=ASTNodeLetClause.d.ts.map

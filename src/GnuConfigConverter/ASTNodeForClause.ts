@@ -12,10 +12,11 @@ import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeLoop } from "./ASTNodeLoop";
 import { ASTNodeStmtList } from "./ASTNodeStmtList";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
 import { ASTSingle } from "./ASTSingle";
+import { ASTSingleNotNull } from "./ASTSingleNotNull";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
 import { IForClause } from "./ParserTypes";
 
@@ -31,23 +32,23 @@ export class ASTNodeForClause extends ASTNode {
   public Do: ASTNodeStmtList | null; //     Do: IStmtList | null;
   public DoLast: ASTNodeComment[]; //     DoLast: IComment[];
 
-  constructor(forclause: IForClause, public parent: ASTNode | null) {
-    super(forclause, parent);
+  constructor(forclause: IForClause, public parent: ASTNode | null, public parentField: string) {
+    super(forclause, parent, parentField);
     logg("ASTNodeForClause");
     this.ForPos = ASTSimpleSingle(ASTPos, forclause.ForPos)!;
     this.DoPos = ASTSimpleSingle(ASTPos, forclause.DoPos)!;
     this.DonePos = ASTSimpleSingle(ASTPos, forclause.DonePos)!;
     this.Select = forclause.Select;
-    this.Loop = ASTSingle(ASTNodeLoop, forclause.Loop, this)!;
-    this.Do = ASTSingle(ASTNodeStmtList, forclause.Do, this);
-    this.DoLast = ASTArray(ASTNodeComment, forclause.DoLast, this)!;
-    ["ForPos", "DoPos", "DonePos"].forEach((f) => {
+    this.Loop = ASTSingleNotNull(ASTNodeLoop, forclause.Loop, this, "Loop")!;
+    this.Do = ASTSingle(ASTNodeStmtList, forclause.Do, this, "Do");
+    this.DoLast = ASTArray(ASTNodeComment, forclause.DoLast, this, "DoLast")!;
+    ["kind", "parent", "parentField", "ForPos", "DoPos", "DonePos"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;
       Object.defineProperty(this, f, desc);
     });
   }
-  public accept(visitor: ASTnodeVisitor) {
+  public accept(visitor: ASTVisitorBase) {
     visitor.visitASTNodeForClausePre(this);
     this.Loop.accept(visitor);
     if (this.Do) {

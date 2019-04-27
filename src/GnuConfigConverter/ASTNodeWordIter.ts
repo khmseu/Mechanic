@@ -10,11 +10,11 @@ import { ASTMoreWordIter } from "./ASTMoreWordIter";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeLit } from "./ASTNodeLit";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTNodeWord } from "./ASTNodeWord";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
 import { ASTSingle } from "./ASTSingle";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
 import { IWordIter } from "./ParserTypes";
 
@@ -26,19 +26,19 @@ export class ASTNodeWordIter extends ASTNode {
   public InPos: ASTPos; //     InPos: I_Pos;
   public Items: ASTNodeWord[]; //     Items: IWord[] | null;
 
-  constructor(worditer: IWordIter, public parent: ASTNode | null) {
-    super(worditer, parent);
+  constructor(worditer: IWordIter, public parent: ASTNode | null, public parentField: string) {
+    super(worditer, parent, parentField);
     logg("ASTNodeWordIter");
-    this.Name = ASTSingle(ASTNodeLit, worditer.Name, this);
+    this.Name = ASTSingle(ASTNodeLit, worditer.Name, this, "Name");
     this.InPos = ASTSimpleSingle(ASTPos, worditer.InPos)!;
-    this.Items = ASTArray(ASTNodeWord, worditer.Items, this);
-    ["InPos"].forEach((f) => {
+    this.Items = ASTArray(ASTNodeWord, worditer.Items, this, "Items");
+    ["kind", "parent", "parentField", "InPos"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;
       Object.defineProperty(this, f, desc);
     });
   }
-  public accept(visitor: ASTnodeVisitor) {
+  public accept(visitor: ASTVisitorBase) {
     visitor.visitASTNodeWordIterPre(this);
     if (this.Name) {
       this.Name.accept(visitor);

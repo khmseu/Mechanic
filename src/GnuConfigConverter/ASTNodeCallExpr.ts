@@ -10,8 +10,8 @@ import { ASTMoreCallExpr } from "./ASTMoreCallExpr";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeAssign } from "./ASTNodeAssign";
 import { ASTnodeKind } from "./ASTnodeKind";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTNodeWord } from "./ASTNodeWord";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
 import { ICallExpr } from "./ParserTypes";
 
@@ -22,18 +22,18 @@ export class ASTNodeCallExpr extends ASTNode {
   public Assigns: ASTNodeAssign[]; //     Assigns: IAssign[] | null;
   public Args: ASTNodeWord[]; //     Args: IWord[] | null;
 
-  constructor(callexpr: ICallExpr, public parent: ASTNode | null) {
-    super(callexpr, parent);
+  constructor(callexpr: ICallExpr, public parent: ASTNode | null, public parentField: string) {
+    super(callexpr, parent, parentField);
     logg("ASTNodeCallExpr");
-    this.Assigns = ASTArray(ASTNodeAssign, callexpr.Assigns, this);
-    this.Args = ASTArray(ASTNodeWord, callexpr.Args, this);
-    [].forEach((f) => {
+    this.Assigns = ASTArray(ASTNodeAssign, callexpr.Assigns, this, "Assigns");
+    this.Args = ASTArray(ASTNodeWord, callexpr.Args, this, "Args");
+    ["kind", "parent", "parentField"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;
       Object.defineProperty(this, f, desc);
     });
   }
-  public accept(visitor: ASTnodeVisitor) {
+  public accept(visitor: ASTVisitorBase) {
     visitor.visitASTNodeCallExprPre(this);
     this.Assigns.forEach((e) => e.accept(visitor));
     this.Args.forEach((e) => e.accept(visitor));

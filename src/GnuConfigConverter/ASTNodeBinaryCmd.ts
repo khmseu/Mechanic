@@ -9,10 +9,10 @@ import { ASTMoreBinaryCmd } from "./ASTMoreBinaryCmd";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmt } from "./ASTNodeStmt";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
-import { ASTSingle } from "./ASTSingle";
+import { ASTSingleNotNull } from "./ASTSingleNotNull";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
 import { BinCmdOperator, IBinaryCmd } from "./ParserTypes";
 import { op, Token } from "./Token";
@@ -27,21 +27,21 @@ export class ASTNodeBinaryCmd extends ASTNode {
   public X: ASTNodeStmt; //     X: IStmt;
   public Y: ASTNodeStmt; //     Y: IStmt;
 
-  constructor(binarycmd: IBinaryCmd, public parent: ASTNode | null) {
-    super(binarycmd, parent);
+  constructor(binarycmd: IBinaryCmd, public parent: ASTNode | null, public parentField: string) {
+    super(binarycmd, parent, parentField);
     logg("ASTNodeBinaryCmd");
     this.OpPos = ASTSimpleSingle(ASTPos, binarycmd.OpPos)!;
     this.Op = BinCmdOperator[binarycmd.Op];
     this.OpString = op((binarycmd.Op as unknown) as Token);
-    this.X = ASTSingle(ASTNodeStmt, binarycmd.X, this)!;
-    this.Y = ASTSingle(ASTNodeStmt, binarycmd.Y, this)!;
-    ["OpPos"].forEach((f) => {
+    this.X = ASTSingleNotNull(ASTNodeStmt, binarycmd.X, this, "X")!;
+    this.Y = ASTSingleNotNull(ASTNodeStmt, binarycmd.Y, this, "Y")!;
+    ["kind", "parent", "parentField", "OpPos"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;
       Object.defineProperty(this, f, desc);
     });
   }
-  public accept(visitor: ASTnodeVisitor) {
+  public accept(visitor: ASTVisitorBase) {
     visitor.visitASTNodeBinaryCmdPre(this);
     this.X.accept(visitor);
     this.Y.accept(visitor);

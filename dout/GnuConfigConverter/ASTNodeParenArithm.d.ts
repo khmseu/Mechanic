@@ -8,17 +8,19 @@ import { ASTMoreParenArithm } from "./ASTMoreParenArithm";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTnodeKind } from "./ASTnodeKind";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { IParenArithm } from "./ParserTypes";
 export declare class ASTNodeParenArithm extends ASTNode {
+    parent: ASTNode | null;
+    parentField: string;
     kind: ASTnodeKind.ASTNodeParenArithm;
     kindString: string;
     more: ASTMoreParenArithm;
     Lparen: ASTPos;
     Rparen: ASTPos;
     X: ASTNodeArithmExpr;
-    constructor(parenarithm: IParenArithm);
-    accept(visitor: ASTnodeVisitor): void;
+    constructor(parenarithm: IParenArithm, parent: ASTNode | null, parentField: string);
+    accept(visitor: ASTVisitorBase): void;
 }
 //# sourceMappingURL=ASTNodeParenArithm.d.ts.map

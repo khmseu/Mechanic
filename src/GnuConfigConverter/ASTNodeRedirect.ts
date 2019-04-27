@@ -9,11 +9,11 @@ import { ASTMoreRedirect } from "./ASTMoreRedirect";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeLit } from "./ASTNodeLit";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTNodeWord } from "./ASTNodeWord";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
 import { ASTSingle } from "./ASTSingle";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
 import { IRedirect, RedirOperator } from "./ParserTypes";
 import { op, Token } from "./Token";
@@ -29,22 +29,22 @@ export class ASTNodeRedirect extends ASTNode {
   public Word: ASTNodeWord | null; //     Word: IWord | null;
   public Hdoc: ASTNodeWord | null; //     Hdoc: IWord | null;
 
-  constructor(redirect: IRedirect, public parent: ASTNode | null) {
-    super(redirect, parent);
+  constructor(redirect: IRedirect, public parent: ASTNode | null, public parentField: string) {
+    super(redirect, parent, parentField);
     logg("ASTNodeRedirect");
     this.OpPos = ASTSimpleSingle(ASTPos, redirect.OpPos)!;
     this.Op = RedirOperator[redirect.Op];
     this.OpString = op((redirect.Op as unknown) as Token);
-    this.N = ASTSingle(ASTNodeLit, redirect.N, this);
-    this.Word = ASTSingle(ASTNodeWord, redirect.Word, this);
-    this.Hdoc = ASTSingle(ASTNodeWord, redirect.Hdoc, this);
-    ["OpPos"].forEach((f) => {
+    this.N = ASTSingle(ASTNodeLit, redirect.N, this, "N");
+    this.Word = ASTSingle(ASTNodeWord, redirect.Word, this, "Word");
+    this.Hdoc = ASTSingle(ASTNodeWord, redirect.Hdoc, this, "Hdoc");
+    ["kind", "parent", "parentField", "OpPos"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;
       Object.defineProperty(this, f, desc);
     });
   }
-  public accept(visitor: ASTnodeVisitor) {
+  public accept(visitor: ASTVisitorBase) {
     visitor.visitASTNodeRedirectPre(this);
     if (this.N) {
       this.N.accept(visitor);

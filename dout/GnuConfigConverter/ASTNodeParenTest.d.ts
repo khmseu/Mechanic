@@ -8,17 +8,19 @@ import { ASTMoreParenTest } from "./ASTMoreParenTest";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeTestExpr } from "./ASTNodeTestExpr";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { IParenTest } from "./ParserTypes";
 export declare class ASTNodeParenTest extends ASTNode {
+    parent: ASTNode | null;
+    parentField: string;
     kind: ASTnodeKind.ASTNodeParenTest;
     kindString: string;
     more: ASTMoreParenTest;
     Lparen: ASTPos;
     Rparen: ASTPos;
     X: ASTNodeTestExpr;
-    constructor(parentest: IParenTest);
-    accept(visitor: ASTnodeVisitor): void;
+    constructor(parentest: IParenTest, parent: ASTNode | null, parentField: string);
+    accept(visitor: ASTVisitorBase): void;
 }
 //# sourceMappingURL=ASTNodeParenTest.d.ts.map

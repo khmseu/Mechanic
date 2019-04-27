@@ -11,11 +11,11 @@ import { ASTNode } from "./ASTNode";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmtList } from "./ASTNodeStmtList";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTNodeWord } from "./ASTNodeWord";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
 import { ASTSingle } from "./ASTSingle";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
 import { CaseOperator, ICaseItem } from "./ParserTypes";
 import { op, Token } from "./Token";
@@ -32,23 +32,23 @@ export class ASTNodeCaseItem extends ASTNode {
   public StmtList: ASTNodeStmtList | null; //     StmtList: IStmtList | null;
   public Last: ASTNodeComment[]; //     Last: IComment[];
 
-  constructor(caseitem: ICaseItem, public parent: ASTNode | null) {
-    super(caseitem, parent);
+  constructor(caseitem: ICaseItem, public parent: ASTNode | null, public parentField: string) {
+    super(caseitem, parent, parentField);
     logg("ASTNodeCaseItem");
     this.Op = CaseOperator[caseitem.Op];
     this.OpString = op((caseitem.Op as unknown) as Token);
     this.OpPos = ASTSimpleSingle(ASTPos, caseitem.OpPos)!;
-    this.Comments = ASTArray(ASTNodeComment, caseitem.Comments, this)!;
-    this.Patterns = ASTArray(ASTNodeWord, caseitem.Patterns, this);
-    this.StmtList = ASTSingle(ASTNodeStmtList, caseitem.StmtList, this);
-    this.Last = ASTArray(ASTNodeComment, caseitem.Last, this)!;
-    ["OpPos"].forEach((f) => {
+    this.Comments = ASTArray(ASTNodeComment, caseitem.Comments, this, "Comments")!;
+    this.Patterns = ASTArray(ASTNodeWord, caseitem.Patterns, this, "Patterns");
+    this.StmtList = ASTSingle(ASTNodeStmtList, caseitem.StmtList, this, "StmtList");
+    this.Last = ASTArray(ASTNodeComment, caseitem.Last, this, "Last")!;
+    ["kind", "parent", "parentField", "OpPos"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;
       Object.defineProperty(this, f, desc);
     });
   }
-  public accept(visitor: ASTnodeVisitor) {
+  public accept(visitor: ASTVisitorBase) {
     visitor.visitASTNodeCaseItemPre(this);
     this.Comments.forEach((e) => e.accept(visitor));
     this.Patterns.forEach((e) => e.accept(visitor));

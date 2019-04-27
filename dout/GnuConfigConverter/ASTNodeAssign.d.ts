@@ -10,20 +10,22 @@ import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTNodeArrayExpr } from "./ASTNodeArrayExpr";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeLit } from "./ASTNodeLit";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTNodeWord } from "./ASTNodeWord";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { IAssign } from "./ParserTypes";
 export declare class ASTNodeAssign extends ASTNode {
+    parent: ASTNode | null;
+    parentField: string;
     kind: ASTnodeKind.ASTNodeAssign;
     kindString: string;
     more: ASTMoreAssign;
     Append: boolean;
     Naked: boolean;
     Name: ASTNodeLit | null;
-    Index: ASTNodeArithmExpr;
+    Index: ASTNodeArithmExpr | null;
     Value: ASTNodeWord | null;
     Array: ASTNodeArrayExpr | null;
-    constructor(assign: IAssign);
-    accept(visitor: ASTnodeVisitor): void;
+    constructor(assign: IAssign, parent: ASTNode | null, parentField: string);
+    accept(visitor: ASTVisitorBase): void;
 }
 //# sourceMappingURL=ASTNodeAssign.d.ts.map

@@ -8,10 +8,12 @@ import { ASTMoreCStyleLoop } from "./ASTMoreCStyleLoop";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTnodeKind } from "./ASTnodeKind";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { ICStyleLoop } from "./ParserTypes";
 export declare class ASTNodeCStyleLoop extends ASTNode {
+    parent: ASTNode | null;
+    parentField: string;
     kind: ASTnodeKind.ASTNodeCStyleLoop;
     kindString: string;
     more: ASTMoreCStyleLoop;
@@ -20,7 +22,7 @@ export declare class ASTNodeCStyleLoop extends ASTNode {
     Init: ASTNodeArithmExpr;
     Cond: ASTNodeArithmExpr;
     Post: ASTNodeArithmExpr;
-    constructor(cstyleloop: ICStyleLoop);
-    accept(visitor: ASTnodeVisitor): void;
+    constructor(cstyleloop: ICStyleLoop, parent: ASTNode | null, parentField: string);
+    accept(visitor: ASTVisitorBase): void;
 }
 //# sourceMappingURL=ASTNodeCStyleLoop.d.ts.map

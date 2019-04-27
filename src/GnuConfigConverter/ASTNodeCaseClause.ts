@@ -11,11 +11,11 @@ import { ASTNode } from "./ASTNode";
 import { ASTNodeCaseItem } from "./ASTNodeCaseItem";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTNodeWord } from "./ASTNodeWord";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
 import { ASTSingle } from "./ASTSingle";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
 import { ICaseClause } from "./ParserTypes";
 
@@ -29,21 +29,21 @@ export class ASTNodeCaseClause extends ASTNode {
   public Items: ASTNodeCaseItem[]; //     Items: ICaseItem[] | null;
   public Last: ASTNodeComment[]; //     Last: IComment[];
 
-  constructor(caseclause: ICaseClause, public parent: ASTNode | null) {
-    super(caseclause, parent);
+  constructor(caseclause: ICaseClause, public parent: ASTNode | null, public parentField: string) {
+    super(caseclause, parent, parentField);
     logg("ASTNodeCaseClause");
     this.Case = ASTSimpleSingle(ASTPos, caseclause.Case)!;
     this.Esac = ASTSimpleSingle(ASTPos, caseclause.Esac)!;
-    this.Word = ASTSingle(ASTNodeWord, caseclause.Word, this);
-    this.Items = ASTArray(ASTNodeCaseItem, caseclause.Items, this);
-    this.Last = ASTArray(ASTNodeComment, caseclause.Last, this)!;
-    ["Case", "Esac"].forEach((f) => {
+    this.Word = ASTSingle(ASTNodeWord, caseclause.Word, this, "Word");
+    this.Items = ASTArray(ASTNodeCaseItem, caseclause.Items, this, "Items");
+    this.Last = ASTArray(ASTNodeComment, caseclause.Last, this, "Last")!;
+    ["kind", "parent", "parentField", "Case", "Esac"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;
       Object.defineProperty(this, f, desc);
     });
   }
-  public accept(visitor: ASTnodeVisitor) {
+  public accept(visitor: ASTVisitorBase) {
     visitor.visitASTNodeCaseClausePre(this);
     if (this.Word) {
       this.Word.accept(visitor);

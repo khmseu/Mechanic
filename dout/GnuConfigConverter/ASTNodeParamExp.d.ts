@@ -10,12 +10,14 @@ import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeLit } from "./ASTNodeLit";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
 import { ASTReplace } from "./ASTReplace";
 import { ASTSlice } from "./ASTSlice";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { IParamExp } from "./ParserTypes";
 export declare class ASTNodeParamExp extends ASTNode {
+    parent: ASTNode | null;
+    parentField: string;
     kind: ASTnodeKind.ASTNodeParamExp;
     kindString: string;
     more: ASTMoreParamExp;
@@ -26,13 +28,13 @@ export declare class ASTNodeParamExp extends ASTNode {
     Length: boolean;
     Width: boolean;
     Param: ASTNodeLit | null;
-    Index: ASTNodeArithmExpr;
+    Index: ASTNodeArithmExpr | null;
     Slice: ASTSlice | null;
     Repl: ASTReplace | null;
-    Names: string;
-    NamesString: string;
+    Names: string | null;
+    NamesString: string | null;
     Exp: ASTExpansion | null;
-    constructor(paramexp: IParamExp);
-    accept(visitor: ASTnodeVisitor): void;
+    constructor(paramexp: IParamExp, parent: ASTNode | null, parentField: string);
+    accept(visitor: ASTVisitorBase): void;
 }
 //# sourceMappingURL=ASTNodeParamExp.d.ts.map

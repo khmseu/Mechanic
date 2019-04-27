@@ -11,10 +11,10 @@ import { ASTNode } from "./ASTNode";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmtList } from "./ASTNodeStmtList";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
 import { ASTSingle } from "./ASTSingle";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
 import { ISubshell } from "./ParserTypes";
 
@@ -27,20 +27,20 @@ export class ASTNodeSubshell extends ASTNode {
   public StmtList: ASTNodeStmtList | null; //     StmtList: IStmtList | null;
   public Last: ASTNodeComment[]; //     Last: IComment[];
 
-  constructor(subshell: ISubshell, public parent: ASTNode | null) {
-    super(subshell, parent);
+  constructor(subshell: ISubshell, public parent: ASTNode | null, public parentField: string) {
+    super(subshell, parent, parentField);
     logg("ASTNodeSubshell");
     this.Lparen = ASTSimpleSingle(ASTPos, subshell.Lparen)!;
     this.Rparen = ASTSimpleSingle(ASTPos, subshell.Rparen)!;
-    this.StmtList = ASTSingle(ASTNodeStmtList, subshell.StmtList, this);
-    this.Last = ASTArray(ASTNodeComment, subshell.Last, this)!;
-    ["Lparen", "Rparen"].forEach((f) => {
+    this.StmtList = ASTSingle(ASTNodeStmtList, subshell.StmtList, this, "StmtList");
+    this.Last = ASTArray(ASTNodeComment, subshell.Last, this, "Last")!;
+    ["kind", "parent", "parentField", "Lparen", "Rparen"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;
       Object.defineProperty(this, f, desc);
     });
   }
-  public accept(visitor: ASTnodeVisitor) {
+  public accept(visitor: ASTVisitorBase) {
     visitor.visitASTNodeSubshellPre(this);
     if (this.StmtList) {
       this.StmtList.accept(visitor);

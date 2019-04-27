@@ -9,10 +9,10 @@ import { ASTMoreUnaryArithm } from "./ASTMoreUnaryArithm";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTnodeKind } from "./ASTnodeKind";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
-import { ASTSingle } from "./ASTSingle";
+import { ASTSingleNotNull } from "./ASTSingleNotNull";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
 import { IUnaryArithm, UnAritOperator } from "./ParserTypes";
 import { op, Token } from "./Token";
@@ -27,21 +27,21 @@ export class ASTNodeUnaryArithm extends ASTNode {
   public Post: boolean; //     Post: boolean;
   public X: ASTNodeArithmExpr; //     X: IArithmExpr;
 
-  constructor(unaryarithm: IUnaryArithm, public parent: ASTNode | null) {
-    super(unaryarithm, parent);
+  constructor(unaryarithm: IUnaryArithm, public parent: ASTNode | null, public parentField: string) {
+    super(unaryarithm, parent, parentField);
     logg("ASTNodeUnaryArithm");
     this.OpPos = ASTSimpleSingle(ASTPos, unaryarithm.OpPos)!;
     this.Op = UnAritOperator[unaryarithm.Op];
     this.OpString = op((unaryarithm.Op as unknown) as Token);
     this.Post = unaryarithm.Post;
-    this.X = ASTSingle(ASTNodeArithmExpr, unaryarithm.X, this)!;
-    ["OpPos"].forEach((f) => {
+    this.X = ASTSingleNotNull(ASTNodeArithmExpr, unaryarithm.X, this, "X")!;
+    ["kind", "parent", "parentField", "OpPos"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;
       Object.defineProperty(this, f, desc);
     });
   }
-  public accept(visitor: ASTnodeVisitor) {
+  public accept(visitor: ASTVisitorBase) {
     visitor.visitASTNodeUnaryArithmPre(this);
     this.X.accept(visitor);
     visitor.visitASTNodeUnaryArithmPost(this);

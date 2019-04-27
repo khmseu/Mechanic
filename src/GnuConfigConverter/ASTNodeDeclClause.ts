@@ -11,9 +11,9 @@ import { ASTNode } from "./ASTNode";
 import { ASTNodeAssign } from "./ASTNodeAssign";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeLit } from "./ASTNodeLit";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTNodeWord } from "./ASTNodeWord";
 import { ASTSingle } from "./ASTSingle";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
 import { IDeclClause } from "./ParserTypes";
 
@@ -25,19 +25,19 @@ export class ASTNodeDeclClause extends ASTNode {
   public Opts: ASTNodeWord[]; //     Opts: IWord[] | null;
   public Assigns: ASTNodeAssign[]; //     Assigns: IAssign[] | null;
 
-  constructor(declclause: IDeclClause, public parent: ASTNode | null) {
-    super(declclause, parent);
+  constructor(declclause: IDeclClause, public parent: ASTNode | null, public parentField: string) {
+    super(declclause, parent, parentField);
     logg("ASTNodeDeclClause");
-    this.Variant = ASTSingle(ASTNodeLit, declclause.Variant, this);
-    this.Opts = ASTArray(ASTNodeWord, declclause.Opts, this);
-    this.Assigns = ASTArray(ASTNodeAssign, declclause.Assigns, this);
-    [].forEach((f) => {
+    this.Variant = ASTSingle(ASTNodeLit, declclause.Variant, this, "Variant");
+    this.Opts = ASTArray(ASTNodeWord, declclause.Opts, this, "Opts");
+    this.Assigns = ASTArray(ASTNodeAssign, declclause.Assigns, this, "Assigns");
+    ["kind", "parent", "parentField"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;
       Object.defineProperty(this, f, desc);
     });
   }
-  public accept(visitor: ASTnodeVisitor) {
+  public accept(visitor: ASTVisitorBase) {
     visitor.visitASTNodeDeclClausePre(this);
     if (this.Variant) {
       this.Variant.accept(visitor);

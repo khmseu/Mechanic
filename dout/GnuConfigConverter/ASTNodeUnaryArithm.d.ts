@@ -8,10 +8,12 @@ import { ASTMoreUnaryArithm } from "./ASTMoreUnaryArithm";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTnodeKind } from "./ASTnodeKind";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { IUnaryArithm } from "./ParserTypes";
 export declare class ASTNodeUnaryArithm extends ASTNode {
+    parent: ASTNode | null;
+    parentField: string;
     kind: ASTnodeKind.ASTNodeUnaryArithm;
     kindString: string;
     more: ASTMoreUnaryArithm;
@@ -20,7 +22,7 @@ export declare class ASTNodeUnaryArithm extends ASTNode {
     OpString: string;
     Post: boolean;
     X: ASTNodeArithmExpr;
-    constructor(unaryarithm: IUnaryArithm);
-    accept(visitor: ASTnodeVisitor): void;
+    constructor(unaryarithm: IUnaryArithm, parent: ASTNode | null, parentField: string);
+    accept(visitor: ASTVisitorBase): void;
 }
 //# sourceMappingURL=ASTNodeUnaryArithm.d.ts.map

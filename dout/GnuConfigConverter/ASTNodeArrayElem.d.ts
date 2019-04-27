@@ -9,17 +9,19 @@ import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTNodeWord } from "./ASTNodeWord";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { IArrayElem } from "./ParserTypes";
 export declare class ASTNodeArrayElem extends ASTNode {
+    parent: ASTNode | null;
+    parentField: string;
     kind: ASTnodeKind.ASTNodeArrayElem;
     kindString: string;
     more: ASTMoreArrayElem;
     Index: ASTNodeArithmExpr;
     Value: ASTNodeWord | null;
     Comments: ASTNodeComment[];
-    constructor(arrayelem: IArrayElem);
-    accept(visitor: ASTnodeVisitor): void;
+    constructor(arrayelem: IArrayElem, parent: ASTNode | null, parentField: string);
+    accept(visitor: ASTVisitorBase): void;
 }
 //# sourceMappingURL=ASTNodeArrayElem.d.ts.map

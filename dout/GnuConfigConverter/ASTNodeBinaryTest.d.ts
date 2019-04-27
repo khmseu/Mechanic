@@ -8,10 +8,12 @@ import { ASTMoreBinaryTest } from "./ASTMoreBinaryTest";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeTestExpr } from "./ASTNodeTestExpr";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { IBinaryTest } from "./ParserTypes";
 export declare class ASTNodeBinaryTest extends ASTNode {
+    parent: ASTNode | null;
+    parentField: string;
     kind: ASTnodeKind.ASTNodeBinaryTest;
     kindString: string;
     more: ASTMoreBinaryTest;
@@ -20,7 +22,7 @@ export declare class ASTNodeBinaryTest extends ASTNode {
     OpString: string;
     X: ASTNodeTestExpr;
     Y: ASTNodeTestExpr;
-    constructor(binarytest: IBinaryTest);
-    accept(visitor: ASTnodeVisitor): void;
+    constructor(binarytest: IBinaryTest, parent: ASTNode | null, parentField: string);
+    accept(visitor: ASTVisitorBase): void;
 }
 //# sourceMappingURL=ASTNodeBinaryTest.d.ts.map

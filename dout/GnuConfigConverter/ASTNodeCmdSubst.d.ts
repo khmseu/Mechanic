@@ -9,10 +9,12 @@ import { ASTNode } from "./ASTNode";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmtList } from "./ASTNodeStmtList";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { ICmdSubst } from "./ParserTypes";
 export declare class ASTNodeCmdSubst extends ASTNode {
+    parent: ASTNode | null;
+    parentField: string;
     kind: ASTnodeKind.ASTNodeCmdSubst;
     kindString: string;
     more: ASTMoreCmdSubst;
@@ -22,7 +24,7 @@ export declare class ASTNodeCmdSubst extends ASTNode {
     Last: ASTNodeComment[];
     TempFile: boolean;
     ReplyVar: boolean;
-    constructor(cmdsubst: ICmdSubst);
-    accept(visitor: ASTnodeVisitor): void;
+    constructor(cmdsubst: ICmdSubst, parent: ASTNode | null, parentField: string);
+    accept(visitor: ASTVisitorBase): void;
 }
 //# sourceMappingURL=ASTNodeCmdSubst.d.ts.map

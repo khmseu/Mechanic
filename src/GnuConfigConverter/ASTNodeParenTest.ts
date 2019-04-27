@@ -9,10 +9,10 @@ import { ASTMoreParenTest } from "./ASTMoreParenTest";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeTestExpr } from "./ASTNodeTestExpr";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
-import { ASTSingle } from "./ASTSingle";
+import { ASTSingleNotNull } from "./ASTSingleNotNull";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
 import { IParenTest } from "./ParserTypes";
 
@@ -24,19 +24,19 @@ export class ASTNodeParenTest extends ASTNode {
   public Rparen: ASTPos; //     Rparen: I_Pos;
   public X: ASTNodeTestExpr; //     X: ITestExpr;
 
-  constructor(parentest: IParenTest, public parent: ASTNode | null) {
-    super(parentest, parent);
+  constructor(parentest: IParenTest, public parent: ASTNode | null, public parentField: string) {
+    super(parentest, parent, parentField);
     logg("ASTNodeParenTest");
     this.Lparen = ASTSimpleSingle(ASTPos, parentest.Lparen)!;
     this.Rparen = ASTSimpleSingle(ASTPos, parentest.Rparen)!;
-    this.X = ASTSingle(ASTNodeTestExpr, parentest.X, this)!;
-    ["Lparen", "Rparen"].forEach((f) => {
+    this.X = ASTSingleNotNull(ASTNodeTestExpr, parentest.X, this, "X")!;
+    ["kind", "parent", "parentField", "Lparen", "Rparen"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;
       Object.defineProperty(this, f, desc);
     });
   }
-  public accept(visitor: ASTnodeVisitor) {
+  public accept(visitor: ASTVisitorBase) {
     visitor.visitASTNodeParenTestPre(this);
     this.X.accept(visitor);
     visitor.visitASTNodeParenTestPost(this);

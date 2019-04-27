@@ -1,0 +1,1 @@
+{"version":3,"file":"ASTVisitorComments.d.ts","sourceRoot":"","sources":["../../src/GnuConfigConverter/ASTVisitorComments.ts"],"names":[],"mappings":"AAAA;;;;;GAKG;AAEH,OAAO,EAAE,cAAc,EAAE,MAAM,kBAAkB,CAAC;AAClD,OAAO,EAAE,cAAc,EAAE,MAAM,kBAAkB,CAAC;AAElD,qBAAa,kBAAmB,SAAQ,cAAc;IAC7C,sBAAsB,CAAC,IAAI,EAAE,cAAc;CAMnD"}

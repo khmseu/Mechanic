@@ -9,10 +9,10 @@ import { ASTArray } from "./ASTArray";
 import { ASTMoreDblQuoted } from "./ASTMoreDblQuoted";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTNodeWordPart } from "./ASTNodeWordPart";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
 import { IDblQuoted } from "./ParserTypes";
 
@@ -24,19 +24,19 @@ export class ASTNodeDblQuoted extends ASTNode {
   public Dollar: boolean; //     Dollar: boolean;
   public Parts: ASTNodeWordPart[]; //     Parts: IWordPart[];
 
-  constructor(dblquoted: IDblQuoted, public parent: ASTNode | null) {
-    super(dblquoted, parent);
+  constructor(dblquoted: IDblQuoted, public parent: ASTNode | null, public parentField: string) {
+    super(dblquoted, parent, parentField);
     logg("ASTNodeDblQuoted");
     this.Position = ASTSimpleSingle(ASTPos, dblquoted.Position)!;
     this.Dollar = dblquoted.Dollar;
-    this.Parts = ASTArray(ASTNodeWordPart, dblquoted.Parts, this)!;
-    ["Position"].forEach((f) => {
+    this.Parts = ASTArray(ASTNodeWordPart, dblquoted.Parts, this, "Parts")!;
+    ["kind", "parent", "parentField", "Position"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;
       Object.defineProperty(this, f, desc);
     });
   }
-  public accept(visitor: ASTnodeVisitor) {
+  public accept(visitor: ASTVisitorBase) {
     visitor.visitASTNodeDblQuotedPre(this);
     this.Parts.forEach((e) => e.accept(visitor));
     visitor.visitASTNodeDblQuotedPost(this);

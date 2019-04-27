@@ -63,7 +63,7 @@ export interface IAssign extends INode {
   Append: boolean; // +=
   Naked: boolean; // without '='
   Name: ILit | null;
-  Index: IArithmExpr; // [i], ["k"]
+  Index: IArithmExpr | null; // [i], ["k"]
   Value: IWord | null; // =val
   Array: IArrayExpr | null; // =(arr)
 }
@@ -275,10 +275,10 @@ export interface IParamExp extends INode {
   Length: boolean; // ${#a}
   Width: boolean; // ${%a}
   Param: ILit | null;
-  Index: IArithmExpr; // ${a[i]}, ${a["k"]}
+  Index: IArithmExpr | null; // ${a[i]}, ${a["k"]}
   Slice: I_Slice | null; // ${a:x:y}
   Repl: I_Replace | null; // ${a/x/y}
-  Names: ParNamesOperator; // ${!prefix*} or ${!prefix@}
+  Names: ParNamesOperator | null; // ${!prefix*} or ${!prefix@}
   Exp: I_Expansion | null; // ${a:-b}, ${a#b}, etc
 }
 // ParenArithm represents an arithmetic expression within parentheses.

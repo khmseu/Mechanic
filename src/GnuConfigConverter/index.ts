@@ -9,6 +9,7 @@ import { readFileSync, writeFileSync } from "fs";
 import { syntax } from "mvdan-sh";
 import { format, resolve } from "path";
 import { ASTNodeFile } from "./ASTNodeFile";
+import { ASTVisitorComments } from "./ASTVisitorComments";
 import { logg } from "./logg";
 import { IFile } from "./ParserTypes";
 
@@ -38,7 +39,8 @@ function perFile(f: string): void {
   const parser = syntax.NewParser(syntax.Variant(syntax.LangPOSIX), syntax.KeepComments);
   const j: IFile = parser.Parse(t, f);
   logg(j);
-  const k: ASTNodeFile = new ASTNodeFile(j);
+  const k: ASTNodeFile = new ASTNodeFile(j, null, "");
+  k.accept(new ASTVisitorComments());
   // const js = joiner(prepFile(j), "\n");
   const js = JSON.stringify(k, null, 2);
   writeFileSync(resolve(format({ ext: ".js", name: f })), js, { encoding: "ascii" });

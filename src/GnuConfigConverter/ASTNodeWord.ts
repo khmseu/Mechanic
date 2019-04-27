@@ -9,9 +9,9 @@ import { ASTArray } from "./ASTArray";
 import { ASTMoreWord } from "./ASTMoreWord";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTNodeWordPart } from "./ASTNodeWordPart";
 import { ASTSingle } from "./ASTSingle";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
 import { IWord } from "./ParserTypes";
 
@@ -23,19 +23,19 @@ export class ASTNodeWord extends ASTNode {
   public SplitBraces: ASTNodeWord | null; //     SplitBraces: (() => IWord) | null;
   public Lit: string | null; //     Lit: (() => string) | null;
 
-  constructor(word: IWord, public parent: ASTNode | null) {
-    super(word, parent);
+  constructor(word: IWord, public parent: ASTNode | null, public parentField: string) {
+    super(word, parent, parentField);
     logg("ASTNodeWord");
-    this.Parts = ASTArray(ASTNodeWordPart, word.Parts, this)!;
-    this.SplitBraces = word.SplitBraces ? ASTSingle(ASTNodeWord, word.SplitBraces(), this) : null;
+    this.Parts = ASTArray(ASTNodeWordPart, word.Parts, this, "Parts")!;
+    this.SplitBraces = word.SplitBraces ? ASTSingle(ASTNodeWord, word.SplitBraces(), this, "SplitBraces") : null;
     this.Lit = word.Lit ? word.Lit() : null;
-    [].forEach((f) => {
+    ["kind", "parent", "parentField"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;
       Object.defineProperty(this, f, desc);
     });
   }
-  public accept(visitor: ASTnodeVisitor) {
+  public accept(visitor: ASTVisitorBase) {
     visitor.visitASTNodeWordPre(this);
     this.Parts.forEach((e) => e.accept(visitor));
     if (this.SplitBraces) {

@@ -25,28 +25,28 @@ export class ASTNodeWordPart extends ASTNode {
   // tslint:disable-next-line:max-line-length
   public kind: ASTnodeKind.bad | ASTnodeKind.ASTNodeLit | ASTnodeKind.ASTNodeSglQuoted | ASTnodeKind.ASTNodeDblQuoted | ASTnodeKind.ASTNodeParamExp | ASTnodeKind.ASTNodeCmdSubst | ASTnodeKind.ASTNodeArithmExp | ASTnodeKind.ASTNodeProcSubst | ASTnodeKind.ASTNodeExtGlob | ASTnodeKind.ASTNodeBraceExp = ASTnodeKind.bad;
   public kindString: string = ASTnodeKind[ASTnodeKind.bad];
-  constructor(wordpart: IWordPart, public parent: ASTNode | null) {
-    super(wordpart, parent);
+  constructor(wordpart: IWordPart, public parent: ASTNode | null, public parentField: string) {
+    super(wordpart, parent, parentField);
     logg("ASTNodeWordPart");
     switch (syntax.NodeType(wordpart)) {
       case "Lit":
-        return new ASTNodeLit(wordpart as ILit, parent);
+        return new ASTNodeLit(wordpart as ILit, parent, parentField);
       case "SglQuoted":
-        return new ASTNodeSglQuoted(wordpart as ISglQuoted, parent);
+        return new ASTNodeSglQuoted(wordpart as ISglQuoted, parent, parentField);
       case "DblQuoted":
-        return new ASTNodeDblQuoted(wordpart as IDblQuoted, parent);
+        return new ASTNodeDblQuoted(wordpart as IDblQuoted, parent, parentField);
       case "ParamExp":
-        return new ASTNodeParamExp(wordpart as IParamExp, parent);
+        return new ASTNodeParamExp(wordpart as IParamExp, parent, parentField);
       case "CmdSubst":
-        return new ASTNodeCmdSubst(wordpart as ICmdSubst, parent);
+        return new ASTNodeCmdSubst(wordpart as ICmdSubst, parent, parentField);
       case "ArithmExp":
-        return new ASTNodeArithmExp(wordpart as IArithmExp, parent);
+        return new ASTNodeArithmExp(wordpart as IArithmExp, parent, parentField);
       case "ProcSubst":
-        return new ASTNodeProcSubst(wordpart as IProcSubst, parent);
+        return new ASTNodeProcSubst(wordpart as IProcSubst, parent, parentField);
       case "ExtGlob":
-        return new ASTNodeExtGlob(wordpart as IExtGlob, parent);
+        return new ASTNodeExtGlob(wordpart as IExtGlob, parent, parentField);
       case "BraceExp":
-        return new ASTNodeBraceExp(wordpart as IBraceExp, parent);
+        return new ASTNodeBraceExp(wordpart as IBraceExp, parent, parentField);
       default:
         throw { NodeType: syntax.NodeType(wordpart) };
     }

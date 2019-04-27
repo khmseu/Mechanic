@@ -39,7 +39,7 @@ export interface IAssign extends INode {
     Append: boolean;
     Naked: boolean;
     Name: ILit | null;
-    Index: IArithmExpr;
+    Index: IArithmExpr | null;
     Value: IWord | null;
     Array: IArrayExpr | null;
 }
@@ -188,10 +188,10 @@ export interface IParamExp extends INode {
     Length: boolean;
     Width: boolean;
     Param: ILit | null;
-    Index: IArithmExpr;
+    Index: IArithmExpr | null;
     Slice: I_Slice | null;
     Repl: I_Replace | null;
-    Names: ParNamesOperator;
+    Names: ParNamesOperator | null;
     Exp: I_Expansion | null;
 }
 export interface IParenArithm extends INode {

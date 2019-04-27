@@ -11,9 +11,10 @@ import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTNodeWord } from "./ASTNodeWord";
 import { ASTSingle } from "./ASTSingle";
+import { ASTSingleNotNull } from "./ASTSingleNotNull";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
 import { IArrayElem } from "./ParserTypes";
 
@@ -25,19 +26,19 @@ export class ASTNodeArrayElem extends ASTNode {
   public Value: ASTNodeWord | null; //     Value: IWord | null;
   public Comments: ASTNodeComment[]; //     Comments: IComment[];
 
-  constructor(arrayelem: IArrayElem, public parent: ASTNode | null) {
-    super(arrayelem, parent);
+  constructor(arrayelem: IArrayElem, public parent: ASTNode | null, public parentField: string) {
+    super(arrayelem, parent, parentField);
     logg("ASTNodeArrayElem");
-    this.Index = ASTSingle(ASTNodeArithmExpr, arrayelem.Index, this)!;
-    this.Value = ASTSingle(ASTNodeWord, arrayelem.Value, this);
-    this.Comments = ASTArray(ASTNodeComment, arrayelem.Comments, this)!;
-    [].forEach((f) => {
+    this.Index = ASTSingleNotNull(ASTNodeArithmExpr, arrayelem.Index, this, "Index")!;
+    this.Value = ASTSingle(ASTNodeWord, arrayelem.Value, this, "Value");
+    this.Comments = ASTArray(ASTNodeComment, arrayelem.Comments, this, "Comments")!;
+    ["kind", "parent", "parentField"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;
       Object.defineProperty(this, f, desc);
     });
   }
-  public accept(visitor: ASTnodeVisitor) {
+  public accept(visitor: ASTVisitorBase) {
     visitor.visitASTNodeArrayElemPre(this);
     this.Index.accept(visitor);
     if (this.Value) {

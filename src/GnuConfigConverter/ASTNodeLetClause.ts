@@ -10,9 +10,9 @@ import { ASTMoreLetClause } from "./ASTMoreLetClause";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTnodeKind } from "./ASTnodeKind";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
 import { ILetClause } from "./ParserTypes";
 
@@ -23,18 +23,18 @@ export class ASTNodeLetClause extends ASTNode {
   public Let: ASTPos; //     Let: I_Pos;
   public Exprs: ASTNodeArithmExpr[]; //     Exprs: IArithmExpr[];
 
-  constructor(letclause: ILetClause, public parent: ASTNode | null) {
-    super(letclause, parent);
+  constructor(letclause: ILetClause, public parent: ASTNode | null, public parentField: string) {
+    super(letclause, parent, parentField);
     logg("ASTNodeLetClause");
     this.Let = ASTSimpleSingle(ASTPos, letclause.Let)!;
-    this.Exprs = ASTArray(ASTNodeArithmExpr, letclause.Exprs, this)!;
-    ["Let"].forEach((f) => {
+    this.Exprs = ASTArray(ASTNodeArithmExpr, letclause.Exprs, this, "Exprs")!;
+    ["kind", "parent", "parentField", "Let"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;
       Object.defineProperty(this, f, desc);
     });
   }
-  public accept(visitor: ASTnodeVisitor) {
+  public accept(visitor: ASTVisitorBase) {
     visitor.visitASTNodeLetClausePre(this);
     this.Exprs.forEach((e) => e.accept(visitor));
     visitor.visitASTNodeLetClausePost(this);

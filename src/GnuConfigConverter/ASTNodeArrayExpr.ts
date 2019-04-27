@@ -11,9 +11,9 @@ import { ASTNode } from "./ASTNode";
 import { ASTNodeArrayElem } from "./ASTNodeArrayElem";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
 import { IArrayExpr } from "./ParserTypes";
 
@@ -26,20 +26,20 @@ export class ASTNodeArrayExpr extends ASTNode {
   public Elems: ASTNodeArrayElem[]; //     Elems: IArrayElem[] | null;
   public Last: ASTNodeComment[]; //     Last: IComment[];
 
-  constructor(arrayexpr: IArrayExpr, public parent: ASTNode | null) {
-    super(arrayexpr, parent);
+  constructor(arrayexpr: IArrayExpr, public parent: ASTNode | null, public parentField: string) {
+    super(arrayexpr, parent, parentField);
     logg("ASTNodeArrayExpr");
     this.Lparen = ASTSimpleSingle(ASTPos, arrayexpr.Lparen)!;
     this.Rparen = ASTSimpleSingle(ASTPos, arrayexpr.Rparen)!;
-    this.Elems = ASTArray(ASTNodeArrayElem, arrayexpr.Elems, this);
-    this.Last = ASTArray(ASTNodeComment, arrayexpr.Last, this)!;
-    ["Lparen", "Rparen"].forEach((f) => {
+    this.Elems = ASTArray(ASTNodeArrayElem, arrayexpr.Elems, this, "Elems");
+    this.Last = ASTArray(ASTNodeComment, arrayexpr.Last, this, "Last")!;
+    ["kind", "parent", "parentField", "Lparen", "Rparen"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;
       Object.defineProperty(this, f, desc);
     });
   }
-  public accept(visitor: ASTnodeVisitor) {
+  public accept(visitor: ASTVisitorBase) {
     visitor.visitASTNodeArrayExprPre(this);
     this.Elems.forEach((e) => e.accept(visitor));
     this.Last.forEach((e) => e.accept(visitor));

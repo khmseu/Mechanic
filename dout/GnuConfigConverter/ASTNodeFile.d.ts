@@ -9,16 +9,18 @@ import { ASTNode } from "./ASTNode";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmtList } from "./ASTNodeStmtList";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { IFile } from "./ParserTypes";
 export declare class ASTNodeFile extends ASTNode {
+    parent: ASTNode | null;
+    parentField: string;
     kind: ASTnodeKind.ASTNodeFile;
     kindString: string;
     more: ASTMoreFile;
     Name: string;
     StmtList: ASTNodeStmtList | null;
     Last: ASTNodeComment[];
-    constructor(file: IFile);
-    accept(visitor: ASTnodeVisitor): void;
+    constructor(file: IFile, parent: ASTNode | null, parentField: string);
+    accept(visitor: ASTVisitorBase): void;
 }
 //# sourceMappingURL=ASTNodeFile.d.ts.map

@@ -10,10 +10,12 @@ import { ASTNodeCommand } from "./ASTNodeCommand";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeRedirect } from "./ASTNodeRedirect";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { IStmt } from "./ParserTypes";
 export declare class ASTNodeStmt extends ASTNode {
+    parent: ASTNode | null;
+    parentField: string;
     kind: ASTnodeKind.ASTNodeStmt;
     kindString: string;
     more: ASTMoreStmt;
@@ -25,7 +27,7 @@ export declare class ASTNodeStmt extends ASTNode {
     Background: boolean;
     Coprocess: boolean;
     Redirs: ASTNodeRedirect[];
-    constructor(stmt: IStmt);
-    accept(visitor: ASTnodeVisitor): void;
+    constructor(stmt: IStmt, parent: ASTNode | null, parentField: string);
+    accept(visitor: ASTVisitorBase): void;
 }
 //# sourceMappingURL=ASTNodeStmt.d.ts.map

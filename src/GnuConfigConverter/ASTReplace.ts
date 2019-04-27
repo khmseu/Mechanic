@@ -18,8 +18,8 @@ export class ASTReplace {
   constructor(replace: I_Replace) {
     logg("ASTReplace");
     this.All = replace.All;
-    this.Orig = ASTSingle(ASTNodeWord, replace.Orig, null);
-    this.With = ASTSingle(ASTNodeWord, replace.With, null);
+    this.Orig = ASTSingle(ASTNodeWord, replace.Orig, null, "Orig");
+    this.With = ASTSingle(ASTNodeWord, replace.With, null, "With");
     [].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

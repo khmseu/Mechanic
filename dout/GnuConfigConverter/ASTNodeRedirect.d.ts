@@ -8,11 +8,13 @@ import { ASTMoreRedirect } from "./ASTMoreRedirect";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeLit } from "./ASTNodeLit";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTNodeWord } from "./ASTNodeWord";
 import { ASTPos } from "./ASTPos";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { IRedirect } from "./ParserTypes";
 export declare class ASTNodeRedirect extends ASTNode {
+    parent: ASTNode | null;
+    parentField: string;
     kind: ASTnodeKind.ASTNodeRedirect;
     kindString: string;
     more: ASTMoreRedirect;
@@ -22,7 +24,7 @@ export declare class ASTNodeRedirect extends ASTNode {
     N: ASTNodeLit | null;
     Word: ASTNodeWord | null;
     Hdoc: ASTNodeWord | null;
-    constructor(redirect: IRedirect);
-    accept(visitor: ASTnodeVisitor): void;
+    constructor(redirect: IRedirect, parent: ASTNode | null, parentField: string);
+    accept(visitor: ASTVisitorBase): void;
 }
 //# sourceMappingURL=ASTNodeRedirect.d.ts.map

@@ -12,10 +12,10 @@ import { ASTNodeCommand } from "./ASTNodeCommand";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeRedirect } from "./ASTNodeRedirect";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
-import { ASTSingle } from "./ASTSingle";
+import { ASTSingleNotNull } from "./ASTSingleNotNull";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
 import { IStmt } from "./ParserTypes";
 
@@ -32,24 +32,24 @@ export class ASTNodeStmt extends ASTNode {
   public Coprocess: boolean; //     Coprocess: boolean;
   public Redirs: ASTNodeRedirect[]; //     Redirs: IRedirect[] | null;
 
-  constructor(stmt: IStmt, public parent: ASTNode | null) {
-    super(stmt, parent);
+  constructor(stmt: IStmt, public parent: ASTNode | null, public parentField: string) {
+    super(stmt, parent, parentField);
     logg("ASTNodeStmt");
-    this.Comments = ASTArray(ASTNodeComment, stmt.Comments, this)!;
-    this.Cmd = ASTSingle(ASTNodeCommand, stmt.Cmd, this)!;
+    this.Comments = ASTArray(ASTNodeComment, stmt.Comments, this, "Comments")!;
+    this.Cmd = ASTSingleNotNull(ASTNodeCommand, stmt.Cmd, this, "Cmd")!;
     this.Position = ASTSimpleSingle(ASTPos, stmt.Position)!;
     this.Semicolon = ASTSimpleSingle(ASTPos, stmt.Semicolon)!;
     this.Negated = stmt.Negated;
     this.Background = stmt.Background;
     this.Coprocess = stmt.Coprocess;
-    this.Redirs = ASTArray(ASTNodeRedirect, stmt.Redirs, this);
-    ["Position", "Semicolon"].forEach((f) => {
+    this.Redirs = ASTArray(ASTNodeRedirect, stmt.Redirs, this, "Redirs");
+    ["kind", "parent", "parentField", "Position", "Semicolon"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;
       Object.defineProperty(this, f, desc);
     });
   }
-  public accept(visitor: ASTnodeVisitor) {
+  public accept(visitor: ASTVisitorBase) {
     visitor.visitASTNodeStmtPre(this);
     this.Comments.forEach((e) => e.accept(visitor));
     this.Cmd.accept(visitor);

@@ -9,15 +9,17 @@ import { ASTNode } from "./ASTNode";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmt } from "./ASTNodeStmt";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { IStmtList } from "./ParserTypes";
 export declare class ASTNodeStmtList extends ASTNode {
+    parent: ASTNode | null;
+    parentField: string;
     kind: ASTnodeKind.ASTNodeStmtList;
     kindString: string;
     more: ASTMoreStmtList;
     Stmts: ASTNodeStmt[];
     Last: ASTNodeComment[];
-    constructor(stmtlist: IStmtList);
-    accept(visitor: ASTnodeVisitor): void;
+    constructor(stmtlist: IStmtList, parent: ASTNode | null, parentField: string);
+    accept(visitor: ASTVisitorBase): void;
 }
 //# sourceMappingURL=ASTNodeStmtList.d.ts.map

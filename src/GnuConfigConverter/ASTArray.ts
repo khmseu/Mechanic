@@ -9,11 +9,11 @@ import { ASTNode } from "./ASTNode";
 import { ASTSingle } from "./ASTSingle";
 
 // tslint:disable-next-line:max-line-length
-export function ASTArray<AE extends ASTNode, PE>(at: new(pt: PE, parent: ASTNode | null) => AE, pa: PE[] | null, parent: ASTNode | null) {
+export function ASTArray<AE extends ASTNode, PE>(at: new(pt: PE, parent: ASTNode | null, parentField: string) => AE, pa: PE[] | null, parent: ASTNode | null, parentField: string) {
   const aa: AE[] = [];
   if (pa) {
     pa.forEach((pe) => {
-        const ae = ASTSingle<AE, PE>(at, pe, parent);
+        const ae = ASTSingle<AE, PE>(at, pe, parent, parentField);
         if (ae) {
           aa.push(ae);
         }

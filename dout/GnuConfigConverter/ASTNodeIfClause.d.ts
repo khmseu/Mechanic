@@ -9,10 +9,12 @@ import { ASTNode } from "./ASTNode";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmtList } from "./ASTNodeStmtList";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { IIfClause } from "./ParserTypes";
 export declare class ASTNodeIfClause extends ASTNode {
+    parent: ASTNode | null;
+    parentField: string;
     kind: ASTnodeKind.ASTNodeIfClause;
     kindString: string;
     more: ASTMoreIfClause;
@@ -25,7 +27,7 @@ export declare class ASTNodeIfClause extends ASTNode {
     ThenLast: ASTNodeComment[];
     Else: ASTNodeIfClause | null;
     Last: ASTNodeComment[];
-    constructor(ifclause: IIfClause);
-    accept(visitor: ASTnodeVisitor): void;
+    constructor(ifclause: IIfClause, parent: ASTNode | null, parentField: string);
+    accept(visitor: ASTVisitorBase): void;
 }
 //# sourceMappingURL=ASTNodeIfClause.d.ts.map

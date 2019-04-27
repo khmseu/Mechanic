@@ -9,10 +9,10 @@ import { ASTMoreTimeClause } from "./ASTMoreTimeClause";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmt } from "./ASTNodeStmt";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
 import { ASTSingle } from "./ASTSingle";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
 import { ITimeClause } from "./ParserTypes";
 
@@ -24,19 +24,19 @@ export class ASTNodeTimeClause extends ASTNode {
   public PosixFormat: boolean; //     PosixFormat: boolean;
   public Stmt: ASTNodeStmt | null; //     Stmt: IStmt | null;
 
-  constructor(timeclause: ITimeClause, public parent: ASTNode | null) {
-    super(timeclause, parent);
+  constructor(timeclause: ITimeClause, public parent: ASTNode | null, public parentField: string) {
+    super(timeclause, parent, parentField);
     logg("ASTNodeTimeClause");
     this.Time = ASTSimpleSingle(ASTPos, timeclause.Time)!;
     this.PosixFormat = timeclause.PosixFormat;
-    this.Stmt = ASTSingle(ASTNodeStmt, timeclause.Stmt, this);
-    ["Time"].forEach((f) => {
+    this.Stmt = ASTSingle(ASTNodeStmt, timeclause.Stmt, this, "Stmt");
+    ["kind", "parent", "parentField", "Time"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;
       Object.defineProperty(this, f, desc);
     });
   }
-  public accept(visitor: ASTnodeVisitor) {
+  public accept(visitor: ASTVisitorBase) {
     visitor.visitASTNodeTimeClausePre(this);
     if (this.Stmt) {
       this.Stmt.accept(visitor);

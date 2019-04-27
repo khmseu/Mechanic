@@ -9,11 +9,11 @@ import { ASTMoreCoprocClause } from "./ASTMoreCoprocClause";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmt } from "./ASTNodeStmt";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTNodeWord } from "./ASTNodeWord";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
 import { ASTSingle } from "./ASTSingle";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
 import { ICoprocClause } from "./ParserTypes";
 
@@ -25,19 +25,19 @@ export class ASTNodeCoprocClause extends ASTNode {
   public Name: ASTNodeWord | null; //     Name: IWord | null;
   public Stmt: ASTNodeStmt | null; //     Stmt: IStmt | null;
 
-  constructor(coprocclause: ICoprocClause, public parent: ASTNode | null) {
-    super(coprocclause, parent);
+  constructor(coprocclause: ICoprocClause, public parent: ASTNode | null, public parentField: string) {
+    super(coprocclause, parent, parentField);
     logg("ASTNodeCoprocClause");
     this.Coproc = ASTSimpleSingle(ASTPos, coprocclause.Coproc)!;
-    this.Name = ASTSingle(ASTNodeWord, coprocclause.Name, this);
-    this.Stmt = ASTSingle(ASTNodeStmt, coprocclause.Stmt, this);
-    ["Coproc"].forEach((f) => {
+    this.Name = ASTSingle(ASTNodeWord, coprocclause.Name, this, "Name");
+    this.Stmt = ASTSingle(ASTNodeStmt, coprocclause.Stmt, this, "Stmt");
+    ["kind", "parent", "parentField", "Coproc"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;
       Object.defineProperty(this, f, desc);
     });
   }
-  public accept(visitor: ASTnodeVisitor) {
+  public accept(visitor: ASTVisitorBase) {
     visitor.visitASTNodeCoprocClausePre(this);
     if (this.Name) {
       this.Name.accept(visitor);

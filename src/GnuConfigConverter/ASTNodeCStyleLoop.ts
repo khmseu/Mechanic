@@ -9,10 +9,10 @@ import { ASTMoreCStyleLoop } from "./ASTMoreCStyleLoop";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTnodeKind } from "./ASTnodeKind";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
-import { ASTSingle } from "./ASTSingle";
+import { ASTSingleNotNull } from "./ASTSingleNotNull";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
 import { ICStyleLoop } from "./ParserTypes";
 
@@ -26,21 +26,21 @@ export class ASTNodeCStyleLoop extends ASTNode {
   public Cond: ASTNodeArithmExpr; //     Cond: IArithmExpr;
   public Post: ASTNodeArithmExpr; //     Post: IArithmExpr;
 
-  constructor(cstyleloop: ICStyleLoop, public parent: ASTNode | null) {
-    super(cstyleloop, parent);
+  constructor(cstyleloop: ICStyleLoop, public parent: ASTNode | null, public parentField: string) {
+    super(cstyleloop, parent, parentField);
     logg("ASTNodeCStyleLoop");
     this.Lparen = ASTSimpleSingle(ASTPos, cstyleloop.Lparen)!;
     this.Rparen = ASTSimpleSingle(ASTPos, cstyleloop.Rparen)!;
-    this.Init = ASTSingle(ASTNodeArithmExpr, cstyleloop.Init, this)!;
-    this.Cond = ASTSingle(ASTNodeArithmExpr, cstyleloop.Cond, this)!;
-    this.Post = ASTSingle(ASTNodeArithmExpr, cstyleloop.Post, this)!;
-    ["Lparen", "Rparen"].forEach((f) => {
+    this.Init = ASTSingleNotNull(ASTNodeArithmExpr, cstyleloop.Init, this, "Init")!;
+    this.Cond = ASTSingleNotNull(ASTNodeArithmExpr, cstyleloop.Cond, this, "Cond")!;
+    this.Post = ASTSingleNotNull(ASTNodeArithmExpr, cstyleloop.Post, this, "Post")!;
+    ["kind", "parent", "parentField", "Lparen", "Rparen"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;
       Object.defineProperty(this, f, desc);
     });
   }
-  public accept(visitor: ASTnodeVisitor) {
+  public accept(visitor: ASTVisitorBase) {
     visitor.visitASTNodeCStyleLoopPre(this);
     this.Init.accept(visitor);
     this.Cond.accept(visitor);

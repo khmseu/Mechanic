@@ -8,17 +8,19 @@ import { ASTMoreTimeClause } from "./ASTMoreTimeClause";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmt } from "./ASTNodeStmt";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { ITimeClause } from "./ParserTypes";
 export declare class ASTNodeTimeClause extends ASTNode {
+    parent: ASTNode | null;
+    parentField: string;
     kind: ASTnodeKind.ASTNodeTimeClause;
     kindString: string;
     more: ASTMoreTimeClause;
     Time: ASTPos;
     PosixFormat: boolean;
     Stmt: ASTNodeStmt | null;
-    constructor(timeclause: ITimeClause);
-    accept(visitor: ASTnodeVisitor): void;
+    constructor(timeclause: ITimeClause, parent: ASTNode | null, parentField: string);
+    accept(visitor: ASTVisitorBase): void;
 }
 //# sourceMappingURL=ASTNodeTimeClause.d.ts.map

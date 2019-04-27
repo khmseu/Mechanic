@@ -9,10 +9,10 @@ import { ASTMoreBinaryTest } from "./ASTMoreBinaryTest";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeTestExpr } from "./ASTNodeTestExpr";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
-import { ASTSingle } from "./ASTSingle";
+import { ASTSingleNotNull } from "./ASTSingleNotNull";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
 import { BinTestOperator, IBinaryTest } from "./ParserTypes";
 import { op, Token } from "./Token";
@@ -27,21 +27,21 @@ export class ASTNodeBinaryTest extends ASTNode {
   public X: ASTNodeTestExpr; //     X: ITestExpr;
   public Y: ASTNodeTestExpr; //     Y: ITestExpr;
 
-  constructor(binarytest: IBinaryTest, public parent: ASTNode | null) {
-    super(binarytest, parent);
+  constructor(binarytest: IBinaryTest, public parent: ASTNode | null, public parentField: string) {
+    super(binarytest, parent, parentField);
     logg("ASTNodeBinaryTest");
     this.OpPos = ASTSimpleSingle(ASTPos, binarytest.OpPos)!;
     this.Op = BinTestOperator[binarytest.Op];
     this.OpString = op((binarytest.Op as unknown) as Token);
-    this.X = ASTSingle(ASTNodeTestExpr, binarytest.X, this)!;
-    this.Y = ASTSingle(ASTNodeTestExpr, binarytest.Y, this)!;
-    ["OpPos"].forEach((f) => {
+    this.X = ASTSingleNotNull(ASTNodeTestExpr, binarytest.X, this, "X")!;
+    this.Y = ASTSingleNotNull(ASTNodeTestExpr, binarytest.Y, this, "Y")!;
+    ["kind", "parent", "parentField", "OpPos"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;
       Object.defineProperty(this, f, desc);
     });
   }
-  public accept(visitor: ASTnodeVisitor) {
+  public accept(visitor: ASTVisitorBase) {
     visitor.visitASTNodeBinaryTestPre(this);
     this.X.accept(visitor);
     this.Y.accept(visitor);

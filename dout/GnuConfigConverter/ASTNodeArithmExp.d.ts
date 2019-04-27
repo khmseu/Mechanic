@@ -8,10 +8,12 @@ import { ASTMoreArithmExp } from "./ASTMoreArithmExp";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTnodeKind } from "./ASTnodeKind";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { IArithmExp } from "./ParserTypes";
 export declare class ASTNodeArithmExp extends ASTNode {
+    parent: ASTNode | null;
+    parentField: string;
     kind: ASTnodeKind.ASTNodeArithmExp;
     kindString: string;
     more: ASTMoreArithmExp;
@@ -20,7 +22,7 @@ export declare class ASTNodeArithmExp extends ASTNode {
     Bracket: boolean;
     Unsigned: boolean;
     X: ASTNodeArithmExpr;
-    constructor(arithmexp: IArithmExp);
-    accept(visitor: ASTnodeVisitor): void;
+    constructor(arithmexp: IArithmExp, parent: ASTNode | null, parentField: string);
+    accept(visitor: ASTVisitorBase): void;
 }
 //# sourceMappingURL=ASTNodeArithmExp.d.ts.map

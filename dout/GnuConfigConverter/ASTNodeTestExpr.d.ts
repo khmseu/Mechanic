@@ -8,8 +8,10 @@ import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ITestExpr } from "./ParserTypes";
 export declare class ASTNodeTestExpr extends ASTNode {
+    parent: ASTNode | null;
+    parentField: string;
     kind: ASTnodeKind.bad | ASTnodeKind.ASTNodeBinaryTest | ASTnodeKind.ASTNodeUnaryTest | ASTnodeKind.ASTNodeParenTest | ASTnodeKind.ASTNodeWord;
     kindString: string;
-    constructor(testexpr: ITestExpr);
+    constructor(testexpr: ITestExpr, parent: ASTNode | null, parentField: string);
 }
 //# sourceMappingURL=ASTNodeTestExpr.d.ts.map

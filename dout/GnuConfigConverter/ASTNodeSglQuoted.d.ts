@@ -7,10 +7,12 @@
 import { ASTMoreSglQuoted } from "./ASTMoreSglQuoted";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { ISglQuoted } from "./ParserTypes";
 export declare class ASTNodeSglQuoted extends ASTNode {
+    parent: ASTNode | null;
+    parentField: string;
     kind: ASTnodeKind.ASTNodeSglQuoted;
     kindString: string;
     more: ASTMoreSglQuoted;
@@ -18,7 +20,7 @@ export declare class ASTNodeSglQuoted extends ASTNode {
     Right: ASTPos;
     Dollar: boolean;
     Value: string;
-    constructor(sglquoted: ISglQuoted);
-    accept(visitor: ASTnodeVisitor): void;
+    constructor(sglquoted: ISglQuoted, parent: ASTNode | null, parentField: string);
+    accept(visitor: ASTVisitorBase): void;
 }
 //# sourceMappingURL=ASTNodeSglQuoted.d.ts.map

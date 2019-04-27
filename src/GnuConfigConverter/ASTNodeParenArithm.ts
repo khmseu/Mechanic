@@ -9,10 +9,10 @@ import { ASTMoreParenArithm } from "./ASTMoreParenArithm";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTnodeKind } from "./ASTnodeKind";
-import { ASTnodeVisitor } from "./ASTnodeVisitor";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
-import { ASTSingle } from "./ASTSingle";
+import { ASTSingleNotNull } from "./ASTSingleNotNull";
+import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
 import { IParenArithm } from "./ParserTypes";
 
@@ -24,19 +24,19 @@ export class ASTNodeParenArithm extends ASTNode {
   public Rparen: ASTPos; //     Rparen: I_Pos;
   public X: ASTNodeArithmExpr; //     X: IArithmExpr;
 
-  constructor(parenarithm: IParenArithm, public parent: ASTNode | null) {
-    super(parenarithm, parent);
+  constructor(parenarithm: IParenArithm, public parent: ASTNode | null, public parentField: string) {
+    super(parenarithm, parent, parentField);
     logg("ASTNodeParenArithm");
     this.Lparen = ASTSimpleSingle(ASTPos, parenarithm.Lparen)!;
     this.Rparen = ASTSimpleSingle(ASTPos, parenarithm.Rparen)!;
-    this.X = ASTSingle(ASTNodeArithmExpr, parenarithm.X, this)!;
-    ["Lparen", "Rparen"].forEach((f) => {
+    this.X = ASTSingleNotNull(ASTNodeArithmExpr, parenarithm.X, this, "X")!;
+    ["kind", "parent", "parentField", "Lparen", "Rparen"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;
       Object.defineProperty(this, f, desc);
     });
   }
-  public accept(visitor: ASTnodeVisitor) {
+  public accept(visitor: ASTVisitorBase) {
     visitor.visitASTNodeParenArithmPre(this);
     this.X.accept(visitor);
     visitor.visitASTNodeParenArithmPost(this);
