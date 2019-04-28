@@ -13,7 +13,7 @@ import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmtList } from "./ASTNodeStmtList";
 import { ASTNodeWord } from "./ASTNodeWord";
 import { ASTPos } from "./ASTPos";
-import { ASTSimpleSingle } from "./ASTSimpleSingle";
+import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTSingle } from "./ASTSingle";
 import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
@@ -37,11 +37,11 @@ export class ASTNodeCaseItem extends ASTNode {
     logg("ASTNodeCaseItem");
     this.Op = CaseOperator[caseitem.Op];
     this.OpString = op((caseitem.Op as unknown) as Token);
-    this.OpPos = ASTSimpleSingle(ASTPos, caseitem.OpPos)!;
-    this.Comments = ASTArray(ASTNodeComment, caseitem.Comments, this, "Comments")!;
+    this.OpPos = ASTSimpleSingleNotNull(ASTPos, caseitem.OpPos);
+    this.Comments = ASTArray(ASTNodeComment, caseitem.Comments, this, "Comments");
     this.Patterns = ASTArray(ASTNodeWord, caseitem.Patterns, this, "Patterns");
     this.StmtList = ASTSingle(ASTNodeStmtList, caseitem.StmtList, this, "StmtList");
-    this.Last = ASTArray(ASTNodeComment, caseitem.Last, this, "Last")!;
+    this.Last = ASTArray(ASTNodeComment, caseitem.Last, this, "Last");
     ["kind", "parent", "parentField", "OpPos"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

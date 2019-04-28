@@ -13,7 +13,7 @@ import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeRedirect } from "./ASTNodeRedirect";
 import { ASTPos } from "./ASTPos";
-import { ASTSimpleSingle } from "./ASTSimpleSingle";
+import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTSingleNotNull } from "./ASTSingleNotNull";
 import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
@@ -35,10 +35,10 @@ export class ASTNodeStmt extends ASTNode {
   constructor(stmt: IStmt, public parent: ASTNode | null, public parentField: string) {
     super(stmt, parent, parentField);
     logg("ASTNodeStmt");
-    this.Comments = ASTArray(ASTNodeComment, stmt.Comments, this, "Comments")!;
-    this.Cmd = ASTSingleNotNull(ASTNodeCommand, stmt.Cmd, this, "Cmd")!;
-    this.Position = ASTSimpleSingle(ASTPos, stmt.Position)!;
-    this.Semicolon = ASTSimpleSingle(ASTPos, stmt.Semicolon)!;
+    this.Comments = ASTArray(ASTNodeComment, stmt.Comments, this, "Comments");
+    this.Cmd = ASTSingleNotNull(ASTNodeCommand, stmt.Cmd, this, "Cmd");
+    this.Position = ASTSimpleSingleNotNull(ASTPos, stmt.Position);
+    this.Semicolon = ASTSimpleSingleNotNull(ASTPos, stmt.Semicolon);
     this.Negated = stmt.Negated;
     this.Background = stmt.Background;
     this.Coprocess = stmt.Coprocess;

@@ -12,7 +12,7 @@ import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmtList } from "./ASTNodeStmtList";
 import { ASTPos } from "./ASTPos";
-import { ASTSimpleSingle } from "./ASTSimpleSingle";
+import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTSingle } from "./ASTSingle";
 import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
@@ -32,10 +32,10 @@ export class ASTNodeCmdSubst extends ASTNode {
   constructor(cmdsubst: ICmdSubst, public parent: ASTNode | null, public parentField: string) {
     super(cmdsubst, parent, parentField);
     logg("ASTNodeCmdSubst");
-    this.Left = ASTSimpleSingle(ASTPos, cmdsubst.Left)!;
-    this.Right = ASTSimpleSingle(ASTPos, cmdsubst.Right)!;
+    this.Left = ASTSimpleSingleNotNull(ASTPos, cmdsubst.Left);
+    this.Right = ASTSimpleSingleNotNull(ASTPos, cmdsubst.Right);
     this.StmtList = ASTSingle(ASTNodeStmtList, cmdsubst.StmtList, this, "StmtList");
-    this.Last = ASTArray(ASTNodeComment, cmdsubst.Last, this, "Last")!;
+    this.Last = ASTArray(ASTNodeComment, cmdsubst.Last, this, "Last");
     this.TempFile = cmdsubst.TempFile;
     this.ReplyVar = cmdsubst.ReplyVar;
     ["kind", "parent", "parentField", "Left", "Right"].forEach((f) => {

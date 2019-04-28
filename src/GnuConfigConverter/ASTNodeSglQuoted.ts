@@ -9,7 +9,7 @@ import { ASTMoreSglQuoted } from "./ASTMoreSglQuoted";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTPos } from "./ASTPos";
-import { ASTSimpleSingle } from "./ASTSimpleSingle";
+import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
 import { ISglQuoted } from "./ParserTypes";
@@ -26,8 +26,8 @@ export class ASTNodeSglQuoted extends ASTNode {
   constructor(sglquoted: ISglQuoted, public parent: ASTNode | null, public parentField: string) {
     super(sglquoted, parent, parentField);
     logg("ASTNodeSglQuoted");
-    this.Left = ASTSimpleSingle(ASTPos, sglquoted.Left)!;
-    this.Right = ASTSimpleSingle(ASTPos, sglquoted.Right)!;
+    this.Left = ASTSimpleSingleNotNull(ASTPos, sglquoted.Left);
+    this.Right = ASTSimpleSingleNotNull(ASTPos, sglquoted.Right);
     this.Dollar = sglquoted.Dollar;
     this.Value = sglquoted.Value;
     ["kind", "parent", "parentField", "Left", "Right"].forEach((f) => {

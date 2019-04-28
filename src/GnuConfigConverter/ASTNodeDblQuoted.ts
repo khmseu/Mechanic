@@ -11,7 +11,7 @@ import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeWordPart } from "./ASTNodeWordPart";
 import { ASTPos } from "./ASTPos";
-import { ASTSimpleSingle } from "./ASTSimpleSingle";
+import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
 import { IDblQuoted } from "./ParserTypes";
@@ -27,9 +27,9 @@ export class ASTNodeDblQuoted extends ASTNode {
   constructor(dblquoted: IDblQuoted, public parent: ASTNode | null, public parentField: string) {
     super(dblquoted, parent, parentField);
     logg("ASTNodeDblQuoted");
-    this.Position = ASTSimpleSingle(ASTPos, dblquoted.Position)!;
+    this.Position = ASTSimpleSingleNotNull(ASTPos, dblquoted.Position);
     this.Dollar = dblquoted.Dollar;
-    this.Parts = ASTArray(ASTNodeWordPart, dblquoted.Parts, this, "Parts")!;
+    this.Parts = ASTArray(ASTNodeWordPart, dblquoted.Parts, this, "Parts");
     ["kind", "parent", "parentField", "Position"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

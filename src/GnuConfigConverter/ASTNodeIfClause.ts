@@ -12,7 +12,7 @@ import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmtList } from "./ASTNodeStmtList";
 import { ASTPos } from "./ASTPos";
-import { ASTSimpleSingle } from "./ASTSimpleSingle";
+import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTSingle } from "./ASTSingle";
 import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
@@ -35,15 +35,15 @@ export class ASTNodeIfClause extends ASTNode {
   constructor(ifclause: IIfClause, public parent: ASTNode | null, public parentField: string) {
     super(ifclause, parent, parentField);
     logg("ASTNodeIfClause");
-    this.Position = ASTSimpleSingle(ASTPos, ifclause.Position)!;
-    this.ThenPos = ASTSimpleSingle(ASTPos, ifclause.ThenPos)!;
-    this.FiPos = ASTSimpleSingle(ASTPos, ifclause.FiPos)!;
+    this.Position = ASTSimpleSingleNotNull(ASTPos, ifclause.Position);
+    this.ThenPos = ASTSimpleSingleNotNull(ASTPos, ifclause.ThenPos);
+    this.FiPos = ASTSimpleSingleNotNull(ASTPos, ifclause.FiPos);
     this.Cond = ASTSingle(ASTNodeStmtList, ifclause.Cond, this, "Cond");
-    this.CondLast = ASTArray(ASTNodeComment, ifclause.CondLast, this, "CondLast")!;
+    this.CondLast = ASTArray(ASTNodeComment, ifclause.CondLast, this, "CondLast");
     this.Then = ASTSingle(ASTNodeStmtList, ifclause.Then, this, "Then");
-    this.ThenLast = ASTArray(ASTNodeComment, ifclause.ThenLast, this, "ThenLast")!;
+    this.ThenLast = ASTArray(ASTNodeComment, ifclause.ThenLast, this, "ThenLast");
     this.Else = ASTSingle(ASTNodeIfClause, ifclause.Else, this, "Else");
-    this.Last = ASTArray(ASTNodeComment, ifclause.Last, this, "Last")!;
+    this.Last = ASTArray(ASTNodeComment, ifclause.Last, this, "Last");
     ["kind", "parent", "parentField", "Position", "ThenPos", "FiPos"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

@@ -5,6 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { ASTCall } from "./ASTCall";
 import { logg } from "./logg";
 import { I_Pos } from "./ParserTypes";
 
@@ -18,11 +19,11 @@ export class ASTPos {
 
   constructor(pos: I_Pos) {
     logg("ASTPos");
-    this.Col = pos.Col ? pos.Col() : null;
-    this.IsValid = pos.IsValid ? pos.IsValid() : null;
-    this.Line = pos.Line ? pos.Line() : null;
-    this.Offset = pos.Offset ? pos.Offset() : null;
-    this.String = pos.String ? pos.String() : null;
+    this.Col = pos.Col ? ASTCall(pos.Col) : null;
+    this.IsValid = pos.IsValid ? ASTCall(pos.IsValid) : null;
+    this.Line = pos.Line ? ASTCall(pos.Line) : null;
+    this.Offset = pos.Offset ? ASTCall(pos.Offset) : null;
+    this.String = pos.String ? ASTCall(pos.String) : null;
     [].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

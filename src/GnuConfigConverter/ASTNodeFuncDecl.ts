@@ -11,7 +11,7 @@ import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeLit } from "./ASTNodeLit";
 import { ASTNodeStmt } from "./ASTNodeStmt";
 import { ASTPos } from "./ASTPos";
-import { ASTSimpleSingle } from "./ASTSimpleSingle";
+import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTSingle } from "./ASTSingle";
 import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
@@ -29,7 +29,7 @@ export class ASTNodeFuncDecl extends ASTNode {
   constructor(funcdecl: IFuncDecl, public parent: ASTNode | null, public parentField: string) {
     super(funcdecl, parent, parentField);
     logg("ASTNodeFuncDecl");
-    this.Position = ASTSimpleSingle(ASTPos, funcdecl.Position)!;
+    this.Position = ASTSimpleSingleNotNull(ASTPos, funcdecl.Position);
     this.RsrvWord = funcdecl.RsrvWord;
     this.Name = ASTSingle(ASTNodeLit, funcdecl.Name, this, "Name");
     this.Body = ASTSingle(ASTNodeStmt, funcdecl.Body, this, "Body");

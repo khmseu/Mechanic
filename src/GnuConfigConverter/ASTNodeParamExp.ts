@@ -14,6 +14,7 @@ import { ASTNodeLit } from "./ASTNodeLit";
 import { ASTPos } from "./ASTPos";
 import { ASTReplace } from "./ASTReplace";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
+import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTSingle } from "./ASTSingle";
 import { ASTSlice } from "./ASTSlice";
 import { ASTVisitorBase } from "./ASTVisitorBase";
@@ -42,8 +43,8 @@ export class ASTNodeParamExp extends ASTNode {
   constructor(paramexp: IParamExp, public parent: ASTNode | null, public parentField: string) {
     super(paramexp, parent, parentField);
     logg("ASTNodeParamExp");
-    this.Dollar = ASTSimpleSingle(ASTPos, paramexp.Dollar)!;
-    this.Rbrace = ASTSimpleSingle(ASTPos, paramexp.Rbrace)!;
+    this.Dollar = ASTSimpleSingleNotNull(ASTPos, paramexp.Dollar);
+    this.Rbrace = ASTSimpleSingleNotNull(ASTPos, paramexp.Rbrace);
     this.Short = paramexp.Short;
     this.Excl = paramexp.Excl;
     this.Length = paramexp.Length;
@@ -52,8 +53,8 @@ export class ASTNodeParamExp extends ASTNode {
     this.Index = ASTSingle(ASTNodeArithmExpr, paramexp.Index, this, "Index");
     this.Slice = ASTSimpleSingle(ASTSlice, paramexp.Slice);
     this.Repl = ASTSimpleSingle(ASTReplace, paramexp.Repl);
-    this.Names = ParNamesOperator[paramexp.Names];
-    this.NamesString = op((paramexp.Names as unknown) as Token);
+    this.Names = paramexp.Names ? ParNamesOperator[paramexp.Names] : null;
+    this.NamesString = paramexp.Names ? op((paramexp.Names as unknown) as Token) : null;
     this.Exp = ASTSimpleSingle(ASTExpansion, paramexp.Exp);
     ["kind", "parent", "parentField", "Dollar", "Rbrace"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;

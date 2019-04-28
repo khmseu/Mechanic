@@ -10,7 +10,7 @@ import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmt } from "./ASTNodeStmt";
 import { ASTPos } from "./ASTPos";
-import { ASTSimpleSingle } from "./ASTSimpleSingle";
+import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTSingle } from "./ASTSingle";
 import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
@@ -27,7 +27,7 @@ export class ASTNodeTimeClause extends ASTNode {
   constructor(timeclause: ITimeClause, public parent: ASTNode | null, public parentField: string) {
     super(timeclause, parent, parentField);
     logg("ASTNodeTimeClause");
-    this.Time = ASTSimpleSingle(ASTPos, timeclause.Time)!;
+    this.Time = ASTSimpleSingleNotNull(ASTPos, timeclause.Time);
     this.PosixFormat = timeclause.PosixFormat;
     this.Stmt = ASTSingle(ASTNodeStmt, timeclause.Stmt, this, "Stmt");
     ["kind", "parent", "parentField", "Time"].forEach((f) => {

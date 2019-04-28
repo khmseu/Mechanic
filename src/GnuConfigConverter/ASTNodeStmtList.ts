@@ -25,8 +25,8 @@ export class ASTNodeStmtList extends ASTNode {
   constructor(stmtlist: IStmtList, public parent: ASTNode | null, public parentField: string) {
     super(stmtlist, parent, parentField);
     logg("ASTNodeStmtList");
-    this.Stmts = ASTArray(ASTNodeStmt, stmtlist.Stmts, this, "Stmts")!;
-    this.Last = ASTArray(ASTNodeComment, stmtlist.Last, this, "Last")!;
+    this.Stmts = ASTArray(ASTNodeStmt, stmtlist.Stmts, this, "Stmts");
+    this.Last = ASTArray(ASTNodeComment, stmtlist.Last, this, "Last");
     ["kind", "parent", "parentField"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

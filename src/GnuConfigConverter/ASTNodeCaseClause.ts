@@ -13,7 +13,7 @@ import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeWord } from "./ASTNodeWord";
 import { ASTPos } from "./ASTPos";
-import { ASTSimpleSingle } from "./ASTSimpleSingle";
+import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTSingle } from "./ASTSingle";
 import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
@@ -32,11 +32,11 @@ export class ASTNodeCaseClause extends ASTNode {
   constructor(caseclause: ICaseClause, public parent: ASTNode | null, public parentField: string) {
     super(caseclause, parent, parentField);
     logg("ASTNodeCaseClause");
-    this.Case = ASTSimpleSingle(ASTPos, caseclause.Case)!;
-    this.Esac = ASTSimpleSingle(ASTPos, caseclause.Esac)!;
+    this.Case = ASTSimpleSingleNotNull(ASTPos, caseclause.Case);
+    this.Esac = ASTSimpleSingleNotNull(ASTPos, caseclause.Esac);
     this.Word = ASTSingle(ASTNodeWord, caseclause.Word, this, "Word");
     this.Items = ASTArray(ASTNodeCaseItem, caseclause.Items, this, "Items");
-    this.Last = ASTArray(ASTNodeComment, caseclause.Last, this, "Last")!;
+    this.Last = ASTArray(ASTNodeComment, caseclause.Last, this, "Last");
     ["kind", "parent", "parentField", "Case", "Esac"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

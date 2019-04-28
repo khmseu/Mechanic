@@ -6,6 +6,7 @@
  */
 
 import { ASTArray } from "./ASTArray";
+import { ASTCall } from "./ASTCall";
 import { ASTMoreWord } from "./ASTMoreWord";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -26,9 +27,9 @@ export class ASTNodeWord extends ASTNode {
   constructor(word: IWord, public parent: ASTNode | null, public parentField: string) {
     super(word, parent, parentField);
     logg("ASTNodeWord");
-    this.Parts = ASTArray(ASTNodeWordPart, word.Parts, this, "Parts")!;
-    this.SplitBraces = word.SplitBraces ? ASTSingle(ASTNodeWord, word.SplitBraces(), this, "SplitBraces") : null;
-    this.Lit = word.Lit ? word.Lit() : null;
+    this.Parts = ASTArray(ASTNodeWordPart, word.Parts, this, "Parts");
+    this.SplitBraces = ASTSingle(ASTNodeWord, ASTCall(word.SplitBraces), this, "SplitBraces");
+    this.Lit = word.Lit ? ASTCall(word.Lit) : null;
     ["kind", "parent", "parentField"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

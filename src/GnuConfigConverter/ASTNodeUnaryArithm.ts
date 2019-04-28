@@ -10,7 +10,7 @@ import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTPos } from "./ASTPos";
-import { ASTSimpleSingle } from "./ASTSimpleSingle";
+import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTSingleNotNull } from "./ASTSingleNotNull";
 import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
@@ -30,11 +30,11 @@ export class ASTNodeUnaryArithm extends ASTNode {
   constructor(unaryarithm: IUnaryArithm, public parent: ASTNode | null, public parentField: string) {
     super(unaryarithm, parent, parentField);
     logg("ASTNodeUnaryArithm");
-    this.OpPos = ASTSimpleSingle(ASTPos, unaryarithm.OpPos)!;
+    this.OpPos = ASTSimpleSingleNotNull(ASTPos, unaryarithm.OpPos);
     this.Op = UnAritOperator[unaryarithm.Op];
     this.OpString = op((unaryarithm.Op as unknown) as Token);
     this.Post = unaryarithm.Post;
-    this.X = ASTSingleNotNull(ASTNodeArithmExpr, unaryarithm.X, this, "X")!;
+    this.X = ASTSingleNotNull(ASTNodeArithmExpr, unaryarithm.X, this, "X");
     ["kind", "parent", "parentField", "OpPos"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

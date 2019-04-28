@@ -77,7 +77,8 @@ sub export($$$) {
       sort { lc $a cmp lc $b } keys %from;
     my @hdr1 = grep !m[/], @hdr;
     my @hdr2 = grep m[/],  @hdr;
-    unshift @$text, $copyr, @hdr1, @hdr2, "\n";
+    unshift @$text, "\n" if @hdr;
+    unshift @$text, $copyr, @hdr1, @hdr2;
     @$text = map { split /(?<=\n)/, $_ } @$text;
     @$text = map {
         if ( length $_ < 120 ) { $_ }
@@ -108,9 +109,21 @@ open FI, '<', 'dout/GnuConfigConverter/ParserTypes.d.ts'
 my $fi = <FI>;
 close FI or die "dout/GnuConfigConverter/ParserTypes.d.ts: $!";
 
+export 'ASTCall', [<<EOFCALL], {};
+export function ASTCall<PE>(pe: (() => PE) | null) {
+  return pe ? pe() : null;
+}
+EOFCALL
 export 'ASTSimpleSingle', [<<EOFASS], {};
 export function ASTSimpleSingle<AE, PE>(at: new(pt: PE) => AE, pe: PE | null) {
   const ae = pe ? new at(pe) : null;
+  return ae;
+}
+EOFASS
+export 'ASTSimpleSingleNotNull', [<<EOFASS], { ok => 1 };
+export function ASTSimpleSingleNotNull<AE, PE>(at: new(pt: PE) => AE, pe: PE | null) {
+  ok(pe, "ASTSimpleSingleNotNull");
+  const ae = new at(pe!);
   return ae;
 }
 EOFASS
@@ -257,16 +270,6 @@ EOFN2a
 EOFN2b
                         }
                         if ( $aft ne $def ) {
-                            if ($aa) {
-                                $needType{ASTArray}++;
-                            }
-                            elsif ($ii) {
-                                $needType{ASTSimpleSingle}++;
-                            }
-                            elsif ($nn) { $needType{ASTSingle}++ }
-                            else {
-                                $needType{ASTSingleNotNull}++;
-                            }
                             $needType{$aft}++;
                         }
                         elsif ( $def =~ /^[A-Z]/ ) {
@@ -291,42 +294,75 @@ EOFN2
                     my ( $ff, $nn, $aa, $ii ) =
                       ( $fdef{$_}{f}, $fdef{$_}{n}, $fdef{$_}{a},
                         $fdef{$_}{i} );
+                    my $s1 = $fdef{$_}{t} eq $sin;
+                    my $s2 = ( $s1 and $sin =~ /^[A-Z]/ );
 
                     #note Dumper( $_, $fdef{$_} );
-                    if ( $fdef{$_}{t} eq $sin ) {
-                        (
-                            "    this.$_ = "
-                              . ( $ff && $nn ? "$ln.$_ ? " : "" )
-                              . (
-                                $sin =~ /^[A-Z]/ ? "$sin\[$ln.$_]" : "$ln.$_" )
-                              . ( $fdef{$_}{f} ? '()' : '' )
-                              . ( $ff && $nn ? " : null" : "" ) . ";",
-                            (
-                                $sin =~ /^[A-Z]/
-                                ? "    this.${_}String = "
-                                  . ( $ff && $nn ? "$ln.$_ ? " : "" )
-                                  . "op(($ln.$_ as unknown) as Token)"
-                                  . ( $fdef{$_}{f} ? '()' : '' )
-                                  . ( $ff && $nn ? " : null" : "" ) . ";"
-                                : ()
-                            )
-                          )
+                    # Flags:
+                    # $aa
+                    # $s1
+                    # $ff
+                    # $ii
+                    # $nn
+                    # $s2
+                    # Strings:
+                    # $_
+                    # $ln
+                    # $sin
+                    # $this
+                    my $fv0 = "$ln.$_";
+                    my $fv  = $fv0;
+                    if ($ff) {
+                        $fv = "ASTCall($fv)";
+                        $needType{ASTCall}++;
+                    }
+
+                    my $par = ", $this, \"$_\"";
+                    if ($ii) {
+                        $par = '';
+                    }
+
+                    my ( $pre, $post ) = ( '', '' );
+                    if ($s1) {
+                        if ($nn) {
+                            $pre  = "$fv0 ? ";
+                            $post = ' : null';
+                        }
                     }
                     else {
-                        "    this.$_ = "
-                          . ( $ff && $nn ? "$ln.$_ ? " : "" )
-                          . (
-                              $aa ? 'ASTArray'
-                            : $ii ? 'ASTSimpleSingle'
-                            : $nn ? 'ASTSingle'
-                            :       'ASTSingleNotNull'
-                          )
-                          . "($sin, $ln.$_"
-                          . ( $ff ? '()' : '' )
-                          . ( $ii ? ""   : qq[, $this, "$_"] ) . ")"
-                          . ( $ff && $nn ? " : null" : "" )
-                          . ( !$nn ? '!' : '' ) . ";";
+                        if ($aa) {
+                            $fv = "ASTArray($sin, $fv$par)";
+                            $needType{ASTArray}++;
+                        }
+                        else {
+                            my $nnt = $nn ? '' : 'NotNull';
+                            if ($ii) {
+                                $fv = "ASTSimpleSingle$nnt($sin, $fv)";
+                                $needType{"ASTSimpleSingle$nnt"}++;
+                            }
+                            else {
+                                $fv = "ASTSingle$nnt($sin, $fv$par)";
+                                $needType{"ASTSingle$nnt"}++;
+                            }
+                        }
                     }
+
+                    my $res;
+                    if ($s2) {
+                        $res = <<EOR;
+    this.$_ = $pre$sin\[$fv\]$post;
+    this.${_}String = ${pre}op(($fv as unknown) as Token)$post;
+EOR
+                    }
+                    else {
+                        $res = <<EOR;
+    this.$_ = $pre$fv$post;
+EOR
+                    }
+                    { $/ = ''; chomp $res; }
+
+                 #Dumper( $aa, $s1, $ff, $ii, $nn, $s2, $_, $ln, $sin, $this,) .
+                    $res;
                 } grep { $fdef{$_}{f} < 2 } @fdef;
                 my $recur = join( "\n", @recur );
                 my @recur2 = map {

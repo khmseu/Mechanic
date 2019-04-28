@@ -10,7 +10,7 @@ import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeLit } from "./ASTNodeLit";
 import { ASTPos } from "./ASTPos";
-import { ASTSimpleSingle } from "./ASTSimpleSingle";
+import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTSingle } from "./ASTSingle";
 import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
@@ -29,7 +29,7 @@ export class ASTNodeExtGlob extends ASTNode {
   constructor(extglob: IExtGlob, public parent: ASTNode | null, public parentField: string) {
     super(extglob, parent, parentField);
     logg("ASTNodeExtGlob");
-    this.OpPos = ASTSimpleSingle(ASTPos, extglob.OpPos)!;
+    this.OpPos = ASTSimpleSingleNotNull(ASTPos, extglob.OpPos);
     this.Op = GlobOperator[extglob.Op];
     this.OpString = op((extglob.Op as unknown) as Token);
     this.Pattern = ASTSingle(ASTNodeLit, extglob.Pattern, this, "Pattern");

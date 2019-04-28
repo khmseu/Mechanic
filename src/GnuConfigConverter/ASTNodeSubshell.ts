@@ -12,7 +12,7 @@ import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmtList } from "./ASTNodeStmtList";
 import { ASTPos } from "./ASTPos";
-import { ASTSimpleSingle } from "./ASTSimpleSingle";
+import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTSingle } from "./ASTSingle";
 import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
@@ -30,10 +30,10 @@ export class ASTNodeSubshell extends ASTNode {
   constructor(subshell: ISubshell, public parent: ASTNode | null, public parentField: string) {
     super(subshell, parent, parentField);
     logg("ASTNodeSubshell");
-    this.Lparen = ASTSimpleSingle(ASTPos, subshell.Lparen)!;
-    this.Rparen = ASTSimpleSingle(ASTPos, subshell.Rparen)!;
+    this.Lparen = ASTSimpleSingleNotNull(ASTPos, subshell.Lparen);
+    this.Rparen = ASTSimpleSingleNotNull(ASTPos, subshell.Rparen);
     this.StmtList = ASTSingle(ASTNodeStmtList, subshell.StmtList, this, "StmtList");
-    this.Last = ASTArray(ASTNodeComment, subshell.Last, this, "Last")!;
+    this.Last = ASTArray(ASTNodeComment, subshell.Last, this, "Last");
     ["kind", "parent", "parentField", "Lparen", "Rparen"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

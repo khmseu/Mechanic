@@ -12,7 +12,7 @@ import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeLit } from "./ASTNodeLit";
 import { ASTNodeWord } from "./ASTNodeWord";
 import { ASTPos } from "./ASTPos";
-import { ASTSimpleSingle } from "./ASTSimpleSingle";
+import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTSingle } from "./ASTSingle";
 import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
@@ -30,7 +30,7 @@ export class ASTNodeWordIter extends ASTNode {
     super(worditer, parent, parentField);
     logg("ASTNodeWordIter");
     this.Name = ASTSingle(ASTNodeLit, worditer.Name, this, "Name");
-    this.InPos = ASTSimpleSingle(ASTPos, worditer.InPos)!;
+    this.InPos = ASTSimpleSingleNotNull(ASTPos, worditer.InPos);
     this.Items = ASTArray(ASTNodeWord, worditer.Items, this, "Items");
     ["kind", "parent", "parentField", "InPos"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;

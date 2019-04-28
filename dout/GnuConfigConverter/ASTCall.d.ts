@@ -4,5 +4,5 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-export declare function __stack(): any;
-//# sourceMappingURL=__stack.d.ts.map
+export declare function ASTCall<PE>(pe: (() => PE) | null): PE | null;
+//# sourceMappingURL=ASTCall.d.ts.map

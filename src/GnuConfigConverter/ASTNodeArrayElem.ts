@@ -29,9 +29,9 @@ export class ASTNodeArrayElem extends ASTNode {
   constructor(arrayelem: IArrayElem, public parent: ASTNode | null, public parentField: string) {
     super(arrayelem, parent, parentField);
     logg("ASTNodeArrayElem");
-    this.Index = ASTSingleNotNull(ASTNodeArithmExpr, arrayelem.Index, this, "Index")!;
+    this.Index = ASTSingleNotNull(ASTNodeArithmExpr, arrayelem.Index, this, "Index");
     this.Value = ASTSingle(ASTNodeWord, arrayelem.Value, this, "Value");
-    this.Comments = ASTArray(ASTNodeComment, arrayelem.Comments, this, "Comments")!;
+    this.Comments = ASTArray(ASTNodeComment, arrayelem.Comments, this, "Comments");
     ["kind", "parent", "parentField"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

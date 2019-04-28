@@ -5,6 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { ASTCall } from "./ASTCall";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
@@ -21,8 +22,8 @@ export class ASTNode {
 
   constructor(node: INode, public parent: ASTNode | null, public parentField: string) {
     logg("ASTNode");
-    this.Pos = node.Pos ? ASTSimpleSingle(ASTPos, node.Pos()) : null;
-    this.End = node.End ? ASTSimpleSingle(ASTPos, node.End()) : null;
+    this.Pos = ASTSimpleSingle(ASTPos, ASTCall(node.Pos));
+    this.End = ASTSimpleSingle(ASTPos, ASTCall(node.End));
     ["kind", "parent", "parentField", "Pos", "End"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

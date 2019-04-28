@@ -12,7 +12,7 @@ import { ASTNodeArrayElem } from "./ASTNodeArrayElem";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTPos } from "./ASTPos";
-import { ASTSimpleSingle } from "./ASTSimpleSingle";
+import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
 import { IArrayExpr } from "./ParserTypes";
@@ -29,10 +29,10 @@ export class ASTNodeArrayExpr extends ASTNode {
   constructor(arrayexpr: IArrayExpr, public parent: ASTNode | null, public parentField: string) {
     super(arrayexpr, parent, parentField);
     logg("ASTNodeArrayExpr");
-    this.Lparen = ASTSimpleSingle(ASTPos, arrayexpr.Lparen)!;
-    this.Rparen = ASTSimpleSingle(ASTPos, arrayexpr.Rparen)!;
+    this.Lparen = ASTSimpleSingleNotNull(ASTPos, arrayexpr.Lparen);
+    this.Rparen = ASTSimpleSingleNotNull(ASTPos, arrayexpr.Rparen);
     this.Elems = ASTArray(ASTNodeArrayElem, arrayexpr.Elems, this, "Elems");
-    this.Last = ASTArray(ASTNodeComment, arrayexpr.Last, this, "Last")!;
+    this.Last = ASTArray(ASTNodeComment, arrayexpr.Last, this, "Last");
     ["kind", "parent", "parentField", "Lparen", "Rparen"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

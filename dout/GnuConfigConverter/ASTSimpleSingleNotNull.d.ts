@@ -4,5 +4,5 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-export declare function comm(thing: object, dflt?: string | null): string;
-//# sourceMappingURL=comm.d.ts.map
+export declare function ASTSimpleSingleNotNull<AE, PE>(at: new (pt: PE) => AE, pe: PE | null): AE;
+//# sourceMappingURL=ASTSimpleSingleNotNull.d.ts.map

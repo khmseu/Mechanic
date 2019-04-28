@@ -11,7 +11,7 @@ import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeLit } from "./ASTNodeLit";
 import { ASTNodeWord } from "./ASTNodeWord";
 import { ASTPos } from "./ASTPos";
-import { ASTSimpleSingle } from "./ASTSimpleSingle";
+import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTSingle } from "./ASTSingle";
 import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
@@ -32,7 +32,7 @@ export class ASTNodeRedirect extends ASTNode {
   constructor(redirect: IRedirect, public parent: ASTNode | null, public parentField: string) {
     super(redirect, parent, parentField);
     logg("ASTNodeRedirect");
-    this.OpPos = ASTSimpleSingle(ASTPos, redirect.OpPos)!;
+    this.OpPos = ASTSimpleSingleNotNull(ASTPos, redirect.OpPos);
     this.Op = RedirOperator[redirect.Op];
     this.OpString = op((redirect.Op as unknown) as Token);
     this.N = ASTSingle(ASTNodeLit, redirect.N, this, "N");

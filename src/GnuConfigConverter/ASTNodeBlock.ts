@@ -12,7 +12,7 @@ import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmtList } from "./ASTNodeStmtList";
 import { ASTPos } from "./ASTPos";
-import { ASTSimpleSingle } from "./ASTSimpleSingle";
+import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTSingle } from "./ASTSingle";
 import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
@@ -30,10 +30,10 @@ export class ASTNodeBlock extends ASTNode {
   constructor(block: IBlock, public parent: ASTNode | null, public parentField: string) {
     super(block, parent, parentField);
     logg("ASTNodeBlock");
-    this.Lbrace = ASTSimpleSingle(ASTPos, block.Lbrace)!;
-    this.Rbrace = ASTSimpleSingle(ASTPos, block.Rbrace)!;
+    this.Lbrace = ASTSimpleSingleNotNull(ASTPos, block.Lbrace);
+    this.Rbrace = ASTSimpleSingleNotNull(ASTPos, block.Rbrace);
     this.StmtList = ASTSingle(ASTNodeStmtList, block.StmtList, this, "StmtList");
-    this.Last = ASTArray(ASTNodeComment, block.Last, this, "Last")!;
+    this.Last = ASTArray(ASTNodeComment, block.Last, this, "Last");
     ["kind", "parent", "parentField", "Lbrace", "Rbrace"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

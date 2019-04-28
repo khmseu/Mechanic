@@ -12,7 +12,7 @@ import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmtList } from "./ASTNodeStmtList";
 import { ASTPos } from "./ASTPos";
-import { ASTSimpleSingle } from "./ASTSimpleSingle";
+import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTSingle } from "./ASTSingle";
 import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
@@ -34,14 +34,14 @@ export class ASTNodeWhileClause extends ASTNode {
   constructor(whileclause: IWhileClause, public parent: ASTNode | null, public parentField: string) {
     super(whileclause, parent, parentField);
     logg("ASTNodeWhileClause");
-    this.WhilePos = ASTSimpleSingle(ASTPos, whileclause.WhilePos)!;
-    this.DoPos = ASTSimpleSingle(ASTPos, whileclause.DoPos)!;
-    this.DonePos = ASTSimpleSingle(ASTPos, whileclause.DonePos)!;
+    this.WhilePos = ASTSimpleSingleNotNull(ASTPos, whileclause.WhilePos);
+    this.DoPos = ASTSimpleSingleNotNull(ASTPos, whileclause.DoPos);
+    this.DonePos = ASTSimpleSingleNotNull(ASTPos, whileclause.DonePos);
     this.Until = whileclause.Until;
     this.Cond = ASTSingle(ASTNodeStmtList, whileclause.Cond, this, "Cond");
-    this.CondLast = ASTArray(ASTNodeComment, whileclause.CondLast, this, "CondLast")!;
+    this.CondLast = ASTArray(ASTNodeComment, whileclause.CondLast, this, "CondLast");
     this.Do = ASTSingle(ASTNodeStmtList, whileclause.Do, this, "Do");
-    this.DoLast = ASTArray(ASTNodeComment, whileclause.DoLast, this, "DoLast")!;
+    this.DoLast = ASTArray(ASTNodeComment, whileclause.DoLast, this, "DoLast");
     ["kind", "parent", "parentField", "WhilePos", "DoPos", "DonePos"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

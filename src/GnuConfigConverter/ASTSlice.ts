@@ -16,8 +16,8 @@ export class ASTSlice {
 
   constructor(slice: I_Slice) {
     logg("ASTSlice");
-    this.Offset = ASTSingleNotNull(ASTNodeArithmExpr, slice.Offset, null, "Offset")!;
-    this.Length = ASTSingleNotNull(ASTNodeArithmExpr, slice.Length, null, "Length")!;
+    this.Offset = ASTSingleNotNull(ASTNodeArithmExpr, slice.Offset, null, "Offset");
+    this.Length = ASTSingleNotNull(ASTNodeArithmExpr, slice.Length, null, "Length");
     [].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

@@ -11,7 +11,7 @@ import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmt } from "./ASTNodeStmt";
 import { ASTNodeWord } from "./ASTNodeWord";
 import { ASTPos } from "./ASTPos";
-import { ASTSimpleSingle } from "./ASTSimpleSingle";
+import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTSingle } from "./ASTSingle";
 import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
@@ -28,7 +28,7 @@ export class ASTNodeCoprocClause extends ASTNode {
   constructor(coprocclause: ICoprocClause, public parent: ASTNode | null, public parentField: string) {
     super(coprocclause, parent, parentField);
     logg("ASTNodeCoprocClause");
-    this.Coproc = ASTSimpleSingle(ASTPos, coprocclause.Coproc)!;
+    this.Coproc = ASTSimpleSingleNotNull(ASTPos, coprocclause.Coproc);
     this.Name = ASTSingle(ASTNodeWord, coprocclause.Name, this, "Name");
     this.Stmt = ASTSingle(ASTNodeStmt, coprocclause.Stmt, this, "Stmt");
     ["kind", "parent", "parentField", "Coproc"].forEach((f) => {

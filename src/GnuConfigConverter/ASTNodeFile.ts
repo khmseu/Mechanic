@@ -29,7 +29,7 @@ export class ASTNodeFile extends ASTNode {
     logg("ASTNodeFile");
     this.Name = file.Name;
     this.StmtList = ASTSingle(ASTNodeStmtList, file.StmtList, this, "StmtList");
-    this.Last = ASTArray(ASTNodeComment, file.Last, this, "Last")!;
+    this.Last = ASTArray(ASTNodeComment, file.Last, this, "Last");
     ["kind", "parent", "parentField"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

@@ -4,5 +4,7 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-export declare function logg(thing: any): void;
-//# sourceMappingURL=analyzer.d.ts.map
+
+export function ASTCall<PE>(pe: (() => PE) | null) {
+  return pe ? pe() : null;
+}

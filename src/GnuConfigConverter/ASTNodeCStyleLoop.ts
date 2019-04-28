@@ -10,7 +10,7 @@ import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTPos } from "./ASTPos";
-import { ASTSimpleSingle } from "./ASTSimpleSingle";
+import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTSingleNotNull } from "./ASTSingleNotNull";
 import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
@@ -29,11 +29,11 @@ export class ASTNodeCStyleLoop extends ASTNode {
   constructor(cstyleloop: ICStyleLoop, public parent: ASTNode | null, public parentField: string) {
     super(cstyleloop, parent, parentField);
     logg("ASTNodeCStyleLoop");
-    this.Lparen = ASTSimpleSingle(ASTPos, cstyleloop.Lparen)!;
-    this.Rparen = ASTSimpleSingle(ASTPos, cstyleloop.Rparen)!;
-    this.Init = ASTSingleNotNull(ASTNodeArithmExpr, cstyleloop.Init, this, "Init")!;
-    this.Cond = ASTSingleNotNull(ASTNodeArithmExpr, cstyleloop.Cond, this, "Cond")!;
-    this.Post = ASTSingleNotNull(ASTNodeArithmExpr, cstyleloop.Post, this, "Post")!;
+    this.Lparen = ASTSimpleSingleNotNull(ASTPos, cstyleloop.Lparen);
+    this.Rparen = ASTSimpleSingleNotNull(ASTPos, cstyleloop.Rparen);
+    this.Init = ASTSingleNotNull(ASTNodeArithmExpr, cstyleloop.Init, this, "Init");
+    this.Cond = ASTSingleNotNull(ASTNodeArithmExpr, cstyleloop.Cond, this, "Cond");
+    this.Post = ASTSingleNotNull(ASTNodeArithmExpr, cstyleloop.Post, this, "Post");
     ["kind", "parent", "parentField", "Lparen", "Rparen"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

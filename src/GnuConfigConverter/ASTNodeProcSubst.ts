@@ -12,7 +12,7 @@ import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmt } from "./ASTNodeStmt";
 import { ASTPos } from "./ASTPos";
-import { ASTSimpleSingle } from "./ASTSimpleSingle";
+import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
 import { IProcSubst, ProcOperator } from "./ParserTypes";
@@ -32,12 +32,12 @@ export class ASTNodeProcSubst extends ASTNode {
   constructor(procsubst: IProcSubst, public parent: ASTNode | null, public parentField: string) {
     super(procsubst, parent, parentField);
     logg("ASTNodeProcSubst");
-    this.OpPos = ASTSimpleSingle(ASTPos, procsubst.OpPos)!;
-    this.Rparen = ASTSimpleSingle(ASTPos, procsubst.Rparen)!;
+    this.OpPos = ASTSimpleSingleNotNull(ASTPos, procsubst.OpPos);
+    this.Rparen = ASTSimpleSingleNotNull(ASTPos, procsubst.Rparen);
     this.Op = ProcOperator[procsubst.Op];
     this.OpString = op((procsubst.Op as unknown) as Token);
     this.Stmts = ASTArray(ASTNodeStmt, procsubst.Stmts, this, "Stmts");
-    this.Last = ASTArray(ASTNodeComment, procsubst.Last, this, "Last")!;
+    this.Last = ASTArray(ASTNodeComment, procsubst.Last, this, "Last");
     ["kind", "parent", "parentField", "OpPos", "Rparen"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

@@ -10,7 +10,7 @@ import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTPos } from "./ASTPos";
-import { ASTSimpleSingle } from "./ASTSimpleSingle";
+import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTSingleNotNull } from "./ASTSingleNotNull";
 import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
@@ -29,11 +29,11 @@ export class ASTNodeArithmExp extends ASTNode {
   constructor(arithmexp: IArithmExp, public parent: ASTNode | null, public parentField: string) {
     super(arithmexp, parent, parentField);
     logg("ASTNodeArithmExp");
-    this.Left = ASTSimpleSingle(ASTPos, arithmexp.Left)!;
-    this.Right = ASTSimpleSingle(ASTPos, arithmexp.Right)!;
+    this.Left = ASTSimpleSingleNotNull(ASTPos, arithmexp.Left);
+    this.Right = ASTSimpleSingleNotNull(ASTPos, arithmexp.Right);
     this.Bracket = arithmexp.Bracket;
     this.Unsigned = arithmexp.Unsigned;
-    this.X = ASTSingleNotNull(ASTNodeArithmExpr, arithmexp.X, this, "X")!;
+    this.X = ASTSingleNotNull(ASTNodeArithmExpr, arithmexp.X, this, "X");
     ["kind", "parent", "parentField", "Left", "Right"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

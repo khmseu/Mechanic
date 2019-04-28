@@ -9,7 +9,7 @@ import { ASTMoreLit } from "./ASTMoreLit";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTPos } from "./ASTPos";
-import { ASTSimpleSingle } from "./ASTSimpleSingle";
+import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
 import { ILit } from "./ParserTypes";
@@ -25,8 +25,8 @@ export class ASTNodeLit extends ASTNode {
   constructor(lit: ILit, public parent: ASTNode | null, public parentField: string) {
     super(lit, parent, parentField);
     logg("ASTNodeLit");
-    this.ValuePos = ASTSimpleSingle(ASTPos, lit.ValuePos)!;
-    this.ValueEnd = ASTSimpleSingle(ASTPos, lit.ValueEnd)!;
+    this.ValuePos = ASTSimpleSingleNotNull(ASTPos, lit.ValuePos);
+    this.ValueEnd = ASTSimpleSingleNotNull(ASTPos, lit.ValueEnd);
     this.Value = lit.Value;
     ["kind", "parent", "parentField", "ValuePos", "ValueEnd"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;

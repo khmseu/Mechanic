@@ -13,7 +13,7 @@ import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeLoop } from "./ASTNodeLoop";
 import { ASTNodeStmtList } from "./ASTNodeStmtList";
 import { ASTPos } from "./ASTPos";
-import { ASTSimpleSingle } from "./ASTSimpleSingle";
+import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTSingle } from "./ASTSingle";
 import { ASTSingleNotNull } from "./ASTSingleNotNull";
 import { ASTVisitorBase } from "./ASTVisitorBase";
@@ -35,13 +35,13 @@ export class ASTNodeForClause extends ASTNode {
   constructor(forclause: IForClause, public parent: ASTNode | null, public parentField: string) {
     super(forclause, parent, parentField);
     logg("ASTNodeForClause");
-    this.ForPos = ASTSimpleSingle(ASTPos, forclause.ForPos)!;
-    this.DoPos = ASTSimpleSingle(ASTPos, forclause.DoPos)!;
-    this.DonePos = ASTSimpleSingle(ASTPos, forclause.DonePos)!;
+    this.ForPos = ASTSimpleSingleNotNull(ASTPos, forclause.ForPos);
+    this.DoPos = ASTSimpleSingleNotNull(ASTPos, forclause.DoPos);
+    this.DonePos = ASTSimpleSingleNotNull(ASTPos, forclause.DonePos);
     this.Select = forclause.Select;
-    this.Loop = ASTSingleNotNull(ASTNodeLoop, forclause.Loop, this, "Loop")!;
+    this.Loop = ASTSingleNotNull(ASTNodeLoop, forclause.Loop, this, "Loop");
     this.Do = ASTSingle(ASTNodeStmtList, forclause.Do, this, "Do");
-    this.DoLast = ASTArray(ASTNodeComment, forclause.DoLast, this, "DoLast")!;
+    this.DoLast = ASTArray(ASTNodeComment, forclause.DoLast, this, "DoLast");
     ["kind", "parent", "parentField", "ForPos", "DoPos", "DonePos"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

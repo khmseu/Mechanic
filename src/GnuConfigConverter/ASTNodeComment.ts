@@ -9,7 +9,7 @@ import { ASTMoreComment } from "./ASTMoreComment";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTPos } from "./ASTPos";
-import { ASTSimpleSingle } from "./ASTSimpleSingle";
+import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
 import { IComment } from "./ParserTypes";
@@ -24,7 +24,7 @@ export class ASTNodeComment extends ASTNode {
   constructor(comment: IComment, public parent: ASTNode | null, public parentField: string) {
     super(comment, parent, parentField);
     logg("ASTNodeComment");
-    this.Hash = ASTSimpleSingle(ASTPos, comment.Hash)!;
+    this.Hash = ASTSimpleSingleNotNull(ASTPos, comment.Hash);
     this.Text = comment.Text;
     ["kind", "parent", "parentField", "Hash"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;

@@ -10,7 +10,7 @@ import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmt } from "./ASTNodeStmt";
 import { ASTPos } from "./ASTPos";
-import { ASTSimpleSingle } from "./ASTSimpleSingle";
+import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTSingleNotNull } from "./ASTSingleNotNull";
 import { ASTVisitorBase } from "./ASTVisitorBase";
 import { logg } from "./logg";
@@ -30,11 +30,11 @@ export class ASTNodeBinaryCmd extends ASTNode {
   constructor(binarycmd: IBinaryCmd, public parent: ASTNode | null, public parentField: string) {
     super(binarycmd, parent, parentField);
     logg("ASTNodeBinaryCmd");
-    this.OpPos = ASTSimpleSingle(ASTPos, binarycmd.OpPos)!;
+    this.OpPos = ASTSimpleSingleNotNull(ASTPos, binarycmd.OpPos);
     this.Op = BinCmdOperator[binarycmd.Op];
     this.OpString = op((binarycmd.Op as unknown) as Token);
-    this.X = ASTSingleNotNull(ASTNodeStmt, binarycmd.X, this, "X")!;
-    this.Y = ASTSingleNotNull(ASTNodeStmt, binarycmd.Y, this, "Y")!;
+    this.X = ASTSingleNotNull(ASTNodeStmt, binarycmd.X, this, "X");
+    this.Y = ASTSingleNotNull(ASTNodeStmt, binarycmd.Y, this, "Y");
     ["kind", "parent", "parentField", "OpPos"].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;
