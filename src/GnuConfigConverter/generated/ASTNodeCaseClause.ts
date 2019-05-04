@@ -8,7 +8,6 @@
 import { logg } from "../logg";
 import { ICaseClause } from "../ParserTypes";
 import { ASTArray } from "./ASTArray";
-import { ASTMoreCaseClause } from "./ASTMoreCaseClause";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeCaseItem } from "./ASTNodeCaseItem";
 import { ASTNodeComment } from "./ASTNodeComment";
@@ -22,7 +21,6 @@ import { ASTVisitorBase } from "./ASTVisitorBase";
 export class ASTNodeCaseClause extends ASTNode {
   public kind: ASTnodeKind.ASTNodeCaseClause = ASTnodeKind.ASTNodeCaseClause;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeCaseClause];
-  public more: ASTMoreCaseClause = new ASTMoreCaseClause();
   public Case: ASTPos; //     Case: I_Pos;
   public Esac: ASTPos; //     Esac: I_Pos;
   public Word: ASTNodeWord | null; //     Word: IWord | null;

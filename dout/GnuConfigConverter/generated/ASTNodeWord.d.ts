@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 import { IWord } from "../ParserTypes";
-import { ASTMoreWord } from "./ASTMoreWord";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeWordPart } from "./ASTNodeWordPart";
@@ -15,7 +14,6 @@ export declare class ASTNodeWord extends ASTNode {
     parentField: string;
     kind: ASTnodeKind.ASTNodeWord;
     kindString: string;
-    more: ASTMoreWord;
     Parts: ASTNodeWordPart[];
     SplitBraces: ASTNodeWord | null;
     Lit: string | null;

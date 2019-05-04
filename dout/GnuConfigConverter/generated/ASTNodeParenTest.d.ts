@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 import { IParenTest } from "../ParserTypes";
-import { ASTMoreParenTest } from "./ASTMoreParenTest";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeTestExpr } from "./ASTNodeTestExpr";
@@ -16,7 +15,6 @@ export declare class ASTNodeParenTest extends ASTNode {
     parentField: string;
     kind: ASTnodeKind.ASTNodeParenTest;
     kindString: string;
-    more: ASTMoreParenTest;
     Lparen: ASTPos;
     Rparen: ASTPos;
     X: ASTNodeTestExpr;

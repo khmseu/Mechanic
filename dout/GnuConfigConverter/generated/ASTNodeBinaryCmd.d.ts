@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 import { IBinaryCmd } from "../ParserTypes";
-import { ASTMoreBinaryCmd } from "./ASTMoreBinaryCmd";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmt } from "./ASTNodeStmt";
@@ -16,7 +15,6 @@ export declare class ASTNodeBinaryCmd extends ASTNode {
     parentField: string;
     kind: ASTnodeKind.ASTNodeBinaryCmd;
     kindString: string;
-    more: ASTMoreBinaryCmd;
     OpPos: ASTPos;
     Op: string;
     OpString: string;

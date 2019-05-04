@@ -7,7 +7,6 @@
 
 import { logg } from "../logg";
 import { IFuncDecl } from "../ParserTypes";
-import { ASTMoreFuncDecl } from "./ASTMoreFuncDecl";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeLit } from "./ASTNodeLit";
@@ -20,7 +19,6 @@ import { ASTVisitorBase } from "./ASTVisitorBase";
 export class ASTNodeFuncDecl extends ASTNode {
   public kind: ASTnodeKind.ASTNodeFuncDecl = ASTnodeKind.ASTNodeFuncDecl;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeFuncDecl];
-  public more: ASTMoreFuncDecl = new ASTMoreFuncDecl();
   public Position: ASTPos; //     Position: I_Pos;
   public RsrvWord: boolean; //     RsrvWord: boolean;
   public Name: ASTNodeLit | null; //     Name: ILit | null;

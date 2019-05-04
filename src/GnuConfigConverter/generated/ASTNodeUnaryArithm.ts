@@ -8,7 +8,6 @@
 import { logg } from "../logg";
 import { IUnaryArithm, UnAritOperator } from "../ParserTypes";
 import { op, Token } from "../Token";
-import { ASTMoreUnaryArithm } from "./ASTMoreUnaryArithm";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -20,7 +19,6 @@ import { ASTVisitorBase } from "./ASTVisitorBase";
 export class ASTNodeUnaryArithm extends ASTNode {
   public kind: ASTnodeKind.ASTNodeUnaryArithm = ASTnodeKind.ASTNodeUnaryArithm;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeUnaryArithm];
-  public more: ASTMoreUnaryArithm = new ASTMoreUnaryArithm();
   public OpPos: ASTPos; //     OpPos: I_Pos;
   public Op: string; //     Op: UnAritOperator;
   public OpString: string;

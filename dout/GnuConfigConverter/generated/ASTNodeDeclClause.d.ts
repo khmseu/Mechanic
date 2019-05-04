@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 import { IDeclClause } from "../ParserTypes";
-import { ASTMoreDeclClause } from "./ASTMoreDeclClause";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeAssign } from "./ASTNodeAssign";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -17,7 +16,6 @@ export declare class ASTNodeDeclClause extends ASTNode {
     parentField: string;
     kind: ASTnodeKind.ASTNodeDeclClause;
     kindString: string;
-    more: ASTMoreDeclClause;
     Variant: ASTNodeLit | null;
     Opts: ASTNodeWord[];
     Assigns: ASTNodeAssign[];

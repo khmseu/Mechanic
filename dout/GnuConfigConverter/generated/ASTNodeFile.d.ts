@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 import { IFile } from "../ParserTypes";
-import { ASTMoreFile } from "./ASTMoreFile";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -16,7 +15,6 @@ export declare class ASTNodeFile extends ASTNode {
     parentField: string;
     kind: ASTnodeKind.ASTNodeFile;
     kindString: string;
-    more: ASTMoreFile;
     Name: string;
     StmtList: ASTNodeStmtList | null;
     Last: ASTNodeComment[];

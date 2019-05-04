@@ -8,7 +8,6 @@
 import { logg } from "../logg";
 import { IUnaryTest, UnTestOperator } from "../ParserTypes";
 import { op, Token } from "../Token";
-import { ASTMoreUnaryTest } from "./ASTMoreUnaryTest";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeTestExpr } from "./ASTNodeTestExpr";
@@ -20,7 +19,6 @@ import { ASTVisitorBase } from "./ASTVisitorBase";
 export class ASTNodeUnaryTest extends ASTNode {
   public kind: ASTnodeKind.ASTNodeUnaryTest = ASTnodeKind.ASTNodeUnaryTest;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeUnaryTest];
-  public more: ASTMoreUnaryTest = new ASTMoreUnaryTest();
   public OpPos: ASTPos; //     OpPos: I_Pos;
   public Op: string; //     Op: UnTestOperator;
   public OpString: string;

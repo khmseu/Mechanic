@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 import { ICmdSubst } from "../ParserTypes";
-import { ASTMoreCmdSubst } from "./ASTMoreCmdSubst";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -17,7 +16,6 @@ export declare class ASTNodeCmdSubst extends ASTNode {
     parentField: string;
     kind: ASTnodeKind.ASTNodeCmdSubst;
     kindString: string;
-    more: ASTMoreCmdSubst;
     Left: ASTPos;
     Right: ASTPos;
     StmtList: ASTNodeStmtList | null;

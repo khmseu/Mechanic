@@ -8,7 +8,6 @@
 import { logg } from "../logg";
 import { BinTestOperator, IBinaryTest } from "../ParserTypes";
 import { op, Token } from "../Token";
-import { ASTMoreBinaryTest } from "./ASTMoreBinaryTest";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeTestExpr } from "./ASTNodeTestExpr";
@@ -20,7 +19,6 @@ import { ASTVisitorBase } from "./ASTVisitorBase";
 export class ASTNodeBinaryTest extends ASTNode {
   public kind: ASTnodeKind.ASTNodeBinaryTest = ASTnodeKind.ASTNodeBinaryTest;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeBinaryTest];
-  public more: ASTMoreBinaryTest = new ASTMoreBinaryTest();
   public OpPos: ASTPos; //     OpPos: I_Pos;
   public Op: string; //     Op: BinTestOperator;
   public OpString: string;

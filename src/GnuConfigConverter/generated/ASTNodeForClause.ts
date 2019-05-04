@@ -8,7 +8,6 @@
 import { logg } from "../logg";
 import { IForClause } from "../ParserTypes";
 import { ASTArray } from "./ASTArray";
-import { ASTMoreForClause } from "./ASTMoreForClause";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -23,7 +22,6 @@ import { ASTVisitorBase } from "./ASTVisitorBase";
 export class ASTNodeForClause extends ASTNode {
   public kind: ASTnodeKind.ASTNodeForClause = ASTnodeKind.ASTNodeForClause;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeForClause];
-  public more: ASTMoreForClause = new ASTMoreForClause();
   public ForPos: ASTPos; //     ForPos: I_Pos;
   public DoPos: ASTPos; //     DoPos: I_Pos;
   public DonePos: ASTPos; //     DonePos: I_Pos;

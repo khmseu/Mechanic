@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 import { IWordIter } from "../ParserTypes";
-import { ASTMoreWordIter } from "./ASTMoreWordIter";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeLit } from "./ASTNodeLit";
@@ -17,7 +16,6 @@ export declare class ASTNodeWordIter extends ASTNode {
     parentField: string;
     kind: ASTnodeKind.ASTNodeWordIter;
     kindString: string;
-    more: ASTMoreWordIter;
     Name: ASTNodeLit | null;
     InPos: ASTPos;
     Items: ASTNodeWord[];

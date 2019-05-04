@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 import { IAssign } from "../ParserTypes";
-import { ASTMoreAssign } from "./ASTMoreAssign";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTNodeArrayExpr } from "./ASTNodeArrayExpr";
@@ -18,7 +17,6 @@ export declare class ASTNodeAssign extends ASTNode {
     parentField: string;
     kind: ASTnodeKind.ASTNodeAssign;
     kindString: string;
-    more: ASTMoreAssign;
     Append: boolean;
     Naked: boolean;
     Name: ASTNodeLit | null;

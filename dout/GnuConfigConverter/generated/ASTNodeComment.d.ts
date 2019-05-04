@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 import { IComment } from "../ParserTypes";
-import { ASTMoreComment } from "./ASTMoreComment";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTPos } from "./ASTPos";
@@ -15,7 +14,6 @@ export declare class ASTNodeComment extends ASTNode {
     parentField: string;
     kind: ASTnodeKind.ASTNodeComment;
     kindString: string;
-    more: ASTMoreComment;
     Hash: ASTPos;
     Text: string;
     constructor(comment: IComment, parent: ASTNode | null, parentField: string);

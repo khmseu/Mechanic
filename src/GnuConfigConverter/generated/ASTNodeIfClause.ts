@@ -8,7 +8,6 @@
 import { logg } from "../logg";
 import { IIfClause } from "../ParserTypes";
 import { ASTArray } from "./ASTArray";
-import { ASTMoreIfClause } from "./ASTMoreIfClause";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -21,7 +20,6 @@ import { ASTVisitorBase } from "./ASTVisitorBase";
 export class ASTNodeIfClause extends ASTNode {
   public kind: ASTnodeKind.ASTNodeIfClause = ASTnodeKind.ASTNodeIfClause;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeIfClause];
-  public more: ASTMoreIfClause = new ASTMoreIfClause();
   public Position: ASTPos; //     Position: I_Pos;
   public ThenPos: ASTPos; //     ThenPos: I_Pos;
   public FiPos: ASTPos; //     FiPos: I_Pos;

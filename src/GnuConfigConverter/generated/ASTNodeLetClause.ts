@@ -8,7 +8,6 @@
 import { logg } from "../logg";
 import { ILetClause } from "../ParserTypes";
 import { ASTArray } from "./ASTArray";
-import { ASTMoreLetClause } from "./ASTMoreLetClause";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -19,7 +18,6 @@ import { ASTVisitorBase } from "./ASTVisitorBase";
 export class ASTNodeLetClause extends ASTNode {
   public kind: ASTnodeKind.ASTNodeLetClause = ASTnodeKind.ASTNodeLetClause;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeLetClause];
-  public more: ASTMoreLetClause = new ASTMoreLetClause();
   public Let: ASTPos; //     Let: I_Pos;
   public Exprs: ASTNodeArithmExpr[]; //     Exprs: IArithmExpr[];
 

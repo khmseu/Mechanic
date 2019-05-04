@@ -8,7 +8,6 @@
 import { logg } from "../logg";
 import { BinAritOperator, IBinaryArithm } from "../ParserTypes";
 import { op, Token } from "../Token";
-import { ASTMoreBinaryArithm } from "./ASTMoreBinaryArithm";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -20,7 +19,6 @@ import { ASTVisitorBase } from "./ASTVisitorBase";
 export class ASTNodeBinaryArithm extends ASTNode {
   public kind: ASTnodeKind.ASTNodeBinaryArithm = ASTnodeKind.ASTNodeBinaryArithm;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeBinaryArithm];
-  public more: ASTMoreBinaryArithm = new ASTMoreBinaryArithm();
   public OpPos: ASTPos; //     OpPos: I_Pos;
   public Op: string; //     Op: BinAritOperator;
   public OpString: string;

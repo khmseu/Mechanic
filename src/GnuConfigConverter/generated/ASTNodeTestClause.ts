@@ -7,7 +7,6 @@
 
 import { logg } from "../logg";
 import { ITestClause } from "../ParserTypes";
-import { ASTMoreTestClause } from "./ASTMoreTestClause";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeTestExpr } from "./ASTNodeTestExpr";
@@ -19,7 +18,6 @@ import { ASTVisitorBase } from "./ASTVisitorBase";
 export class ASTNodeTestClause extends ASTNode {
   public kind: ASTnodeKind.ASTNodeTestClause = ASTnodeKind.ASTNodeTestClause;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeTestClause];
-  public more: ASTMoreTestClause = new ASTMoreTestClause();
   public Left: ASTPos; //     Left: I_Pos;
   public Right: ASTPos; //     Right: I_Pos;
   public X: ASTNodeTestExpr; //     X: ITestExpr;

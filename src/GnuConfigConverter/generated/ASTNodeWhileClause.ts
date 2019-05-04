@@ -8,7 +8,6 @@
 import { logg } from "../logg";
 import { IWhileClause } from "../ParserTypes";
 import { ASTArray } from "./ASTArray";
-import { ASTMoreWhileClause } from "./ASTMoreWhileClause";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -21,7 +20,6 @@ import { ASTVisitorBase } from "./ASTVisitorBase";
 export class ASTNodeWhileClause extends ASTNode {
   public kind: ASTnodeKind.ASTNodeWhileClause = ASTnodeKind.ASTNodeWhileClause;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeWhileClause];
-  public more: ASTMoreWhileClause = new ASTMoreWhileClause();
   public WhilePos: ASTPos; //     WhilePos: I_Pos;
   public DoPos: ASTPos; //     DoPos: I_Pos;
   public DonePos: ASTPos; //     DonePos: I_Pos;

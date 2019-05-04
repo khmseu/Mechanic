@@ -7,7 +7,6 @@
 
 import { logg } from "../logg";
 import { IArithmCmd } from "../ParserTypes";
-import { ASTMoreArithmCmd } from "./ASTMoreArithmCmd";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -19,7 +18,6 @@ import { ASTVisitorBase } from "./ASTVisitorBase";
 export class ASTNodeArithmCmd extends ASTNode {
   public kind: ASTnodeKind.ASTNodeArithmCmd = ASTnodeKind.ASTNodeArithmCmd;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeArithmCmd];
-  public more: ASTMoreArithmCmd = new ASTMoreArithmCmd();
   public Left: ASTPos; //     Left: I_Pos;
   public Right: ASTPos; //     Right: I_Pos;
   public Unsigned: boolean; //     Unsigned: boolean;

@@ -7,7 +7,6 @@
 
 import { logg } from "../logg";
 import { ICStyleLoop } from "../ParserTypes";
-import { ASTMoreCStyleLoop } from "./ASTMoreCStyleLoop";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -19,7 +18,6 @@ import { ASTVisitorBase } from "./ASTVisitorBase";
 export class ASTNodeCStyleLoop extends ASTNode {
   public kind: ASTnodeKind.ASTNodeCStyleLoop = ASTnodeKind.ASTNodeCStyleLoop;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeCStyleLoop];
-  public more: ASTMoreCStyleLoop = new ASTMoreCStyleLoop();
   public Lparen: ASTPos; //     Lparen: I_Pos;
   public Rparen: ASTPos; //     Rparen: I_Pos;
   public Init: ASTNodeArithmExpr; //     Init: IArithmExpr;

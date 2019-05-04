@@ -8,7 +8,6 @@
 import { logg } from "../logg";
 import { ISubshell } from "../ParserTypes";
 import { ASTArray } from "./ASTArray";
-import { ASTMoreSubshell } from "./ASTMoreSubshell";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -21,7 +20,6 @@ import { ASTVisitorBase } from "./ASTVisitorBase";
 export class ASTNodeSubshell extends ASTNode {
   public kind: ASTnodeKind.ASTNodeSubshell = ASTnodeKind.ASTNodeSubshell;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeSubshell];
-  public more: ASTMoreSubshell = new ASTMoreSubshell();
   public Lparen: ASTPos; //     Lparen: I_Pos;
   public Rparen: ASTPos; //     Rparen: I_Pos;
   public StmtList: ASTNodeStmtList | null; //     StmtList: IStmtList | null;

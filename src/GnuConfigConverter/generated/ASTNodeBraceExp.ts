@@ -8,7 +8,6 @@
 import { logg } from "../logg";
 import { IBraceExp } from "../ParserTypes";
 import { ASTArray } from "./ASTArray";
-import { ASTMoreBraceExp } from "./ASTMoreBraceExp";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeWord } from "./ASTNodeWord";
@@ -17,7 +16,6 @@ import { ASTVisitorBase } from "./ASTVisitorBase";
 export class ASTNodeBraceExp extends ASTNode {
   public kind: ASTnodeKind.ASTNodeBraceExp = ASTnodeKind.ASTNodeBraceExp;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeBraceExp];
-  public more: ASTMoreBraceExp = new ASTMoreBraceExp();
   public Sequence: boolean; //     Sequence: boolean;
   public Chars: boolean; //     Chars: boolean;
   public Elems: ASTNodeWord[]; //     Elems: IWord[] | null;

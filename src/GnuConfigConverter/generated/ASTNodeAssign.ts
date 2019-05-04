@@ -7,7 +7,6 @@
 
 import { logg } from "../logg";
 import { IAssign } from "../ParserTypes";
-import { ASTMoreAssign } from "./ASTMoreAssign";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTNodeArrayExpr } from "./ASTNodeArrayExpr";
@@ -20,7 +19,6 @@ import { ASTVisitorBase } from "./ASTVisitorBase";
 export class ASTNodeAssign extends ASTNode {
   public kind: ASTnodeKind.ASTNodeAssign = ASTnodeKind.ASTNodeAssign;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeAssign];
-  public more: ASTMoreAssign = new ASTMoreAssign();
   public Append: boolean; //     Append: boolean;
   public Naked: boolean; //     Naked: boolean;
   public Name: ASTNodeLit | null; //     Name: ILit | null;

@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 import { ICStyleLoop } from "../ParserTypes";
-import { ASTMoreCStyleLoop } from "./ASTMoreCStyleLoop";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -16,7 +15,6 @@ export declare class ASTNodeCStyleLoop extends ASTNode {
     parentField: string;
     kind: ASTnodeKind.ASTNodeCStyleLoop;
     kindString: string;
-    more: ASTMoreCStyleLoop;
     Lparen: ASTPos;
     Rparen: ASTPos;
     Init: ASTNodeArithmExpr;

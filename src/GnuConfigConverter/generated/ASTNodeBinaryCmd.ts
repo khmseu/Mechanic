@@ -8,7 +8,6 @@
 import { logg } from "../logg";
 import { BinCmdOperator, IBinaryCmd } from "../ParserTypes";
 import { op, Token } from "../Token";
-import { ASTMoreBinaryCmd } from "./ASTMoreBinaryCmd";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmt } from "./ASTNodeStmt";
@@ -20,7 +19,6 @@ import { ASTVisitorBase } from "./ASTVisitorBase";
 export class ASTNodeBinaryCmd extends ASTNode {
   public kind: ASTnodeKind.ASTNodeBinaryCmd = ASTnodeKind.ASTNodeBinaryCmd;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeBinaryCmd];
-  public more: ASTMoreBinaryCmd = new ASTMoreBinaryCmd();
   public OpPos: ASTPos; //     OpPos: I_Pos;
   public Op: string; //     Op: BinCmdOperator;
   public OpString: string;

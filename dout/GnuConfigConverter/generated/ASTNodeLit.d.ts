@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 import { ILit } from "../ParserTypes";
-import { ASTMoreLit } from "./ASTMoreLit";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTPos } from "./ASTPos";
@@ -15,7 +14,6 @@ export declare class ASTNodeLit extends ASTNode {
     parentField: string;
     kind: ASTnodeKind.ASTNodeLit;
     kindString: string;
-    more: ASTMoreLit;
     ValuePos: ASTPos;
     ValueEnd: ASTPos;
     Value: string;

@@ -7,7 +7,6 @@
 
 import { logg } from "../logg";
 import { ICoprocClause } from "../ParserTypes";
-import { ASTMoreCoprocClause } from "./ASTMoreCoprocClause";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmt } from "./ASTNodeStmt";
@@ -20,7 +19,6 @@ import { ASTVisitorBase } from "./ASTVisitorBase";
 export class ASTNodeCoprocClause extends ASTNode {
   public kind: ASTnodeKind.ASTNodeCoprocClause = ASTnodeKind.ASTNodeCoprocClause;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeCoprocClause];
-  public more: ASTMoreCoprocClause = new ASTMoreCoprocClause();
   public Coproc: ASTPos; //     Coproc: I_Pos;
   public Name: ASTNodeWord | null; //     Name: IWord | null;
   public Stmt: ASTNodeStmt | null; //     Stmt: IStmt | null;

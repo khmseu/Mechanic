@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 import { IBraceExp } from "../ParserTypes";
-import { ASTMoreBraceExp } from "./ASTMoreBraceExp";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeWord } from "./ASTNodeWord";
@@ -15,7 +14,6 @@ export declare class ASTNodeBraceExp extends ASTNode {
     parentField: string;
     kind: ASTnodeKind.ASTNodeBraceExp;
     kindString: string;
-    more: ASTMoreBraceExp;
     Sequence: boolean;
     Chars: boolean;
     Elems: ASTNodeWord[];

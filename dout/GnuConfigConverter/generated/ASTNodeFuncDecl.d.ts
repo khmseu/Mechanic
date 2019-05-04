@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 import { IFuncDecl } from "../ParserTypes";
-import { ASTMoreFuncDecl } from "./ASTMoreFuncDecl";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeLit } from "./ASTNodeLit";
@@ -17,7 +16,6 @@ export declare class ASTNodeFuncDecl extends ASTNode {
     parentField: string;
     kind: ASTnodeKind.ASTNodeFuncDecl;
     kindString: string;
-    more: ASTMoreFuncDecl;
     Position: ASTPos;
     RsrvWord: boolean;
     Name: ASTNodeLit | null;

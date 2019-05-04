@@ -7,7 +7,6 @@
 
 import { logg } from "../logg";
 import { IParenTest } from "../ParserTypes";
-import { ASTMoreParenTest } from "./ASTMoreParenTest";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeTestExpr } from "./ASTNodeTestExpr";
@@ -19,7 +18,6 @@ import { ASTVisitorBase } from "./ASTVisitorBase";
 export class ASTNodeParenTest extends ASTNode {
   public kind: ASTnodeKind.ASTNodeParenTest = ASTnodeKind.ASTNodeParenTest;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeParenTest];
-  public more: ASTMoreParenTest = new ASTMoreParenTest();
   public Lparen: ASTPos; //     Lparen: I_Pos;
   public Rparen: ASTPos; //     Rparen: I_Pos;
   public X: ASTNodeTestExpr; //     X: ITestExpr;

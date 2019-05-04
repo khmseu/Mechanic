@@ -8,7 +8,6 @@
 import { logg } from "../logg";
 import { IDblQuoted } from "../ParserTypes";
 import { ASTArray } from "./ASTArray";
-import { ASTMoreDblQuoted } from "./ASTMoreDblQuoted";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeWordPart } from "./ASTNodeWordPart";
@@ -19,7 +18,6 @@ import { ASTVisitorBase } from "./ASTVisitorBase";
 export class ASTNodeDblQuoted extends ASTNode {
   public kind: ASTnodeKind.ASTNodeDblQuoted = ASTnodeKind.ASTNodeDblQuoted;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeDblQuoted];
-  public more: ASTMoreDblQuoted = new ASTMoreDblQuoted();
   public Position: ASTPos; //     Position: I_Pos;
   public Dollar: boolean; //     Dollar: boolean;
   public Parts: ASTNodeWordPart[]; //     Parts: IWordPart[];

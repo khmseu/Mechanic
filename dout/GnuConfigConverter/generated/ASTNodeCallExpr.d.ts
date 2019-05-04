@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 import { ICallExpr } from "../ParserTypes";
-import { ASTMoreCallExpr } from "./ASTMoreCallExpr";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeAssign } from "./ASTNodeAssign";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -16,7 +15,6 @@ export declare class ASTNodeCallExpr extends ASTNode {
     parentField: string;
     kind: ASTnodeKind.ASTNodeCallExpr;
     kindString: string;
-    more: ASTMoreCallExpr;
     Assigns: ASTNodeAssign[];
     Args: ASTNodeWord[];
     constructor(callexpr: ICallExpr, parent: ASTNode | null, parentField: string);

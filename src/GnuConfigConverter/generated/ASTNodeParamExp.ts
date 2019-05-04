@@ -9,7 +9,6 @@ import { logg } from "../logg";
 import { IParamExp, ParNamesOperator } from "../ParserTypes";
 import { op, Token } from "../Token";
 import { ASTExpansion } from "./ASTExpansion";
-import { ASTMoreParamExp } from "./ASTMoreParamExp";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -25,7 +24,6 @@ import { ASTVisitorBase } from "./ASTVisitorBase";
 export class ASTNodeParamExp extends ASTNode {
   public kind: ASTnodeKind.ASTNodeParamExp = ASTnodeKind.ASTNodeParamExp;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeParamExp];
-  public more: ASTMoreParamExp = new ASTMoreParamExp();
   public Dollar: ASTPos; //     Dollar: I_Pos;
   public Rbrace: ASTPos; //     Rbrace: I_Pos;
   public Short: boolean; //     Short: boolean;

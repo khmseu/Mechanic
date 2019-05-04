@@ -8,6 +8,7 @@
 import { logg } from "../logg";
 import { INode } from "../ParserTypes";
 import { ASTCall } from "./ASTCall";
+import { ASTMore } from "./ASTMore";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
@@ -16,7 +17,7 @@ import { ASTVisitorBase } from "./ASTVisitorBase";
 export class ASTNode {
   public kind: ASTnodeKind = ASTnodeKind.bad;
   public kindString: string = ASTnodeKind[ASTnodeKind.bad];
-  public more: { [key: string]: any } = {};
+  public more: ASTMore = new ASTMore();
   public Pos: ASTPos | null; //     Pos: (() => I_Pos) | null;
   public End: ASTPos | null; //     End: (() => I_Pos) | null;
 

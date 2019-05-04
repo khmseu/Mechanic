@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 import { IUnaryArithm } from "../ParserTypes";
-import { ASTMoreUnaryArithm } from "./ASTMoreUnaryArithm";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -16,7 +15,6 @@ export declare class ASTNodeUnaryArithm extends ASTNode {
     parentField: string;
     kind: ASTnodeKind.ASTNodeUnaryArithm;
     kindString: string;
-    more: ASTMoreUnaryArithm;
     OpPos: ASTPos;
     Op: string;
     OpString: string;

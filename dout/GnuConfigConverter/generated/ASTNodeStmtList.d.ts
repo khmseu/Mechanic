@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 import { IStmtList } from "../ParserTypes";
-import { ASTMoreStmtList } from "./ASTMoreStmtList";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -16,7 +15,6 @@ export declare class ASTNodeStmtList extends ASTNode {
     parentField: string;
     kind: ASTnodeKind.ASTNodeStmtList;
     kindString: string;
-    more: ASTMoreStmtList;
     Stmts: ASTNodeStmt[];
     Last: ASTNodeComment[];
     constructor(stmtlist: IStmtList, parent: ASTNode | null, parentField: string);

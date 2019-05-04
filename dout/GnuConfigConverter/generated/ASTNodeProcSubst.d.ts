@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 import { IProcSubst } from "../ParserTypes";
-import { ASTMoreProcSubst } from "./ASTMoreProcSubst";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -17,7 +16,6 @@ export declare class ASTNodeProcSubst extends ASTNode {
     parentField: string;
     kind: ASTnodeKind.ASTNodeProcSubst;
     kindString: string;
-    more: ASTMoreProcSubst;
     OpPos: ASTPos;
     Rparen: ASTPos;
     Op: string;

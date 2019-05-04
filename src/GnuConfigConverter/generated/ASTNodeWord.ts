@@ -9,7 +9,6 @@ import { logg } from "../logg";
 import { IWord } from "../ParserTypes";
 import { ASTArray } from "./ASTArray";
 import { ASTCall } from "./ASTCall";
-import { ASTMoreWord } from "./ASTMoreWord";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeWordPart } from "./ASTNodeWordPart";
@@ -19,7 +18,6 @@ import { ASTVisitorBase } from "./ASTVisitorBase";
 export class ASTNodeWord extends ASTNode {
   public kind: ASTnodeKind.ASTNodeWord = ASTnodeKind.ASTNodeWord;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeWord];
-  public more: ASTMoreWord = new ASTMoreWord();
   public Parts: ASTNodeWordPart[]; //     Parts: IWordPart[];
   public SplitBraces: ASTNodeWord | null; //     SplitBraces: (() => IWord) | null;
   public Lit: string | null; //     Lit: (() => string) | null;

@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 import { IWhileClause } from "../ParserTypes";
-import { ASTMoreWhileClause } from "./ASTMoreWhileClause";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -17,7 +16,6 @@ export declare class ASTNodeWhileClause extends ASTNode {
     parentField: string;
     kind: ASTnodeKind.ASTNodeWhileClause;
     kindString: string;
-    more: ASTMoreWhileClause;
     WhilePos: ASTPos;
     DoPos: ASTPos;
     DonePos: ASTPos;

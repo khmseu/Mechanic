@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 import { ILetClause } from "../ParserTypes";
-import { ASTMoreLetClause } from "./ASTMoreLetClause";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -16,7 +15,6 @@ export declare class ASTNodeLetClause extends ASTNode {
     parentField: string;
     kind: ASTnodeKind.ASTNodeLetClause;
     kindString: string;
-    more: ASTMoreLetClause;
     Let: ASTPos;
     Exprs: ASTNodeArithmExpr[];
     constructor(letclause: ILetClause, parent: ASTNode | null, parentField: string);

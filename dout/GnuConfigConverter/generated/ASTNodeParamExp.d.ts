@@ -6,7 +6,6 @@
  */
 import { IParamExp } from "../ParserTypes";
 import { ASTExpansion } from "./ASTExpansion";
-import { ASTMoreParamExp } from "./ASTMoreParamExp";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -20,7 +19,6 @@ export declare class ASTNodeParamExp extends ASTNode {
     parentField: string;
     kind: ASTnodeKind.ASTNodeParamExp;
     kindString: string;
-    more: ASTMoreParamExp;
     Dollar: ASTPos;
     Rbrace: ASTPos;
     Short: boolean;

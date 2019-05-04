@@ -8,7 +8,6 @@
 import { logg } from "../logg";
 import { IArrayExpr } from "../ParserTypes";
 import { ASTArray } from "./ASTArray";
-import { ASTMoreArrayExpr } from "./ASTMoreArrayExpr";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeArrayElem } from "./ASTNodeArrayElem";
 import { ASTNodeComment } from "./ASTNodeComment";
@@ -20,7 +19,6 @@ import { ASTVisitorBase } from "./ASTVisitorBase";
 export class ASTNodeArrayExpr extends ASTNode {
   public kind: ASTnodeKind.ASTNodeArrayExpr = ASTnodeKind.ASTNodeArrayExpr;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeArrayExpr];
-  public more: ASTMoreArrayExpr = new ASTMoreArrayExpr();
   public Lparen: ASTPos; //     Lparen: I_Pos;
   public Rparen: ASTPos; //     Rparen: I_Pos;
   public Elems: ASTNodeArrayElem[]; //     Elems: IArrayElem[] | null;

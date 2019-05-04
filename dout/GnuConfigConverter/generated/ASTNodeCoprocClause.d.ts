@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 import { ICoprocClause } from "../ParserTypes";
-import { ASTMoreCoprocClause } from "./ASTMoreCoprocClause";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmt } from "./ASTNodeStmt";
@@ -17,7 +16,6 @@ export declare class ASTNodeCoprocClause extends ASTNode {
     parentField: string;
     kind: ASTnodeKind.ASTNodeCoprocClause;
     kindString: string;
-    more: ASTMoreCoprocClause;
     Coproc: ASTPos;
     Name: ASTNodeWord | null;
     Stmt: ASTNodeStmt | null;

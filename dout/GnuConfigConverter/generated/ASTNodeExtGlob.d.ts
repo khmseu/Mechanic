@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 import { IExtGlob } from "../ParserTypes";
-import { ASTMoreExtGlob } from "./ASTMoreExtGlob";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeLit } from "./ASTNodeLit";
@@ -16,7 +15,6 @@ export declare class ASTNodeExtGlob extends ASTNode {
     parentField: string;
     kind: ASTnodeKind.ASTNodeExtGlob;
     kindString: string;
-    more: ASTMoreExtGlob;
     OpPos: ASTPos;
     Op: string;
     OpString: string;

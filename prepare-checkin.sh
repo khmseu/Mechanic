@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/bash -x
 
 rm -rf dout built
 yarn run build

@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 import { ITimeClause } from "../ParserTypes";
-import { ASTMoreTimeClause } from "./ASTMoreTimeClause";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmt } from "./ASTNodeStmt";
@@ -16,7 +15,6 @@ export declare class ASTNodeTimeClause extends ASTNode {
     parentField: string;
     kind: ASTnodeKind.ASTNodeTimeClause;
     kindString: string;
-    more: ASTMoreTimeClause;
     Time: ASTPos;
     PosixFormat: boolean;
     Stmt: ASTNodeStmt | null;

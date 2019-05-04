@@ -7,7 +7,6 @@
 
 import { logg } from "../logg";
 import { ITimeClause } from "../ParserTypes";
-import { ASTMoreTimeClause } from "./ASTMoreTimeClause";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmt } from "./ASTNodeStmt";
@@ -19,7 +18,6 @@ import { ASTVisitorBase } from "./ASTVisitorBase";
 export class ASTNodeTimeClause extends ASTNode {
   public kind: ASTnodeKind.ASTNodeTimeClause = ASTnodeKind.ASTNodeTimeClause;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeTimeClause];
-  public more: ASTMoreTimeClause = new ASTMoreTimeClause();
   public Time: ASTPos; //     Time: I_Pos;
   public PosixFormat: boolean; //     PosixFormat: boolean;
   public Stmt: ASTNodeStmt | null; //     Stmt: IStmt | null;

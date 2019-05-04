@@ -9,7 +9,6 @@ import { logg } from "../logg";
 import { IProcSubst, ProcOperator } from "../ParserTypes";
 import { op, Token } from "../Token";
 import { ASTArray } from "./ASTArray";
-import { ASTMoreProcSubst } from "./ASTMoreProcSubst";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -21,7 +20,6 @@ import { ASTVisitorBase } from "./ASTVisitorBase";
 export class ASTNodeProcSubst extends ASTNode {
   public kind: ASTnodeKind.ASTNodeProcSubst = ASTnodeKind.ASTNodeProcSubst;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeProcSubst];
-  public more: ASTMoreProcSubst = new ASTMoreProcSubst();
   public OpPos: ASTPos; //     OpPos: I_Pos;
   public Rparen: ASTPos; //     Rparen: I_Pos;
   public Op: string; //     Op: ProcOperator;

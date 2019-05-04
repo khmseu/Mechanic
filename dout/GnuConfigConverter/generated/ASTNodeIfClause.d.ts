@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 import { IIfClause } from "../ParserTypes";
-import { ASTMoreIfClause } from "./ASTMoreIfClause";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -17,7 +16,6 @@ export declare class ASTNodeIfClause extends ASTNode {
     parentField: string;
     kind: ASTnodeKind.ASTNodeIfClause;
     kindString: string;
-    more: ASTMoreIfClause;
     Position: ASTPos;
     ThenPos: ASTPos;
     FiPos: ASTPos;

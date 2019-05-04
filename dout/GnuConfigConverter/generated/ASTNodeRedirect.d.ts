@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 import { IRedirect } from "../ParserTypes";
-import { ASTMoreRedirect } from "./ASTMoreRedirect";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeLit } from "./ASTNodeLit";
@@ -17,7 +16,6 @@ export declare class ASTNodeRedirect extends ASTNode {
     parentField: string;
     kind: ASTnodeKind.ASTNodeRedirect;
     kindString: string;
-    more: ASTMoreRedirect;
     OpPos: ASTPos;
     Op: string;
     OpString: string;

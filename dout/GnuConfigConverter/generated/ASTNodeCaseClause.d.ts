@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 import { ICaseClause } from "../ParserTypes";
-import { ASTMoreCaseClause } from "./ASTMoreCaseClause";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeCaseItem } from "./ASTNodeCaseItem";
 import { ASTNodeComment } from "./ASTNodeComment";
@@ -18,7 +17,6 @@ export declare class ASTNodeCaseClause extends ASTNode {
     parentField: string;
     kind: ASTnodeKind.ASTNodeCaseClause;
     kindString: string;
-    more: ASTMoreCaseClause;
     Case: ASTPos;
     Esac: ASTPos;
     Word: ASTNodeWord | null;

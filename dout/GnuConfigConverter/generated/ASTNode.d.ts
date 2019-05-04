@@ -5,6 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 import { INode } from "../ParserTypes";
+import { ASTMore } from "./ASTMore";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTPos } from "./ASTPos";
 import { ASTVisitorBase } from "./ASTVisitorBase";
@@ -13,9 +14,7 @@ export declare class ASTNode {
     parentField: string;
     kind: ASTnodeKind;
     kindString: string;
-    more: {
-        [key: string]: any;
-    };
+    more: ASTMore;
     Pos: ASTPos | null;
     End: ASTPos | null;
     constructor(node: INode, parent: ASTNode | null, parentField: string);

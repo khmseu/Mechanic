@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 import { IArithmExp } from "../ParserTypes";
-import { ASTMoreArithmExp } from "./ASTMoreArithmExp";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -16,7 +15,6 @@ export declare class ASTNodeArithmExp extends ASTNode {
     parentField: string;
     kind: ASTnodeKind.ASTNodeArithmExp;
     kindString: string;
-    more: ASTMoreArithmExp;
     Left: ASTPos;
     Right: ASTPos;
     Bracket: boolean;

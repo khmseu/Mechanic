@@ -8,7 +8,6 @@
 import { logg } from "../logg";
 import { IDeclClause } from "../ParserTypes";
 import { ASTArray } from "./ASTArray";
-import { ASTMoreDeclClause } from "./ASTMoreDeclClause";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeAssign } from "./ASTNodeAssign";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -20,7 +19,6 @@ import { ASTVisitorBase } from "./ASTVisitorBase";
 export class ASTNodeDeclClause extends ASTNode {
   public kind: ASTnodeKind.ASTNodeDeclClause = ASTnodeKind.ASTNodeDeclClause;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeDeclClause];
-  public more: ASTMoreDeclClause = new ASTMoreDeclClause();
   public Variant: ASTNodeLit | null; //     Variant: ILit | null;
   public Opts: ASTNodeWord[]; //     Opts: IWord[] | null;
   public Assigns: ASTNodeAssign[]; //     Assigns: IAssign[] | null;

@@ -7,7 +7,6 @@
 
 import { logg } from "../logg";
 import { IComment } from "../ParserTypes";
-import { ASTMoreComment } from "./ASTMoreComment";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTPos } from "./ASTPos";
@@ -17,7 +16,6 @@ import { ASTVisitorBase } from "./ASTVisitorBase";
 export class ASTNodeComment extends ASTNode {
   public kind: ASTnodeKind.ASTNodeComment = ASTnodeKind.ASTNodeComment;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeComment];
-  public more: ASTMoreComment = new ASTMoreComment();
   public Hash: ASTPos; //     Hash: I_Pos;
   public Text: string; //     Text: string;
 

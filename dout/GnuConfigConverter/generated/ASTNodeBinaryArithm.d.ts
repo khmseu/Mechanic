@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 import { IBinaryArithm } from "../ParserTypes";
-import { ASTMoreBinaryArithm } from "./ASTMoreBinaryArithm";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -16,7 +15,6 @@ export declare class ASTNodeBinaryArithm extends ASTNode {
     parentField: string;
     kind: ASTnodeKind.ASTNodeBinaryArithm;
     kindString: string;
-    more: ASTMoreBinaryArithm;
     OpPos: ASTPos;
     Op: string;
     OpString: string;

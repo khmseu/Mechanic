@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 import { IUnaryTest } from "../ParserTypes";
-import { ASTMoreUnaryTest } from "./ASTMoreUnaryTest";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeTestExpr } from "./ASTNodeTestExpr";
@@ -16,7 +15,6 @@ export declare class ASTNodeUnaryTest extends ASTNode {
     parentField: string;
     kind: ASTnodeKind.ASTNodeUnaryTest;
     kindString: string;
-    more: ASTMoreUnaryTest;
     OpPos: ASTPos;
     Op: string;
     OpString: string;

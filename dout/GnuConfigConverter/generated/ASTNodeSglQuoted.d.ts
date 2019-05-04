@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 import { ISglQuoted } from "../ParserTypes";
-import { ASTMoreSglQuoted } from "./ASTMoreSglQuoted";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTPos } from "./ASTPos";
@@ -15,7 +14,6 @@ export declare class ASTNodeSglQuoted extends ASTNode {
     parentField: string;
     kind: ASTnodeKind.ASTNodeSglQuoted;
     kindString: string;
-    more: ASTMoreSglQuoted;
     Left: ASTPos;
     Right: ASTPos;
     Dollar: boolean;

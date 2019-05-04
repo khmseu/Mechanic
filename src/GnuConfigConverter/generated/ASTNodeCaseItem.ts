@@ -9,7 +9,6 @@ import { logg } from "../logg";
 import { CaseOperator, ICaseItem } from "../ParserTypes";
 import { op, Token } from "../Token";
 import { ASTArray } from "./ASTArray";
-import { ASTMoreCaseItem } from "./ASTMoreCaseItem";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -23,7 +22,6 @@ import { ASTVisitorBase } from "./ASTVisitorBase";
 export class ASTNodeCaseItem extends ASTNode {
   public kind: ASTnodeKind.ASTNodeCaseItem = ASTnodeKind.ASTNodeCaseItem;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeCaseItem];
-  public more: ASTMoreCaseItem = new ASTMoreCaseItem();
   public Op: string; //     Op: CaseOperator;
   public OpString: string;
   public OpPos: ASTPos; //     OpPos: I_Pos;

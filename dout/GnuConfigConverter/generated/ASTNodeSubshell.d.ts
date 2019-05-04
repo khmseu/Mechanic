@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 import { ISubshell } from "../ParserTypes";
-import { ASTMoreSubshell } from "./ASTMoreSubshell";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -17,7 +16,6 @@ export declare class ASTNodeSubshell extends ASTNode {
     parentField: string;
     kind: ASTnodeKind.ASTNodeSubshell;
     kindString: string;
-    more: ASTMoreSubshell;
     Lparen: ASTPos;
     Rparen: ASTPos;
     StmtList: ASTNodeStmtList | null;

@@ -7,7 +7,6 @@
 
 import { logg } from "../logg";
 import { ILit } from "../ParserTypes";
-import { ASTMoreLit } from "./ASTMoreLit";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTPos } from "./ASTPos";
@@ -17,7 +16,6 @@ import { ASTVisitorBase } from "./ASTVisitorBase";
 export class ASTNodeLit extends ASTNode {
   public kind: ASTnodeKind.ASTNodeLit = ASTnodeKind.ASTNodeLit;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeLit];
-  public more: ASTMoreLit = new ASTMoreLit();
   public ValuePos: ASTPos; //     ValuePos: I_Pos;
   public ValueEnd: ASTPos; //     ValueEnd: I_Pos;
   public Value: string; //     Value: string;

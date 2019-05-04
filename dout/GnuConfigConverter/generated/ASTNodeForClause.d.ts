@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 import { IForClause } from "../ParserTypes";
-import { ASTMoreForClause } from "./ASTMoreForClause";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -18,7 +17,6 @@ export declare class ASTNodeForClause extends ASTNode {
     parentField: string;
     kind: ASTnodeKind.ASTNodeForClause;
     kindString: string;
-    more: ASTMoreForClause;
     ForPos: ASTPos;
     DoPos: ASTPos;
     DonePos: ASTPos;

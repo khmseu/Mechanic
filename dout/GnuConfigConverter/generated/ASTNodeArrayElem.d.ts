@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 import { IArrayElem } from "../ParserTypes";
-import { ASTMoreArrayElem } from "./ASTMoreArrayElem";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTNodeComment } from "./ASTNodeComment";
@@ -17,7 +16,6 @@ export declare class ASTNodeArrayElem extends ASTNode {
     parentField: string;
     kind: ASTnodeKind.ASTNodeArrayElem;
     kindString: string;
-    more: ASTMoreArrayElem;
     Index: ASTNodeArithmExpr;
     Value: ASTNodeWord | null;
     Comments: ASTNodeComment[];

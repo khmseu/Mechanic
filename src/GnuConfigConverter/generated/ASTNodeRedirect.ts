@@ -8,7 +8,6 @@
 import { logg } from "../logg";
 import { IRedirect, RedirOperator } from "../ParserTypes";
 import { op, Token } from "../Token";
-import { ASTMoreRedirect } from "./ASTMoreRedirect";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeLit } from "./ASTNodeLit";
@@ -21,7 +20,6 @@ import { ASTVisitorBase } from "./ASTVisitorBase";
 export class ASTNodeRedirect extends ASTNode {
   public kind: ASTnodeKind.ASTNodeRedirect = ASTnodeKind.ASTNodeRedirect;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeRedirect];
-  public more: ASTMoreRedirect = new ASTMoreRedirect();
   public OpPos: ASTPos; //     OpPos: I_Pos;
   public Op: string; //     Op: RedirOperator;
   public OpString: string;

@@ -163,9 +163,9 @@ export function ASTArray<AE extends ASTNode, PE>(at: new(pt: PE, parent: ASTNode
   return aa;
 }
 EOFAA
-export 'ASTMoreBase', [<<EOFMB], {};
-export class ASTMoreBase {
-  public commentField: { [f: string]: string } = {};
+export 'ASTMore', [<<EOFMB], {};
+export class ASTMore {
+  public commentField: { [f: string]: number } = {};
   [f: string]: any;
 }
 EOFMB
@@ -188,14 +188,10 @@ for my $typ (@fi) {
             if ( defined $ext and $ext ~~ [qw( INode Istruct )] ) {
                 $needType{$name}++;
                 if ( $ext eq 'INode' ) {
-                    my $more = $an;
-                    $more =~ s/^ASTNode/ASTMore/;
-                    $needType{$more}++;
                     save <<EOFN1a;
 export class $an extends ASTNode {
   public kind: ASTnodeKind.$an = ASTnodeKind.$an;
   public kindString: string = ASTnodeKind[ASTnodeKind.$an];
-  public more: $more = new $more();
 EOFN1a
                     $needType{ASTNode}++;
                     $needType{ASTnodeKind}++;
@@ -203,11 +199,12 @@ EOFN1a
                     $this = 'this';
                 }
                 elsif ( $name eq 'INode' ) {
+                    $needType{ASTMore}++;
                     save <<EOFN1b;
 export class $an {
   public kind: ASTnodeKind = ASTnodeKind.bad;
   public kindString: string = ASTnodeKind[ASTnodeKind.bad];
-  public more: { [key: string]: any } = {};
+  public more: ASTMore = new ASTMore();
 EOFN1b
                     $needType{ASTnodeKind}++;
                     $this = 'this';
@@ -565,13 +562,3 @@ save <<EOFV3;
 EOFV3
 export 'ASTVisitorBase', \@text, \%needType;
 
-for my $cc ( sort { lc $a cmp lc $b } keys %kind ) {
-    my $kk = $cc;
-    $kk =~ s/^ASTNode/ASTMore/;
-    $needType{ASTMoreBase}++;
-    save <<EOFU;
-export class $kk extends ASTMoreBase {
-}
-EOFU
-    export $kk, \@text, \%needType;
-}

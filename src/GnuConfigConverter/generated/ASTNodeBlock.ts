@@ -8,7 +8,6 @@
 import { logg } from "../logg";
 import { IBlock } from "../ParserTypes";
 import { ASTArray } from "./ASTArray";
-import { ASTMoreBlock } from "./ASTMoreBlock";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -21,7 +20,6 @@ import { ASTVisitorBase } from "./ASTVisitorBase";
 export class ASTNodeBlock extends ASTNode {
   public kind: ASTnodeKind.ASTNodeBlock = ASTnodeKind.ASTNodeBlock;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeBlock];
-  public more: ASTMoreBlock = new ASTMoreBlock();
   public Lbrace: ASTPos; //     Lbrace: I_Pos;
   public Rbrace: ASTPos; //     Rbrace: I_Pos;
   public StmtList: ASTNodeStmtList | null; //     StmtList: IStmtList | null;

@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 import { IBlock } from "../ParserTypes";
-import { ASTMoreBlock } from "./ASTMoreBlock";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -17,7 +16,6 @@ export declare class ASTNodeBlock extends ASTNode {
     parentField: string;
     kind: ASTnodeKind.ASTNodeBlock;
     kindString: string;
-    more: ASTMoreBlock;
     Lbrace: ASTPos;
     Rbrace: ASTPos;
     StmtList: ASTNodeStmtList | null;

@@ -8,7 +8,6 @@
 import { logg } from "../logg";
 import { ICallExpr } from "../ParserTypes";
 import { ASTArray } from "./ASTArray";
-import { ASTMoreCallExpr } from "./ASTMoreCallExpr";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeAssign } from "./ASTNodeAssign";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -18,7 +17,6 @@ import { ASTVisitorBase } from "./ASTVisitorBase";
 export class ASTNodeCallExpr extends ASTNode {
   public kind: ASTnodeKind.ASTNodeCallExpr = ASTnodeKind.ASTNodeCallExpr;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeCallExpr];
-  public more: ASTMoreCallExpr = new ASTMoreCallExpr();
   public Assigns: ASTNodeAssign[]; //     Assigns: IAssign[] | null;
   public Args: ASTNodeWord[]; //     Args: IWord[] | null;
 

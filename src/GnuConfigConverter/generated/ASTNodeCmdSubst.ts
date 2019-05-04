@@ -8,7 +8,6 @@
 import { logg } from "../logg";
 import { ICmdSubst } from "../ParserTypes";
 import { ASTArray } from "./ASTArray";
-import { ASTMoreCmdSubst } from "./ASTMoreCmdSubst";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -21,7 +20,6 @@ import { ASTVisitorBase } from "./ASTVisitorBase";
 export class ASTNodeCmdSubst extends ASTNode {
   public kind: ASTnodeKind.ASTNodeCmdSubst = ASTnodeKind.ASTNodeCmdSubst;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeCmdSubst];
-  public more: ASTMoreCmdSubst = new ASTMoreCmdSubst();
   public Left: ASTPos; //     Left: I_Pos;
   public Right: ASTPos; //     Right: I_Pos;
   public StmtList: ASTNodeStmtList | null; //     StmtList: IStmtList | null;

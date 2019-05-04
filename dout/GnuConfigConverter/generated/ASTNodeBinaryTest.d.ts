@@ -5,7 +5,6 @@
  * https://opensource.org/licenses/MIT
  */
 import { IBinaryTest } from "../ParserTypes";
-import { ASTMoreBinaryTest } from "./ASTMoreBinaryTest";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeTestExpr } from "./ASTNodeTestExpr";
@@ -16,7 +15,6 @@ export declare class ASTNodeBinaryTest extends ASTNode {
     parentField: string;
     kind: ASTnodeKind.ASTNodeBinaryTest;
     kindString: string;
-    more: ASTMoreBinaryTest;
     OpPos: ASTPos;
     Op: string;
     OpString: string;

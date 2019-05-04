@@ -8,7 +8,6 @@
 import { logg } from "../logg";
 import { IWordIter } from "../ParserTypes";
 import { ASTArray } from "./ASTArray";
-import { ASTMoreWordIter } from "./ASTMoreWordIter";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeLit } from "./ASTNodeLit";
@@ -21,7 +20,6 @@ import { ASTVisitorBase } from "./ASTVisitorBase";
 export class ASTNodeWordIter extends ASTNode {
   public kind: ASTnodeKind.ASTNodeWordIter = ASTnodeKind.ASTNodeWordIter;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeWordIter];
-  public more: ASTMoreWordIter = new ASTMoreWordIter();
   public Name: ASTNodeLit | null; //     Name: ILit | null;
   public InPos: ASTPos; //     InPos: I_Pos;
   public Items: ASTNodeWord[]; //     Items: IWord[] | null;

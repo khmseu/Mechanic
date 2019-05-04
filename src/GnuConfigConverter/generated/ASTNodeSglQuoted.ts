@@ -7,7 +7,6 @@
 
 import { logg } from "../logg";
 import { ISglQuoted } from "../ParserTypes";
-import { ASTMoreSglQuoted } from "./ASTMoreSglQuoted";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTPos } from "./ASTPos";
@@ -17,7 +16,6 @@ import { ASTVisitorBase } from "./ASTVisitorBase";
 export class ASTNodeSglQuoted extends ASTNode {
   public kind: ASTnodeKind.ASTNodeSglQuoted = ASTnodeKind.ASTNodeSglQuoted;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeSglQuoted];
-  public more: ASTMoreSglQuoted = new ASTMoreSglQuoted();
   public Left: ASTPos; //     Left: I_Pos;
   public Right: ASTPos; //     Right: I_Pos;
   public Dollar: boolean; //     Dollar: boolean;

@@ -8,7 +8,6 @@
 import { logg } from "../logg";
 import { IFile } from "../ParserTypes";
 import { ASTArray } from "./ASTArray";
-import { ASTMoreFile } from "./ASTMoreFile";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -19,7 +18,6 @@ import { ASTVisitorBase } from "./ASTVisitorBase";
 export class ASTNodeFile extends ASTNode {
   public kind: ASTnodeKind.ASTNodeFile = ASTnodeKind.ASTNodeFile;
   public kindString: string = ASTnodeKind[ASTnodeKind.ASTNodeFile];
-  public more: ASTMoreFile = new ASTMoreFile();
   public Name: string; //     Name: string;
   public StmtList: ASTNodeStmtList | null; //     StmtList: IStmtList | null;
   public Last: ASTNodeComment[]; //     Last: IComment[];
