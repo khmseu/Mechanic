@@ -5,13 +5,13 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { logg } from "../logg";
+import { INode } from "../ParserTypes";
 import { ASTCall } from "./ASTCall";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingle } from "./ASTSimpleSingle";
 import { ASTVisitorBase } from "./ASTVisitorBase";
-import { logg } from "./logg";
-import { INode } from "./ParserTypes";
 
 export class ASTNode {
   public kind: ASTnodeKind = ASTnodeKind.bad;

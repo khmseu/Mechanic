@@ -5,9 +5,9 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { logg } from "../logg";
+import { I_Pos } from "../ParserTypes";
 import { ASTCall } from "./ASTCall";
-import { logg } from "./logg";
-import { I_Pos } from "./ParserTypes";
 
 export class ASTPos {
   // ignored:     After: ((p2: I_Pos) => boolean) | null;

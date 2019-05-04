@@ -5,9 +5,9 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { ASTNode } from "./ASTNode";
-import { ASTNodeComment } from "./ASTNodeComment";
-import { ASTVisitorBase } from "./ASTVisitorBase";
+import { ASTNode } from "./generated/ASTNode";
+import { ASTNodeComment } from "./generated/ASTNodeComment";
+import { ASTVisitorBase } from "./generated/ASTVisitorBase";
 import { joiner } from "./joiner";
 
 export class ASTVisitorComments extends ASTVisitorBase {

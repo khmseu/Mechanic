@@ -1,0 +1,1 @@
+{"version":3,"file":"ASTSlice.d.ts","sourceRoot":"","sources":["../../../src/GnuConfigConverter/generated/ASTSlice.ts"],"names":[],"mappings":"AAAA;;;;;GAKG;AAGH,OAAO,EAAE,OAAO,EAAE,MAAM,gBAAgB,CAAC;AACzC,OAAO,EAAE,iBAAiB,EAAE,MAAM,qBAAqB,CAAC;AAGxD,qBAAa,QAAQ;IACZ,MAAM,EAAE,iBAAiB,CAAC;IAC1B,MAAM,EAAE,iBAAiB,CAAC;gBAErB,KAAK,EAAE,OAAO;CAU3B"}

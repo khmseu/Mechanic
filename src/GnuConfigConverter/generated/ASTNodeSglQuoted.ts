@@ -5,14 +5,14 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { logg } from "../logg";
+import { ISglQuoted } from "../ParserTypes";
 import { ASTMoreSglQuoted } from "./ASTMoreSglQuoted";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTVisitorBase } from "./ASTVisitorBase";
-import { logg } from "./logg";
-import { ISglQuoted } from "./ParserTypes";
 
 export class ASTNodeSglQuoted extends ASTNode {
   public kind: ASTnodeKind.ASTNodeSglQuoted = ASTnodeKind.ASTNodeSglQuoted;

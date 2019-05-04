@@ -5,6 +5,8 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { logg } from "../logg";
+import { IParenTest } from "../ParserTypes";
 import { ASTMoreParenTest } from "./ASTMoreParenTest";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -13,8 +15,6 @@ import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTSingleNotNull } from "./ASTSingleNotNull";
 import { ASTVisitorBase } from "./ASTVisitorBase";
-import { logg } from "./logg";
-import { IParenTest } from "./ParserTypes";
 
 export class ASTNodeParenTest extends ASTNode {
   public kind: ASTnodeKind.ASTNodeParenTest = ASTnodeKind.ASTNodeParenTest;

@@ -5,6 +5,8 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { logg } from "../logg";
+import { ICaseClause } from "../ParserTypes";
 import { ASTArray } from "./ASTArray";
 import { ASTMoreCaseClause } from "./ASTMoreCaseClause";
 import { ASTNode } from "./ASTNode";
@@ -16,8 +18,6 @@ import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTSingle } from "./ASTSingle";
 import { ASTVisitorBase } from "./ASTVisitorBase";
-import { logg } from "./logg";
-import { ICaseClause } from "./ParserTypes";
 
 export class ASTNodeCaseClause extends ASTNode {
   public kind: ASTnodeKind.ASTNodeCaseClause = ASTnodeKind.ASTNodeCaseClause;

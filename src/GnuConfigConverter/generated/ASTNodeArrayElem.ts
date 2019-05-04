@@ -5,6 +5,8 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { logg } from "../logg";
+import { IArrayElem } from "../ParserTypes";
 import { ASTArray } from "./ASTArray";
 import { ASTMoreArrayElem } from "./ASTMoreArrayElem";
 import { ASTNode } from "./ASTNode";
@@ -15,8 +17,6 @@ import { ASTNodeWord } from "./ASTNodeWord";
 import { ASTSingle } from "./ASTSingle";
 import { ASTSingleNotNull } from "./ASTSingleNotNull";
 import { ASTVisitorBase } from "./ASTVisitorBase";
-import { logg } from "./logg";
-import { IArrayElem } from "./ParserTypes";
 
 export class ASTNodeArrayElem extends ASTNode {
   public kind: ASTnodeKind.ASTNodeArrayElem = ASTnodeKind.ASTNodeArrayElem;

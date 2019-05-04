@@ -5,6 +5,8 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { logg } from "../logg";
+import { IFuncDecl } from "../ParserTypes";
 import { ASTMoreFuncDecl } from "./ASTMoreFuncDecl";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -14,8 +16,6 @@ import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTSingle } from "./ASTSingle";
 import { ASTVisitorBase } from "./ASTVisitorBase";
-import { logg } from "./logg";
-import { IFuncDecl } from "./ParserTypes";
 
 export class ASTNodeFuncDecl extends ASTNode {
   public kind: ASTnodeKind.ASTNodeFuncDecl = ASTnodeKind.ASTNodeFuncDecl;

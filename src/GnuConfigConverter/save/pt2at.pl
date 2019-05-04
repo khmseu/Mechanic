@@ -65,11 +65,12 @@ sub export($$$) {
     return unless @$text;
     my %to = map {
             $_ ~~ [ 'Istruct', $name ] ? ()
-          : $_ eq 'syntax'              ? ( $_, "mvdan-sh" )
-          : $_ eq 'ok'                  ? ( $_, 'assert' )
-          : $_ eq 'op'                  ? ( $_, "./Token" )
-          : $_ =~ /^AST|^(logg|Token)$/ ? ( $_, "./$_" )
-          : ( $_, "./ParserTypes" )
+          : $_ eq 'syntax'         ? ( $_, "mvdan-sh" )
+          : $_ eq 'ok'             ? ( $_, 'assert' )
+          : $_ eq 'op'             ? ( $_, "../Token" )
+          : $_ =~ /^AST/           ? ( $_, "./$_" )
+          : $_ =~ /^(logg|Token)$/ ? ( $_, "../$_" )
+          : ( $_, "../ParserTypes" )
     } sort { lc $a cmp lc $b } keys %$needType;
     my %from;
     push @{ $from{ $to{$_} } }, $_ for keys %to;

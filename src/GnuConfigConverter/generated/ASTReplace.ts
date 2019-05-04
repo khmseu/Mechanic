@@ -5,10 +5,10 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { logg } from "../logg";
+import { I_Replace } from "../ParserTypes";
 import { ASTNodeWord } from "./ASTNodeWord";
 import { ASTSingle } from "./ASTSingle";
-import { logg } from "./logg";
-import { I_Replace } from "./ParserTypes";
 
 export class ASTReplace {
   public All: boolean; //     All: boolean;

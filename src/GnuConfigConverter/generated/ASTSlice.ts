@@ -5,10 +5,10 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { logg } from "../logg";
+import { I_Slice } from "../ParserTypes";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
 import { ASTSingleNotNull } from "./ASTSingleNotNull";
-import { logg } from "./logg";
-import { I_Slice } from "./ParserTypes";
 
 export class ASTSlice {
   public Offset: ASTNodeArithmExpr; //     Offset: IArithmExpr;

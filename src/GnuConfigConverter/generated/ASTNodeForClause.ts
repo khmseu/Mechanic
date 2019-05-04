@@ -5,6 +5,8 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { logg } from "../logg";
+import { IForClause } from "../ParserTypes";
 import { ASTArray } from "./ASTArray";
 import { ASTMoreForClause } from "./ASTMoreForClause";
 import { ASTNode } from "./ASTNode";
@@ -17,8 +19,6 @@ import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTSingle } from "./ASTSingle";
 import { ASTSingleNotNull } from "./ASTSingleNotNull";
 import { ASTVisitorBase } from "./ASTVisitorBase";
-import { logg } from "./logg";
-import { IForClause } from "./ParserTypes";
 
 export class ASTNodeForClause extends ASTNode {
   public kind: ASTnodeKind.ASTNodeForClause = ASTnodeKind.ASTNodeForClause;

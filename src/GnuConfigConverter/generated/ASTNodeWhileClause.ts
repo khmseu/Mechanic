@@ -5,6 +5,8 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { logg } from "../logg";
+import { IWhileClause } from "../ParserTypes";
 import { ASTArray } from "./ASTArray";
 import { ASTMoreWhileClause } from "./ASTMoreWhileClause";
 import { ASTNode } from "./ASTNode";
@@ -15,8 +17,6 @@ import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTSingle } from "./ASTSingle";
 import { ASTVisitorBase } from "./ASTVisitorBase";
-import { logg } from "./logg";
-import { IWhileClause } from "./ParserTypes";
 
 export class ASTNodeWhileClause extends ASTNode {
   public kind: ASTnodeKind.ASTNodeWhileClause = ASTnodeKind.ASTNodeWhileClause;

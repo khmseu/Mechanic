@@ -8,8 +8,8 @@
 import { readFileSync, writeFileSync } from "fs";
 import { syntax } from "mvdan-sh";
 import { format, resolve } from "path";
-import { ASTNodeFile } from "./ASTNodeFile";
 import { ASTVisitorComments } from "./ASTVisitorComments";
+import { ASTNodeFile } from "./generated/ASTNodeFile";
 import { logg } from "./logg";
 import { IFile } from "./ParserTypes";
 

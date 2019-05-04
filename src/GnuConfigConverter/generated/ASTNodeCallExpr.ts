@@ -5,6 +5,8 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { logg } from "../logg";
+import { ICallExpr } from "../ParserTypes";
 import { ASTArray } from "./ASTArray";
 import { ASTMoreCallExpr } from "./ASTMoreCallExpr";
 import { ASTNode } from "./ASTNode";
@@ -12,8 +14,6 @@ import { ASTNodeAssign } from "./ASTNodeAssign";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeWord } from "./ASTNodeWord";
 import { ASTVisitorBase } from "./ASTVisitorBase";
-import { logg } from "./logg";
-import { ICallExpr } from "./ParserTypes";
 
 export class ASTNodeCallExpr extends ASTNode {
   public kind: ASTnodeKind.ASTNodeCallExpr = ASTnodeKind.ASTNodeCallExpr;

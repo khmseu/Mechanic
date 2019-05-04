@@ -5,6 +5,9 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { logg } from "../logg";
+import { IRedirect, RedirOperator } from "../ParserTypes";
+import { op, Token } from "../Token";
 import { ASTMoreRedirect } from "./ASTMoreRedirect";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -14,9 +17,6 @@ import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTSingle } from "./ASTSingle";
 import { ASTVisitorBase } from "./ASTVisitorBase";
-import { logg } from "./logg";
-import { IRedirect, RedirOperator } from "./ParserTypes";
-import { op, Token } from "./Token";
 
 export class ASTNodeRedirect extends ASTNode {
   public kind: ASTnodeKind.ASTNodeRedirect = ASTnodeKind.ASTNodeRedirect;

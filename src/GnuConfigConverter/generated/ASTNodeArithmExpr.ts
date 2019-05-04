@@ -6,14 +6,14 @@
  */
 
 import { syntax } from "mvdan-sh";
+import { logg } from "../logg";
+import { IArithmExpr, IBinaryArithm, IParenArithm, IUnaryArithm, IWord } from "../ParserTypes";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeBinaryArithm } from "./ASTNodeBinaryArithm";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeParenArithm } from "./ASTNodeParenArithm";
 import { ASTNodeUnaryArithm } from "./ASTNodeUnaryArithm";
 import { ASTNodeWord } from "./ASTNodeWord";
-import { logg } from "./logg";
-import { IArithmExpr, IBinaryArithm, IParenArithm, IUnaryArithm, IWord } from "./ParserTypes";
 
 export class ASTNodeArithmExpr extends ASTNode {
   // tslint:disable-next-line:max-line-length

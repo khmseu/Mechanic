@@ -5,6 +5,8 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { logg } from "../logg";
+import { ITimeClause } from "../ParserTypes";
 import { ASTMoreTimeClause } from "./ASTMoreTimeClause";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -13,8 +15,6 @@ import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTSingle } from "./ASTSingle";
 import { ASTVisitorBase } from "./ASTVisitorBase";
-import { logg } from "./logg";
-import { ITimeClause } from "./ParserTypes";
 
 export class ASTNodeTimeClause extends ASTNode {
   public kind: ASTnodeKind.ASTNodeTimeClause = ASTnodeKind.ASTNodeTimeClause;

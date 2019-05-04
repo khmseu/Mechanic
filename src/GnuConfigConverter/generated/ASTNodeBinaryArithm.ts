@@ -5,6 +5,9 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { logg } from "../logg";
+import { BinAritOperator, IBinaryArithm } from "../ParserTypes";
+import { op, Token } from "../Token";
 import { ASTMoreBinaryArithm } from "./ASTMoreBinaryArithm";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
@@ -13,9 +16,6 @@ import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTSingleNotNull } from "./ASTSingleNotNull";
 import { ASTVisitorBase } from "./ASTVisitorBase";
-import { logg } from "./logg";
-import { BinAritOperator, IBinaryArithm } from "./ParserTypes";
-import { op, Token } from "./Token";
 
 export class ASTNodeBinaryArithm extends ASTNode {
   public kind: ASTnodeKind.ASTNodeBinaryArithm = ASTnodeKind.ASTNodeBinaryArithm;

@@ -6,14 +6,14 @@
  */
 
 import { syntax } from "mvdan-sh";
+import { logg } from "../logg";
+import { IBinaryTest, IParenTest, ITestExpr, IUnaryTest, IWord } from "../ParserTypes";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeBinaryTest } from "./ASTNodeBinaryTest";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeParenTest } from "./ASTNodeParenTest";
 import { ASTNodeUnaryTest } from "./ASTNodeUnaryTest";
 import { ASTNodeWord } from "./ASTNodeWord";
-import { logg } from "./logg";
-import { IBinaryTest, IParenTest, ITestExpr, IUnaryTest, IWord } from "./ParserTypes";
 
 export class ASTNodeTestExpr extends ASTNode {
   // tslint:disable-next-line:max-line-length

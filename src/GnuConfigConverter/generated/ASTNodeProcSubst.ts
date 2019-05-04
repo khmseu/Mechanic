@@ -5,6 +5,9 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { logg } from "../logg";
+import { IProcSubst, ProcOperator } from "../ParserTypes";
+import { op, Token } from "../Token";
 import { ASTArray } from "./ASTArray";
 import { ASTMoreProcSubst } from "./ASTMoreProcSubst";
 import { ASTNode } from "./ASTNode";
@@ -14,9 +17,6 @@ import { ASTNodeStmt } from "./ASTNodeStmt";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTVisitorBase } from "./ASTVisitorBase";
-import { logg } from "./logg";
-import { IProcSubst, ProcOperator } from "./ParserTypes";
-import { op, Token } from "./Token";
 
 export class ASTNodeProcSubst extends ASTNode {
   public kind: ASTnodeKind.ASTNodeProcSubst = ASTnodeKind.ASTNodeProcSubst;

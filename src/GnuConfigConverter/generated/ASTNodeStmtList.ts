@@ -5,6 +5,8 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { logg } from "../logg";
+import { IStmtList } from "../ParserTypes";
 import { ASTArray } from "./ASTArray";
 import { ASTMoreStmtList } from "./ASTMoreStmtList";
 import { ASTNode } from "./ASTNode";
@@ -12,8 +14,6 @@ import { ASTNodeComment } from "./ASTNodeComment";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeStmt } from "./ASTNodeStmt";
 import { ASTVisitorBase } from "./ASTVisitorBase";
-import { logg } from "./logg";
-import { IStmtList } from "./ParserTypes";
 
 export class ASTNodeStmtList extends ASTNode {
   public kind: ASTnodeKind.ASTNodeStmtList = ASTnodeKind.ASTNodeStmtList;

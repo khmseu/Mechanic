@@ -5,6 +5,8 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { logg } from "../logg";
+import { IDeclClause } from "../ParserTypes";
 import { ASTArray } from "./ASTArray";
 import { ASTMoreDeclClause } from "./ASTMoreDeclClause";
 import { ASTNode } from "./ASTNode";
@@ -14,8 +16,6 @@ import { ASTNodeLit } from "./ASTNodeLit";
 import { ASTNodeWord } from "./ASTNodeWord";
 import { ASTSingle } from "./ASTSingle";
 import { ASTVisitorBase } from "./ASTVisitorBase";
-import { logg } from "./logg";
-import { IDeclClause } from "./ParserTypes";
 
 export class ASTNodeDeclClause extends ASTNode {
   public kind: ASTnodeKind.ASTNodeDeclClause = ASTnodeKind.ASTNodeDeclClause;

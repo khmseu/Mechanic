@@ -5,11 +5,11 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { logg } from "../logg";
+import { I_Expansion, ParExpOperator } from "../ParserTypes";
+import { op, Token } from "../Token";
 import { ASTNodeWord } from "./ASTNodeWord";
 import { ASTSingle } from "./ASTSingle";
-import { logg } from "./logg";
-import { I_Expansion, ParExpOperator } from "./ParserTypes";
-import { op, Token } from "./Token";
 
 export class ASTExpansion {
   public Op: string; //     Op: ParExpOperator;

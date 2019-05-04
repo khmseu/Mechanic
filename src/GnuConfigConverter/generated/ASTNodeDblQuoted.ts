@@ -5,6 +5,8 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { logg } from "../logg";
+import { IDblQuoted } from "../ParserTypes";
 import { ASTArray } from "./ASTArray";
 import { ASTMoreDblQuoted } from "./ASTMoreDblQuoted";
 import { ASTNode } from "./ASTNode";
@@ -13,8 +15,6 @@ import { ASTNodeWordPart } from "./ASTNodeWordPart";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTVisitorBase } from "./ASTVisitorBase";
-import { logg } from "./logg";
-import { IDblQuoted } from "./ParserTypes";
 
 export class ASTNodeDblQuoted extends ASTNode {
   public kind: ASTnodeKind.ASTNodeDblQuoted = ASTnodeKind.ASTNodeDblQuoted;

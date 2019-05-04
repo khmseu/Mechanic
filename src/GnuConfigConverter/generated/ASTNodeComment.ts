@@ -5,14 +5,14 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { logg } from "../logg";
+import { IComment } from "../ParserTypes";
 import { ASTMoreComment } from "./ASTMoreComment";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTVisitorBase } from "./ASTVisitorBase";
-import { logg } from "./logg";
-import { IComment } from "./ParserTypes";
 
 export class ASTNodeComment extends ASTNode {
   public kind: ASTnodeKind.ASTNodeComment = ASTnodeKind.ASTNodeComment;

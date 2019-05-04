@@ -5,6 +5,8 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { logg } from "../logg";
+import { ICmdSubst } from "../ParserTypes";
 import { ASTArray } from "./ASTArray";
 import { ASTMoreCmdSubst } from "./ASTMoreCmdSubst";
 import { ASTNode } from "./ASTNode";
@@ -15,8 +17,6 @@ import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTSingle } from "./ASTSingle";
 import { ASTVisitorBase } from "./ASTVisitorBase";
-import { logg } from "./logg";
-import { ICmdSubst } from "./ParserTypes";
 
 export class ASTNodeCmdSubst extends ASTNode {
   public kind: ASTnodeKind.ASTNodeCmdSubst = ASTnodeKind.ASTNodeCmdSubst;

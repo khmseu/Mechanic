@@ -5,6 +5,9 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { logg } from "../logg";
+import { IUnaryTest, UnTestOperator } from "../ParserTypes";
+import { op, Token } from "../Token";
 import { ASTMoreUnaryTest } from "./ASTMoreUnaryTest";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
@@ -13,9 +16,6 @@ import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTSingleNotNull } from "./ASTSingleNotNull";
 import { ASTVisitorBase } from "./ASTVisitorBase";
-import { logg } from "./logg";
-import { IUnaryTest, UnTestOperator } from "./ParserTypes";
-import { op, Token } from "./Token";
 
 export class ASTNodeUnaryTest extends ASTNode {
   public kind: ASTnodeKind.ASTNodeUnaryTest = ASTnodeKind.ASTNodeUnaryTest;

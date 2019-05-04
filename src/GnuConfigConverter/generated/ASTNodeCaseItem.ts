@@ -5,6 +5,9 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { logg } from "../logg";
+import { CaseOperator, ICaseItem } from "../ParserTypes";
+import { op, Token } from "../Token";
 import { ASTArray } from "./ASTArray";
 import { ASTMoreCaseItem } from "./ASTMoreCaseItem";
 import { ASTNode } from "./ASTNode";
@@ -16,9 +19,6 @@ import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTSingle } from "./ASTSingle";
 import { ASTVisitorBase } from "./ASTVisitorBase";
-import { logg } from "./logg";
-import { CaseOperator, ICaseItem } from "./ParserTypes";
-import { op, Token } from "./Token";
 
 export class ASTNodeCaseItem extends ASTNode {
   public kind: ASTnodeKind.ASTNodeCaseItem = ASTnodeKind.ASTNodeCaseItem;

@@ -4,9 +4,9 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-import { ASTNode } from "./ASTNode";
-import { ASTNodeComment } from "./ASTNodeComment";
-import { ASTVisitorBase } from "./ASTVisitorBase";
+import { ASTNode } from "./generated/ASTNode";
+import { ASTNodeComment } from "./generated/ASTNodeComment";
+import { ASTVisitorBase } from "./generated/ASTVisitorBase";
 export declare class ASTVisitorComments extends ASTVisitorBase {
     visitASTNodeCommentPre(node: ASTNodeComment): void;
     visitAllPost(node: ASTNode): void;

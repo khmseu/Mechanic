@@ -6,6 +6,9 @@
  */
 
 import { syntax } from "mvdan-sh";
+import { logg } from "../logg";
+// tslint:disable-next-line:max-line-length
+import { IArithmCmd, IBinaryCmd, IBlock, ICallExpr, ICaseClause, ICommand, ICoprocClause, IDeclClause, IForClause, IFuncDecl, IIfClause, ILetClause, ISubshell, ITestClause, ITimeClause, IWhileClause } from "../ParserTypes";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmCmd } from "./ASTNodeArithmCmd";
 import { ASTNodeBinaryCmd } from "./ASTNodeBinaryCmd";
@@ -23,9 +26,6 @@ import { ASTNodeSubshell } from "./ASTNodeSubshell";
 import { ASTNodeTestClause } from "./ASTNodeTestClause";
 import { ASTNodeTimeClause } from "./ASTNodeTimeClause";
 import { ASTNodeWhileClause } from "./ASTNodeWhileClause";
-import { logg } from "./logg";
-// tslint:disable-next-line:max-line-length
-import { IArithmCmd, IBinaryCmd, IBlock, ICallExpr, ICaseClause, ICommand, ICoprocClause, IDeclClause, IForClause, IFuncDecl, IIfClause, ILetClause, ISubshell, ITestClause, ITimeClause, IWhileClause } from "./ParserTypes";
 
 export class ASTNodeCommand extends ASTNode {
   // tslint:disable-next-line:max-line-length

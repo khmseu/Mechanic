@@ -5,6 +5,8 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { logg } from "../logg";
+import { IIfClause } from "../ParserTypes";
 import { ASTArray } from "./ASTArray";
 import { ASTMoreIfClause } from "./ASTMoreIfClause";
 import { ASTNode } from "./ASTNode";
@@ -15,8 +17,6 @@ import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTSingle } from "./ASTSingle";
 import { ASTVisitorBase } from "./ASTVisitorBase";
-import { logg } from "./logg";
-import { IIfClause } from "./ParserTypes";
 
 export class ASTNodeIfClause extends ASTNode {
   public kind: ASTnodeKind.ASTNodeIfClause = ASTnodeKind.ASTNodeIfClause;

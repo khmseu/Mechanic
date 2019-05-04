@@ -5,6 +5,8 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { logg } from "../logg";
+import { IWord } from "../ParserTypes";
 import { ASTArray } from "./ASTArray";
 import { ASTCall } from "./ASTCall";
 import { ASTMoreWord } from "./ASTMoreWord";
@@ -13,8 +15,6 @@ import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeWordPart } from "./ASTNodeWordPart";
 import { ASTSingle } from "./ASTSingle";
 import { ASTVisitorBase } from "./ASTVisitorBase";
-import { logg } from "./logg";
-import { IWord } from "./ParserTypes";
 
 export class ASTNodeWord extends ASTNode {
   public kind: ASTnodeKind.ASTNodeWord = ASTnodeKind.ASTNodeWord;

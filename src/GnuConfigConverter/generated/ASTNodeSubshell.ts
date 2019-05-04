@@ -5,6 +5,8 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { logg } from "../logg";
+import { ISubshell } from "../ParserTypes";
 import { ASTArray } from "./ASTArray";
 import { ASTMoreSubshell } from "./ASTMoreSubshell";
 import { ASTNode } from "./ASTNode";
@@ -15,8 +17,6 @@ import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTSingle } from "./ASTSingle";
 import { ASTVisitorBase } from "./ASTVisitorBase";
-import { logg } from "./logg";
-import { ISubshell } from "./ParserTypes";
 
 export class ASTNodeSubshell extends ASTNode {
   public kind: ASTnodeKind.ASTNodeSubshell = ASTnodeKind.ASTNodeSubshell;

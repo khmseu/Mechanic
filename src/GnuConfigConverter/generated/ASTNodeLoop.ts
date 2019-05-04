@@ -6,12 +6,12 @@
  */
 
 import { syntax } from "mvdan-sh";
+import { logg } from "../logg";
+import { ICStyleLoop, ILoop, IWordIter } from "../ParserTypes";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeCStyleLoop } from "./ASTNodeCStyleLoop";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeWordIter } from "./ASTNodeWordIter";
-import { logg } from "./logg";
-import { ICStyleLoop, ILoop, IWordIter } from "./ParserTypes";
 
 export class ASTNodeLoop extends ASTNode {
   public kind: ASTnodeKind.bad | ASTnodeKind.ASTNodeWordIter | ASTnodeKind.ASTNodeCStyleLoop = ASTnodeKind.bad;

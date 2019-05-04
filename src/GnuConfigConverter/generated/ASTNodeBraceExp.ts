@@ -5,14 +5,14 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { logg } from "../logg";
+import { IBraceExp } from "../ParserTypes";
 import { ASTArray } from "./ASTArray";
 import { ASTMoreBraceExp } from "./ASTMoreBraceExp";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTNodeWord } from "./ASTNodeWord";
 import { ASTVisitorBase } from "./ASTVisitorBase";
-import { logg } from "./logg";
-import { IBraceExp } from "./ParserTypes";
 
 export class ASTNodeBraceExp extends ASTNode {
   public kind: ASTnodeKind.ASTNodeBraceExp = ASTnodeKind.ASTNodeBraceExp;

@@ -5,6 +5,8 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { logg } from "../logg";
+import { IAssign } from "../ParserTypes";
 import { ASTMoreAssign } from "./ASTMoreAssign";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
@@ -14,8 +16,6 @@ import { ASTNodeLit } from "./ASTNodeLit";
 import { ASTNodeWord } from "./ASTNodeWord";
 import { ASTSingle } from "./ASTSingle";
 import { ASTVisitorBase } from "./ASTVisitorBase";
-import { logg } from "./logg";
-import { IAssign } from "./ParserTypes";
 
 export class ASTNodeAssign extends ASTNode {
   public kind: ASTnodeKind.ASTNodeAssign = ASTnodeKind.ASTNodeAssign;

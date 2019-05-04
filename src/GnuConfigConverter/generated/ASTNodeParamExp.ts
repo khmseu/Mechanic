@@ -5,6 +5,9 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { logg } from "../logg";
+import { IParamExp, ParNamesOperator } from "../ParserTypes";
+import { op, Token } from "../Token";
 import { ASTExpansion } from "./ASTExpansion";
 import { ASTMoreParamExp } from "./ASTMoreParamExp";
 import { ASTNode } from "./ASTNode";
@@ -18,9 +21,6 @@ import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTSingle } from "./ASTSingle";
 import { ASTSlice } from "./ASTSlice";
 import { ASTVisitorBase } from "./ASTVisitorBase";
-import { logg } from "./logg";
-import { IParamExp, ParNamesOperator } from "./ParserTypes";
-import { op, Token } from "./Token";
 
 export class ASTNodeParamExp extends ASTNode {
   public kind: ASTnodeKind.ASTNodeParamExp = ASTnodeKind.ASTNodeParamExp;

@@ -5,14 +5,14 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { logg } from "../logg";
+import { ILit } from "../ParserTypes";
 import { ASTMoreLit } from "./ASTMoreLit";
 import { ASTNode } from "./ASTNode";
 import { ASTnodeKind } from "./ASTnodeKind";
 import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTVisitorBase } from "./ASTVisitorBase";
-import { logg } from "./logg";
-import { ILit } from "./ParserTypes";
 
 export class ASTNodeLit extends ASTNode {
   public kind: ASTnodeKind.ASTNodeLit = ASTnodeKind.ASTNodeLit;

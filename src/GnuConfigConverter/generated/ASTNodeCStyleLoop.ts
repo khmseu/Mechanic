@@ -5,6 +5,8 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { logg } from "../logg";
+import { ICStyleLoop } from "../ParserTypes";
 import { ASTMoreCStyleLoop } from "./ASTMoreCStyleLoop";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExpr } from "./ASTNodeArithmExpr";
@@ -13,8 +15,6 @@ import { ASTPos } from "./ASTPos";
 import { ASTSimpleSingleNotNull } from "./ASTSimpleSingleNotNull";
 import { ASTSingleNotNull } from "./ASTSingleNotNull";
 import { ASTVisitorBase } from "./ASTVisitorBase";
-import { logg } from "./logg";
-import { ICStyleLoop } from "./ParserTypes";
 
 export class ASTNodeCStyleLoop extends ASTNode {
   public kind: ASTnodeKind.ASTNodeCStyleLoop = ASTnodeKind.ASTNodeCStyleLoop;

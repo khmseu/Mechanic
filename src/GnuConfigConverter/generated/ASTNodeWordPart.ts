@@ -6,6 +6,9 @@
  */
 
 import { syntax } from "mvdan-sh";
+import { logg } from "../logg";
+// tslint:disable-next-line:max-line-length
+import { IArithmExp, IBraceExp, ICmdSubst, IDblQuoted, IExtGlob, ILit, IParamExp, IProcSubst, ISglQuoted, IWordPart } from "../ParserTypes";
 import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmExp } from "./ASTNodeArithmExp";
 import { ASTNodeBraceExp } from "./ASTNodeBraceExp";
@@ -17,9 +20,6 @@ import { ASTNodeLit } from "./ASTNodeLit";
 import { ASTNodeParamExp } from "./ASTNodeParamExp";
 import { ASTNodeProcSubst } from "./ASTNodeProcSubst";
 import { ASTNodeSglQuoted } from "./ASTNodeSglQuoted";
-import { logg } from "./logg";
-// tslint:disable-next-line:max-line-length
-import { IArithmExp, IBraceExp, ICmdSubst, IDblQuoted, IExtGlob, ILit, IParamExp, IProcSubst, ISglQuoted, IWordPart } from "./ParserTypes";
 
 export class ASTNodeWordPart extends ASTNode {
   // tslint:disable-next-line:max-line-length
