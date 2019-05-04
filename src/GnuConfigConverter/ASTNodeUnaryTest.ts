@@ -40,8 +40,10 @@ export class ASTNodeUnaryTest extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
+    visitor.visitAllPre(this);
     visitor.visitASTNodeUnaryTestPre(this);
     this.X.accept(visitor);
     visitor.visitASTNodeUnaryTestPost(this);
+    visitor.visitAllPost(this);
   }
 }

@@ -39,11 +39,13 @@ export class ASTNodeWordIter extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
+    visitor.visitAllPre(this);
     visitor.visitASTNodeWordIterPre(this);
     if (this.Name) {
       this.Name.accept(visitor);
     }
     this.Items.forEach((e) => e.accept(visitor));
     visitor.visitASTNodeWordIterPost(this);
+    visitor.visitAllPost(this);
   }
 }

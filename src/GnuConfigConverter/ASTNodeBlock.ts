@@ -41,11 +41,13 @@ export class ASTNodeBlock extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
+    visitor.visitAllPre(this);
     visitor.visitASTNodeBlockPre(this);
     if (this.StmtList) {
       this.StmtList.accept(visitor);
     }
     this.Last.forEach((e) => e.accept(visitor));
     visitor.visitASTNodeBlockPost(this);
+    visitor.visitAllPost(this);
   }
 }

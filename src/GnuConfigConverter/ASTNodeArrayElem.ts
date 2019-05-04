@@ -39,6 +39,7 @@ export class ASTNodeArrayElem extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
+    visitor.visitAllPre(this);
     visitor.visitASTNodeArrayElemPre(this);
     this.Index.accept(visitor);
     if (this.Value) {
@@ -46,5 +47,6 @@ export class ASTNodeArrayElem extends ASTNode {
     }
     this.Comments.forEach((e) => e.accept(visitor));
     visitor.visitASTNodeArrayElemPost(this);
+    visitor.visitAllPost(this);
   }
 }

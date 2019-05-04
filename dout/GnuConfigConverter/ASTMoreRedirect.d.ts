@@ -4,6 +4,7 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-export declare class ASTMoreRedirect {
+import { ASTMoreBase } from "./ASTMoreBase";
+export declare class ASTMoreRedirect extends ASTMoreBase {
 }
 //# sourceMappingURL=ASTMoreRedirect.d.ts.map

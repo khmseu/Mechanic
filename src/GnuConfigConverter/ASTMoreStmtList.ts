@@ -5,6 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { ASTMoreBase } from "./ASTMoreBase";
 
-export class ASTMoreStmtList {
+export class ASTMoreStmtList extends ASTMoreBase {
 }

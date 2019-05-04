@@ -35,8 +35,10 @@ export class ASTNodeLetClause extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
+    visitor.visitAllPre(this);
     visitor.visitASTNodeLetClausePre(this);
     this.Exprs.forEach((e) => e.accept(visitor));
     visitor.visitASTNodeLetClausePost(this);
+    visitor.visitAllPost(this);
   }
 }

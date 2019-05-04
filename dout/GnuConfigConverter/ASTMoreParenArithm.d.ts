@@ -4,6 +4,7 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-export declare class ASTMoreParenArithm {
+import { ASTMoreBase } from "./ASTMoreBase";
+export declare class ASTMoreParenArithm extends ASTMoreBase {
 }
 //# sourceMappingURL=ASTMoreParenArithm.d.ts.map

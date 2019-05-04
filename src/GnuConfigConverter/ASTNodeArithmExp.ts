@@ -41,8 +41,10 @@ export class ASTNodeArithmExp extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
+    visitor.visitAllPre(this);
     visitor.visitASTNodeArithmExpPre(this);
     this.X.accept(visitor);
     visitor.visitASTNodeArithmExpPost(this);
+    visitor.visitAllPost(this);
   }
 }

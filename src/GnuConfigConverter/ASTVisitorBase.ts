@@ -5,6 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmCmd } from "./ASTNodeArithmCmd";
 import { ASTNodeArithmExp } from "./ASTNodeArithmExp";
 import { ASTNodeArrayElem } from "./ASTNodeArrayElem";
@@ -49,6 +50,12 @@ import { ASTNodeWord } from "./ASTNodeWord";
 import { ASTNodeWordIter } from "./ASTNodeWordIter";
 
 export class ASTVisitorBase {
+  public visitAllPre(node: ASTNode): void {
+    node = node;
+  }
+  public visitAllPost(node: ASTNode): void {
+    node = node;
+  }
   public visitASTNodeArithmCmdPre(node: ASTNodeArithmCmd): void {
     node = node;
   }

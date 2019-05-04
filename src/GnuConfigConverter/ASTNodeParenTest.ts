@@ -37,8 +37,10 @@ export class ASTNodeParenTest extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
+    visitor.visitAllPre(this);
     visitor.visitASTNodeParenTestPre(this);
     this.X.accept(visitor);
     visitor.visitASTNodeParenTestPost(this);
+    visitor.visitAllPost(this);
   }
 }

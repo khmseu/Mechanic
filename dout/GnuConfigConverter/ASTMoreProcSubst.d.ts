@@ -4,6 +4,7 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-export declare class ASTMoreProcSubst {
+import { ASTMoreBase } from "./ASTMoreBase";
+export declare class ASTMoreProcSubst extends ASTMoreBase {
 }
 //# sourceMappingURL=ASTMoreProcSubst.d.ts.map

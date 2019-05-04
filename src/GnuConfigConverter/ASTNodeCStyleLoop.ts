@@ -41,10 +41,12 @@ export class ASTNodeCStyleLoop extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
+    visitor.visitAllPre(this);
     visitor.visitASTNodeCStyleLoopPre(this);
     this.Init.accept(visitor);
     this.Cond.accept(visitor);
     this.Post.accept(visitor);
     visitor.visitASTNodeCStyleLoopPost(this);
+    visitor.visitAllPost(this);
   }
 }

@@ -38,6 +38,7 @@ export class ASTNodeDeclClause extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
+    visitor.visitAllPre(this);
     visitor.visitASTNodeDeclClausePre(this);
     if (this.Variant) {
       this.Variant.accept(visitor);
@@ -45,5 +46,6 @@ export class ASTNodeDeclClause extends ASTNode {
     this.Opts.forEach((e) => e.accept(visitor));
     this.Assigns.forEach((e) => e.accept(visitor));
     visitor.visitASTNodeDeclClausePost(this);
+    visitor.visitAllPost(this);
   }
 }

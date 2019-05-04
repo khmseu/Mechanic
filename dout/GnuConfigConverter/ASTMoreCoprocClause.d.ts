@@ -4,6 +4,7 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-export declare class ASTMoreCoprocClause {
+import { ASTMoreBase } from "./ASTMoreBase";
+export declare class ASTMoreCoprocClause extends ASTMoreBase {
 }
 //# sourceMappingURL=ASTMoreCoprocClause.d.ts.map

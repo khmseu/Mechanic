@@ -6,7 +6,8 @@
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-class ASTMoreExtGlob {
+const ASTMoreBase_1 = require("./ASTMoreBase");
+class ASTMoreExtGlob extends ASTMoreBase_1.ASTMoreBase {
 }
 exports.ASTMoreExtGlob = ASTMoreExtGlob;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQVNUTW9yZUV4dEdsb2IuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9zcmMvR251Q29uZmlnQ29udmVydGVyL0FTVE1vcmVFeHRHbG9iLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQTs7Ozs7R0FLRzs7QUFHSCxNQUFhLGNBQWM7Q0FDMUI7QUFERCx3Q0FDQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQVNUTW9yZUV4dEdsb2IuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9zcmMvR251Q29uZmlnQ29udmVydGVyL0FTVE1vcmVFeHRHbG9iLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQTs7Ozs7R0FLRzs7QUFFSCwrQ0FBNEM7QUFFNUMsTUFBYSxjQUFlLFNBQVEseUJBQVc7Q0FDOUM7QUFERCx3Q0FDQyJ9

@@ -63,6 +63,7 @@ export class ASTNodeParamExp extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
+    visitor.visitAllPre(this);
     visitor.visitASTNodeParamExpPre(this);
     if (this.Param) {
       this.Param.accept(visitor);
@@ -71,5 +72,6 @@ export class ASTNodeParamExp extends ASTNode {
       this.Index.accept(visitor);
     }
     visitor.visitASTNodeParamExpPost(this);
+    visitor.visitAllPost(this);
   }
 }

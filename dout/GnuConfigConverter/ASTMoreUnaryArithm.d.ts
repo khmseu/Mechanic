@@ -4,6 +4,7 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-export declare class ASTMoreUnaryArithm {
+import { ASTMoreBase } from "./ASTMoreBase";
+export declare class ASTMoreUnaryArithm extends ASTMoreBase {
 }
 //# sourceMappingURL=ASTMoreUnaryArithm.d.ts.map

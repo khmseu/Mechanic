@@ -4,6 +4,7 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-export declare class ASTMoreCaseClause {
+import { ASTMoreBase } from "./ASTMoreBase";
+export declare class ASTMoreCaseClause extends ASTMoreBase {
 }
 //# sourceMappingURL=ASTMoreCaseClause.d.ts.map

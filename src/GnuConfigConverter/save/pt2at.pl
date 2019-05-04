@@ -154,6 +154,12 @@ export function ASTArray<AE extends ASTNode, PE>(at: new(pt: PE, parent: ASTNode
   return aa;
 }
 EOFAA
+export 'ASTMoreBase', [<<EOFMB], {};
+export class ASTMoreBase {
+  public commentField: { [f: string]: string } = {};
+  [f: string]: any;
+}
+EOFMB
 
 my @fi = split /\bexport\s+(?:declare\s+)?/, $fi;
 for my $typ (@fi) {
@@ -434,9 +440,11 @@ EOFN5a
                     $needType{ASTVisitorBase}++;
                     save <<EOFN5b;
   public accept(visitor: ASTVisitorBase) {
+    visitor.visitAllPre(this);
     visitor.visit${an}Pre(this);
 $recur2
     visitor.visit${an}Post(this);
+    visitor.visitAllPost(this);
   }
 EOFN5b
                 }
@@ -524,7 +532,14 @@ export 'ASTnodeKind', \@text, \%needType;
 
 save <<EOFV1;
 export class ASTVisitorBase {
+  public visitAllPre(node: ASTNode): void {
+    node = node;
+  }
+  public visitAllPost(node: ASTNode): void {
+    node = node;
+  }
 EOFV1
+$needType{ASTNode}++;
 for my $cc ( sort { lc $a cmp lc $b } keys %kind ) {
     $needType{$cc}++;
     save <<EOFV2;
@@ -544,10 +559,10 @@ export 'ASTVisitorBase', \@text, \%needType;
 for my $cc ( sort { lc $a cmp lc $b } keys %kind ) {
     my $kk = $cc;
     $kk =~ s/^ASTNode/ASTMore/;
-    $needType{$kk}++;
+    $needType{ASTMoreBase}++;
     save <<EOFU;
-export class $kk {
+export class $kk extends ASTMoreBase {
 }
 EOFU
-    export_maybe $kk, \@text, \%needType;
+    export $kk, \@text, \%needType;
 }

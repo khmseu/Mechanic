@@ -39,8 +39,10 @@ export class ASTNodeArithmCmd extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
+    visitor.visitAllPre(this);
     visitor.visitASTNodeArithmCmdPre(this);
     this.X.accept(visitor);
     visitor.visitASTNodeArithmCmdPost(this);
+    visitor.visitAllPost(this);
   }
 }

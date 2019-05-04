@@ -4,6 +4,7 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-export declare class ASTMoreComment {
+import { ASTMoreBase } from "./ASTMoreBase";
+export declare class ASTMoreComment extends ASTMoreBase {
 }
 //# sourceMappingURL=ASTMoreComment.d.ts.map

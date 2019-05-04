@@ -4,6 +4,7 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-export declare class ASTMoreSubshell {
+import { ASTMoreBase } from "./ASTMoreBase";
+export declare class ASTMoreSubshell extends ASTMoreBase {
 }
 //# sourceMappingURL=ASTMoreSubshell.d.ts.map

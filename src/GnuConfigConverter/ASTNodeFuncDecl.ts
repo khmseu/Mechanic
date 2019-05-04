@@ -40,6 +40,7 @@ export class ASTNodeFuncDecl extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
+    visitor.visitAllPre(this);
     visitor.visitASTNodeFuncDeclPre(this);
     if (this.Name) {
       this.Name.accept(visitor);
@@ -48,5 +49,6 @@ export class ASTNodeFuncDecl extends ASTNode {
       this.Body.accept(visitor);
     }
     visitor.visitASTNodeFuncDeclPost(this);
+    visitor.visitAllPost(this);
   }
 }

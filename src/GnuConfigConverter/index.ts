@@ -13,11 +13,6 @@ import { ASTVisitorComments } from "./ASTVisitorComments";
 import { logg } from "./logg";
 import { IFile } from "./ParserTypes";
 
-export function joiner(list: string[], dlm: string): string {
-  logg("joiner");
-  return list.filter((s) => !!s).join(dlm);
-}
-
 // function patterns(pts: IWord[] | null): string[] {
 //   logg("patterns");
 //   const res: string[] = [];
@@ -38,9 +33,11 @@ function perFile(f: string): void {
   const t = readFileSync(resolve("gnu-config", f), { encoding: "ascii" });
   const parser = syntax.NewParser(syntax.Variant(syntax.LangPOSIX), syntax.KeepComments);
   const j: IFile = parser.Parse(t, f);
-  logg(j);
+  logg({ j });
   const k: ASTNodeFile = new ASTNodeFile(j, null, "");
+  logg({ k });
   k.accept(new ASTVisitorComments());
+  logg({ k });
   // const js = joiner(prepFile(j), "\n");
   const js = JSON.stringify(k, null, 2);
   writeFileSync(resolve(format({ ext: ".js", name: f })), js, { encoding: "ascii" });

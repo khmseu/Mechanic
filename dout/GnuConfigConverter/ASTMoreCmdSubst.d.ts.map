@@ -1,1 +1,1 @@
-{"version":3,"file":"ASTMoreCmdSubst.d.ts","sourceRoot":"","sources":["../../src/GnuConfigConverter/ASTMoreCmdSubst.ts"],"names":[],"mappings":"AAAA;;;;;GAKG;AAGH,qBAAa,eAAe;CAC3B"}
+{"version":3,"file":"ASTMoreCmdSubst.d.ts","sourceRoot":"","sources":["../../src/GnuConfigConverter/ASTMoreCmdSubst.ts"],"names":[],"mappings":"AAAA;;;;;GAKG;AAEH,OAAO,EAAE,WAAW,EAAE,MAAM,eAAe,CAAC;AAE5C,qBAAa,eAAgB,SAAQ,WAAW;CAC/C"}

@@ -4,6 +4,7 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-export declare class ASTMoreCallExpr {
+import { ASTMoreBase } from "./ASTMoreBase";
+export declare class ASTMoreCallExpr extends ASTMoreBase {
 }
 //# sourceMappingURL=ASTMoreCallExpr.d.ts.map

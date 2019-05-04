@@ -5,6 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { ASTMoreBase } from "./ASTMoreBase";
 
-export class ASTMoreUnaryTest {
+export class ASTMoreUnaryTest extends ASTMoreBase {
 }

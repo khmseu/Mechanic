@@ -35,8 +35,10 @@ export class ASTNodeBraceExp extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
+    visitor.visitAllPre(this);
     visitor.visitASTNodeBraceExpPre(this);
     this.Elems.forEach((e) => e.accept(visitor));
     visitor.visitASTNodeBraceExpPost(this);
+    visitor.visitAllPost(this);
   }
 }

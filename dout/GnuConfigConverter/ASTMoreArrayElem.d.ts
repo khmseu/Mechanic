@@ -4,6 +4,7 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-export declare class ASTMoreArrayElem {
+import { ASTMoreBase } from "./ASTMoreBase";
+export declare class ASTMoreArrayElem extends ASTMoreBase {
 }
 //# sourceMappingURL=ASTMoreArrayElem.d.ts.map

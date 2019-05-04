@@ -51,6 +51,7 @@ export class ASTNodeIfClause extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
+    visitor.visitAllPre(this);
     visitor.visitASTNodeIfClausePre(this);
     if (this.Cond) {
       this.Cond.accept(visitor);
@@ -65,5 +66,6 @@ export class ASTNodeIfClause extends ASTNode {
     }
     this.Last.forEach((e) => e.accept(visitor));
     visitor.visitASTNodeIfClausePost(this);
+    visitor.visitAllPost(this);
   }
 }

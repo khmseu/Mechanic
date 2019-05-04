@@ -44,6 +44,7 @@ export class ASTNodeAssign extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
+    visitor.visitAllPre(this);
     visitor.visitASTNodeAssignPre(this);
     if (this.Name) {
       this.Name.accept(visitor);
@@ -58,5 +59,6 @@ export class ASTNodeAssign extends ASTNode {
       this.Array.accept(visitor);
     }
     visitor.visitASTNodeAssignPost(this);
+    visitor.visitAllPost(this);
   }
 }

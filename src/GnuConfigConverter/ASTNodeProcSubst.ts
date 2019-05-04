@@ -45,9 +45,11 @@ export class ASTNodeProcSubst extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
+    visitor.visitAllPre(this);
     visitor.visitASTNodeProcSubstPre(this);
     this.Stmts.forEach((e) => e.accept(visitor));
     this.Last.forEach((e) => e.accept(visitor));
     visitor.visitASTNodeProcSubstPost(this);
+    visitor.visitAllPost(this);
   }
 }

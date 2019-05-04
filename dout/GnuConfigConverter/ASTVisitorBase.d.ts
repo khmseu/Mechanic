@@ -4,6 +4,7 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
+import { ASTNode } from "./ASTNode";
 import { ASTNodeArithmCmd } from "./ASTNodeArithmCmd";
 import { ASTNodeArithmExp } from "./ASTNodeArithmExp";
 import { ASTNodeArrayElem } from "./ASTNodeArrayElem";
@@ -47,6 +48,8 @@ import { ASTNodeWhileClause } from "./ASTNodeWhileClause";
 import { ASTNodeWord } from "./ASTNodeWord";
 import { ASTNodeWordIter } from "./ASTNodeWordIter";
 export declare class ASTVisitorBase {
+    visitAllPre(node: ASTNode): void;
+    visitAllPost(node: ASTNode): void;
     visitASTNodeArithmCmdPre(node: ASTNodeArithmCmd): void;
     visitASTNodeArithmCmdPost(node: ASTNodeArithmCmd): void;
     visitASTNodeArithmExpPre(node: ASTNodeArithmExp): void;

@@ -4,6 +4,7 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-export declare class ASTMoreBinaryCmd {
+import { ASTMoreBase } from "./ASTMoreBase";
+export declare class ASTMoreBinaryCmd extends ASTMoreBase {
 }
 //# sourceMappingURL=ASTMoreBinaryCmd.d.ts.map

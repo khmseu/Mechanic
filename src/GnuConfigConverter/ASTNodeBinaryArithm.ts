@@ -42,9 +42,11 @@ export class ASTNodeBinaryArithm extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
+    visitor.visitAllPre(this);
     visitor.visitASTNodeBinaryArithmPre(this);
     this.X.accept(visitor);
     this.Y.accept(visitor);
     visitor.visitASTNodeBinaryArithmPost(this);
+    visitor.visitAllPost(this);
   }
 }

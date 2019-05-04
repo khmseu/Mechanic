@@ -1,1 +1,1 @@
-{"version":3,"file":"ASTMoreForClause.d.ts","sourceRoot":"","sources":["../../src/GnuConfigConverter/ASTMoreForClause.ts"],"names":[],"mappings":"AAAA;;;;;GAKG;AAGH,qBAAa,gBAAgB;CAC5B"}
+{"version":3,"file":"ASTMoreForClause.d.ts","sourceRoot":"","sources":["../../src/GnuConfigConverter/ASTMoreForClause.ts"],"names":[],"mappings":"AAAA;;;;;GAKG;AAEH,OAAO,EAAE,WAAW,EAAE,MAAM,eAAe,CAAC;AAE5C,qBAAa,gBAAiB,SAAQ,WAAW;CAChD"}

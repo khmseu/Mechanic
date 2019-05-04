@@ -50,10 +50,12 @@ export class ASTNodeStmt extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
+    visitor.visitAllPre(this);
     visitor.visitASTNodeStmtPre(this);
     this.Comments.forEach((e) => e.accept(visitor));
     this.Cmd.accept(visitor);
     this.Redirs.forEach((e) => e.accept(visitor));
     visitor.visitASTNodeStmtPost(this);
+    visitor.visitAllPost(this);
   }
 }

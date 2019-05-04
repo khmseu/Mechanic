@@ -37,8 +37,10 @@ export class ASTNodeSglQuoted extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
+    visitor.visitAllPre(this);
     visitor.visitASTNodeSglQuotedPre(this);
 
     visitor.visitASTNodeSglQuotedPost(this);
+    visitor.visitAllPost(this);
   }
 }

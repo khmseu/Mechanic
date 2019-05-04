@@ -49,6 +49,7 @@ export class ASTNodeCaseItem extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
+    visitor.visitAllPre(this);
     visitor.visitASTNodeCaseItemPre(this);
     this.Comments.forEach((e) => e.accept(visitor));
     this.Patterns.forEach((e) => e.accept(visitor));
@@ -57,5 +58,6 @@ export class ASTNodeCaseItem extends ASTNode {
     }
     this.Last.forEach((e) => e.accept(visitor));
     visitor.visitASTNodeCaseItemPost(this);
+    visitor.visitAllPost(this);
   }
 }

@@ -4,6 +4,7 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-export declare class ASTMoreBraceExp {
+import { ASTMoreBase } from "./ASTMoreBase";
+export declare class ASTMoreBraceExp extends ASTMoreBase {
 }
 //# sourceMappingURL=ASTMoreBraceExp.d.ts.map

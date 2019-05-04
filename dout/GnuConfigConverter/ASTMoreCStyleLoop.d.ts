@@ -4,6 +4,7 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-export declare class ASTMoreCStyleLoop {
+import { ASTMoreBase } from "./ASTMoreBase";
+export declare class ASTMoreCStyleLoop extends ASTMoreBase {
 }
 //# sourceMappingURL=ASTMoreCStyleLoop.d.ts.map

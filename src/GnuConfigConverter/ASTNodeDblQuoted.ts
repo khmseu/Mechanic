@@ -37,8 +37,10 @@ export class ASTNodeDblQuoted extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
+    visitor.visitAllPre(this);
     visitor.visitASTNodeDblQuotedPre(this);
     this.Parts.forEach((e) => e.accept(visitor));
     visitor.visitASTNodeDblQuotedPost(this);
+    visitor.visitAllPost(this);
   }
 }

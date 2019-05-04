@@ -37,8 +37,10 @@ export class ASTNodeTestClause extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
+    visitor.visitAllPre(this);
     visitor.visitASTNodeTestClausePre(this);
     this.X.accept(visitor);
     visitor.visitASTNodeTestClausePost(this);
+    visitor.visitAllPost(this);
   }
 }

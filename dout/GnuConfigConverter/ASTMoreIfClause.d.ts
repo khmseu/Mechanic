@@ -4,6 +4,7 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-export declare class ASTMoreIfClause {
+import { ASTMoreBase } from "./ASTMoreBase";
+export declare class ASTMoreIfClause extends ASTMoreBase {
 }
 //# sourceMappingURL=ASTMoreIfClause.d.ts.map

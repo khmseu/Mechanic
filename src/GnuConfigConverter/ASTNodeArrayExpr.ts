@@ -40,9 +40,11 @@ export class ASTNodeArrayExpr extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
+    visitor.visitAllPre(this);
     visitor.visitASTNodeArrayExprPre(this);
     this.Elems.forEach((e) => e.accept(visitor));
     this.Last.forEach((e) => e.accept(visitor));
     visitor.visitASTNodeArrayExprPost(this);
+    visitor.visitAllPost(this);
   }
 }

@@ -5,6 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { ASTMoreBase } from "./ASTMoreBase";
 
-export class ASTMoreIfClause {
+export class ASTMoreIfClause extends ASTMoreBase {
 }

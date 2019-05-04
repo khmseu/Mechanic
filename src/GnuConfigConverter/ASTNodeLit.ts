@@ -35,8 +35,10 @@ export class ASTNodeLit extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
+    visitor.visitAllPre(this);
     visitor.visitASTNodeLitPre(this);
 
     visitor.visitASTNodeLitPost(this);
+    visitor.visitAllPost(this);
   }
 }

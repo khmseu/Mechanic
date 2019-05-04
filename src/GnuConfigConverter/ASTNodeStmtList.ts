@@ -34,9 +34,11 @@ export class ASTNodeStmtList extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
+    visitor.visitAllPre(this);
     visitor.visitASTNodeStmtListPre(this);
     this.Stmts.forEach((e) => e.accept(visitor));
     this.Last.forEach((e) => e.accept(visitor));
     visitor.visitASTNodeStmtListPost(this);
+    visitor.visitAllPost(this);
   }
 }

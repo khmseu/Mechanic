@@ -4,6 +4,7 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-export declare class ASTMoreWhileClause {
+import { ASTMoreBase } from "./ASTMoreBase";
+export declare class ASTMoreWhileClause extends ASTMoreBase {
 }
 //# sourceMappingURL=ASTMoreWhileClause.d.ts.map

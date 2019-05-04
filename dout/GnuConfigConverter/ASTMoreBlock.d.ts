@@ -4,6 +4,7 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-export declare class ASTMoreBlock {
+import { ASTMoreBase } from "./ASTMoreBase";
+export declare class ASTMoreBlock extends ASTMoreBase {
 }
 //# sourceMappingURL=ASTMoreBlock.d.ts.map

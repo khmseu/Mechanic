@@ -45,6 +45,7 @@ export class ASTNodeRedirect extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
+    visitor.visitAllPre(this);
     visitor.visitASTNodeRedirectPre(this);
     if (this.N) {
       this.N.accept(visitor);
@@ -56,5 +57,6 @@ export class ASTNodeRedirect extends ASTNode {
       this.Hdoc.accept(visitor);
     }
     visitor.visitASTNodeRedirectPost(this);
+    visitor.visitAllPost(this);
   }
 }
