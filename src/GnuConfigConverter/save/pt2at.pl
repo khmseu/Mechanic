@@ -14,6 +14,7 @@ use Data::Dumper::Simple;
 $Data::Dumper::Useqq    = 1;
 $Data::Dumper::Sortkeys = 1;
 $|                      = 1;
+use File::Path qw(make_path remove_tree);
 
 $/ = undef;
 
@@ -26,6 +27,9 @@ my $copyr = <<'EOFCPR';
  */
 
 EOFCPR
+
+my $source = 'dout/GnuConfigConverter/ParserTypes.d.ts';
+my $outdir = 'src/GnuConfigConverter/generated';
 
 my @text;
 
@@ -87,10 +91,10 @@ sub export($$$) {
             ( "$1// tslint:disable-next-line:max-line-length\n", $_ );
         }
     } @$text;
-    open FO, '>', "src/GnuConfigConverter/$name.ts"
-      or die "src/GnuConfigConverter/$name.ts: $!";
+    open FO, '>', "$outdir/$name.ts"
+      or die "$outdir/$name.ts: $!";
     print FO @$text;
-    close FO or die "src/GnuConfigConverter/$name.ts: $!";
+    close FO or die "$outdir/$name.ts: $!";
     @$text     = ();
     %$needType = ();
 }
@@ -98,16 +102,20 @@ sub export($$$) {
 sub export_maybe($$$) {
     my ( $name, $text, $needType ) = @_;
     export $name, $text, $needType
-      unless -f "src/GnuConfigConverter/$name.ts";
+      unless -f "$outdir/$name.ts";
 }
 
 my %needType;
 my %kind;
 
-open FI, '<', 'dout/GnuConfigConverter/ParserTypes.d.ts'
-  or die "dout/GnuConfigConverter/ParserTypes.d.ts: $!";
+open FI, '<', $source or die "$source: $!";
 my $fi = <FI>;
-close FI or die "dout/GnuConfigConverter/ParserTypes.d.ts: $!";
+close FI or die "$source: $!";
+
+# prepare output
+make_path $outdir;
+remove_tree $outdir;
+make_path $outdir;
 
 export 'ASTCall', [<<EOFCALL], {};
 export function ASTCall<PE>(pe: (() => PE) | null) {
