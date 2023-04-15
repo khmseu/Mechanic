@@ -35,13 +35,15 @@ export class ASTNodeFile extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
-    visitor.visitAllPre(this);
+    visitor.visitAllPreBefore(this);
     visitor.visitASTNodeFilePre(this);
+    visitor.visitAllPreAfter(this);
     if (this.StmtList) {
       this.StmtList.accept(visitor);
     }
     this.Last.forEach((e) => e.accept(visitor));
+    visitor.visitAllPostBefore(this);
     visitor.visitASTNodeFilePost(this);
-    visitor.visitAllPost(this);
+    visitor.visitAllPostAfter(this);
   }
 }

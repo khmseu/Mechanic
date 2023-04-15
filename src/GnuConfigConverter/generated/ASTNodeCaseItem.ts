@@ -47,15 +47,17 @@ export class ASTNodeCaseItem extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
-    visitor.visitAllPre(this);
+    visitor.visitAllPreBefore(this);
     visitor.visitASTNodeCaseItemPre(this);
+    visitor.visitAllPreAfter(this);
     this.Comments.forEach((e) => e.accept(visitor));
     this.Patterns.forEach((e) => e.accept(visitor));
     if (this.StmtList) {
       this.StmtList.accept(visitor);
     }
     this.Last.forEach((e) => e.accept(visitor));
+    visitor.visitAllPostBefore(this);
     visitor.visitASTNodeCaseItemPost(this);
-    visitor.visitAllPost(this);
+    visitor.visitAllPostAfter(this);
   }
 }

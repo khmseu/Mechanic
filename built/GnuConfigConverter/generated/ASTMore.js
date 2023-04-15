@@ -9,7 +9,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class ASTMore {
     constructor() {
         this.commentField = {};
+        this.printDone = false;
     }
 }
 exports.ASTMore = ASTMore;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQVNUTW9yZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uL3NyYy9HbnVDb25maWdDb252ZXJ0ZXIvZ2VuZXJhdGVkL0FTVE1vcmUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBOzs7OztHQUtHOztBQUVILE1BQWEsT0FBTztJQUFwQjtRQUNTLGlCQUFZLEdBQTRCLEVBQUUsQ0FBQztJQUVwRCxDQUFDO0NBQUE7QUFIRCwwQkFHQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQVNUTW9yZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uL3NyYy9HbnVDb25maWdDb252ZXJ0ZXIvZ2VuZXJhdGVkL0FTVE1vcmUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBOzs7OztHQUtHOztBQUVILE1BQWEsT0FBTztJQUFwQjtRQUNTLGlCQUFZLEdBQTRCLEVBQUUsQ0FBQztRQUMzQyxjQUFTLEdBQUcsS0FBSyxDQUFDO0lBRTNCLENBQUM7Q0FBQTtBQUpELDBCQUlDIn0=

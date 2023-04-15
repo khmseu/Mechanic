@@ -9,6 +9,6 @@ import { ASTNodeComment } from "./generated/ASTNodeComment";
 import { ASTVisitorBase } from "./generated/ASTVisitorBase";
 export declare class ASTVisitorComments extends ASTVisitorBase {
     visitASTNodeCommentPre(node: ASTNodeComment): void;
-    visitAllPost(node: ASTNode): void;
+    visitAllPostBefore(node: ASTNode): void;
 }
 //# sourceMappingURL=ASTVisitorComments.d.ts.map

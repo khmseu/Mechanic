@@ -50,10 +50,16 @@ import { ASTNodeWord } from "./ASTNodeWord";
 import { ASTNodeWordIter } from "./ASTNodeWordIter";
 
 export class ASTVisitorBase {
-  public visitAllPre(node: ASTNode): void {
+  public visitAllPreBefore(node: ASTNode): void {
     node = node;
   }
-  public visitAllPost(node: ASTNode): void {
+  public visitAllPreAfter(node: ASTNode): void {
+    node = node;
+  }
+  public visitAllPostBefore(node: ASTNode): void {
+    node = node;
+  }
+  public visitAllPostAfter(node: ASTNode): void {
     node = node;
   }
   public visitASTNodeArithmCmdPre(node: ASTNodeArithmCmd): void {

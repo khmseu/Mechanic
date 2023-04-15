@@ -47,14 +47,16 @@ export class ASTNodeForClause extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
-    visitor.visitAllPre(this);
+    visitor.visitAllPreBefore(this);
     visitor.visitASTNodeForClausePre(this);
+    visitor.visitAllPreAfter(this);
     this.Loop.accept(visitor);
     if (this.Do) {
       this.Do.accept(visitor);
     }
     this.DoLast.forEach((e) => e.accept(visitor));
+    visitor.visitAllPostBefore(this);
     visitor.visitASTNodeForClausePost(this);
-    visitor.visitAllPost(this);
+    visitor.visitAllPostAfter(this);
   }
 }

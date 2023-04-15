@@ -37,14 +37,16 @@ export class ASTNodeArrayElem extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
-    visitor.visitAllPre(this);
+    visitor.visitAllPreBefore(this);
     visitor.visitASTNodeArrayElemPre(this);
+    visitor.visitAllPreAfter(this);
     this.Index.accept(visitor);
     if (this.Value) {
       this.Value.accept(visitor);
     }
     this.Comments.forEach((e) => e.accept(visitor));
+    visitor.visitAllPostBefore(this);
     visitor.visitASTNodeArrayElemPost(this);
-    visitor.visitAllPost(this);
+    visitor.visitAllPostAfter(this);
   }
 }

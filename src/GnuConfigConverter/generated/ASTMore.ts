@@ -7,5 +7,6 @@
 
 export class ASTMore {
   public commentField: { [f: string]: number } = {};
+  public printDone = false;
   [f: string]: any;
 }

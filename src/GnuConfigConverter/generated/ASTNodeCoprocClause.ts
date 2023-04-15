@@ -36,15 +36,17 @@ export class ASTNodeCoprocClause extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
-    visitor.visitAllPre(this);
+    visitor.visitAllPreBefore(this);
     visitor.visitASTNodeCoprocClausePre(this);
+    visitor.visitAllPreAfter(this);
     if (this.Name) {
       this.Name.accept(visitor);
     }
     if (this.Stmt) {
       this.Stmt.accept(visitor);
     }
+    visitor.visitAllPostBefore(this);
     visitor.visitASTNodeCoprocClausePost(this);
-    visitor.visitAllPost(this);
+    visitor.visitAllPostAfter(this);
   }
 }

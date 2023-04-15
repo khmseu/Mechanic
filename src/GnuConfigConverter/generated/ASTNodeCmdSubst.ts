@@ -43,13 +43,15 @@ export class ASTNodeCmdSubst extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
-    visitor.visitAllPre(this);
+    visitor.visitAllPreBefore(this);
     visitor.visitASTNodeCmdSubstPre(this);
+    visitor.visitAllPreAfter(this);
     if (this.StmtList) {
       this.StmtList.accept(visitor);
     }
     this.Last.forEach((e) => e.accept(visitor));
+    visitor.visitAllPostBefore(this);
     visitor.visitASTNodeCmdSubstPost(this);
-    visitor.visitAllPost(this);
+    visitor.visitAllPostAfter(this);
   }
 }

@@ -32,11 +32,13 @@ export class ASTNodeCallExpr extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
-    visitor.visitAllPre(this);
+    visitor.visitAllPreBefore(this);
     visitor.visitASTNodeCallExprPre(this);
+    visitor.visitAllPreAfter(this);
     this.Assigns.forEach((e) => e.accept(visitor));
     this.Args.forEach((e) => e.accept(visitor));
+    visitor.visitAllPostBefore(this);
     visitor.visitASTNodeCallExprPost(this);
-    visitor.visitAllPost(this);
+    visitor.visitAllPostAfter(this);
   }
 }

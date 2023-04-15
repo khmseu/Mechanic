@@ -40,10 +40,12 @@ export class ASTNodeUnaryArithm extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
-    visitor.visitAllPre(this);
+    visitor.visitAllPreBefore(this);
     visitor.visitASTNodeUnaryArithmPre(this);
+    visitor.visitAllPreAfter(this);
     this.X.accept(visitor);
+    visitor.visitAllPostBefore(this);
     visitor.visitASTNodeUnaryArithmPost(this);
-    visitor.visitAllPost(this);
+    visitor.visitAllPostAfter(this);
   }
 }

@@ -35,12 +35,14 @@ export class ASTNodeTimeClause extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
-    visitor.visitAllPre(this);
+    visitor.visitAllPreBefore(this);
     visitor.visitASTNodeTimeClausePre(this);
+    visitor.visitAllPreAfter(this);
     if (this.Stmt) {
       this.Stmt.accept(visitor);
     }
+    visitor.visitAllPostBefore(this);
     visitor.visitASTNodeTimeClausePost(this);
-    visitor.visitAllPost(this);
+    visitor.visitAllPostAfter(this);
   }
 }

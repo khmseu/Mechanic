@@ -38,15 +38,17 @@ export class ASTNodeFuncDecl extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
-    visitor.visitAllPre(this);
+    visitor.visitAllPreBefore(this);
     visitor.visitASTNodeFuncDeclPre(this);
+    visitor.visitAllPreAfter(this);
     if (this.Name) {
       this.Name.accept(visitor);
     }
     if (this.Body) {
       this.Body.accept(visitor);
     }
+    visitor.visitAllPostBefore(this);
     visitor.visitASTNodeFuncDeclPost(this);
-    visitor.visitAllPost(this);
+    visitor.visitAllPostAfter(this);
   }
 }

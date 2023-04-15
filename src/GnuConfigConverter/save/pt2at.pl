@@ -166,6 +166,7 @@ EOFAA
 export 'ASTMore', [<<EOFMB], {};
 export class ASTMore {
   public commentField: { [f: string]: number } = {};
+  public printDone = false;
   [f: string]: any;
 }
 EOFMB
@@ -446,11 +447,13 @@ EOFN5a
                     $needType{ASTVisitorBase}++;
                     save <<EOFN5b;
   public accept(visitor: ASTVisitorBase) {
-    visitor.visitAllPre(this);
+    visitor.visitAllPreBefore(this);
     visitor.visit${an}Pre(this);
+    visitor.visitAllPreAfter(this);
 $recur2
+    visitor.visitAllPostBefore(this);
     visitor.visit${an}Post(this);
-    visitor.visitAllPost(this);
+    visitor.visitAllPostAfter(this);
   }
 EOFN5b
                 }
@@ -538,10 +541,16 @@ export 'ASTnodeKind', \@text, \%needType;
 
 save <<EOFV1;
 export class ASTVisitorBase {
-  public visitAllPre(node: ASTNode): void {
+  public visitAllPreBefore(node: ASTNode): void {
     node = node;
   }
-  public visitAllPost(node: ASTNode): void {
+  public visitAllPreAfter(node: ASTNode): void {
+    node = node;
+  }
+  public visitAllPostBefore(node: ASTNode): void {
+    node = node;
+  }
+  public visitAllPostAfter(node: ASTNode): void {
     node = node;
   }
 EOFV1

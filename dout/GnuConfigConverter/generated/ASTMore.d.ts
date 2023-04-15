@@ -8,6 +8,7 @@ export declare class ASTMore {
     commentField: {
         [f: string]: number;
     };
+    printDone: boolean;
     [f: string]: any;
 }
 //# sourceMappingURL=ASTMore.d.ts.map

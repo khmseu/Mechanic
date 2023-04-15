@@ -19,7 +19,7 @@ export class ASTVisitorComments extends ASTVisitorBase {
     node.parent!.more[node.parentField].push(node.Text);
     node.parent!.more.commentField[node.parentField]++;
   }
-  public visitAllPost(node: ASTNode) {
+  public visitAllPostBefore(node: ASTNode) {
     // logg({ Text: node.Text });
     Object.keys(node.more.commentField).forEach((field) => {
       node.more[field] = "// " + joiner(node.more[field], "\n// ");

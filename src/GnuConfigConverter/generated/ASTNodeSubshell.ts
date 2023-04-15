@@ -39,13 +39,15 @@ export class ASTNodeSubshell extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
-    visitor.visitAllPre(this);
+    visitor.visitAllPreBefore(this);
     visitor.visitASTNodeSubshellPre(this);
+    visitor.visitAllPreAfter(this);
     if (this.StmtList) {
       this.StmtList.accept(visitor);
     }
     this.Last.forEach((e) => e.accept(visitor));
+    visitor.visitAllPostBefore(this);
     visitor.visitASTNodeSubshellPost(this);
-    visitor.visitAllPost(this);
+    visitor.visitAllPostAfter(this);
   }
 }

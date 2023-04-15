@@ -8,8 +8,11 @@
 import { readFileSync, writeFileSync } from "fs";
 import { syntax } from "mvdan-sh";
 import { format, resolve } from "path";
+import { inspect } from "util";
 import { ASTVisitorComments } from "./ASTVisitorComments";
+import { ASTVisitorPrint } from "./ASTVisitorPrint";
 import { ASTNodeFile } from "./generated/ASTNodeFile";
+import { joiner } from "./joiner";
 import { logg } from "./logg";
 import { IFile } from "./ParserTypes";
 
@@ -25,6 +28,18 @@ import { IFile } from "./ParserTypes";
 
 // ---------------------------------------------------------------------------------------------------------------------
 
+let out: string[];
+
+function dumper(stuff: any) {
+  out.push(
+    inspect(stuff, {
+      depth: 2,
+      compact: false,
+      sorted: true,
+    }),
+  );
+}
+
 // ---------------------------------------------------------------------------------------------------------------------
 
 function perFile(f: string): void {
@@ -38,8 +53,11 @@ function perFile(f: string): void {
   logg({ k });
   k.accept(new ASTVisitorComments());
   logg({ k });
+  out = [];
+  k.accept(new ASTVisitorPrint(dumper));
+  logg({ k });
   // const js = joiner(prepFile(j), "\n");
-  const js = JSON.stringify(k, null, 2);
+  const js = "mixed:\n\n" + joiner(out, "\n") + "\n\nraw:\n\n" + JSON.stringify(k, null, 2);
   writeFileSync(resolve(format({ ext: ".js", name: f })), js, { encoding: "ascii" });
 }
 

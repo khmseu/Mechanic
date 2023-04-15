@@ -31,10 +31,12 @@ export class ASTNodeComment extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
-    visitor.visitAllPre(this);
+    visitor.visitAllPreBefore(this);
     visitor.visitASTNodeCommentPre(this);
+    visitor.visitAllPreAfter(this);
 
+    visitor.visitAllPostBefore(this);
     visitor.visitASTNodeCommentPost(this);
-    visitor.visitAllPost(this);
+    visitor.visitAllPostAfter(this);
   }
 }

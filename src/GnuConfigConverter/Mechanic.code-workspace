@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		}
+	],
+	"settings": {
+		"tslint.configFile": "tslint.json",
+		"tslint.packageManager": "yarn"
+	}
+}

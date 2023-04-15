@@ -40,11 +40,13 @@ export class ASTNodeBinaryTest extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
-    visitor.visitAllPre(this);
+    visitor.visitAllPreBefore(this);
     visitor.visitASTNodeBinaryTestPre(this);
+    visitor.visitAllPreAfter(this);
     this.X.accept(visitor);
     this.Y.accept(visitor);
+    visitor.visitAllPostBefore(this);
     visitor.visitASTNodeBinaryTestPost(this);
-    visitor.visitAllPost(this);
+    visitor.visitAllPostAfter(this);
   }
 }

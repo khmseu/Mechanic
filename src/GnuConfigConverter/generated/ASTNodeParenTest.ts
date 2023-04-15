@@ -35,10 +35,12 @@ export class ASTNodeParenTest extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
-    visitor.visitAllPre(this);
+    visitor.visitAllPreBefore(this);
     visitor.visitASTNodeParenTestPre(this);
+    visitor.visitAllPreAfter(this);
     this.X.accept(visitor);
+    visitor.visitAllPostBefore(this);
     visitor.visitASTNodeParenTestPost(this);
-    visitor.visitAllPost(this);
+    visitor.visitAllPostAfter(this);
   }
 }

@@ -36,14 +36,16 @@ export class ASTNodeDeclClause extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
-    visitor.visitAllPre(this);
+    visitor.visitAllPreBefore(this);
     visitor.visitASTNodeDeclClausePre(this);
+    visitor.visitAllPreAfter(this);
     if (this.Variant) {
       this.Variant.accept(visitor);
     }
     this.Opts.forEach((e) => e.accept(visitor));
     this.Assigns.forEach((e) => e.accept(visitor));
+    visitor.visitAllPostBefore(this);
     visitor.visitASTNodeDeclClausePost(this);
-    visitor.visitAllPost(this);
+    visitor.visitAllPostAfter(this);
   }
 }

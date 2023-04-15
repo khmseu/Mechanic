@@ -35,10 +35,12 @@ export class ASTNodeParenArithm extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
-    visitor.visitAllPre(this);
+    visitor.visitAllPreBefore(this);
     visitor.visitASTNodeParenArithmPre(this);
+    visitor.visitAllPreAfter(this);
     this.X.accept(visitor);
+    visitor.visitAllPostBefore(this);
     visitor.visitASTNodeParenArithmPost(this);
-    visitor.visitAllPost(this);
+    visitor.visitAllPostAfter(this);
   }
 }

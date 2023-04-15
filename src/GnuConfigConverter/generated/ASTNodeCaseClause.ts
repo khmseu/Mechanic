@@ -42,14 +42,16 @@ export class ASTNodeCaseClause extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
-    visitor.visitAllPre(this);
+    visitor.visitAllPreBefore(this);
     visitor.visitASTNodeCaseClausePre(this);
+    visitor.visitAllPreAfter(this);
     if (this.Word) {
       this.Word.accept(visitor);
     }
     this.Items.forEach((e) => e.accept(visitor));
     this.Last.forEach((e) => e.accept(visitor));
+    visitor.visitAllPostBefore(this);
     visitor.visitASTNodeCaseClausePost(this);
-    visitor.visitAllPost(this);
+    visitor.visitAllPostAfter(this);
   }
 }

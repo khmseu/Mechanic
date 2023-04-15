@@ -38,12 +38,14 @@ export class ASTNodeExtGlob extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
-    visitor.visitAllPre(this);
+    visitor.visitAllPreBefore(this);
     visitor.visitASTNodeExtGlobPre(this);
+    visitor.visitAllPreAfter(this);
     if (this.Pattern) {
       this.Pattern.accept(visitor);
     }
+    visitor.visitAllPostBefore(this);
     visitor.visitASTNodeExtGlobPost(this);
-    visitor.visitAllPost(this);
+    visitor.visitAllPostAfter(this);
   }
 }

@@ -35,13 +35,15 @@ export class ASTNodeWord extends ASTNode {
     });
   }
   public accept(visitor: ASTVisitorBase) {
-    visitor.visitAllPre(this);
+    visitor.visitAllPreBefore(this);
     visitor.visitASTNodeWordPre(this);
+    visitor.visitAllPreAfter(this);
     this.Parts.forEach((e) => e.accept(visitor));
     if (this.SplitBraces) {
       this.SplitBraces.accept(visitor);
     }
+    visitor.visitAllPostBefore(this);
     visitor.visitASTNodeWordPost(this);
-    visitor.visitAllPost(this);
+    visitor.visitAllPostAfter(this);
   }
 }
