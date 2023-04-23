@@ -5,5 +5,5 @@
  * https://opensource.org/licenses/MIT
  */
 import { IDependencyGenerator } from "./IDependencyGenerator";
-export declare type DependencySpec = string | IDependencyGenerator;
+export type DependencySpec = string | IDependencyGenerator;
 //# sourceMappingURL=DependencySpec.d.ts.map

@@ -39,8 +39,8 @@ export class ASTNodeCoprocClause extends ASTNode {
     visitor.visitAllPreBefore(this);
     visitor.visitASTNodeCoprocClausePre(this);
     visitor.visitAllPreAfter(this);
-    if (this.Name) {
-      this.Name.accept(visitor);
+    if (this.Stmt) {
+      this.Stmt.accept(visitor);
     }
     if (this.Stmt) {
       this.Stmt.accept(visitor);

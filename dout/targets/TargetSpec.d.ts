@@ -5,5 +5,5 @@
  * https://opensource.org/licenses/MIT
  */
 import { ITargetMatcher } from "./ITargetMatcher";
-export declare type TargetSpec = string | ITargetMatcher;
+export type TargetSpec = string | ITargetMatcher;
 //# sourceMappingURL=TargetSpec.d.ts.map

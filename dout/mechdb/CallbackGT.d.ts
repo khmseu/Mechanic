@@ -4,5 +4,5 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-export declare type CallbackGT = (errt?: Error, data?: number[]) => void;
+export type CallbackGT = (errt?: Error, data?: number[]) => void;
 //# sourceMappingURL=CallbackGT.d.ts.map

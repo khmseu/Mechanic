@@ -1,1 +1,1 @@
-{"version":3,"file":"ITargetDetails.d.ts","sourceRoot":"","sources":["../../src/targets/ITargetDetails.ts"],"names":[],"mappings":"AAAA;;;;;GAKG;AAEH,oBAAY,cAAc,GAAG,MAAM,EAAE,GAAG,IAAI,CAAC"}
+{"version":3,"file":"ITargetDetails.d.ts","sourceRoot":"","sources":["../../src/targets/ITargetDetails.ts"],"names":[],"mappings":"AAAA;;;;;GAKG;AAEH,MAAM,MAAM,cAAc,GAAG,MAAM,EAAE,GAAG,IAAI,CAAC"}

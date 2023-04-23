@@ -1,1 +1,1 @@
-{"version":3,"file":"DependencySpecList.d.ts","sourceRoot":"","sources":["../../src/dependencies/DependencySpecList.ts"],"names":[],"mappings":"AAAA;;;;;GAKG;AAEH,OAAO,EAAE,cAAc,EAAE,MAAM,kBAAkB,CAAC;AAElD,oBAAY,kBAAkB,GAAG,cAAc,EAAE,CAAC"}
+{"version":3,"file":"DependencySpecList.d.ts","sourceRoot":"","sources":["../../src/dependencies/DependencySpecList.ts"],"names":[],"mappings":"AAAA;;;;;GAKG;AAEH,OAAO,EAAE,cAAc,EAAE,MAAM,kBAAkB,CAAC;AAElD,MAAM,MAAM,kBAAkB,GAAG,cAAc,EAAE,CAAC"}

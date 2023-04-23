@@ -4,5 +4,5 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-export declare type PathDescriptorTriple = [string, string, string];
+export type PathDescriptorTriple = [string, string, string];
 //# sourceMappingURL=PathDescriptorTriple.d.ts.map

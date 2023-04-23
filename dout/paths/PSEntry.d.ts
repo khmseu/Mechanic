@@ -5,5 +5,5 @@
  * https://opensource.org/licenses/MIT
  */
 import { Path } from "../io/Path";
-export declare type PSEntry = [RegExp, Path];
+export type PSEntry = [RegExp, Path];
 //# sourceMappingURL=PSEntry.d.ts.map

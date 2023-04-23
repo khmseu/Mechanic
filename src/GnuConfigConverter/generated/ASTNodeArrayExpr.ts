@@ -41,7 +41,7 @@ export class ASTNodeArrayExpr extends ASTNode {
     visitor.visitAllPreBefore(this);
     visitor.visitASTNodeArrayExprPre(this);
     visitor.visitAllPreAfter(this);
-    this.Elems.forEach((e) => e.accept(visitor));
+    this.Last.forEach((e) => e.accept(visitor));
     this.Last.forEach((e) => e.accept(visitor));
     visitor.visitAllPostBefore(this);
     visitor.visitASTNodeArrayExprPost(this);

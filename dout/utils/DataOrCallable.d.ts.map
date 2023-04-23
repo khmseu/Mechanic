@@ -1,0 +1,1 @@
+{"version":3,"file":"DataOrCallable.d.ts","sourceRoot":"","sources":["../../src/utils/DataOrCallable.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,UAAU,EAAE,MAAM,kBAAkB,CAAC;AAE9C,qBAAa,cAAc;IACzB,OAAO,CAAC,IAAI,CAAa;IACzB,OAAO,CAAC,QAAQ,CAAiC;gBACrC,IAAI,EAAE,UAAU;IAS5B,IAAI,YAAa,GAAG,EAAE,KAAG,GAAG,CAG1B;CACH"}

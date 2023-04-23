@@ -52,7 +52,7 @@ export declare class MechDB {
      * @param outerStatus
      * @returns
      */
-    setDependency(outerName: string, outerStatus: any): Promise<void>;
+    setDependency(outerName: string, outerStatus: any): Promise<null | undefined>;
     /**
      * Sets target
      * @param outerName

@@ -5,5 +5,5 @@
  * https://opensource.org/licenses/MIT
  */
 export declare const debug = true;
-export declare function logg(thing: any): void;
+export declare const logg: (thing: any) => void;
 //# sourceMappingURL=logg.d.ts.map

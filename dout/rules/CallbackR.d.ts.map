@@ -1,1 +1,1 @@
-{"version":3,"file":"CallbackR.d.ts","sourceRoot":"","sources":["../../src/rules/CallbackR.ts"],"names":[],"mappings":"AAAA;;;;;GAKG;AAEH,OAAO,EAAE,OAAO,EAAE,MAAM,sBAAsB,CAAC;AAE/C,oBAAY,SAAS,GAAG,CAAC,IAAI,EAAE,OAAO,KAAK,IAAI,CAAC"}
+{"version":3,"file":"CallbackR.d.ts","sourceRoot":"","sources":["../../src/rules/CallbackR.ts"],"names":[],"mappings":"AAAA;;;;;GAKG;AAEH,OAAO,EAAE,OAAO,EAAE,MAAM,sBAAsB,CAAC;AAE/C,MAAM,MAAM,SAAS,GAAG,CAAC,IAAI,EAAE,OAAO,KAAK,IAAI,CAAC"}

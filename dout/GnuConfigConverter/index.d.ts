@@ -4,5 +4,6 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-export {};
+import { logg } from "./logg";
+export { logg };
 //# sourceMappingURL=index.d.ts.map

@@ -41,8 +41,8 @@ export class ASTNodeFuncDecl extends ASTNode {
     visitor.visitAllPreBefore(this);
     visitor.visitASTNodeFuncDeclPre(this);
     visitor.visitAllPreAfter(this);
-    if (this.Name) {
-      this.Name.accept(visitor);
+    if (this.Body) {
+      this.Body.accept(visitor);
     }
     if (this.Body) {
       this.Body.accept(visitor);

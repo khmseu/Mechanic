@@ -35,7 +35,7 @@ export class ASTNodeCallExpr extends ASTNode {
     visitor.visitAllPreBefore(this);
     visitor.visitASTNodeCallExprPre(this);
     visitor.visitAllPreAfter(this);
-    this.Assigns.forEach((e) => e.accept(visitor));
+    this.Args.forEach((e) => e.accept(visitor));
     this.Args.forEach((e) => e.accept(visitor));
     visitor.visitAllPostBefore(this);
     visitor.visitASTNodeCallExprPost(this);

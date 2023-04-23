@@ -5,5 +5,5 @@
  * https://opensource.org/licenses/MIT
  */
 import { ITargetMatcher } from "./ITargetMatcher";
-export declare type TargetMatcherList = ITargetMatcher[];
+export type TargetMatcherList = ITargetMatcher[];
 //# sourceMappingURL=TargetMatcherList.d.ts.map

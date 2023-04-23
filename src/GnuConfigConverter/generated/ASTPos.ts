@@ -15,7 +15,7 @@ export class ASTPos {
   public IsValid: boolean | null; //     IsValid: (() => boolean) | null;
   public Line: number | null; //     Line: (() => number) | null;
   public Offset: number | null; //     Offset: (() => number) | null;
-  public ["String"]: string | null; //     ["String"]: (() => string) | null;
+  public String: string | null; //     String: (() => string) | null;
 
   constructor(pos: I_Pos) {
     logg("ASTPos");
@@ -23,7 +23,7 @@ export class ASTPos {
     this.IsValid = pos.IsValid ? ASTCall(pos.IsValid) : null;
     this.Line = pos.Line ? ASTCall(pos.Line) : null;
     this.Offset = pos.Offset ? ASTCall(pos.Offset) : null;
-    this.["String"] = pos.["String"] ? ASTCall(pos.["String"]) : null;
+    this.String = pos.String ? ASTCall(pos.String) : null;
     [].forEach((f) => {
       const desc: PropertyDescriptor = Object.getOwnPropertyDescriptor(this, f)!;
       desc.enumerable = false;

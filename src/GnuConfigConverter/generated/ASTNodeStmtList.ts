@@ -35,7 +35,7 @@ export class ASTNodeStmtList extends ASTNode {
     visitor.visitAllPreBefore(this);
     visitor.visitASTNodeStmtListPre(this);
     visitor.visitAllPreAfter(this);
-    this.Stmts.forEach((e) => e.accept(visitor));
+    this.Last.forEach((e) => e.accept(visitor));
     this.Last.forEach((e) => e.accept(visitor));
     visitor.visitAllPostBefore(this);
     visitor.visitASTNodeStmtListPost(this);

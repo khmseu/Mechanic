@@ -39,10 +39,10 @@ export class ASTNodeDeclClause extends ASTNode {
     visitor.visitAllPreBefore(this);
     visitor.visitASTNodeDeclClausePre(this);
     visitor.visitAllPreAfter(this);
-    if (this.Variant) {
-      this.Variant.accept(visitor);
+    if (this.Assigns) {
+      this.Assigns.accept(visitor);
     }
-    this.Opts.forEach((e) => e.accept(visitor));
+    this.Assigns.forEach((e) => e.accept(visitor));
     this.Assigns.forEach((e) => e.accept(visitor));
     visitor.visitAllPostBefore(this);
     visitor.visitASTNodeDeclClausePost(this);

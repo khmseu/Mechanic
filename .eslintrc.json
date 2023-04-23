@@ -98,7 +98,7 @@ Happy linting! 💖
       "any",
       "Number",
       "number",
-      "String",
+      // "String",
       "string",
       "Boolean",
       "boolean",

@@ -40,9 +40,9 @@ export class ASTNodeArrayElem extends ASTNode {
     visitor.visitAllPreBefore(this);
     visitor.visitASTNodeArrayElemPre(this);
     visitor.visitAllPreAfter(this);
-    this.Index.accept(visitor);
-    if (this.Value) {
-      this.Value.accept(visitor);
+    this.Comments.accept(visitor);
+    if (this.Comments) {
+      this.Comments.accept(visitor);
     }
     this.Comments.forEach((e) => e.accept(visitor));
     visitor.visitAllPostBefore(this);

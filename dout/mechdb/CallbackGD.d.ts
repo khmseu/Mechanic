@@ -4,7 +4,7 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-export declare type CallbackGD = (errt?: Error, data?: {
+export type CallbackGD = (errt?: Error, data?: {
     generation: number;
     status: any;
 }) => void;

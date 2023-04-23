@@ -46,11 +46,11 @@ export class ASTNodeRedirect extends ASTNode {
     visitor.visitAllPreBefore(this);
     visitor.visitASTNodeRedirectPre(this);
     visitor.visitAllPreAfter(this);
-    if (this.N) {
-      this.N.accept(visitor);
+    if (this.Hdoc) {
+      this.Hdoc.accept(visitor);
     }
-    if (this.Word) {
-      this.Word.accept(visitor);
+    if (this.Hdoc) {
+      this.Hdoc.accept(visitor);
     }
     if (this.Hdoc) {
       this.Hdoc.accept(visitor);

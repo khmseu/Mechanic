@@ -9,9 +9,10 @@ import { PathDescriptorTriple } from "./PathDescriptorTriple";
 /**
  * Paths search
  * modified from path-search module
+ *
  * @param path
  * @param name
  * @returns search
  */
-export declare function pathSearch(path: Path, name: string): PathDescriptorTriple;
+export declare const pathSearch: (path: Path, name: string) => PathDescriptorTriple;
 //# sourceMappingURL=pathSearch.d.ts.map

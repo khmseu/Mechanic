@@ -202,6 +202,11 @@
   resolved "https://registry.npmjs.org/@types/json-schema/-/json-schema-7.0.11.tgz"
   integrity sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==
 
+"@types/mvdan-sh@^0.10.0":
+  version "0.10.0"
+  resolved "https://registry.npmjs.org/@types/mvdan-sh/-/mvdan-sh-0.10.0.tgz"
+  integrity sha512-CJjmvfw82dE+Kt1eeCToWPJDbbj2jGDdg/x8/hQe9eGBhpPBstiXt71huYzIAnTApl8iP4bw4vUxc7C4jJGSWQ==
+
 "@types/node@*", "@types/node@^18.15.11":
   version "18.15.11"
   resolved "https://registry.npmjs.org/@types/node/-/node-18.15.11.tgz"

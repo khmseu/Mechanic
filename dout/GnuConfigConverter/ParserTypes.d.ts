@@ -23,7 +23,7 @@ export interface IArithmExp extends INode {
     Unsigned: boolean;
     X: IArithmExpr;
 }
-export declare type IArithmExpr = IBinaryArithm | IUnaryArithm | IParenArithm | IWord;
+export type IArithmExpr = IBinaryArithm | IUnaryArithm | IParenArithm | IWord;
 export interface IArrayElem extends INode {
     Index: IArithmExpr;
     Value: IWord | null;
@@ -106,7 +106,7 @@ export interface ICmdSubst extends INode {
     TempFile: boolean;
     ReplyVar: boolean;
 }
-export declare type ICommand = ICallExpr | IIfClause | IWhileClause | IForClause | ICaseClause | IBlock | ISubshell | IBinaryCmd | IFuncDecl | IArithmCmd | ITestClause | IDeclClause | ILetClause | ITimeClause | ICoprocClause;
+export type ICommand = ICallExpr | IIfClause | IWhileClause | IForClause | ICaseClause | IBlock | ISubshell | IBinaryCmd | IFuncDecl | IArithmCmd | ITestClause | IDeclClause | ILetClause | ITimeClause | ICoprocClause;
 export interface IComment extends INode {
     Hash: I_Pos;
     Text: string;
@@ -175,7 +175,7 @@ export interface ILit extends INode {
     ValueEnd: I_Pos;
     Value: string;
 }
-export declare type ILoop = IWordIter | ICStyleLoop;
+export type ILoop = IWordIter | ICStyleLoop;
 export interface INode extends Istruct {
     Pos: (() => I_Pos) | null;
     End: (() => I_Pos) | null;
@@ -266,7 +266,7 @@ export interface ITestClause extends INode {
     Right: I_Pos;
     X: ITestExpr;
 }
-export declare type ITestExpr = IBinaryTest | IUnaryTest | IParenTest | IWord;
+export type ITestExpr = IBinaryTest | IUnaryTest | IParenTest | IWord;
 export interface ITimeClause extends INode {
     Time: I_Pos;
     PosixFormat: boolean;
@@ -303,7 +303,7 @@ export interface IWordIter extends INode {
     InPos: I_Pos;
     Items: IWord[] | null;
 }
-export declare type IWordPart = ILit | ISglQuoted | IDblQuoted | IParamExp | ICmdSubst | IArithmExp | IProcSubst | IExtGlob | IBraceExp;
+export type IWordPart = ILit | ISglQuoted | IDblQuoted | IParamExp | ICmdSubst | IArithmExp | IProcSubst | IExtGlob | IBraceExp;
 export declare enum RedirOperator {
     RdrOut = 53,
     AppOut = 54,

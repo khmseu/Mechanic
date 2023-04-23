@@ -1,1 +1,1 @@
-{"version":3,"file":"CallbackST.d.ts","sourceRoot":"","sources":["../../src/mechdb/CallbackST.ts"],"names":[],"mappings":"AAAA;;;;;GAKG;AAEH,oBAAY,UAAU,GAAG,CAAC,IAAI,CAAC,EAAE,KAAK,EAAE,IAAI,CAAC,EAAE,IAAI,KAAK,IAAI,CAAC"}
+{"version":3,"file":"CallbackST.d.ts","sourceRoot":"","sources":["../../src/mechdb/CallbackST.ts"],"names":[],"mappings":"AAAA;;;;;GAKG;AAEH,MAAM,MAAM,UAAU,GAAG,CAAC,IAAI,CAAC,EAAE,KAAK,EAAE,IAAI,CAAC,EAAE,IAAI,KAAK,IAAI,CAAC"}

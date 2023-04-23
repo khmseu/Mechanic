@@ -1,44 +1,44 @@
-import { syntax } from "mvdan-sh";
+import sh from "mvdan-sh";
 import { comm, logg } from ".";
 // tslint:disable-next-line:max-line-length
-import {  do ArithmCmd ,  do ArithmExp ,  do ArrayElem ,  do ArrayExpr ,  do Assign ,  do BinaryArithm ,  do BinaryCmd ,  do BinaryTest ,  do Block ,  do BraceExp ,  do CallExpr ,  do CaseClause ,  do CaseItem ,  do CmdSubst ,  do Comment ,  do CoprocClause ,  do CStyleLoop ,  do DblQuoted ,  do DeclClause ,  do ExtGlob ,  do File ,  do ForClause ,  do FuncDecl ,  do IfClause ,  do LetClause ,  do Lit ,  do ParamExp ,  do ParenArithm ,  do ParenTest ,  do ProcSubst ,  do Redirect ,  do SglQuoted ,  do Stmt ,  do StmtList ,  do Subshell ,  do TestClause ,  do TimeClause ,  do UnaryArithm ,  do UnaryTest ,  do WhileClause ,  do Word ,  do WordIter  } from "./ParserDo";
+import { doArithmCmd, doArithmExp, doArrayElem, doArrayExpr, doAssign, doBinaryArithm, doBinaryCmd, doBinaryTest, doBlock, doBraceExp, doCallExpr, doCaseClause, doCaseItem, doCmdSubst, doComment, doCoprocClause, doCStyleLoop, doDblQuoted, doDeclClause, doExtGlob, doFile, doForClause, doFuncDecl, doIfClause, doLetClause, doLit, doParamExp, doParenArithm, doParenTest, doProcSubst, doRedirect, doSglQuoted, doStmt, doStmtList, doSubshell, doTestClause, doTimeClause, doUnaryArithm, doUnaryTest, doWhileClause, doWord, doWordIter } from "./ParserDo";
 // tslint:disable-next-line:max-line-length
 import { BinAritOperator, BinCmdOperator, BinTestOperator, CaseOperator, GlobOperator, I_Expansion, I_Pos, I_Replace, I_Slice, IArithmCmd, IArithmExp, IArithmExpr, IArrayElem, IArrayExpr, IAssign, IBinaryArithm, IBinaryCmd, IBinaryTest, IBlock, IBraceExp, ICallExpr, ICaseClause, ICaseItem, ICmdSubst, ICommand, IComment, ICoprocClause, ICStyleLoop, IDblQuoted, IDeclClause, IExtGlob, IFile, IForClause, IFuncDecl, IIfClause, ILetClause, ILit, ILoop, IParamExp, IParenArithm, IParenTest, IProcSubst, IRedirect, ISglQuoted, IStmt, IStmtList, ISubshell, ITestClause, ITestExpr, ITimeClause, IUnaryArithm, IUnaryTest, IWhileClause, IWord, IWordIter, IWordPart, ParNamesOperator, ProcOperator, RedirOperator, UnAritOperator, UnTestOperator } from "./ParserTypes";
+const syntax = sh.syntax;
 
 export function prepArithmCmd(arithmcmd: IArithmCmd | null): string[] {
-  logg(" prep ArithmCmd");
+  logg("prepArithmCmd");
   if (!arithmcmd) {
-    return [comm({ empty_arithmcmd: arithmcmd }, '{" empty_ arithmcmd":null}')];
+    return [comm({ empty_arithmcmd: arithmcmd }, '{"empty_arithmcmd":null}')];
   }
   const { Left, Right, Unsigned, X, ...rest_arithmcmd } = arithmcmd;
- const r Left = prep Pos (Left);
+ const rLeft = prepPos (Left);
      
-  const r Right = prep Pos (Right);
+  const rRight = prepPos (Right);
      
-  const r Unsigned = prep boolean (Unsigned);
+  const rUnsigned = prepboolean (Unsigned);
      
-  const r X = prep ArithmExpr (X);
+  const rX = prepArithmExpr (X);
     
-  return [...doArithmCmd(rLeft, rRight, rUnsigned, rX), comm({ rest_arithmcmd }, '{" rest_ arithmcmd":{}}')];
+  return [...doArithmCmd(rLeft, rRight, rUnsigned, rX), comm({ rest_arithmcmd }, '{"rest_arithmcmd":{}}')];
 }
 export function prepArithmExp(arithmexp: IArithmExp | null): string[] {
-  logg(" prep ArithmExp");
+  logg("prepArithmExp");
   if (!arithmexp) {
-    return [comm({ empty_arithmexp: arithmexp }, '{" empty_ arithmexp":null}')];
+    return [comm({ empty_arithmexp: arithmexp }, '{"empty_arithmexp":null}')];
   }
   const { Left, Right, Bracket, Unsigned, X, ...rest_arithmexp } = arithmexp;
- const r Left = prep Pos (Left);
+ const rLeft = prepPos (Left);
      
-  const r Right = prep Pos (Right);
+  const rRight = prepPos (Right);
      
-  const r Bracket = prep boolean (Bracket);
+  const rBracket = prepboolean (Bracket);
      
-  const r Unsigned = prep boolean (Unsigned);
+  const rUnsigned = prepboolean (Unsigned);
      
-  const r X = prep ArithmExpr (X);
+  const rX = prepArithmExpr (X);
     
-  // tslint:disable-next-line:max-line-length
-  return [...doArithmExp(rLeft, rRight, rBracket, rUnsigned, rX), comm({ rest_arithmexp }, '{" rest_ arithmexp":{}}')];
+  return [...doArithmExp(rLeft, rRight, rBracket, rUnsigned, rX), comm({ rest_arithmexp }, '{"rest_arithmexp":{}}')];
 }
 export function prepArithmExpr(arithmexpr: IArithmExpr | null): string[] {
   logg("prepArithmExpr");
@@ -59,223 +59,223 @@ export function prepArithmExpr(arithmexpr: IArithmExpr | null): string[] {
   }
 }
 export function prepArrayElem(arrayelem: IArrayElem | null): string[] {
-  logg(" prep ArrayElem");
+  logg("prepArrayElem");
   if (!arrayelem) {
-    return [comm({ empty_arrayelem: arrayelem }, '{" empty_ arrayelem":null}')];
+    return [comm({ empty_arrayelem: arrayelem }, '{"empty_arrayelem":null}')];
   }
   const { Index, Value, Comments, ...rest_arrayelem } = arrayelem;
- const r Index = prep ArithmExpr (Index);
+ const rIndex = prepArithmExpr (Index);
      
-  const r Value = prep Word (Value);
+  const rValue = prepWord (Value);
      
-  const r Comments = prep Comments (Comments);
+  const rComments = prepComments (Comments);
     
-  return [...doArrayElem(rIndex, rValue, rComments), comm({ rest_arrayelem }, '{" rest_ arrayelem":{}}')];
+  return [...doArrayElem(rIndex, rValue, rComments), comm({ rest_arrayelem }, '{"rest_arrayelem":{}}')];
 }
 export function prepArrayExpr(arrayexpr: IArrayExpr | null): string[] {
-  logg(" prep ArrayExpr");
+  logg("prepArrayExpr");
   if (!arrayexpr) {
-    return [comm({ empty_arrayexpr: arrayexpr }, '{" empty_ arrayexpr":null}')];
+    return [comm({ empty_arrayexpr: arrayexpr }, '{"empty_arrayexpr":null}')];
   }
   const { Lparen, Rparen, Elems, Last, ...rest_arrayexpr } = arrayexpr;
- const r Lparen = prep Pos (Lparen);
+ const rLparen = prepPos (Lparen);
      
-  const r Rparen = prep Pos (Rparen);
+  const rRparen = prepPos (Rparen);
      
-  const r Elems = prep ArrayElems (Elems);
+  const rElems = prepArrayElems (Elems);
      
-  const r Last = prep Comments (Last);
+  const rLast = prepComments (Last);
     
-  return [...doArrayExpr(rLparen, rRparen, rElems, rLast), comm({ rest_arrayexpr }, '{" rest_ arrayexpr":{}}')];
+  return [...doArrayExpr(rLparen, rRparen, rElems, rLast), comm({ rest_arrayexpr }, '{"rest_arrayexpr":{}}')];
 }
 export function prepAssign(assign: IAssign | null): string[] {
-  logg(" prep Assign");
+  logg("prepAssign");
   if (!assign) {
-    return [comm({ empty_assign: assign }, '{" empty_ assign":null}')];
+    return [comm({ empty_assign: assign }, '{"empty_assign":null}')];
   }
   const { Append, Naked, Name, Index, Value, Array, ...rest_assign } = assign;
- const r Append = prep boolean (Append);
+ const rAppend = prepboolean (Append);
      
-  const r Naked = prep boolean (Naked);
+  const rNaked = prepboolean (Naked);
      
-  const r Name = prep Lit (Name);
+  const rName = prepLit (Name);
      
-  const r Index = prep ArithmExpr (Index);
+  const rIndex = prepArithmExpr (Index);
      
-  const r Value = prep Word (Value);
+  const rValue = prepWord (Value);
      
-  const r Array = prep ArrayExpr (Array);
+  const rArray = prepArrayExpr (Array);
     
-  return [...doAssign(rAppend, rNaked, rName, rIndex, rValue, rArray), comm({ rest_assign }, '{" rest_ assign":{}}')];
+  return [...doAssign(rAppend, rNaked, rName, rIndex, rValue, rArray), comm({ rest_assign }, '{"rest_assign":{}}')];
 }
 export function prepBinaryArithm(binaryarithm: IBinaryArithm | null): string[] {
-  logg(" prep BinaryArithm");
+  logg("prepBinaryArithm");
   if (!binaryarithm) {
-    return [comm({ empty_binaryarithm: binaryarithm }, '{" empty_ binaryarithm":null}')];
+    return [comm({ empty_binaryarithm: binaryarithm }, '{"empty_binaryarithm":null}')];
   }
   const { OpPos, Op, X, Y, ...rest_binaryarithm } = binaryarithm;
- const r OpPos = prep Pos (OpPos);
+ const rOpPos = prepPos (OpPos);
      
-  const r Op = prep BinAritOperator (Op);
+  const rOp = prepBinAritOperator (Op);
      
-  const r X = prep ArithmExpr (X);
+  const rX = prepArithmExpr (X);
      
-  const r Y = prep ArithmExpr (Y);
+  const rY = prepArithmExpr (Y);
     
-  return [...doBinaryArithm(rOpPos, rOp, rX, rY), comm({ rest_binaryarithm }, '{" rest_ binaryarithm":{}}')];
+  return [...doBinaryArithm(rOpPos, rOp, rX, rY), comm({ rest_binaryarithm }, '{"rest_binaryarithm":{}}')];
 }
 export function prepBinaryCmd(binarycmd: IBinaryCmd | null): string[] {
-  logg(" prep BinaryCmd");
+  logg("prepBinaryCmd");
   if (!binarycmd) {
-    return [comm({ empty_binarycmd: binarycmd }, '{" empty_ binarycmd":null}')];
+    return [comm({ empty_binarycmd: binarycmd }, '{"empty_binarycmd":null}')];
   }
   const { OpPos, Op, X, Y, ...rest_binarycmd } = binarycmd;
- const r OpPos = prep Pos (OpPos);
+ const rOpPos = prepPos (OpPos);
      
-  const r Op = prep BinCmdOperator (Op);
+  const rOp = prepBinCmdOperator (Op);
      
-  const r X = prep Stmt (X);
+  const rX = prepStmt (X);
      
-  const r Y = prep Stmt (Y);
+  const rY = prepStmt (Y);
     
-  return [...doBinaryCmd(rOpPos, rOp, rX, rY), comm({ rest_binarycmd }, '{" rest_ binarycmd":{}}')];
+  return [...doBinaryCmd(rOpPos, rOp, rX, rY), comm({ rest_binarycmd }, '{"rest_binarycmd":{}}')];
 }
 export function prepBinaryTest(binarytest: IBinaryTest | null): string[] {
-  logg(" prep BinaryTest");
+  logg("prepBinaryTest");
   if (!binarytest) {
-    return [comm({ empty_binarytest: binarytest }, '{" empty_ binarytest":null}')];
+    return [comm({ empty_binarytest: binarytest }, '{"empty_binarytest":null}')];
   }
   const { OpPos, Op, X, Y, ...rest_binarytest } = binarytest;
- const r OpPos = prep Pos (OpPos);
+ const rOpPos = prepPos (OpPos);
      
-  const r Op = prep BinTestOperator (Op);
+  const rOp = prepBinTestOperator (Op);
      
-  const r X = prep TestExpr (X);
+  const rX = prepTestExpr (X);
      
-  const r Y = prep TestExpr (Y);
+  const rY = prepTestExpr (Y);
     
-  return [...doBinaryTest(rOpPos, rOp, rX, rY), comm({ rest_binarytest }, '{" rest_ binarytest":{}}')];
+  return [...doBinaryTest(rOpPos, rOp, rX, rY), comm({ rest_binarytest }, '{"rest_binarytest":{}}')];
 }
 export function prepBlock(block: IBlock | null): string[] {
-  logg(" prep Block");
+  logg("prepBlock");
   if (!block) {
-    return [comm({ empty_block: block }, '{" empty_ block":null}')];
+    return [comm({ empty_block: block }, '{"empty_block":null}')];
   }
   const { Lbrace, Rbrace, StmtList, Last, ...rest_block } = block;
- const r Lbrace = prep Pos (Lbrace);
+ const rLbrace = prepPos (Lbrace);
      
-  const r Rbrace = prep Pos (Rbrace);
+  const rRbrace = prepPos (Rbrace);
      
-  const r StmtList = prep StmtList (StmtList);
+  const rStmtList = prepStmtList (StmtList);
      
-  const r Last = prep Comments (Last);
+  const rLast = prepComments (Last);
     
-  return [...doBlock(rLbrace, rRbrace, rStmtList, rLast), comm({ rest_block }, '{" rest_ block":{}}')];
+  return [...doBlock(rLbrace, rRbrace, rStmtList, rLast), comm({ rest_block }, '{"rest_block":{}}')];
 }
 export function prepBraceExp(braceexp: IBraceExp | null): string[] {
-  logg(" prep BraceExp");
+  logg("prepBraceExp");
   if (!braceexp) {
-    return [comm({ empty_braceexp: braceexp }, '{" empty_ braceexp":null}')];
+    return [comm({ empty_braceexp: braceexp }, '{"empty_braceexp":null}')];
   }
   const { Sequence, Chars, Elems, ...rest_braceexp } = braceexp;
- const r Sequence = prep boolean (Sequence);
+ const rSequence = prepboolean (Sequence);
      
-  const r Chars = prep boolean (Chars);
+  const rChars = prepboolean (Chars);
      
-  const r Elems = prep Words (Elems);
+  const rElems = prepWords (Elems);
     
-  return [...doBraceExp(rSequence, rChars, rElems), comm({ rest_braceexp }, '{" rest_ braceexp":{}}')];
+  return [...doBraceExp(rSequence, rChars, rElems), comm({ rest_braceexp }, '{"rest_braceexp":{}}')];
 }
 export function prepCStyleLoop(cstyleloop: ICStyleLoop | null): string[] {
-  logg(" prep CStyleLoop");
+  logg("prepCStyleLoop");
   if (!cstyleloop) {
-    return [comm({ empty_cstyleloop: cstyleloop }, '{" empty_ cstyleloop":null}')];
+    return [comm({ empty_cstyleloop: cstyleloop }, '{"empty_cstyleloop":null}')];
   }
   const { Lparen, Rparen, Init, Cond, Post, ...rest_cstyleloop } = cstyleloop;
- const r Lparen = prep Pos (Lparen);
+ const rLparen = prepPos (Lparen);
      
-  const r Rparen = prep Pos (Rparen);
+  const rRparen = prepPos (Rparen);
      
-  const r Init = prep ArithmExpr (Init);
+  const rInit = prepArithmExpr (Init);
      
-  const r Cond = prep ArithmExpr (Cond);
+  const rCond = prepArithmExpr (Cond);
      
-  const r Post = prep ArithmExpr (Post);
+  const rPost = prepArithmExpr (Post);
     
   // tslint:disable-next-line:max-line-length
-  return [...doCStyleLoop(rLparen, rRparen, rInit, rCond, rPost), comm({ rest_cstyleloop }, '{" rest_ cstyleloop":{}}')];
+  return [...doCStyleLoop(rLparen, rRparen, rInit, rCond, rPost), comm({ rest_cstyleloop }, '{"rest_cstyleloop":{}}')];
 }
 export function prepCallExpr(callexpr: ICallExpr | null): string[] {
-  logg(" prep CallExpr");
+  logg("prepCallExpr");
   if (!callexpr) {
-    return [comm({ empty_callexpr: callexpr }, '{" empty_ callexpr":null}')];
+    return [comm({ empty_callexpr: callexpr }, '{"empty_callexpr":null}')];
   }
   const { Assigns, Args, ...rest_callexpr } = callexpr;
- const r Assigns = prep Assigns (Assigns);
+ const rAssigns = prepAssigns (Assigns);
      
-  const r Args = prep Words (Args);
+  const rArgs = prepWords (Args);
     
-  return [...doCallExpr(rAssigns, rArgs), comm({ rest_callexpr }, '{" rest_ callexpr":{}}')];
+  return [...doCallExpr(rAssigns, rArgs), comm({ rest_callexpr }, '{"rest_callexpr":{}}')];
 }
 export function prepCaseClause(caseclause: ICaseClause | null): string[] {
-  logg(" prep CaseClause");
+  logg("prepCaseClause");
   if (!caseclause) {
-    return [comm({ empty_caseclause: caseclause }, '{" empty_ caseclause":null}')];
+    return [comm({ empty_caseclause: caseclause }, '{"empty_caseclause":null}')];
   }
   const { Case, Esac, Word, Items, Last, ...rest_caseclause } = caseclause;
- const r Case = prep Pos (Case);
+ const rCase = prepPos (Case);
      
-  const r Esac = prep Pos (Esac);
+  const rEsac = prepPos (Esac);
      
-  const r Word = prep Word (Word);
+  const rWord = prepWord (Word);
      
-  const r Items = prep CaseItems (Items);
+  const rItems = prepCaseItems (Items);
      
-  const r Last = prep Comments (Last);
+  const rLast = prepComments (Last);
     
-  return [...doCaseClause(rCase, rEsac, rWord, rItems, rLast), comm({ rest_caseclause }, '{" rest_ caseclause":{}}')];
+  return [...doCaseClause(rCase, rEsac, rWord, rItems, rLast), comm({ rest_caseclause }, '{"rest_caseclause":{}}')];
 }
 export function prepCaseItem(caseitem: ICaseItem | null): string[] {
-  logg(" prep CaseItem");
+  logg("prepCaseItem");
   if (!caseitem) {
-    return [comm({ empty_caseitem: caseitem }, '{" empty_ caseitem":null}')];
+    return [comm({ empty_caseitem: caseitem }, '{"empty_caseitem":null}')];
   }
   const { Op, OpPos, Comments, Patterns, StmtList, Last, ...rest_caseitem } = caseitem;
- const r Op = prep CaseOperator (Op);
+ const rOp = prepCaseOperator (Op);
      
-  const r OpPos = prep Pos (OpPos);
+  const rOpPos = prepPos (OpPos);
      
-  const r Comments = prep Comments (Comments);
+  const rComments = prepComments (Comments);
      
-  const r Patterns = prep Words (Patterns);
+  const rPatterns = prepWords (Patterns);
      
-  const r StmtList = prep StmtList (StmtList);
+  const rStmtList = prepStmtList (StmtList);
      
-  const r Last = prep Comments (Last);
+  const rLast = prepComments (Last);
     
   // tslint:disable-next-line:max-line-length
-  return [...doCaseItem(rOp, rOpPos, rComments, rPatterns, rStmtList, rLast), comm({ rest_caseitem }, '{" rest_ caseitem":{}}')];
+  return [...doCaseItem(rOp, rOpPos, rComments, rPatterns, rStmtList, rLast), comm({ rest_caseitem }, '{"rest_caseitem":{}}')];
 }
 export function prepCmdSubst(cmdsubst: ICmdSubst | null): string[] {
-  logg(" prep CmdSubst");
+  logg("prepCmdSubst");
   if (!cmdsubst) {
-    return [comm({ empty_cmdsubst: cmdsubst }, '{" empty_ cmdsubst":null}')];
+    return [comm({ empty_cmdsubst: cmdsubst }, '{"empty_cmdsubst":null}')];
   }
   const { Left, Right, StmtList, Last, TempFile, ReplyVar, ...rest_cmdsubst } = cmdsubst;
- const r Left = prep Pos (Left);
+ const rLeft = prepPos (Left);
      
-  const r Right = prep Pos (Right);
+  const rRight = prepPos (Right);
      
-  const r StmtList = prep StmtList (StmtList);
+  const rStmtList = prepStmtList (StmtList);
      
-  const r Last = prep Comments (Last);
+  const rLast = prepComments (Last);
      
-  const r TempFile = prep boolean (TempFile);
+  const rTempFile = prepboolean (TempFile);
      
-  const r ReplyVar = prep boolean (ReplyVar);
+  const rReplyVar = prepboolean (ReplyVar);
     
   // tslint:disable-next-line:max-line-length
-  return [...doCmdSubst(rLeft, rRight, rStmtList, rLast, rTempFile, rReplyVar), comm({ rest_cmdsubst }, '{" rest_ cmdsubst":{}}')];
+  return [...doCmdSubst(rLeft, rRight, rStmtList, rLast, rTempFile, rReplyVar), comm({ rest_cmdsubst }, '{"rest_cmdsubst":{}}')];
 }
 export function prepCommand(command: ICommand | null): string[] {
   logg("prepCommand");
@@ -318,178 +318,178 @@ export function prepCommand(command: ICommand | null): string[] {
   }
 }
 export function prepComment(comment: IComment | null): string[] {
-  logg(" prep Comment");
+  logg("prepComment");
   if (!comment) {
-    return [comm({ empty_comment: comment }, '{" empty_ comment":null}')];
+    return [comm({ empty_comment: comment }, '{"empty_comment":null}')];
   }
   const { Hash, Text, ...rest_comment } = comment;
- const r Hash = prep Pos (Hash);
+ const rHash = prepPos (Hash);
      
-  const r Text = prep string (Text);
+  const rText = prepstring (Text);
     
-  return [...doComment(rHash, rText), comm({ rest_comment }, '{" rest_ comment":{}}')];
+  return [...doComment(rHash, rText), comm({ rest_comment }, '{"rest_comment":{}}')];
 }
 export function prepCoprocClause(coprocclause: ICoprocClause | null): string[] {
-  logg(" prep CoprocClause");
+  logg("prepCoprocClause");
   if (!coprocclause) {
-    return [comm({ empty_coprocclause: coprocclause }, '{" empty_ coprocclause":null}')];
+    return [comm({ empty_coprocclause: coprocclause }, '{"empty_coprocclause":null}')];
   }
   const { Coproc, Name, Stmt, ...rest_coprocclause } = coprocclause;
- const r Coproc = prep Pos (Coproc);
+ const rCoproc = prepPos (Coproc);
      
-  const r Name = prep Word (Name);
+  const rName = prepWord (Name);
      
-  const r Stmt = prep Stmt (Stmt);
+  const rStmt = prepStmt (Stmt);
     
-  return [...doCoprocClause(rCoproc, rName, rStmt), comm({ rest_coprocclause }, '{" rest_ coprocclause":{}}')];
+  return [...doCoprocClause(rCoproc, rName, rStmt), comm({ rest_coprocclause }, '{"rest_coprocclause":{}}')];
 }
 export function prepDblQuoted(dblquoted: IDblQuoted | null): string[] {
-  logg(" prep DblQuoted");
+  logg("prepDblQuoted");
   if (!dblquoted) {
-    return [comm({ empty_dblquoted: dblquoted }, '{" empty_ dblquoted":null}')];
+    return [comm({ empty_dblquoted: dblquoted }, '{"empty_dblquoted":null}')];
   }
   const { Position, Dollar, Parts, ...rest_dblquoted } = dblquoted;
- const r Position = prep Pos (Position);
+ const rPosition = prepPos (Position);
      
-  const r Dollar = prep boolean (Dollar);
+  const rDollar = prepboolean (Dollar);
      
-  const r Parts = prep WordParts (Parts);
+  const rParts = prepWordParts (Parts);
     
-  return [...doDblQuoted(rPosition, rDollar, rParts), comm({ rest_dblquoted }, '{" rest_ dblquoted":{}}')];
+  return [...doDblQuoted(rPosition, rDollar, rParts), comm({ rest_dblquoted }, '{"rest_dblquoted":{}}')];
 }
 export function prepDeclClause(declclause: IDeclClause | null): string[] {
-  logg(" prep DeclClause");
+  logg("prepDeclClause");
   if (!declclause) {
-    return [comm({ empty_declclause: declclause }, '{" empty_ declclause":null}')];
+    return [comm({ empty_declclause: declclause }, '{"empty_declclause":null}')];
   }
   const { Variant, Opts, Assigns, ...rest_declclause } = declclause;
- const r Variant = prep Lit (Variant);
+ const rVariant = prepLit (Variant);
      
-  const r Opts = prep Words (Opts);
+  const rOpts = prepWords (Opts);
      
-  const r Assigns = prep Assigns (Assigns);
+  const rAssigns = prepAssigns (Assigns);
     
-  return [...doDeclClause(rVariant, rOpts, rAssigns), comm({ rest_declclause }, '{" rest_ declclause":{}}')];
+  return [...doDeclClause(rVariant, rOpts, rAssigns), comm({ rest_declclause }, '{"rest_declclause":{}}')];
 }
 export function prepExtGlob(extglob: IExtGlob | null): string[] {
-  logg(" prep ExtGlob");
+  logg("prepExtGlob");
   if (!extglob) {
-    return [comm({ empty_extglob: extglob }, '{" empty_ extglob":null}')];
+    return [comm({ empty_extglob: extglob }, '{"empty_extglob":null}')];
   }
   const { OpPos, Op, Pattern, ...rest_extglob } = extglob;
- const r OpPos = prep Pos (OpPos);
+ const rOpPos = prepPos (OpPos);
      
-  const r Op = prep GlobOperator (Op);
+  const rOp = prepGlobOperator (Op);
      
-  const r Pattern = prep Lit (Pattern);
+  const rPattern = prepLit (Pattern);
     
-  return [...doExtGlob(rOpPos, rOp, rPattern), comm({ rest_extglob }, '{" rest_ extglob":{}}')];
+  return [...doExtGlob(rOpPos, rOp, rPattern), comm({ rest_extglob }, '{"rest_extglob":{}}')];
 }
 export function prepFile(file: IFile | null): string[] {
-  logg(" prep File");
+  logg("prepFile");
   if (!file) {
-    return [comm({ empty_file: file }, '{" empty_ file":null}')];
+    return [comm({ empty_file: file }, '{"empty_file":null}')];
   }
   const { Name, StmtList, Last, ...rest_file } = file;
- const r Name = prep string (Name);
+ const rName = prepstring (Name);
      
-  const r StmtList = prep StmtList (StmtList);
+  const rStmtList = prepStmtList (StmtList);
      
-  const r Last = prep Comments (Last);
+  const rLast = prepComments (Last);
     
-  return [...doFile(rName, rStmtList, rLast), comm({ rest_file }, '{" rest_ file":{}}')];
+  return [...doFile(rName, rStmtList, rLast), comm({ rest_file }, '{"rest_file":{}}')];
 }
 export function prepForClause(forclause: IForClause | null): string[] {
-  logg(" prep ForClause");
+  logg("prepForClause");
   if (!forclause) {
-    return [comm({ empty_forclause: forclause }, '{" empty_ forclause":null}')];
+    return [comm({ empty_forclause: forclause }, '{"empty_forclause":null}')];
   }
   const { ForPos, DoPos, DonePos, Select, Loop, Do, DoLast, ...rest_forclause } = forclause;
- const r ForPos = prep Pos (ForPos);
+ const rForPos = prepPos (ForPos);
      
-  const r DoPos = prep Pos (DoPos);
+  const rDoPos = prepPos (DoPos);
      
-  const r DonePos = prep Pos (DonePos);
+  const rDonePos = prepPos (DonePos);
      
-  const r Select = prep boolean (Select);
+  const rSelect = prepboolean (Select);
      
-  const r Loop = prep Loop (Loop);
+  const rLoop = prepLoop (Loop);
      
-  const r Do = prep StmtList (Do);
+  const rDo = prepStmtList (Do);
      
-  const r DoLast = prep Comments (DoLast);
+  const rDoLast = prepComments (DoLast);
     
   // tslint:disable-next-line:max-line-length
-  return [...doForClause(rForPos, rDoPos, rDonePos, rSelect, rLoop, rDo, rDoLast), comm({ rest_forclause }, '{" rest_ forclause":{}}')];
+  return [...doForClause(rForPos, rDoPos, rDonePos, rSelect, rLoop, rDo, rDoLast), comm({ rest_forclause }, '{"rest_forclause":{}}')];
 }
 export function prepFuncDecl(funcdecl: IFuncDecl | null): string[] {
-  logg(" prep FuncDecl");
+  logg("prepFuncDecl");
   if (!funcdecl) {
-    return [comm({ empty_funcdecl: funcdecl }, '{" empty_ funcdecl":null}')];
+    return [comm({ empty_funcdecl: funcdecl }, '{"empty_funcdecl":null}')];
   }
   const { Position, RsrvWord, Name, Body, ...rest_funcdecl } = funcdecl;
- const r Position = prep Pos (Position);
+ const rPosition = prepPos (Position);
      
-  const r RsrvWord = prep boolean (RsrvWord);
+  const rRsrvWord = prepboolean (RsrvWord);
      
-  const r Name = prep Lit (Name);
+  const rName = prepLit (Name);
      
-  const r Body = prep Stmt (Body);
+  const rBody = prepStmt (Body);
     
-  return [...doFuncDecl(rPosition, rRsrvWord, rName, rBody), comm({ rest_funcdecl }, '{" rest_ funcdecl":{}}')];
+  return [...doFuncDecl(rPosition, rRsrvWord, rName, rBody), comm({ rest_funcdecl }, '{"rest_funcdecl":{}}')];
 }
 export function prepIfClause(ifclause: IIfClause | null): string[] {
-  logg(" prep IfClause");
+  logg("prepIfClause");
   if (!ifclause) {
-    return [comm({ empty_ifclause: ifclause }, '{" empty_ ifclause":null}')];
+    return [comm({ empty_ifclause: ifclause }, '{"empty_ifclause":null}')];
   }
   const { Position, ThenPos, FiPos, Cond, CondLast, Then, ThenLast, Else, Last, ...rest_ifclause } = ifclause;
- const r Position = prep Pos (Position);
+ const rPosition = prepPos (Position);
      
-  const r ThenPos = prep Pos (ThenPos);
+  const rThenPos = prepPos (ThenPos);
      
-  const r FiPos = prep Pos (FiPos);
+  const rFiPos = prepPos (FiPos);
      
-  const r Cond = prep StmtList (Cond);
+  const rCond = prepStmtList (Cond);
      
-  const r CondLast = prep Comments (CondLast);
+  const rCondLast = prepComments (CondLast);
      
-  const r Then = prep StmtList (Then);
+  const rThen = prepStmtList (Then);
      
-  const r ThenLast = prep Comments (ThenLast);
+  const rThenLast = prepComments (ThenLast);
      
-  const r Else = prep IfClause (Else);
+  const rElse = prepIfClause (Else);
      
-  const r Last = prep Comments (Last);
+  const rLast = prepComments (Last);
     
   // tslint:disable-next-line:max-line-length
-  return [...doIfClause(rPosition, rThenPos, rFiPos, rCond, rCondLast, rThen, rThenLast, rElse, rLast), comm({ rest_ifclause }, '{" rest_ ifclause":{}}')];
+  return [...doIfClause(rPosition, rThenPos, rFiPos, rCond, rCondLast, rThen, rThenLast, rElse, rLast), comm({ rest_ifclause }, '{"rest_ifclause":{}}')];
 }
 export function prepLetClause(letclause: ILetClause | null): string[] {
-  logg(" prep LetClause");
+  logg("prepLetClause");
   if (!letclause) {
-    return [comm({ empty_letclause: letclause }, '{" empty_ letclause":null}')];
+    return [comm({ empty_letclause: letclause }, '{"empty_letclause":null}')];
   }
   const { Let, Exprs, ...rest_letclause } = letclause;
- const r Let = prep Pos (Let);
+ const rLet = prepPos (Let);
      
-  const r Exprs = prep ArithmExprs (Exprs);
+  const rExprs = prepArithmExprs (Exprs);
     
-  return [...doLetClause(rLet, rExprs), comm({ rest_letclause }, '{" rest_ letclause":{}}')];
+  return [...doLetClause(rLet, rExprs), comm({ rest_letclause }, '{"rest_letclause":{}}')];
 }
 export function prepLit(lit: ILit | null): string[] {
-  logg(" prep Lit");
+  logg("prepLit");
   if (!lit) {
-    return [comm({ empty_lit: lit }, '{" empty_ lit":null}')];
+    return [comm({ empty_lit: lit }, '{"empty_lit":null}')];
   }
   const { ValuePos, ValueEnd, Value, ...rest_lit } = lit;
- const r ValuePos = prep Pos (ValuePos);
+ const rValuePos = prepPos (ValuePos);
      
-  const r ValueEnd = prep Pos (ValueEnd);
+  const rValueEnd = prepPos (ValueEnd);
      
-  const r Value = prep string (Value);
+  const rValue = prepstring (Value);
     
-  return [...doLit(rValuePos, rValueEnd, rValue), comm({ rest_lit }, '{" rest_ lit":{}}')];
+  return [...doLit(rValuePos, rValueEnd, rValue), comm({ rest_lit }, '{"rest_lit":{}}')];
 }
 export function prepLoop(loop: ILoop | null): string[] {
   logg("prepLoop");
@@ -506,185 +506,185 @@ export function prepLoop(loop: ILoop | null): string[] {
   }
 }
 export function prepParamExp(paramexp: IParamExp | null): string[] {
-  logg(" prep ParamExp");
+  logg("prepParamExp");
   if (!paramexp) {
-    return [comm({ empty_paramexp: paramexp }, '{" empty_ paramexp":null}')];
+    return [comm({ empty_paramexp: paramexp }, '{"empty_paramexp":null}')];
   }
   // tslint:disable-next-line:max-line-length
   const { Dollar, Rbrace, Short, Excl, Length, Width, Param, Index, Slice, Repl, Names, Exp, ...rest_paramexp } = paramexp;
- const r Dollar = prep Pos (Dollar);
+ const rDollar = prepPos (Dollar);
      
-  const r Rbrace = prep Pos (Rbrace);
+  const rRbrace = prepPos (Rbrace);
      
-  const r Short = prep boolean (Short);
+  const rShort = prepboolean (Short);
      
-  const r Excl = prep boolean (Excl);
+  const rExcl = prepboolean (Excl);
      
-  const r Length = prep boolean (Length);
+  const rLength = prepboolean (Length);
      
-  const r Width = prep boolean (Width);
+  const rWidth = prepboolean (Width);
      
-  const r Param = prep Lit (Param);
+  const rParam = prepLit (Param);
      
-  const r Index = prep ArithmExpr (Index);
+  const rIndex = prepArithmExpr (Index);
      
-  const r Slice = prep Slice (Slice);
+  const rSlice = prepSlice (Slice);
      
-  const r Repl = prep Replace (Repl);
+  const rRepl = prepReplace (Repl);
      
-  const r Names = prep ParNamesOperator (Names);
+  const rNames = prepParNamesOperator (Names);
      
-  const r Exp = prep Expansion (Exp);
+  const rExp = prepExpansion (Exp);
     
   // tslint:disable-next-line:max-line-length
-  return [...doParamExp(rDollar, rRbrace, rShort, rExcl, rLength, rWidth, rParam, rIndex, rSlice, rRepl, rNames, rExp), comm({ rest_paramexp }, '{" rest_ paramexp":{}}')];
+  return [...doParamExp(rDollar, rRbrace, rShort, rExcl, rLength, rWidth, rParam, rIndex, rSlice, rRepl, rNames, rExp), comm({ rest_paramexp }, '{"rest_paramexp":{}}')];
 }
 export function prepParenArithm(parenarithm: IParenArithm | null): string[] {
-  logg(" prep ParenArithm");
+  logg("prepParenArithm");
   if (!parenarithm) {
-    return [comm({ empty_parenarithm: parenarithm }, '{" empty_ parenarithm":null}')];
+    return [comm({ empty_parenarithm: parenarithm }, '{"empty_parenarithm":null}')];
   }
   const { Lparen, Rparen, X, ...rest_parenarithm } = parenarithm;
- const r Lparen = prep Pos (Lparen);
+ const rLparen = prepPos (Lparen);
      
-  const r Rparen = prep Pos (Rparen);
+  const rRparen = prepPos (Rparen);
      
-  const r X = prep ArithmExpr (X);
+  const rX = prepArithmExpr (X);
     
-  return [...doParenArithm(rLparen, rRparen, rX), comm({ rest_parenarithm }, '{" rest_ parenarithm":{}}')];
+  return [...doParenArithm(rLparen, rRparen, rX), comm({ rest_parenarithm }, '{"rest_parenarithm":{}}')];
 }
 export function prepParenTest(parentest: IParenTest | null): string[] {
-  logg(" prep ParenTest");
+  logg("prepParenTest");
   if (!parentest) {
-    return [comm({ empty_parentest: parentest }, '{" empty_ parentest":null}')];
+    return [comm({ empty_parentest: parentest }, '{"empty_parentest":null}')];
   }
   const { Lparen, Rparen, X, ...rest_parentest } = parentest;
- const r Lparen = prep Pos (Lparen);
+ const rLparen = prepPos (Lparen);
      
-  const r Rparen = prep Pos (Rparen);
+  const rRparen = prepPos (Rparen);
      
-  const r X = prep TestExpr (X);
+  const rX = prepTestExpr (X);
     
-  return [...doParenTest(rLparen, rRparen, rX), comm({ rest_parentest }, '{" rest_ parentest":{}}')];
+  return [...doParenTest(rLparen, rRparen, rX), comm({ rest_parentest }, '{"rest_parentest":{}}')];
 }
 export function prepProcSubst(procsubst: IProcSubst | null): string[] {
-  logg(" prep ProcSubst");
+  logg("prepProcSubst");
   if (!procsubst) {
-    return [comm({ empty_procsubst: procsubst }, '{" empty_ procsubst":null}')];
+    return [comm({ empty_procsubst: procsubst }, '{"empty_procsubst":null}')];
   }
   const { OpPos, Rparen, Op, Stmts, Last, ...rest_procsubst } = procsubst;
- const r OpPos = prep Pos (OpPos);
+ const rOpPos = prepPos (OpPos);
      
-  const r Rparen = prep Pos (Rparen);
+  const rRparen = prepPos (Rparen);
      
-  const r Op = prep ProcOperator (Op);
+  const rOp = prepProcOperator (Op);
      
-  const r Stmts = prep Stmts (Stmts);
+  const rStmts = prepStmts (Stmts);
      
-  const r Last = prep Comments (Last);
+  const rLast = prepComments (Last);
     
-  return [...doProcSubst(rOpPos, rRparen, rOp, rStmts, rLast), comm({ rest_procsubst }, '{" rest_ procsubst":{}}')];
+  return [...doProcSubst(rOpPos, rRparen, rOp, rStmts, rLast), comm({ rest_procsubst }, '{"rest_procsubst":{}}')];
 }
 export function prepRedirect(redirect: IRedirect | null): string[] {
-  logg(" prep Redirect");
+  logg("prepRedirect");
   if (!redirect) {
-    return [comm({ empty_redirect: redirect }, '{" empty_ redirect":null}')];
+    return [comm({ empty_redirect: redirect }, '{"empty_redirect":null}')];
   }
   const { OpPos, Op, N, Word, Hdoc, ...rest_redirect } = redirect;
- const r OpPos = prep Pos (OpPos);
+ const rOpPos = prepPos (OpPos);
      
-  const r Op = prep RedirOperator (Op);
+  const rOp = prepRedirOperator (Op);
      
-  const r N = prep Lit (N);
+  const rN = prepLit (N);
      
-  const r Word = prep Word (Word);
+  const rWord = prepWord (Word);
      
-  const r Hdoc = prep Word (Hdoc);
+  const rHdoc = prepWord (Hdoc);
     
-  return [...doRedirect(rOpPos, rOp, rN, rWord, rHdoc), comm({ rest_redirect }, '{" rest_ redirect":{}}')];
+  return [...doRedirect(rOpPos, rOp, rN, rWord, rHdoc), comm({ rest_redirect }, '{"rest_redirect":{}}')];
 }
 export function prepSglQuoted(sglquoted: ISglQuoted | null): string[] {
-  logg(" prep SglQuoted");
+  logg("prepSglQuoted");
   if (!sglquoted) {
-    return [comm({ empty_sglquoted: sglquoted }, '{" empty_ sglquoted":null}')];
+    return [comm({ empty_sglquoted: sglquoted }, '{"empty_sglquoted":null}')];
   }
   const { Left, Right, Dollar, Value, ...rest_sglquoted } = sglquoted;
- const r Left = prep Pos (Left);
+ const rLeft = prepPos (Left);
      
-  const r Right = prep Pos (Right);
+  const rRight = prepPos (Right);
      
-  const r Dollar = prep boolean (Dollar);
+  const rDollar = prepboolean (Dollar);
      
-  const r Value = prep string (Value);
+  const rValue = prepstring (Value);
     
-  return [...doSglQuoted(rLeft, rRight, rDollar, rValue), comm({ rest_sglquoted }, '{" rest_ sglquoted":{}}')];
+  return [...doSglQuoted(rLeft, rRight, rDollar, rValue), comm({ rest_sglquoted }, '{"rest_sglquoted":{}}')];
 }
 export function prepStmt(stmt: IStmt | null): string[] {
-  logg(" prep Stmt");
+  logg("prepStmt");
   if (!stmt) {
-    return [comm({ empty_stmt: stmt }, '{" empty_ stmt":null}')];
+    return [comm({ empty_stmt: stmt }, '{"empty_stmt":null}')];
   }
   const { Comments, Cmd, Position, Semicolon, Negated, Background, Coprocess, Redirs, ...rest_stmt } = stmt;
- const r Comments = prep Comments (Comments);
+ const rComments = prepComments (Comments);
      
-  const r Cmd = prep Command (Cmd);
+  const rCmd = prepCommand (Cmd);
      
-  const r Position = prep Pos (Position);
+  const rPosition = prepPos (Position);
      
-  const r Semicolon = prep Pos (Semicolon);
+  const rSemicolon = prepPos (Semicolon);
      
-  const r Negated = prep boolean (Negated);
+  const rNegated = prepboolean (Negated);
      
-  const r Background = prep boolean (Background);
+  const rBackground = prepboolean (Background);
      
-  const r Coprocess = prep boolean (Coprocess);
+  const rCoprocess = prepboolean (Coprocess);
      
-  const r Redirs = prep Redirects (Redirs);
+  const rRedirs = prepRedirects (Redirs);
     
   // tslint:disable-next-line:max-line-length
-  return [...doStmt(rComments, rCmd, rPosition, rSemicolon, rNegated, rBackground, rCoprocess, rRedirs), comm({ rest_stmt }, '{" rest_ stmt":{}}')];
+  return [...doStmt(rComments, rCmd, rPosition, rSemicolon, rNegated, rBackground, rCoprocess, rRedirs), comm({ rest_stmt }, '{"rest_stmt":{}}')];
 }
 export function prepStmtList(stmtlist: IStmtList | null): string[] {
-  logg(" prep StmtList");
+  logg("prepStmtList");
   if (!stmtlist) {
-    return [comm({ empty_stmtlist: stmtlist }, '{" empty_ stmtlist":null}')];
+    return [comm({ empty_stmtlist: stmtlist }, '{"empty_stmtlist":null}')];
   }
   const { Stmts, Last, ...rest_stmtlist } = stmtlist;
- const r Stmts = prep Stmts (Stmts);
+ const rStmts = prepStmts (Stmts);
      
-  const r Last = prep Comments (Last);
+  const rLast = prepComments (Last);
     
-  return [...doStmtList(rStmts, rLast), comm({ rest_stmtlist }, '{" rest_ stmtlist":{}}')];
+  return [...doStmtList(rStmts, rLast), comm({ rest_stmtlist }, '{"rest_stmtlist":{}}')];
 }
 export function prepSubshell(subshell: ISubshell | null): string[] {
-  logg(" prep Subshell");
+  logg("prepSubshell");
   if (!subshell) {
-    return [comm({ empty_subshell: subshell }, '{" empty_ subshell":null}')];
+    return [comm({ empty_subshell: subshell }, '{"empty_subshell":null}')];
   }
   const { Lparen, Rparen, StmtList, Last, ...rest_subshell } = subshell;
- const r Lparen = prep Pos (Lparen);
+ const rLparen = prepPos (Lparen);
      
-  const r Rparen = prep Pos (Rparen);
+  const rRparen = prepPos (Rparen);
      
-  const r StmtList = prep StmtList (StmtList);
+  const rStmtList = prepStmtList (StmtList);
      
-  const r Last = prep Comments (Last);
+  const rLast = prepComments (Last);
     
-  return [...doSubshell(rLparen, rRparen, rStmtList, rLast), comm({ rest_subshell }, '{" rest_ subshell":{}}')];
+  return [...doSubshell(rLparen, rRparen, rStmtList, rLast), comm({ rest_subshell }, '{"rest_subshell":{}}')];
 }
 export function prepTestClause(testclause: ITestClause | null): string[] {
-  logg(" prep TestClause");
+  logg("prepTestClause");
   if (!testclause) {
-    return [comm({ empty_testclause: testclause }, '{" empty_ testclause":null}')];
+    return [comm({ empty_testclause: testclause }, '{"empty_testclause":null}')];
   }
   const { Left, Right, X, ...rest_testclause } = testclause;
- const r Left = prep Pos (Left);
+ const rLeft = prepPos (Left);
      
-  const r Right = prep Pos (Right);
+  const rRight = prepPos (Right);
      
-  const r X = prep TestExpr (X);
+  const rX = prepTestExpr (X);
     
-  return [...doTestClause(rLeft, rRight, rX), comm({ rest_testclause }, '{" rest_ testclause":{}}')];
+  return [...doTestClause(rLeft, rRight, rX), comm({ rest_testclause }, '{"rest_testclause":{}}')];
 }
 export function prepTestExpr(testexpr: ITestExpr | null): string[] {
   logg("prepTestExpr");
@@ -705,101 +705,101 @@ export function prepTestExpr(testexpr: ITestExpr | null): string[] {
   }
 }
 export function prepTimeClause(timeclause: ITimeClause | null): string[] {
-  logg(" prep TimeClause");
+  logg("prepTimeClause");
   if (!timeclause) {
-    return [comm({ empty_timeclause: timeclause }, '{" empty_ timeclause":null}')];
+    return [comm({ empty_timeclause: timeclause }, '{"empty_timeclause":null}')];
   }
   const { Time, PosixFormat, Stmt, ...rest_timeclause } = timeclause;
- const r Time = prep Pos (Time);
+ const rTime = prepPos (Time);
      
-  const r PosixFormat = prep boolean (PosixFormat);
+  const rPosixFormat = prepboolean (PosixFormat);
      
-  const r Stmt = prep Stmt (Stmt);
+  const rStmt = prepStmt (Stmt);
     
-  return [...doTimeClause(rTime, rPosixFormat, rStmt), comm({ rest_timeclause }, '{" rest_ timeclause":{}}')];
+  return [...doTimeClause(rTime, rPosixFormat, rStmt), comm({ rest_timeclause }, '{"rest_timeclause":{}}')];
 }
 export function prepUnaryArithm(unaryarithm: IUnaryArithm | null): string[] {
-  logg(" prep UnaryArithm");
+  logg("prepUnaryArithm");
   if (!unaryarithm) {
-    return [comm({ empty_unaryarithm: unaryarithm }, '{" empty_ unaryarithm":null}')];
+    return [comm({ empty_unaryarithm: unaryarithm }, '{"empty_unaryarithm":null}')];
   }
   const { OpPos, Op, Post, X, ...rest_unaryarithm } = unaryarithm;
- const r OpPos = prep Pos (OpPos);
+ const rOpPos = prepPos (OpPos);
      
-  const r Op = prep UnAritOperator (Op);
+  const rOp = prepUnAritOperator (Op);
      
-  const r Post = prep boolean (Post);
+  const rPost = prepboolean (Post);
      
-  const r X = prep ArithmExpr (X);
+  const rX = prepArithmExpr (X);
     
-  return [...doUnaryArithm(rOpPos, rOp, rPost, rX), comm({ rest_unaryarithm }, '{" rest_ unaryarithm":{}}')];
+  return [...doUnaryArithm(rOpPos, rOp, rPost, rX), comm({ rest_unaryarithm }, '{"rest_unaryarithm":{}}')];
 }
 export function prepUnaryTest(unarytest: IUnaryTest | null): string[] {
-  logg(" prep UnaryTest");
+  logg("prepUnaryTest");
   if (!unarytest) {
-    return [comm({ empty_unarytest: unarytest }, '{" empty_ unarytest":null}')];
+    return [comm({ empty_unarytest: unarytest }, '{"empty_unarytest":null}')];
   }
   const { OpPos, Op, X, ...rest_unarytest } = unarytest;
- const r OpPos = prep Pos (OpPos);
+ const rOpPos = prepPos (OpPos);
      
-  const r Op = prep UnTestOperator (Op);
+  const rOp = prepUnTestOperator (Op);
      
-  const r X = prep TestExpr (X);
+  const rX = prepTestExpr (X);
     
-  return [...doUnaryTest(rOpPos, rOp, rX), comm({ rest_unarytest }, '{" rest_ unarytest":{}}')];
+  return [...doUnaryTest(rOpPos, rOp, rX), comm({ rest_unarytest }, '{"rest_unarytest":{}}')];
 }
 export function prepWhileClause(whileclause: IWhileClause | null): string[] {
-  logg(" prep WhileClause");
+  logg("prepWhileClause");
   if (!whileclause) {
-    return [comm({ empty_whileclause: whileclause }, '{" empty_ whileclause":null}')];
+    return [comm({ empty_whileclause: whileclause }, '{"empty_whileclause":null}')];
   }
   const { WhilePos, DoPos, DonePos, Until, Cond, CondLast, Do, DoLast, ...rest_whileclause } = whileclause;
- const r WhilePos = prep Pos (WhilePos);
+ const rWhilePos = prepPos (WhilePos);
      
-  const r DoPos = prep Pos (DoPos);
+  const rDoPos = prepPos (DoPos);
      
-  const r DonePos = prep Pos (DonePos);
+  const rDonePos = prepPos (DonePos);
      
-  const r Until = prep boolean (Until);
+  const rUntil = prepboolean (Until);
      
-  const r Cond = prep StmtList (Cond);
+  const rCond = prepStmtList (Cond);
      
-  const r CondLast = prep Comments (CondLast);
+  const rCondLast = prepComments (CondLast);
      
-  const r Do = prep StmtList (Do);
+  const rDo = prepStmtList (Do);
      
-  const r DoLast = prep Comments (DoLast);
+  const rDoLast = prepComments (DoLast);
     
   // tslint:disable-next-line:max-line-length
-  return [...doWhileClause(rWhilePos, rDoPos, rDonePos, rUntil, rCond, rCondLast, rDo, rDoLast), comm({ rest_whileclause }, '{" rest_ whileclause":{}}')];
+  return [...doWhileClause(rWhilePos, rDoPos, rDonePos, rUntil, rCond, rCondLast, rDo, rDoLast), comm({ rest_whileclause }, '{"rest_whileclause":{}}')];
 }
 export function prepWord(word: IWord | null): string[] {
-  logg(" prep Word");
+  logg("prepWord");
   if (!word) {
-    return [comm({ empty_word: word }, '{" empty_ word":null}')];
+    return [comm({ empty_word: word }, '{"empty_word":null}')];
   }
   const { Parts, SplitBraces, Lit, ...rest_word } = word;
- const r Parts = prep WordParts (Parts);
+ const rParts = prepWordParts (Parts);
      
-  const r SplitBraces = prep  (SplitBraces);
+  const rSplitBraces = prep (SplitBraces);
      
-  const r Lit = prep  (Lit);
+  const rLit = prep (Lit);
     
-  return [...doWord(rParts, rSplitBraces, rLit), comm({ rest_word }, '{" rest_ word":{}}')];
+  return [...doWord(rParts, rSplitBraces, rLit), comm({ rest_word }, '{"rest_word":{}}')];
 }
 export function prepWordIter(worditer: IWordIter | null): string[] {
-  logg(" prep WordIter");
+  logg("prepWordIter");
   if (!worditer) {
-    return [comm({ empty_worditer: worditer }, '{" empty_ worditer":null}')];
+    return [comm({ empty_worditer: worditer }, '{"empty_worditer":null}')];
   }
   const { Name, InPos, Items, ...rest_worditer } = worditer;
- const r Name = prep Lit (Name);
+ const rName = prepLit (Name);
      
-  const r InPos = prep Pos (InPos);
+  const rInPos = prepPos (InPos);
      
-  const r Items = prep Words (Items);
+  const rItems = prepWords (Items);
     
-  return [...doWordIter(rName, rInPos, rItems), comm({ rest_worditer }, '{" rest_ worditer":{}}')];
+  return [...doWordIter(rName, rInPos, rItems), comm({ rest_worditer }, '{"rest_worditer":{}}')];
 }
 export function prepWordPart(wordpart: IWordPart | null): string[] {
   logg("prepWordPart");

@@ -4,5 +4,5 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-export declare function readRuleFile(dir: string): void;
+export declare const readRuleFile: (dir: string) => void;
 //# sourceMappingURL=readRuleFile.d.ts.map

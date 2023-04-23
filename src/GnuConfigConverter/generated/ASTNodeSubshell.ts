@@ -42,8 +42,8 @@ export class ASTNodeSubshell extends ASTNode {
     visitor.visitAllPreBefore(this);
     visitor.visitASTNodeSubshellPre(this);
     visitor.visitAllPreAfter(this);
-    if (this.StmtList) {
-      this.StmtList.accept(visitor);
+    if (this.Last) {
+      this.Last.accept(visitor);
     }
     this.Last.forEach((e) => e.accept(visitor));
     visitor.visitAllPostBefore(this);

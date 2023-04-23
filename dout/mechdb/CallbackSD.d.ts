@@ -4,5 +4,5 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-export declare type CallbackSD = (errt?: Error, data?: null) => void;
+export type CallbackSD = (errt?: Error, data?: null) => void;
 //# sourceMappingURL=CallbackSD.d.ts.map

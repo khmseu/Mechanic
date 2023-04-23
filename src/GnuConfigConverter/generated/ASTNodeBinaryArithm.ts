@@ -43,7 +43,7 @@ export class ASTNodeBinaryArithm extends ASTNode {
     visitor.visitAllPreBefore(this);
     visitor.visitASTNodeBinaryArithmPre(this);
     visitor.visitAllPreAfter(this);
-    this.X.accept(visitor);
+    this.Y.accept(visitor);
     this.Y.accept(visitor);
     visitor.visitAllPostBefore(this);
     visitor.visitASTNodeBinaryArithmPost(this);

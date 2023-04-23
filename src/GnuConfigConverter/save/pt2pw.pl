@@ -127,7 +127,7 @@ for my $typ (@fi) {
                     $sin =~ s/^I_*//;
 
                     #note Dumper( $_, $fdef{$_} );
-                    " const r $_ = prep $sin"
+                    " const r$_ = prep$sin"
                       . ( $fdef{$_}{a} ? 's' : '' ) . " ($_);
     "
                 } grep { !$fdef{$_}{f} } @fdef;
@@ -148,16 +148,16 @@ for my $typ (@fi) {
                 );
                 save <<EOFI;
 export function prep$sn($lsn: $name | null): string[] {
-  logg(" prep $sn");
+  logg("prep$sn");
   if (!$lsn) {
-    return [comm({ empty_$lsn: $lsn }, '{" empty_ $lsn":null}')];
+    return [comm({ empty_$lsn: $lsn }, '{"empty_$lsn":null}')];
   }
   const { $list1, ...rest_$lsn } = $lsn;
 $recur
-  return [...do$sn($list2), comm({ rest_$lsn }, '{" rest_ $lsn":{}}')];
+  return [...do$sn($list2), comm({ rest_$lsn }, '{"rest_$lsn":{}}')];
 }
 EOFI
-                $needDo{" do $sn "} = <<EOFD;
+                $needDo{"do$sn"} = <<EOFD;
 export function do$sn($list3): string[] { return []; }
 EOFD
             }
@@ -237,10 +237,11 @@ my $list1 = join( ', ',
     sort { lc $a cmp lc $b } grep { !/^(INode|Istruct)$/ } keys %needType );
 my $list2 = join( ', ', sort { lc $a cmp lc $b } keys %needDo );
 my $hdr = <<EOFH;
-import { syntax } from "mvdan-sh";
+import sh from "mvdan-sh";
 import { comm, logg } from ".";
 import { $list2 } from "./ParserDo";
 import { $list1 } from "./ParserTypes";
+const syntax = sh.syntax;
 
 EOFH
 unshift @text, split /(?<=\n)/, $hdr;

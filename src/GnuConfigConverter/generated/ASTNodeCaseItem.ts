@@ -50,10 +50,10 @@ export class ASTNodeCaseItem extends ASTNode {
     visitor.visitAllPreBefore(this);
     visitor.visitASTNodeCaseItemPre(this);
     visitor.visitAllPreAfter(this);
-    this.Comments.forEach((e) => e.accept(visitor));
-    this.Patterns.forEach((e) => e.accept(visitor));
-    if (this.StmtList) {
-      this.StmtList.accept(visitor);
+    this.Last.forEach((e) => e.accept(visitor));
+    this.Last.forEach((e) => e.accept(visitor));
+    if (this.Last) {
+      this.Last.accept(visitor);
     }
     this.Last.forEach((e) => e.accept(visitor));
     visitor.visitAllPostBefore(this);

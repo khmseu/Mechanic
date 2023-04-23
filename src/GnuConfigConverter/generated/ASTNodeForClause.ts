@@ -50,9 +50,9 @@ export class ASTNodeForClause extends ASTNode {
     visitor.visitAllPreBefore(this);
     visitor.visitASTNodeForClausePre(this);
     visitor.visitAllPreAfter(this);
-    this.Loop.accept(visitor);
-    if (this.Do) {
-      this.Do.accept(visitor);
+    this.DoLast.accept(visitor);
+    if (this.DoLast) {
+      this.DoLast.accept(visitor);
     }
     this.DoLast.forEach((e) => e.accept(visitor));
     visitor.visitAllPostBefore(this);

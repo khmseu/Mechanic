@@ -6,5 +6,5 @@ import { IUserVarValue } from "./IUserVarValue";
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-export declare type VarValue = CurrentVarValue | IUserVarValue;
+export type VarValue = CurrentVarValue | IUserVarValue;
 //# sourceMappingURL=VarValue.d.ts.map

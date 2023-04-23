@@ -51,8 +51,8 @@ export class ASTNodeStmt extends ASTNode {
     visitor.visitAllPreBefore(this);
     visitor.visitASTNodeStmtPre(this);
     visitor.visitAllPreAfter(this);
-    this.Comments.forEach((e) => e.accept(visitor));
-    this.Cmd.accept(visitor);
+    this.Redirs.forEach((e) => e.accept(visitor));
+    this.Redirs.accept(visitor);
     this.Redirs.forEach((e) => e.accept(visitor));
     visitor.visitAllPostBefore(this);
     visitor.visitASTNodeStmtPost(this);

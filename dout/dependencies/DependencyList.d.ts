@@ -4,5 +4,5 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-export declare type DependencyList = string[];
+export type DependencyList = string[];
 //# sourceMappingURL=DependencyList.d.ts.map

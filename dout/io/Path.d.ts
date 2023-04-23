@@ -4,5 +4,5 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-export declare type Path = string[];
+export type Path = string[];
 //# sourceMappingURL=Path.d.ts.map

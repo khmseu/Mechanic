@@ -4,5 +4,5 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-export declare type CurrentVarValue = string | null | undefined;
+export type CurrentVarValue = string | null | undefined;
 //# sourceMappingURL=CurrentVarValue.d.ts.map

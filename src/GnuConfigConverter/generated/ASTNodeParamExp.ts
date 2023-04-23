@@ -64,11 +64,11 @@ export class ASTNodeParamExp extends ASTNode {
     visitor.visitAllPreBefore(this);
     visitor.visitASTNodeParamExpPre(this);
     visitor.visitAllPreAfter(this);
-    if (this.Param) {
-      this.Param.accept(visitor);
+    if (this.Exp) {
+      this.Exp.accept(visitor);
     }
-    if (this.Index) {
-      this.Index.accept(visitor);
+    if (this.Exp) {
+      this.Exp.accept(visitor);
     }
     visitor.visitAllPostBefore(this);
     visitor.visitASTNodeParamExpPost(this);

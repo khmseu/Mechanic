@@ -1,12 +1,12 @@
 {
-    "eslint.packageManager": "yarn",
-    "tslint.configFile": "tslint.json",
-    "tslint.packageManager": "yarn",
-    "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
-    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
-    "typescript.format.insertSpaceAfterTypeAssertion": true,
-    "licenser.license": "MIT",
-    "licenser.author": "Kai Henningsen <kai.extern+mechanic@gmail.com>",
-    "licenser.projectName": "Mechanic",
-    "licenser.useSingleLineStyle": false
+  "eslint.packageManager": "npm",
+  "tslint.configFile": "tslint.json",
+  "tslint.packageManager": "npm",
+  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+  "typescript.format.insertSpaceAfterTypeAssertion": true,
+  "licenser.license": "MIT",
+  "licenser.author": "Kai Henningsen <kai.extern+mechanic@gmail.com>",
+  "licenser.projectName": "Mechanic",
+  "licenser.useSingleLineStyle": false
 }

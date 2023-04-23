@@ -42,8 +42,8 @@ export class ASTNodeCStyleLoop extends ASTNode {
     visitor.visitAllPreBefore(this);
     visitor.visitASTNodeCStyleLoopPre(this);
     visitor.visitAllPreAfter(this);
-    this.Init.accept(visitor);
-    this.Cond.accept(visitor);
+    this.Post.accept(visitor);
+    this.Post.accept(visitor);
     this.Post.accept(visitor);
     visitor.visitAllPostBefore(this);
     visitor.visitASTNodeCStyleLoopPost(this);

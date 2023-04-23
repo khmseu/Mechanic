@@ -4,6 +4,7 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
+import { DataOrCallable } from "src/utils/DataOrCallable";
 import { DependencySpecList } from "../dependencies/DependencySpecList";
 import { DataFromJS } from "../js/DataFromJS";
 import { TargetSpecList } from "../targets/TargetSpecList";
@@ -16,6 +17,6 @@ export interface IRuleArg {
 export interface IRuleArgRaw {
     Targets: DataFromJS[];
     Dependencies: DataFromJS[];
-    Recipe: DataFromJS;
+    Recipe: DataOrCallable;
 }
 //# sourceMappingURL=IRuleArg.d.ts.map

@@ -5,5 +5,5 @@
  * https://opensource.org/licenses/MIT
  */
 import { DependencySpec } from "./DependencySpec";
-export declare type DependencySpecList = DependencySpec[];
+export type DependencySpecList = DependencySpec[];
 //# sourceMappingURL=DependencySpecList.d.ts.map

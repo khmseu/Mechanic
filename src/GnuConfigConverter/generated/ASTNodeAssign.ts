@@ -45,14 +45,14 @@ export class ASTNodeAssign extends ASTNode {
     visitor.visitAllPreBefore(this);
     visitor.visitASTNodeAssignPre(this);
     visitor.visitAllPreAfter(this);
-    if (this.Name) {
-      this.Name.accept(visitor);
+    if (this.Array) {
+      this.Array.accept(visitor);
     }
-    if (this.Index) {
-      this.Index.accept(visitor);
+    if (this.Array) {
+      this.Array.accept(visitor);
     }
-    if (this.Value) {
-      this.Value.accept(visitor);
+    if (this.Array) {
+      this.Array.accept(visitor);
     }
     if (this.Array) {
       this.Array.accept(visitor);

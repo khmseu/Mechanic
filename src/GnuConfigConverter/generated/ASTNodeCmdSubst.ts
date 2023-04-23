@@ -46,10 +46,10 @@ export class ASTNodeCmdSubst extends ASTNode {
     visitor.visitAllPreBefore(this);
     visitor.visitASTNodeCmdSubstPre(this);
     visitor.visitAllPreAfter(this);
-    if (this.StmtList) {
-      this.StmtList.accept(visitor);
+    if (this.ReplyVar) {
+      this.ReplyVar.accept(visitor);
     }
-    this.Last.forEach((e) => e.accept(visitor));
+    this.ReplyVar.forEach((e) => e.accept(visitor));
     visitor.visitAllPostBefore(this);
     visitor.visitASTNodeCmdSubstPost(this);
     visitor.visitAllPostAfter(this);

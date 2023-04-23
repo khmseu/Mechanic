@@ -5,5 +5,5 @@
  * https://opensource.org/licenses/MIT
  */
 import { TargetSpec } from "./TargetSpec";
-export declare type TargetSpecList = TargetSpec[];
+export type TargetSpecList = TargetSpec[];
 //# sourceMappingURL=TargetSpecList.d.ts.map

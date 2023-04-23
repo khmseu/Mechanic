@@ -321,7 +321,7 @@ export interface I_Pos extends Istruct {
   Line: (() => number) | null; // Line returns the line number of the position, starting at 1.
   // eslint-disable-next-line max-len
   Offset: (() => number) | null; // Offset returns the byte offset of the position in the original source file. Byte offsets start at 0.
-  ["String"]: (() => string) | null;
+  String: (() => string) | null;
 }
 // ProcSubst represents a Bash process substitution.
 // This node will only appear with LangBash.

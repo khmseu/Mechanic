@@ -69,7 +69,20 @@ sub p2aname($pp) : prototype($) {
     }
 }
 
+sub fieldof ( $var, $field ) : prototype($$) {
+    return "$var.$1" if $field =~ /^\["(\w+)"\]$/;
+    return $field =~ /^\[/ ? "$var$field" : "$var.$field";
+}
+
 sub export ( $name, $text, $needType ) : prototype($$$) {
+    my $sub = {
+        ( ( caller(1) )[3] // '' ) => ( ( caller(0) )[3] // '' ),
+        name     => $name,
+        text     => $text,
+        needType => $needType
+    };
+
+    # print Dumper($sub);
     return unless @$text;
     my %to = map {
             $_ ~~ [ 'Istruct', $name ] ? ()
@@ -80,8 +93,10 @@ sub export ( $name, $text, $needType ) : prototype($$$) {
           : $_ =~ /^(logg|Token)$/ ? ( $_, "../$_" )
           : ( $_, "../ParserTypes" )
     } sort { lc $a cmp lc $b } keys %$needType;
+    # print Dumper(%to);
     my %from;
     push @{ $from{ $to{$_} } }, $_ for keys %to;
+    # print Dumper(%from);
     my @hdr =
       map {
         my $want = join ', ', sort { lc $a cmp lc $b } @{ $from{$_} };
@@ -90,6 +105,7 @@ sub export ( $name, $text, $needType ) : prototype($$$) {
       sort { lc $a cmp lc $b } keys %from;
     my @hdr1 = grep !m[/], @hdr;
     my @hdr2 = grep m[/],  @hdr;
+    # print Dumper( @hdr, @hdr1, @hdr2 );
     unshift @$text, "\n" if @hdr;
     unshift @$text, $copyr, @hdr1, @hdr2;
     @$text = map { split /(?<=\n)/, $_ } @$text;
@@ -310,6 +326,7 @@ EOFN2
                   join( ', ', grep { $fdef{$_}{f} < 2 } @fdef );
                 my $ln = lc $name;
                 $ln =~ s/^i_*//;
+                my $tv;
                 my @recur = map {
                     my $sin = $fdef{$_}{aft};
                     my ( $ff, $nn, $aa, $ii ) =
@@ -331,8 +348,9 @@ EOFN2
                     # $ln
                     # $sin
                     # $this
-                    my $fv0 = "$ln.$_";
-                    my $fv  = $fv0;
+                    my $fv0 = fieldof $ln, $_;
+                    $tv = fieldof 'this', $_;
+                    my $fv = $fv0;
                     if ($ff) {
                         $fv = "ASTCall($fv)";
                         $needType{ASTCall}++;
@@ -371,13 +389,13 @@ EOFN2
                     my $res;
                     if ($s2) {
                         $res = <<EOR;
-    this.$_ = $pre$sin\[$fv\]$post;
-    this.${_}String = ${pre}op(($fv as unknown) as Token)$post;
+    $tv = $pre$sin\[$fv\]$post;
+    ${tv}String = ${pre}op(($fv as unknown) as Token)$post;
 EOR
                     }
                     else {
                         $res = <<EOR;
-    this.$_ = $pre$fv$post;
+    $tv = $pre$fv$post;
 EOR
                     }
                     { $/ = ''; chomp $res; }
@@ -389,19 +407,19 @@ EOR
                 my @recur2 = map {
                     if ( $fdef{$_}{a} ) {
                         <<EOFN5a;
-    this.$_.forEach((e) => e.accept(visitor));
+    $tv.forEach((e) => e.accept(visitor));
 EOFN5a
                     }
                     elsif ( $fdef{$_}{n} ) {
                         <<EOFN5b;
-    if (this.$_) {
-      this.$_.accept(visitor);
+    if ($tv) {
+      $tv.accept(visitor);
     }
 EOFN5b
                     }
                     else {
                         <<EOFN5b;
-    this.$_.accept(visitor);
+    $tv.accept(visitor);
 EOFN5b
                     }
                   }

@@ -45,10 +45,10 @@ export class ASTNodeCaseClause extends ASTNode {
     visitor.visitAllPreBefore(this);
     visitor.visitASTNodeCaseClausePre(this);
     visitor.visitAllPreAfter(this);
-    if (this.Word) {
-      this.Word.accept(visitor);
+    if (this.Last) {
+      this.Last.accept(visitor);
     }
-    this.Items.forEach((e) => e.accept(visitor));
+    this.Last.forEach((e) => e.accept(visitor));
     this.Last.forEach((e) => e.accept(visitor));
     visitor.visitAllPostBefore(this);
     visitor.visitASTNodeCaseClausePost(this);

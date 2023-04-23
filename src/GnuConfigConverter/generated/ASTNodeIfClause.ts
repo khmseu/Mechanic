@@ -52,16 +52,16 @@ export class ASTNodeIfClause extends ASTNode {
     visitor.visitAllPreBefore(this);
     visitor.visitASTNodeIfClausePre(this);
     visitor.visitAllPreAfter(this);
-    if (this.Cond) {
-      this.Cond.accept(visitor);
+    if (this.Last) {
+      this.Last.accept(visitor);
     }
-    this.CondLast.forEach((e) => e.accept(visitor));
-    if (this.Then) {
-      this.Then.accept(visitor);
+    this.Last.forEach((e) => e.accept(visitor));
+    if (this.Last) {
+      this.Last.accept(visitor);
     }
-    this.ThenLast.forEach((e) => e.accept(visitor));
-    if (this.Else) {
-      this.Else.accept(visitor);
+    this.Last.forEach((e) => e.accept(visitor));
+    if (this.Last) {
+      this.Last.accept(visitor);
     }
     this.Last.forEach((e) => e.accept(visitor));
     visitor.visitAllPostBefore(this);

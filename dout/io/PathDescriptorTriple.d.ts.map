@@ -1,1 +1,1 @@
-{"version":3,"file":"PathDescriptorTriple.d.ts","sourceRoot":"","sources":["../../src/io/PathDescriptorTriple.ts"],"names":[],"mappings":"AAAA;;;;;GAKG;AAEF,oBAAY,oBAAoB,GAAG,CAAE,MAAM,EAAE,MAAM,EAAE,MAAM,CAAE,CAAC"}
+{"version":3,"file":"PathDescriptorTriple.d.ts","sourceRoot":"","sources":["../../src/io/PathDescriptorTriple.ts"],"names":[],"mappings":"AAAA;;;;;GAKG;AAEF,MAAM,MAAM,oBAAoB,GAAG,CAAE,MAAM,EAAE,MAAM,EAAE,MAAM,CAAE,CAAC"}

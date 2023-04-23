@@ -6,18 +6,18 @@
  * https://opensource.org/licenses/MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.logg = exports.debug = void 0;
+const console_1 = require("console");
 const util_1 = require("util");
 exports.debug = true;
-function logg(thing) {
-    // tslint:disable-next-line:no-console
+const logg = (thing) => {
     if (exports.debug) {
-        // tslint:disable-next-line:no-console
-        console.log(util_1.inspect(thing, {
-            depth: 2,
+        (0, console_1.log)((0, util_1.inspect)(thing, {
             compact: false,
+            depth: 2,
             sorted: true,
         }));
     }
-}
+};
 exports.logg = logg;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibG9nZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uL3NyYy9HbnVDb25maWdDb252ZXJ0ZXIvbG9nZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUE7Ozs7O0dBS0c7O0FBRUgsK0JBQStCO0FBRWxCLFFBQUEsS0FBSyxHQUFHLElBQUksQ0FBQztBQUUxQixTQUFnQixJQUFJLENBQUMsS0FBVTtJQUM3QixzQ0FBc0M7SUFDdEMsSUFBSSxhQUFLLEVBQUU7UUFDVCxzQ0FBc0M7UUFDdEMsT0FBTyxDQUFDLEdBQUcsQ0FDVCxjQUFPLENBQUMsS0FBSyxFQUFFO1lBQ2IsS0FBSyxFQUFFLENBQUM7WUFDUixPQUFPLEVBQUUsS0FBSztZQUNkLE1BQU0sRUFBRSxJQUFJO1NBQ2IsQ0FBQyxDQUNILENBQUM7S0FDSDtBQUNILENBQUM7QUFaRCxvQkFZQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibG9nZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uL3NyYy9HbnVDb25maWdDb252ZXJ0ZXIvbG9nZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUE7Ozs7O0dBS0c7OztBQUVILHFDQUE4QjtBQUM5QiwrQkFBK0I7QUFFbEIsUUFBQSxLQUFLLEdBQUcsSUFBSSxDQUFDO0FBRW5CLE1BQU0sSUFBSSxHQUFHLENBQUMsS0FBVSxFQUFFLEVBQUU7SUFDakMsSUFBSSxhQUFLLEVBQUU7UUFDVCxJQUFBLGFBQUcsRUFDRCxJQUFBLGNBQU8sRUFBQyxLQUFLLEVBQUU7WUFDYixPQUFPLEVBQUUsS0FBSztZQUNkLEtBQUssRUFBRSxDQUFDO1lBQ1IsTUFBTSxFQUFFLElBQUk7U0FDYixDQUFDLENBQ0gsQ0FBQztLQUNIO0FBQ0gsQ0FBQyxDQUFDO0FBVlcsUUFBQSxJQUFJLFFBVWYifQ==

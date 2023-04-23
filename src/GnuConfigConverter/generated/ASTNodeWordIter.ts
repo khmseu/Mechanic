@@ -40,8 +40,8 @@ export class ASTNodeWordIter extends ASTNode {
     visitor.visitAllPreBefore(this);
     visitor.visitASTNodeWordIterPre(this);
     visitor.visitAllPreAfter(this);
-    if (this.Name) {
-      this.Name.accept(visitor);
+    if (this.Items) {
+      this.Items.accept(visitor);
     }
     this.Items.forEach((e) => e.accept(visitor));
     visitor.visitAllPostBefore(this);
