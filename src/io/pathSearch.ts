@@ -14,20 +14,20 @@ import { PathDescriptorTriple } from "./PathDescriptorTriple";
 /**
  * Paths search
  * modified from path-search module
+ *
  * @param path
  * @param name
  * @returns search
  */
-export function pathSearch(path: Path, name: string): PathDescriptorTriple {
+export const pathSearch = (path: Path, name: string): PathDescriptorTriple => {
   ok(path.length > 0, Error("path may not be empty"));
   const nn = normalize(name);
   if (isAbsolute(name)) {
     const rn = resolve(name);
     return [rn, parse(rn).root, nn];
   }
-  let c0;
-  let d0;
-  // tslint:disable-next-line:no-shadowed-variable
+  let c0 = "";
+  let d0 = "";
   for (const dir of path) {
     const candidate = resolve(dir, name);
     if (existsSync(candidate)) {
@@ -38,5 +38,5 @@ export function pathSearch(path: Path, name: string): PathDescriptorTriple {
       d0 = dir;
     }
   }
-  return [c0!, resolve(d0!), nn];
-}
+  return [c0, resolve(d0), nn];
+};

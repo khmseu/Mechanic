@@ -1,68 +1,68 @@
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line max-len
 import { BinAritOperator, BinCmdOperator, BinTestOperator, CaseOperator, GlobOperator, I_Expansion, I_Pos, I_Replace, I_Slice, ParNamesOperator, ProcOperator, RedirOperator, UnAritOperator, UnTestOperator } from "./ParserTypes";
 
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line max-len
 export function doArithmCmd(Left: I_Pos | null, Right: I_Pos | null, Unsigned: boolean | null, X: string[]): string[] { return []; }
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line max-len
 export function doArithmExp(Left: I_Pos | null, Right: I_Pos | null, Bracket: boolean | null, Unsigned: boolean | null, X: string[]): string[] { return []; }
 export function doArrayElem(Index: string[], Value: string[], Comments: string[]): string[] { return []; }
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line max-len
 export function doArrayExpr(Lparen: I_Pos | null, Rparen: I_Pos | null, Elems: string[], Last: string[]): string[] { return []; }
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line max-len
 export function doAssign(Append: boolean | null, Naked: boolean | null, Name: string[], Index: string[], Value: string[], Array: string[]): string[] { return []; }
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line max-len
 export function doBinaryArithm(OpPos: I_Pos | null, Op: BinAritOperator | null, X: string[], Y: string[]): string[] { return []; }
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line max-len
 export function doBinaryCmd(OpPos: I_Pos | null, Op: BinCmdOperator | null, X: string[], Y: string[]): string[] { return []; }
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line max-len
 export function doBinaryTest(OpPos: I_Pos | null, Op: BinTestOperator | null, X: string[], Y: string[]): string[] { return []; }
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line max-len
 export function doBlock(Lbrace: I_Pos | null, Rbrace: I_Pos | null, StmtList: string[], Last: string[]): string[] { return []; }
 export function doBraceExp(Sequence: boolean | null, Chars: boolean | null, Elems: string[]): string[] { return []; }
 export function doCallExpr(Assigns: string[], Args: string[]): string[] { return []; }
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line max-len
 export function doCaseClause(Case: I_Pos | null, Esac: I_Pos | null, Word: string[], Items: string[], Last: string[]): string[] { return []; }
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line max-len
 export function doCaseItem(Op: CaseOperator | null, OpPos: I_Pos | null, Comments: string[], Patterns: string[], StmtList: string[], Last: string[]): string[] { return []; }
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line max-len
 export function doCmdSubst(Left: I_Pos | null, Right: I_Pos | null, StmtList: string[], Last: string[], TempFile: boolean | null, ReplyVar: boolean | null): string[] { return []; }
 export function doComment(Hash: I_Pos | null, Text: string | null): string[] { return []; }
 export function doCoprocClause(Coproc: I_Pos | null, Name: string[], Stmt: string[]): string[] { return []; }
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line max-len
 export function doCStyleLoop(Lparen: I_Pos | null, Rparen: I_Pos | null, Init: string[], Cond: string[], Post: string[]): string[] { return []; }
 export function doDblQuoted(Position: I_Pos | null, Dollar: boolean | null, Parts: string[]): string[] { return []; }
 export function doDeclClause(Variant: string[], Opts: string[], Assigns: string[]): string[] { return []; }
 export function doExtGlob(OpPos: I_Pos | null, Op: GlobOperator | null, Pattern: string[]): string[] { return []; }
 export function doFile(Name: string | null, StmtList: string[], Last: string[]): string[] { return []; }
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line max-len
 export function doForClause(ForPos: I_Pos | null, DoPos: I_Pos | null, DonePos: I_Pos | null, Select: boolean | null, Loop: string[], Do: string[], DoLast: string[]): string[] { return []; }
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line max-len
 export function doFuncDecl(Position: I_Pos | null, RsrvWord: boolean | null, Name: string[], Body: string[]): string[] { return []; }
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line max-len
 export function doIfClause(Position: I_Pos | null, ThenPos: I_Pos | null, FiPos: I_Pos | null, Cond: string[], CondLast: string[], Then: string[], ThenLast: string[], Else: string[], Last: string[]): string[] { return []; }
 export function doLetClause(Let: I_Pos | null, Exprs: string[]): string[] { return []; }
 export function doLit(ValuePos: I_Pos | null, ValueEnd: I_Pos | null, Value: string | null): string[] { return []; }
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line max-len
 export function doParamExp(Dollar: I_Pos | null, Rbrace: I_Pos | null, Short: boolean | null, Excl: boolean | null, Length: boolean | null, Width: boolean | null, Param: string[], Index: string[], Slice: I_Slice | null, Repl: I_Replace | null, Names: ParNamesOperator | null, Exp: I_Expansion | null): string[] { return []; }
 export function doParenArithm(Lparen: I_Pos | null, Rparen: I_Pos | null, X: string[]): string[] { return []; }
 export function doParenTest(Lparen: I_Pos | null, Rparen: I_Pos | null, X: string[]): string[] { return []; }
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line max-len
 export function doProcSubst(OpPos: I_Pos | null, Rparen: I_Pos | null, Op: ProcOperator | null, Stmts: string[], Last: string[]): string[] { return []; }
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line max-len
 export function doRedirect(OpPos: I_Pos | null, Op: RedirOperator | null, N: string[], Word: string[], Hdoc: string[]): string[] { return []; }
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line max-len
 export function doSglQuoted(Left: I_Pos | null, Right: I_Pos | null, Dollar: boolean | null, Value: string | null): string[] { return []; }
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line max-len
 export function doStmt(Comments: string[], Cmd: string[], Position: I_Pos | null, Semicolon: I_Pos | null, Negated: boolean | null, Background: boolean | null, Coprocess: boolean | null, Redirs: string[]): string[] { return []; }
 export function doStmtList(Stmts: string[], Last: string[]): string[] { return []; }
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line max-len
 export function doSubshell(Lparen: I_Pos | null, Rparen: I_Pos | null, StmtList: string[], Last: string[]): string[] { return []; }
 export function doTestClause(Left: I_Pos | null, Right: I_Pos | null, X: string[]): string[] { return []; }
 export function doTimeClause(Time: I_Pos | null, PosixFormat: boolean | null, Stmt: string[]): string[] { return []; }
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line max-len
 export function doUnaryArithm(OpPos: I_Pos | null, Op: UnAritOperator | null, Post: boolean | null, X: string[]): string[] { return []; }
 export function doUnaryTest(OpPos: I_Pos | null, Op: UnTestOperator | null, X: string[]): string[] { return []; }
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line max-len
 export function doWhileClause(WhilePos: I_Pos | null, DoPos: I_Pos | null, DonePos: I_Pos | null, Until: boolean | null, Cond: string[], CondLast: string[], Do: string[], DoLast: string[]): string[] { return []; }
 export function doWord(Parts: string[]): string[] { return []; }
 export function doWordIter(Name: string[], InPos: I_Pos | null, Items: string[]): string[] { return []; }

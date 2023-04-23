@@ -155,8 +155,23 @@ export interface ICmdSubst extends INode {
   ReplyVar: boolean; // mksh's ${|foo;}
 }
 // Command represents all nodes that are simple or compound commands, including function declarations.
-// tslint:disable-next-line:max-line-length
-export type ICommand = ICallExpr | IIfClause | IWhileClause | IForClause | ICaseClause | IBlock | ISubshell | IBinaryCmd | IFuncDecl | IArithmCmd | ITestClause | IDeclClause | ILetClause | ITimeClause | ICoprocClause;
+// eslint-disable-next-line max-len
+export type ICommand =
+  | ICallExpr
+  | IIfClause
+  | IWhileClause
+  | IForClause
+  | ICaseClause
+  | IBlock
+  | ISubshell
+  | IBinaryCmd
+  | IFuncDecl
+  | IArithmCmd
+  | ITestClause
+  | IDeclClause
+  | ILetClause
+  | ITimeClause
+  | ICoprocClause;
 // Comment represents a single comment on a single line.
 export interface IComment extends INode {
   Hash: I_Pos;
@@ -185,7 +200,7 @@ export interface IDeclClause extends INode {
   Assigns: IAssign[] | null;
 }
 // Expansion represents string manipulation in a ParamExp other than those covered by Replace.
-// tslint:disable-next-line:class-name
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export interface I_Expansion extends Istruct {
   Op: ParExpOperator;
   Word: IWord | null;
@@ -296,17 +311,17 @@ export interface IParenTest extends INode {
   X: ITestExpr;
 }
 // Pos is a position within a shell source file.
-// tslint:disable-next-line:class-name
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export interface I_Pos extends Istruct {
-  // tslint:disable-next-line:max-line-length
+  // eslint-disable-next-line max-len
   After: ((p2: I_Pos) => boolean) | null; // After reports whether the position p is after p2. It is a more expressive version of p.Offset() > p2.Offset().
   Col: (() => number) | null; // Col returns the column number of the position, starting at 1. It counts in bytes.
-  // tslint:disable-next-line:max-line-length
+  // eslint-disable-next-line max-len
   IsValid: (() => boolean) | null; // IsValid reports whether the position is valid. All positions in nodes returned by Parse are valid.
   Line: (() => number) | null; // Line returns the line number of the position, starting at 1.
-  // tslint:disable-next-line:max-line-length
+  // eslint-disable-next-line max-len
   Offset: (() => number) | null; // Offset returns the byte offset of the position in the original source file. Byte offsets start at 0.
-  String: (() => string) | null;
+  ["String"]: (() => string) | null;
 }
 // ProcSubst represents a Bash process substitution.
 // This node will only appear with LangBash.
@@ -327,7 +342,7 @@ export interface IRedirect extends INode {
   Hdoc: IWord | null; // here-document body
 }
 // Replace represents a search and replace expression inside a ParamExp.
-// tslint:disable-next-line:class-name
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export interface I_Replace extends Istruct {
   All: boolean;
   Orig: IWord | null;
@@ -342,7 +357,7 @@ export interface ISglQuoted extends INode {
 }
 // Slice represents a character slicing expression inside a ParamExp.
 // This node will only appear in LangBash and LangMirBSDKorn.
-// tslint:disable-next-line:class-name
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export interface I_Slice extends Istruct {
   Offset: IArithmExpr;
   Length: IArithmExpr;
@@ -434,8 +449,17 @@ export interface IWordIter extends INode {
   Items: IWord[] | null;
 }
 // WordPart represents all nodes that can form part of a word.
-// tslint:disable-next-line:max-line-length
-export type IWordPart = ILit | ISglQuoted | IDblQuoted | IParamExp | ICmdSubst | IArithmExp | IProcSubst | IExtGlob | IBraceExp;
+// eslint-disable-next-line max-len
+export type IWordPart =
+  | ILit
+  | ISglQuoted
+  | IDblQuoted
+  | IParamExp
+  | ICmdSubst
+  | IArithmExp
+  | IProcSubst
+  | IExtGlob
+  | IBraceExp;
 
 export enum RedirOperator {
   RdrOut = Token.rdrOut, // >

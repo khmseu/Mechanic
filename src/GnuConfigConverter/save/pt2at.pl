@@ -1,4 +1,4 @@
-#! /usr/bin/perl -w
+#! /usr/bin/env perl
 
 =pod
  Copyright (c) 2019 Kai Henningsen <kai.extern+mechanic@gmail.com>
@@ -7,13 +7,25 @@
  https://opensource.org/licenses/MIT
 =cut
 
-use v5.26;
-no warnings "experimental::smartmatch";
+use 5.026;    # !!perlver.pl
+use feature qw( signatures );
+
+use utf8;
+use Encode::Guess qw( latin1 );
+use open ':utf8';
+
 use strict;
+use warnings qw(all);
+no warnings qw( experimental::smartmatch experimental::signatures );
+use autodie qw( :all );
 use Data::Dumper::Simple;
 $Data::Dumper::Useqq    = 1;
 $Data::Dumper::Sortkeys = 1;
 $|                      = 1;
+use Carp qw(cluck confess);
+$SIG{__DIE__}  = \&confess;
+$SIG{__WARN__} = \&cluck;
+
 use File::Path qw(make_path remove_tree);
 
 $/ = undef;
@@ -33,13 +45,11 @@ my $outdir = 'src/GnuConfigConverter/generated';
 
 my @text;
 
-sub save($) {
-    my $txt = shift;
+sub save($txt) : prototype($) {
     push @text, split /(?<=\n)/, $txt;
 }
 
-sub note($) {
-    my $txt = shift;
+sub note($txt) : prototype($) {
     my @txt = split /\n/, $txt;
     pop @txt unless length $txt[$#txt];
     save "\n";
@@ -47,8 +57,7 @@ sub note($) {
     save "\n";
 }
 
-sub p2aname($) {
-    my $pp = shift;
+sub p2aname($pp) : prototype($) {
     given ($pp) {
         when ( [qw( INode )] )   { return "ASTNode"; }
         when ( [qw( Istruct )] ) { return undef; }
@@ -60,8 +69,7 @@ sub p2aname($) {
     }
 }
 
-sub export($$$) {
-    my ( $name, $text, $needType ) = @_;
+sub export ( $name, $text, $needType ) : prototype($$$) {
     return unless @$text;
     my %to = map {
             $_ ~~ [ 'Istruct', $name ] ? ()
@@ -92,16 +100,15 @@ sub export($$$) {
             ( "$1// tslint:disable-next-line:max-line-length\n", $_ );
         }
     } @$text;
-    open FO, '>', "$outdir/$name.ts"
-      or die "$outdir/$name.ts: $!";
-    print FO @$text;
-    close FO or die "$outdir/$name.ts: $!";
+    say "> $outdir/$name.ts";
+    open my $FO, '>', "$outdir/$name.ts";
+    print $FO @$text;
+    close $FO;
     @$text     = ();
     %$needType = ();
 }
 
-sub export_maybe($$$) {
-    my ( $name, $text, $needType ) = @_;
+sub export_maybe ( $name, $text, $needType ) : prototype($$$) {
     export $name, $text, $needType
       unless -f "$outdir/$name.ts";
 }
@@ -109,9 +116,9 @@ sub export_maybe($$$) {
 my %needType;
 my %kind;
 
-open FI, '<', $source or die "$source: $!";
-my $fi = <FI>;
-close FI or die "$source: $!";
+open my $FI, '<', $source;
+my $fi = <$FI>;
+close $FI;
 
 # prepare output
 make_path $outdir;
@@ -224,8 +231,9 @@ EOFN1c
                 for my $field (@fields) {
                     my ( $name1, $func, $def, $kind ) =
                       ( $field =~
-/^\s*(\w*)\s*:\s*((?:\(?(?:\([^()]*\)\s*=>\s*))?)(\w*)\)?\s*(.*);$/
+/^\s*(\w+|\["[^"]*"\])\s*:\s*((?:\(?(?:\([^()]*\)\s*=>\s*))?)(\w*)\)?\s*(.*);$/
                       );
+                    die "can't handle " . Dumper($field) unless defined $kind;
 
                    #print( Dumper( $field, $name1, $def, $func, $kind ), "\n" );
 

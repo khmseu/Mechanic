@@ -17,15 +17,15 @@ const debug = false;
 
 const classlist = new BetterSqlite3("classlist.db", { memory: true });
 classlist.prepare("drop table if exists classlist").run();
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line max-len
 classlist.prepare("create table classlist(class text, property text, type text, count integer, primary key(class, property, type))").run();
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line max-len
 const noteField = classlist.prepare("insert into classlist(class, property, type, count) values(@nt, @prop, @qt, 1) on conflict(class, property, type) do update set count = count + 1");
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line max-len
 const showOne = classlist.prepare("select property, type, count from classlist where class = @nt order by property, type");
 const getClasses = classlist.prepare("select distinct class from classlist order by class");
 const getProps = classlist.prepare("select distinct property from classlist where class = @aClass order by property");
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line max-len
 const getTypes = classlist.prepare("select type from classlist where class = @aClass and property = @aProp order by type");
 
 // const sh = require("mvdan-sh");
@@ -33,26 +33,7 @@ const getTypes = classlist.prepare("select type from classlist where class = @aC
 
 // const printer = syntax.NewPrinter();
 
-/* const src = "echo 'foo'";
-const f = parser.Parse(src, "src.sh");
-
-// print out the syntax tree
-syntax.DebugPrint(f);
-// tslint:disable-next-line:no-console
-console.log();
-
-// replace all single quoted string values
-syntax.Walk(f, (node: any) => {
-  if (syntax.NodeType(node) === "SglQuoted") {
-    node.Value = "bar";
-  }
-  return true;
-});
-
-// print the code back out
-// tslint:disable-next-line:no-console
-console.log(printer.Print(f)); // echo 'bar'
- */
+/* eslint-disable-next-line , , , , , ,  */
 function __stack() {
   const origPrep = Error.prepareStackTrace;
   const origLim = Error.stackTraceLimit;
@@ -69,9 +50,9 @@ function __stack() {
 }
 
 export function logg(thing: any) {
-  // tslint:disable-next-line:no-console
+  // eslint-disable-next-line no-console
   if (debug) {
-    // tslint:disable-next-line:no-console
+    // eslint-disable-next-line no-console
     console.log(
       inspect(thing, {
         depth: 2,
@@ -167,11 +148,11 @@ let pass: number;
 
 function quickType(node: any, source: string, ind: number): string {
   logg(ind + " quickType " + source);
-  // tslint:disable-next-line:curly
+  // eslint-disable-next-line curly
   //  if (ind > 3) return "STACK";
-  // tslint:disable-next-line:no-console
+  // eslint-disable-next-line no-console
   if (debug) {
-    // tslint:disable-next-line:no-console
+    // eslint-disable-next-line no-console
     console.log(
       inspect(
         { node },
@@ -238,7 +219,7 @@ function quickType(node: any, source: string, ind: number): string {
   logg(ind + " quickType no $type");
   if (Array.isArray(node) || Array.isArray(pt)) {
     const ee: { [key: string]: boolean } = {};
-    // tslint:disable-next-line:max-line-length
+    // eslint-disable-next-line max-len
     Object.getOwnPropertyNames(node).forEach((i) => {
       if (i !== "length") {
         ee[quickType(node[i], source + " Array " + i, ind + 1)] = true;
@@ -262,9 +243,9 @@ function noteType(node: any, ind: number): void {
   const t = typeof node;
   if (node != null && t === "object") {
     const props = Object.getOwnPropertyDescriptors(node);
-    // tslint:disable-next-line:no-console
+    // eslint-disable-next-line no-console
     if (debug) {
-      // tslint:disable-next-line:no-console
+      // eslint-disable-next-line no-console
       console.log(
         inspect(
           { props },
@@ -339,7 +320,7 @@ function walker(node: INodeType): boolean {
   logg("walker");
   if (node === null) {
     if (debug) {
-      // tslint:disable-next-line:no-console
+      // eslint-disable-next-line no-console
       console.log("null node");
     }
     return true;
@@ -379,7 +360,7 @@ function perFile(f: string): void {
   syntax.Walk(j, walker);
   syntax.DebugPrint(j);
   //  const js = statements(j.Stmts, "Stmts") + "\n" + comments(j.Last, "Last");
-  // tslint:disable-next-line:no-console
+  // eslint-disable-next-line no-console
   // console.log(js);
 }
 
@@ -387,7 +368,7 @@ function perFile(f: string): void {
 
 ["config.guess", "config.sub"].forEach(perFile);
 if (0) {
-  // tslint:disable-next-line:no-console
+  // eslint-disable-next-line no-console
   console.log(
     Object.keys(known)
       .map(
@@ -403,17 +384,17 @@ if (0) {
       .join("\n"),
   );
 }
-// tslint:disable-next-line:no-console
+// eslint-disable-next-line no-console
 console.log("classlist\n");
-// tslint:disable-next-line:no-console
+// eslint-disable-next-line no-console
 console.log({ getClasses });
 const classes: string[] = getClasses.pluck().all();
 classes.forEach((aClass) => {
-  // tslint:disable-next-line:no-console
+  // eslint-disable-next-line no-console
   console.log(aClass);
   const props: string[] = getProps.pluck().all({ aClass });
   props.forEach((aProp) => {
-    // tslint:disable-next-line:no-console
+    // eslint-disable-next-line no-console
     console.log(
       "\t" +
         aProp +
@@ -425,7 +406,7 @@ classes.forEach((aClass) => {
     );
   });
 });
-// // tslint:disable-next-line:no-console
+// eslint-disable-next-line
 // console.log(
 //   "classlist\n",
 //   Object.keys(classlist)

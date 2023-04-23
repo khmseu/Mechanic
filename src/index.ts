@@ -8,6 +8,7 @@
 import * as options from "options-parser";
 import { readRuleFile } from "./io/readRuleFile";
 import { MechDB } from "./mechdb/MechDB";
+import { log } from "console";
 
 const footer = `Home page:      https://github.com/khmseu/Mechanic
 Documentation:  https://github.com/khmseu/Mechanic/wiki
@@ -17,7 +18,14 @@ const verstr = `Mechanic 0.1.19-0
 Copyright © 2018 Kai Henningsen
 License: MIT`;
 
-const opts = options.parse(
+interface OptSet {
+  help: boolean;
+  version: string;
+}
+interface OptionsSet {
+  opt: OptSet;
+}
+const opts: OptionsSet = options.parse(
   {
     help: {
       flag: true,
@@ -25,8 +33,7 @@ const opts = options.parse(
       showHelp: {
         banner: "Mechanic [options] [settings] [targets]",
         callback: () => {
-          // tslint:disable-next-line:no-console
-          console.log(footer);
+          log(footer);
         },
       },
       version: { short: "v", flag: true },
@@ -40,14 +47,14 @@ const opts = options.parse(
     //   out: { short: 'o', type: options.type.file.open.write() }
   },
   undefined,
-  undefined,
-);
+  undefined
+) as OptionsSet;
 
-// tslint:disable-next-line:no-console
+// eslint-disable-next-line no-console
 console.log(opts);
 
-if (opts.opt.version) {
-  // tslint:disable-next-line:no-console
+if (opts && opts?.opt?.version) {
+  // eslint-disable-next-line no-console
   console.log(verstr);
   process.exit();
 }
@@ -56,7 +63,7 @@ const mdb = new MechDB();
 
 readRuleFile(".");
 
-// tslint:disable-next-line:no-console
+// eslint-disable-next-line no-console
 console.error({ mdb });
-// tslint:disable-next-line:no-console
+// eslint-disable-next-line no-console
 mdb.close().catch((err) => console.error(err));

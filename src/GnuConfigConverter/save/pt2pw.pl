@@ -1,24 +1,39 @@
-#! /usr/bin/perl -w
+#! /usr/bin/env perl
 
-use v5.26;
-no warnings "experimental::smartmatch";
+=pod
+ Copyright (c) 2019 Kai Henningsen <kai.extern+mechanic@gmail.com>
+
+ This software is released under the MIT License.
+ https://opensource.org/licenses/MIT
+=cut
+
+use 5.026;    # !!perlver.pl
+use feature qw( signatures );
+use utf8;
+use Encode::Guess qw( latin1 );
+use open ':utf8';
+
 use strict;
+use warnings qw(all);
+no warnings qw( experimental::smartmatch experimental::signatures );
+use autodie qw( :all );
 use Data::Dumper::Simple;
 $Data::Dumper::Useqq    = 1;
 $Data::Dumper::Sortkeys = 1;
 $|                      = 1;
+use Carp qw(cluck confess);
+$SIG{__DIE__}  = \&confess;
+$SIG{__WARN__} = \&cluck;
 
 $/ = undef;
 
 my @text;
 
-sub save($) {
-    my $txt = shift;
+sub save ($txt) : prototype($) {
     push @text, split /(?<=\n)/, $txt;
 }
 
-sub note($) {
-    my $txt = shift;
+sub note($txt) : prototype($) {
     my @txt = split /\n/, $txt;
     pop @txt unless length $txt[$#txt];
     save "\n";
@@ -33,15 +48,16 @@ my %needDo;
 my %doNeedType;
 my %have;
 
-open FI, '<', 'dout/GnuConfigConverter/ParserTypes.d.ts'
-  or die "dout/GnuConfigConverter/ParserTypes.d.ts: $!";
-my $fi = <FI>;
-close FI or die "dout/GnuConfigConverter/ParserTypes.d.ts: $!";
+open my $FI, '<', 'dout/GnuConfigConverter/ParserTypes.d.ts';
+my $fi = <$FI>;
+close $FI;
 
 my @fi = split /\bexport\s+(?:declare\s+)?/, $fi;
 for my $typ (@fi) {
     next unless length $typ;
+    next if $typ =~ m{^\s*/\*.*\*/\s*$}s;
     my ( $what, $name, $body ) = ( $typ =~ /^(\w+)\s+(\w+)\s+(.*\S)\s*$/s );
+    die "can't handle " . Dumper($typ) unless defined $name;
 
     #note Dumper($what, $name, $body);
     $have{$name}++;
@@ -85,6 +101,9 @@ for my $typ (@fi) {
                             $a = 1;
                             $n = 1;
                         }
+                        when (/^\(\(\) => \w+\)\s*\|\s*null$/) {
+                            $n = 1;
+                        }
                         default {
                             die 'Unknown ' . Dumper($kind);
                         }
@@ -108,10 +127,11 @@ for my $typ (@fi) {
                     $sin =~ s/^I_*//;
 
                     #note Dumper( $_, $fdef{$_} );
-                    "  const r$_ = prep$sin"
-                      . ( $fdef{$_}{a} ? 's' : '' ) . "($_);"
+                    " const r $_ = prep $sin"
+                      . ( $fdef{$_}{a} ? 's' : '' ) . " ($_);
+    "
                 } grep { !$fdef{$_}{f} } @fdef;
-                my $recur = join( "\n", @recur );
+                my $recur = join( " \n ", @recur );
                 my $list2 = 'r' . join( ', r', grep { !$fdef{$_}{f} } @fdef );
                 my $list3 = join(
                     ', ',
@@ -121,23 +141,23 @@ for my $typ (@fi) {
                         if ( $t =~ /^I[^_]/ ) { $pt = 'string[]' }
                         else {
                             $doNeedType{$t}++;
-                            $pt = "$t | null";
+                            $pt = "$t | null ";
                         }
-                        "$_: $pt"
+                        "$_ : $pt "
                     } grep { !$fdef{$_}{f} } @fdef
                 );
                 save <<EOFI;
 export function prep$sn($lsn: $name | null): string[] {
-  logg("prep$sn");
+  logg(" prep $sn");
   if (!$lsn) {
-    return [comm({ empty_$lsn: $lsn }, '{"empty_$lsn":null}')];
+    return [comm({ empty_$lsn: $lsn }, '{" empty_ $lsn":null}')];
   }
   const { $list1, ...rest_$lsn } = $lsn;
 $recur
-  return [...do$sn($list2), comm({ rest_$lsn }, '{"rest_$lsn":{}}')];
+  return [...do$sn($list2), comm({ rest_$lsn }, '{" rest_ $lsn":{}}')];
 }
 EOFI
-                $needDo{"do$sn"} = <<EOFD;
+                $needDo{" do $sn "} = <<EOFD;
 export function do$sn($list3): string[] { return []; }
 EOFD
             }
@@ -152,7 +172,7 @@ EOFD
             my @recur = map {
                 my $san = $_;
                 $san =~ s/^I_*//;
-                "    case \"$san\":\n      return prep$san($lsn as $_);"
+                " case \"$san\":\n      return prep$san($lsn as $_);";
             } @alts;
             my $recur = join( "\n", @recur );
             save <<EOFT;
@@ -199,6 +219,7 @@ export function prep$sn($lsn: ${typ}[] | null): string[] {
 }
 EOFA
 }
+
 for my $typ ( sort { lc $a cmp lc $b } keys %needSimple ) {
     $needType{$typ}++ if $have{$typ};
 
@@ -230,10 +251,10 @@ unshift @text, split /(?<=\n)/, $hdr;
         ( "$1// tslint:disable-next-line:max-line-length\n", $_ );
     }
 } @text;
-open FO, '>', 'src/GnuConfigConverter/ParserPrep.ts'
-  or die "src/GnuConfigConverter/ParserPrep.ts: $!";
-print FO @text;
-close FO or die "src/GnuConfigConverter/ParserPrep.ts: $!";
+say "> src/GnuConfigConverter/ParserPrep.ts";
+open my $FO, '>', 'src/GnuConfigConverter/ParserPrep.ts';
+print $FO @text;
+close $FO;
 
 my @dotxt;
 for my $do ( sort { lc $a cmp lc $b } keys %needDo ) {
@@ -253,7 +274,7 @@ unshift @dotxt, split /(?<=\n)/, $dhdr;
         ( "$1// tslint:disable-next-line:max-line-length\n", $_ );
     }
 } @dotxt;
-open FD, '>', 'src/GnuConfigConverter/ParserDo.ts.template'
-  or die "src/GnuConfigConverter/ParserDo.ts.template: $!";
-print FD @dotxt;
-close FD or die "src/GnuConfigConverter/ParserDo.ts.template: $!";
+say '> src/GnuConfigConverter/ParserDo.ts.template';
+open my $FD, '>', 'src/GnuConfigConverter/ParserDo.ts.template';
+print $FD @dotxt;
+close $FD;

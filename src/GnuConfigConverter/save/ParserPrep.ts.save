@@ -9,9 +9,9 @@ import { syntax } from "mvdan-sh";
 import { comm } from "./comm";
 import { ISyntaxTreeNode } from "./ISyntaxTreeNode";
 import { logg } from "./logg";
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line max-len
 import { doArithmCmd, doArithmExp, doArrayElem, doArrayExpr, doAssign, doBinaryArithm, doBinaryCmd, doBinaryTest, doBlock, doBraceExp, doCallExpr, doCaseClause, doCaseItem, doCmdSubst, doComment, doCoprocClause, doCStyleLoop, doDblQuoted, doDeclClause, doExtGlob, doFile, doForClause, doFuncDecl, doIfClause, doLetClause, doLit, doParamExp, doParenArithm, doParenTest, doProcSubst, doRedirect, doSglQuoted, doStmt, doStmtList, doSubshell, doTestClause, doTimeClause, doUnaryArithm, doUnaryTest, doWhileClause, doWord, doWordIter } from "./ParserDo";
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line max-len
 import { BinAritOperator, BinCmdOperator, BinTestOperator, CaseOperator, GlobOperator, I_Expansion, I_Pos, I_Replace, I_Slice, IArithmCmd, IArithmExp, IArithmExpr, IArrayElem, IArrayExpr, IAssign, IBinaryArithm, IBinaryCmd, IBinaryTest, IBlock, IBraceExp, ICallExpr, ICaseClause, ICaseItem, ICmdSubst, ICommand, IComment, ICoprocClause, ICStyleLoop, IDblQuoted, IDeclClause, IExtGlob, IFile, IForClause, IFuncDecl, IIfClause, ILetClause, ILit, ILoop, IParamExp, IParenArithm, IParenTest, IProcSubst, IRedirect, ISglQuoted, IStmt, IStmtList, ISubshell, ITestClause, ITestExpr, ITimeClause, IUnaryArithm, IUnaryTest, IWhileClause, IWord, IWordIter, IWordPart, ParNamesOperator, ProcOperator, RedirOperator, UnAritOperator, UnTestOperator } from "./ParserTypes";
 
 export function prepArithmCmd(arithmcmd: IArithmCmd | null): ISyntaxTreeNode {
@@ -164,7 +164,7 @@ export function prepCStyleLoop(cstyleloop: ICStyleLoop | null): ISyntaxTreeNode 
   const rInit = prepArithmExpr(Init);
   const rCond = prepArithmExpr(Cond);
   const rPost = prepArithmExpr(Post);
-  // tslint:disable-next-line:max-line-length
+  // eslint-disable-next-line max-len
   return [...doCStyleLoop(rLparen, rRparen, rInit, rCond, rPost), new RestComment({ rest_cstyleloop }, '{"rest_cstyleloop":{}}')];
 }
 export function prepCallExpr(callexpr: ICallExpr | null): ISyntaxTreeNode {
@@ -202,7 +202,7 @@ export function prepCaseItem(caseitem: ICaseItem | null): ISyntaxTreeNode {
   const rPatterns = prepWords(Patterns);
   const rStmtList = prepStmtList(StmtList);
   const rLast = prepComments(Last);
-  // tslint:disable-next-line:max-line-length
+  // eslint-disable-next-line max-len
   return [...doCaseItem(rOp, rOpPos, rComments, rPatterns, rStmtList, rLast), new RestComment({ rest_caseitem }, '{"rest_caseitem":{}}')];
 }
 export function prepCmdSubst(cmdsubst: ICmdSubst | null): ISyntaxTreeNode {
@@ -217,7 +217,7 @@ export function prepCmdSubst(cmdsubst: ICmdSubst | null): ISyntaxTreeNode {
   const rLast = prepComments(Last);
   const rTempFile = prepboolean(TempFile);
   const rReplyVar = prepboolean(ReplyVar);
-  // tslint:disable-next-line:max-line-length
+  // eslint-disable-next-line max-len
   return [...doCmdSubst(rLeft, rRight, rStmtList, rLast, rTempFile, rReplyVar), new RestComment({ rest_cmdsubst }, '{"rest_cmdsubst":{}}')];
 }
 export function prepCommand(command: ICommand | null): ISyntaxTreeNode {
@@ -338,7 +338,7 @@ export function prepForClause(forclause: IForClause | null): ISyntaxTreeNode {
   const rLoop = prepLoop(Loop);
   const rDo = prepStmtList(Do);
   const rDoLast = prepComments(DoLast);
-  // tslint:disable-next-line:max-line-length
+  // eslint-disable-next-line max-len
   return [...doForClause(rForPos, rDoPos, rDonePos, rSelect, rLoop, rDo, rDoLast), new RestComment({ rest_forclause }, '{"rest_forclause":{}}')];
 }
 export function prepFuncDecl(funcdecl: IFuncDecl | null): ISyntaxTreeNode {
@@ -368,7 +368,7 @@ export function prepIfClause(ifclause: IIfClause | null): ISyntaxTreeNode {
   const rThenLast = prepComments(ThenLast);
   const rElse = prepIfClause(Else);
   const rLast = prepComments(Last);
-  // tslint:disable-next-line:max-line-length
+  // eslint-disable-next-line max-len
   return [...doIfClause(rPosition, rThenPos, rFiPos, rCond, rCondLast, rThen, rThenLast, rElse, rLast), new RestComment({ rest_ifclause }, '{"rest_ifclause":{}}')];
 }
 export function prepLetClause(letclause: ILetClause | null): ISyntaxTreeNode {
@@ -411,7 +411,7 @@ export function prepParamExp(paramexp: IParamExp | null): ISyntaxTreeNode {
   if (!paramexp) {
     return [new RestComment({ empty_paramexp: paramexp }, '{"empty_paramexp":null}')];
   }
-  // tslint:disable-next-line:max-line-length
+  // eslint-disable-next-line max-len
   const { Dollar, Rbrace, Short, Excl, Length, Width, Param, Index, Slice, Repl, Names, Exp, ...rest_paramexp } = paramexp;
   const rDollar = prepPos(Dollar);
   const rRbrace = prepPos(Rbrace);
@@ -425,7 +425,7 @@ export function prepParamExp(paramexp: IParamExp | null): ISyntaxTreeNode {
   const rRepl = prepReplace(Repl);
   const rNames = prepParNamesOperator(Names);
   const rExp = prepExpansion(Exp);
-  // tslint:disable-next-line:max-line-length
+  // eslint-disable-next-line max-len
   return [...doParamExp(rDollar, rRbrace, rShort, rExcl, rLength, rWidth, rParam, rIndex, rSlice, rRepl, rNames, rExp), new RestComment({ rest_paramexp }, '{"rest_paramexp":{}}')];
 }
 export function prepParenArithm(parenarithm: IParenArithm | null): ISyntaxTreeNode {
@@ -502,7 +502,7 @@ export function prepStmt(stmt: IStmt | null): ISyntaxTreeNode {
   const rBackground = prepboolean(Background);
   const rCoprocess = prepboolean(Coprocess);
   const rRedirs = prepRedirects(Redirs);
-  // tslint:disable-next-line:max-line-length
+  // eslint-disable-next-line max-len
   return [...doStmt(rComments, rCmd, rPosition, rSemicolon, rNegated, rBackground, rCoprocess, rRedirs), new RestComment({ rest_stmt }, '{"rest_stmt":{}}')];
 }
 export function prepStmtList(stmtlist: IStmtList | null): ISyntaxTreeNode {
@@ -604,7 +604,7 @@ export function prepWhileClause(whileclause: IWhileClause | null): ISyntaxTreeNo
   const rCondLast = prepComments(CondLast);
   const rDo = prepStmtList(Do);
   const rDoLast = prepComments(DoLast);
-  // tslint:disable-next-line:max-line-length
+  // eslint-disable-next-line max-len
   return [...doWhileClause(rWhilePos, rDoPos, rDonePos, rUntil, rCond, rCondLast, rDo, rDoLast), new RestComment({ rest_whileclause }, '{"rest_whileclause":{}}')];
 }
 export function prepWord(word: IWord | null): ISyntaxTreeNode {

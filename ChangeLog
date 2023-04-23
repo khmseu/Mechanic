@@ -1,0 +1,316 @@
+2023-04-15  Kai Henningsen  <kai.extern+git@gmail.com>
+
+	save state
+
+2019-05-04  Kai Henningsen  <kai.extern+git@gmail.com>
+
+	Use a single ASTMore class
+
+	Adjust imports
+
+	move generated sources
+
+	ASTMoreBase visitAll{Pre,Post}
+
+2019-04-28  Kai Henningsen  <kai.extern+git@gmail.com>
+
+	Add more adapters Fix more generated code
+
+2019-04-27  Kai Henningsen  <kai.extern+git@gmail.com>
+
+	Some more null pointer fixes. ASTVisitorComments
+
+2019-04-13  Kai Henningsen  <kai.extern+git@gmail.com>
+
+	Parent-Link
+
+	Convert to new AST tree struct
+
+2019-04-07  Kai Henningsen  <kai.extern+git@gmail.com>
+
+	Polish somewhat
+
+	Cleanup
+
+	Probably don't want most of this
+
+	src/GnuConfigConverter/pt2at.pl
+
+2019-04-01  Kai Henningsen  <kai.extern+git@gmail.com>
+
+	These should not be checked in (at least not in this state)
+
+	upgrade
+
+	update
+
+	Convert converter to do it with pure javascript
+
+2019-03-09  Kai Henningsen  <kai.extern+git@gmail.com>
+
+	Handle all records from these two scripts - open: check if we got everything, create useful data structure, convert to using the js version of the parser
+
+2019-02-26  Kai Henningsen  <kai.extern+git@gmail.com>
+
+	Update
+
+	Use mvdan/sh for the sh->js converter
+
+	More js/ts separation
+
+2019-01-27  Kai Henningsen  <kai.extern+git@gmail.com>
+
+	update gnu-config & yarn upgrade
+
+	Move getters&setters into VarTree class. Begin typechecking parameters for calles from rule files.
+
+	Move getters&setters into VarTree class. Begin typechecking parameters for calles from rule files.
+
+2019-01-18  Kai Henningsen  <kai.extern+git@gmail.com>
+
+	yarn upgrade
+
+2019-01-16  Kai Henningsen  <kai.extern+git@gmail.com>
+
+	Next test
+
+	Test
+
+	Un-bump, create new changelog
+
+	Un-bump, create new changelog
+
+	Bumped version to 0.1.19-0
+
+	Bumped version to 0.1.18-0
+
+	Bumped version to 0.1.17
+
+	Bumped version to 0.1.17-0
+
+	Bumped version to 0.1.17
+
+	Bumped version to 0.1.16
+
+	Cleanup
+
+	Bumped version to 0.1.16-0
+
+	Bumped version to 0.1.15-3
+
+	Bumped version to [date]
+
+	Bumped version to [date]
+
+	Bumped version to [date]
+
+	Bumped version to [date]
+
+	Bumped version to [date]
+
+	Test
+
+	Bumped version to 0.1.12-0
+
+	Bumped version to 0.1.11
+
+	Bumped version to 0
+
+	Bumped version to 0
+
+	Bumped version to 0
+
+	Bumped version to 0
+
+	bla
+
+	Bumped version to 0
+
+	Bumped version to 0
+
+	Bumped version to 0
+
+	Bumped version to 0
+
+	Bumped version to 0
+
+	Bumped version to 0.1.10-0
+
+	Bumped version to 0.1.9-0
+
+	Bumped version to 0.1.8-0
+
+	Bumped version to 0.1.7-0
+
+	Bumped version to 0.1.6-0
+
+	Bumped version to 0.1.5-0
+
+	Bumped version to 0.1.4-1
+
+2019-01-15  Kai Henningsen  <khmseu@users.noreply.github.com>
+
+	Update README.md
+	Test actual badge
+
+2019-01-15  Kai Henningsen  <kai.extern+git@gmail.com>
+
+	End test
+
+	test
+
+	Yet more test
+
+	More test
+
+	Test
+
+	Test
+
+	Try badges
+
+	Bumped version to 0.1.4-0
+
+	Bumped version to 0.1.3-0
+
+	Test
+
+	Bumped version to 0.1.2-0
+
+	Bumped version to 0.1.1-0
+
+	Update
+
+	Rework mechdb into a class Inline maps
+
+2019-01-14  Kai Henningsen  <kai.extern+git@gmail.com>
+
+	Rudimentary rule file loading
+
+2019-01-10  Kai Henningsen  <kai.extern+git@gmail.com>
+
+	Hrm ...
+
+	Grrr ...
+
+	Point to Plan from README
+
+	Unnumber
+
+	Test
+
+	md
+
+	Spelink
+
+	Planning
+
+2019-01-09  Kai Henningsen  <kai.extern+git@gmail.com>
+
+	Update
+
+	Fix dependencies
+
+2019-01-08  Kai Henningsen  <kai.extern+git@gmail.com>
+
+	yarn upgrade, and start on modernizing dependencies
+
+2019-01-07  Kai Henningsen  <kai.extern+git@gmail.com>
+
+	Update
+
+	Fix target handling to fit current plan
+
+2019-01-01  Kai Henningsen  <kai.extern+git@gmail.com>
+
+	yarn upgrade
+
+	implement path handling
+
+	sync
+
+	Rearrange
+
+2018-12-30  Kai Henningsen  <kai.extern+git@gmail.com>
+
+	Plan
+
+2018-12-28  Kai Henningsen  <kai.extern+git@gmail.com>
+
+	Doesn't belong
+
+	Rename and declare more types
+
+	reorganize rules dir
+
+	Update doc templates
+
+2018-12-26  Kai Henningsen  <kai.extern+git@gmail.com>
+
+	Next splittery
+
+	Add documentation
+
+	Fix formatting
+
+	Massive reorg
+
+2018-12-09  Kai Henningsen  <kai.extern+git@gmail.com>
+
+	Use licenser & pretty
+
+2018-12-08  Kai Henningsen  <kai.extern+git@gmail.com>
+
+	Implement new design for target matchers
+
+2018-12-07  Kai Henningsen  <kai.extern+git@gmail.com>
+
+	Add io.ts
+
+2018-12-06  Kai Henningsen  <kai.extern+git@gmail.com>
+
+	update
+
+	Split rules up into separate files for the various classes
+
+	Finish RuleObject.matches() Prepare splitting rules.ts
+
+2018-12-05  Kai Henningsen  <kai.extern+git@gmail.com>
+
+	... and this
+
+	More Typescript coding
+
+2018-11-29  Kai Henningsen  <kai.extern+git@gmail.com>
+
+	This is just junk
+
+	Convert to typescript
+
+2018-11-25  Kai Henningsen  <kai.extern+git@gmail.com>
+
+	Start options
+
+	mechdb
+
+2018-11-24  Kai Henningsen  <kai.extern+git@gmail.com>
+
+	save state
+
+2018-11-01  Kai Henningsen  <kai.extern+git@gmail.com>
+
+	Flesh out some
+
+	locally globalise *~ .gitignore
+
+2018-10-31  Kai Henningsen  <kai.extern+git@gmail.com>
+
+	Add sqlite
+
+	Initial config
+
+	Initial config
+
+2018-10-31  Kai Henningsen  <khmseu@users.noreply.github.com>
+
+	Initial commit

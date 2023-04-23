@@ -5,9 +5,9 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { ok } from "assert";
+import { equal, ok } from "assert";
 import { resolve } from "path";
-import { assertType } from "typescript-is";
+import { assert } from "typia";
 import { NodeVM, NodeVMOptions, VMScript } from "vm2";
 import { DependencyGeneratorProxy } from "../dependencies/DependencyGeneratorProxy";
 import { IDependencyGeneratorRaw } from "../dependencies/IDependencyGenerator";
@@ -22,19 +22,18 @@ import { VarTree } from "../variables/VarTree";
 import { VarValue } from "../variables/VarValue";
 
 const vmopts: NodeVMOptions = {
-  console: "inherit",
   sandbox: {
     /**
      *
      * @param args
      * @return
      */
-    Rule(...args: DataFromJS[]) {
+    Rule: (...args: DataFromJS[]) => {
       checkArgs(1, args);
-      const specraw = assertType<IRuleArgRaw>(args[0]);
+      const specraw = assert<IRuleArgRaw>(args[0]);
       return Rule({
         Targets: specraw.Targets.map((t) => {
-          const tt = assertType<string | ITargetMatcherRaw>(t);
+          const tt = assert<string | ITargetMatcherRaw>(t);
           if (typeof tt === "string") {
             return tt;
           } else {
@@ -42,47 +41,59 @@ const vmopts: NodeVMOptions = {
           }
         }),
         Dependencies: specraw.Dependencies.map((d) => {
-          const dd = assertType<IDependencyGeneratorRaw>(d);
+          const dd = assert<IDependencyGeneratorRaw>(d);
           if (typeof dd === "string") {
             return dd;
           } else {
             return new DependencyGeneratorProxy(dd);
           }
         }),
-        Recipe: (vars) => specraw.Recipe(vars),
+        Recipe: (vars): any => {
+          equal(typeof specraw.Recipe, "function");
+          return specraw.Recipe?.call(vars);
+        },
       });
     },
     /**
      * Gets var
+     *
      * @param args
      * @returns
      */
-    getVar(...args: DataFromJS[]) {
+    getVar: (...args: DataFromJS[]) => {
       checkArgs(2, args);
-      ok(args[0] instanceof VarTree, TypeError("first parameter must be a VarTree"));
+      ok(
+        args[0] instanceof VarTree,
+        TypeError("first parameter must be a VarTree")
+      );
       const vt = assertClass<VarTree>(VarTree, args[0]);
-      const vn = assertType<string>(args[1]);
+      const vn = assert<string>(args[1]);
       return vt.getVar(vn);
     },
     /**
      * Sets var
+     *
      * @param args
      * @returns
      */
-    setVar(...args: DataFromJS[]) {
+    setVar: (...args: DataFromJS[]) => {
       checkArgs(3, args);
-      ok(args[0] instanceof VarTree, TypeError("first parameter must be a VarTree"));
+      ok(
+        args[0] instanceof VarTree,
+        TypeError("first parameter must be a VarTree")
+      );
       const vt: VarTree = args[0];
-      const vn = assertType<string>(args[1]);
-      const vv = assertType<VarValue>(args[2]);
+      const vn = assert<string>(args[1]);
+      const vv = assert<VarValue>(args[2]);
       return vt.setVar(vn, vv);
     },
   },
+  console: "inherit",
   require: {
-    external: true,
     builtin: ["*"],
-    root: "./",
     context: "sandbox",
+    external: true,
+    root: "./",
   },
   sourceExtensions: ["mechanic"],
 };
@@ -92,9 +103,9 @@ module.exports = function(what) {
   require(what);
 };
 `);
-const req = vm.run(reqScript);
+const req: any = vm.run(reqScript);
 
-export function readRuleFile(dir: string): void {
+export const readRuleFile = (dir: string): void => {
   const fn = resolve(dir, "manual.mechanic");
   req(fn);
-}
+};

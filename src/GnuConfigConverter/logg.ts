@@ -5,20 +5,19 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { log } from "console";
 import { inspect } from "util";
 
 export const debug = true;
 
-export function logg(thing: any) {
-  // tslint:disable-next-line:no-console
+export const logg = (thing: any) => {
   if (debug) {
-    // tslint:disable-next-line:no-console
-    console.log(
+    log(
       inspect(thing, {
-        depth: 2,
         compact: false,
+        depth: 2,
         sorted: true,
-      }),
+      })
     );
   }
-}
+};

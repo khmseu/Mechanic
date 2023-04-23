@@ -5,20 +5,25 @@
  * https://opensource.org/licenses/MIT
  */
 
-import { assertType } from "typescript-is";
+import { assert } from "typia";
 import { VarTree } from "../variables/VarTree";
 import { ITargetDetails } from "./ITargetDetails";
 import { ITargetMatcher, ITargetMatcherRaw } from "./ITargetMatcher";
 
 export class TargetMatcherProxy implements ITargetMatcher {
   constructor(private jsTM: ITargetMatcherRaw) {}
-  public match(vars: VarTree, full: string, parent: string, child: string): ITargetDetails {
-    return assertType<ITargetDetails>(this.jsTM.match(vars, full, parent, child));
+  public match(
+    vars: VarTree,
+    full: string,
+    parent: string,
+    child: string
+  ): ITargetDetails {
+    return assert<ITargetDetails>(this.jsTM.match(vars, full, parent, child));
   }
   public generate(vars: VarTree): string {
-    return assertType<string>(this.jsTM.generate(vars));
+    return assert<string>(this.jsTM.generate(vars));
   }
   public toString(): string {
-    return assertType<string>(this.jsTM.toString());
+    return assert<string>(this.jsTM.toString());
   }
 }

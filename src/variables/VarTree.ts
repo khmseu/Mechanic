@@ -6,7 +6,7 @@
  */
 
 import { ok } from "assert";
-import { is } from "typescript-is";
+import { is } from "typia";
 import { CurrentVarValue } from "./CurrentVarValue";
 import { IUserVarValue } from "./IUserVarValue";
 import { rexParseAsVar } from "./patterns";

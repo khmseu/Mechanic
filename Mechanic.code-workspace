@@ -1,0 +1,12 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "tslint.configFile": "tslint.json",
+    "tslint.packageManager": "npm",
+    "vue.features.codeActions.enable": false
+  }
+}
