@@ -13,6 +13,7 @@
   "bugs": "https://github.com/khmseu/Mechanic/issues",
   "scripts": {
     "build": "ttsc",
+    "gen-ParserTypes": "./gen-dts.sh",
     "prepare-checkin": "./prepare-checkin.sh",
     "test": "node built/index.js",
     "update-from-ParserTypes": "./update-from-ParserTypes.sh"

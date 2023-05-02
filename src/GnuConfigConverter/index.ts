@@ -6,7 +6,6 @@
  */
 
 import { readFileSync, writeFileSync } from "fs";
-import sh from "mvdan-sh";
 import { format, resolve } from "path";
 import { inspect } from "util";
 import { ASTVisitorComments } from "./ASTVisitorComments";
@@ -16,6 +15,10 @@ import { ASTNodeFile } from "./generated/ASTNodeFile";
 import { joiner } from "./joiner";
 import { logg } from "./logg";
 export { comm, logg };
+import * as sh0 from "mvdan-sh";
+import { ShellScript } from "mvdan-sh";
+
+const sh = sh0 as unknown as ShellScript;
 const syntax = sh.syntax;
 
 // function patterns(pts: IWord[] | null): string[] {
